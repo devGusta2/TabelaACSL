@@ -74,14 +74,14 @@ nav{
 }
 
 .content_sc1 h1{
-  font-size: 2.5em;
+  font-size: clamp(2.5em , 100vw, 3em);
   color: var(--btn-color);
   font-weight: 700;
 
-
 }
 .content_sc1 p{
-  font-size: 1.05em;
+  font-size: clamp(20px , 100vw, 1em);
+
 }
 .bottom_row{
   display: flex;
@@ -164,10 +164,13 @@ nav{
   align-items: center;
 }
 .col_consulta h1{
-  font-size: 2.5em;
+  font-size: clamp(2.5em , 100vw, 4em);
   color: var(--btn-color);
   font-weight: 700;
 
+}
+.col_consulta p{
+  font-size: clamp(1em , 100vw, 1.3em);
 }
 .form_box{
   border-radius: 10px;
