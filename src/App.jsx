@@ -1,8 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import car from '../src/assets/car.jpg'
-import logo from '../src/assets/logo4.png'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import car from '../src/assets/car.jpg';
+import logo from '../src/assets/logo4.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCrown, faCalendar, faCar} from '@fortawesome/free-solid-svg-icons';
 import './App.css'
 
 function App() {
@@ -61,15 +63,25 @@ function App() {
               <h2>Pesquisa Comum</h2>
               <form action="">
                 <div className="inpts_box">
-                    <h3>Marca:</h3>
+                    <div className='label_and_icon'>
+                      <FontAwesomeIcon icon={faCrown} size='2x'/>
+                      <h3>Marca:</h3>
+                    </div>
+                    
                     <select name="" id="">
                       <option value="">Selecione a marca do veículo</option>
                     </select>
-                    <h3>Modelo:</h3>
+                    <div className='label_and_icon'>
+                      <FontAwesomeIcon icon={faCalendar} size='2x'/>
+                      <h3>Modelo:</h3>
+                    </div>
                     <select name="" id="">
                       <option value="">Selecione o modelo do veículo</option>
                     </select>
-                    <h3>Ano:</h3>
+                    <div className='label_and_icon'>
+                      <FontAwesomeIcon icon={faCar} size='2x'/>
+                      <h3>Ano:</h3>
+                    </div>
                     <select name="" id="">
                       <option value="">Selecione o ano do veículo</option>
                     </select>
@@ -89,4 +101,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
