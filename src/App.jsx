@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div className="">
-        <section>
+        <section id="inicio">
           <header>
               <nav>
                 <div className='logo_box'>
@@ -93,8 +93,42 @@ function App() {
             </div>
           </div>
         </section>
-        <section>
+        <section id="graphic">
+          <div className="row_graphic">
+            <div className="desc_graphic">
+              <h1>Gŕafico</h1>
+                <p>
+                  Nesta seção, você encontrará uma análise detalhada 
+                  da depreciação de ativos ao longo do tempo. À esquerda,
+                  são apresentados os principais valores e períodos, 
+                  enquanto à direita um gráfico interativo exibe a evolução
+                  da depreciação, facilitando a visualização da redução do
+                  valor dos ativos.
+                </p>
+            </div>
+          </div>
+          <div className="row_graphic">
+            <div className="graphic_box">
 
+            </div>
+            <div className="col_infos">
+              <div className="row_info">
+                <FontAwesomeIcon icon={faCrown} size='2x' className='icon_font' />
+                <h3>Marca:</h3>
+              </div>
+              <div className="row_info">
+                <FontAwesomeIcon icon={faCar} size='2x' className='icon_font' />
+                <h3>Modelo:</h3>
+              </div>
+              <div className="row_info">
+                <FontAwesomeIcon icon={faCalendar} size='2x' className='icon_font'/>
+                <h3>Ano:</h3>
+              </div>
+              <button id='btn_nova'>
+                <h2>Nova busca</h2>
+              </button>
+            </div>
+          </div>
         </section>
       </div>
     </>

@@ -9,8 +9,9 @@
   --header-color:#ffcfe9;
   --btn-color:#ef44a1;
 }
+
 section{
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
 
 }
@@ -20,4 +21,8 @@ header{
   width: 100%;
   background-color: var(--header-color);
   position: fixed;
+}
+
+.icon_font{
+  
 }
