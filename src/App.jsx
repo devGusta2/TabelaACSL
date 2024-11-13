@@ -7,9 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown, faCalendar, faCar} from '@fortawesome/free-solid-svg-icons';
 import './App.css'
 
+
 function App() {
-
-
   return (
     <>
       <div className="">

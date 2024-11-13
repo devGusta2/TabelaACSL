@@ -80,7 +80,7 @@ nav{
 
 }
 .content_sc1 p{
-  font-size: clamp(20px , 100vw, 1em);
+  font-size: clamp(20px , 100vw, 1.3em);
 
 }
 .bottom_row{
