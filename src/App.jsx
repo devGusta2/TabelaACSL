@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import car from '../src/assets/car.jpg';
@@ -6,9 +6,39 @@ import logo from '../src/assets/logo4.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown, faCalendar, faCar} from '@fortawesome/free-solid-svg-icons';
 import './App.css'
+import axios from 'axios';
+
+
 
 
 function App() {
+  const [marcas, setMarcas] = useState([]);
+
+  // Função para buscar marcas da API
+  // Função para buscar marcas da API
+const fetchMarcas = async () => {
+  const options = {
+    method: 'GET',
+    url: 'https://5453-187-48-118-33.ngrok-free.app/core/brand/model/list/porsche',
+    headers: {
+      'User-Agent': 'insomnia/10.1.1',
+      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+    }
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);  // Verifique a estrutura da resposta aqui
+    setMarcas(response.data.data);  // Ajuste aqui conforme a estrutura real
+  } catch (error) {
+    console.error('Erro ao fazer a requisição:', error);
+  }
+};
+
+useEffect(() => {
+  fetchMarcas();
+}, []);
+
   return (
     <>
       <div className="">
@@ -68,8 +98,11 @@ function App() {
                       <h3>Marca:</h3>
                     </div>
                     
-                    <select name="" id="">
+                    <select name="marca" id="marca">
                       <option value="">Selecione a marca do veículo</option>
+                      {marcas.map((marca, index) => (
+                        <option key={index}value={marca.brand}>{marca.brand}</option>
+                      ))}
                     </select>
                     <div className='label_and_icon'>
                       <FontAwesomeIcon icon={faCalendar} size='2x'/>
