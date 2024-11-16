@@ -159,14 +159,37 @@ nav{
   flex-direction: column;
   justify-content: center;
 }
-.col_consulta:nth-child(1){
-  padding: 0 50px;
-  width: 40%;
-}
 .col_consulta:nth-child(2){
-  width: 60%;
+  padding: 0 50px;
+  width: 50%;
+  height: 80%;
+
+ margin-top: 50px;
+}
+.table_box{
+  height: 100%;
+  width: calc(100% - 60px);
+  background-color: #e4cadf;
+  margin-top: -20px;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table_box h2{
+  color: var(--btn-color);
+  
+}
+.col_consulta:nth-child(1){
+  width: 50%;
   justify-content: center;
   align-items: center;
+}
+.desc_col_consult{
+  
+  height: 100%;
+  width: 100%;
 }
 .col_consulta h1{
   font-size: clamp(2.5em , 100vw, 4em);
@@ -177,6 +200,10 @@ nav{
 .col_consulta p{
   font-size: clamp(1em , 100vw, 1.3em);
 }
+
+
+
+
 .form_box{
   border-radius: 10px;
   width: 500px;
@@ -214,6 +241,8 @@ form button{
 }
 form button:hover{
   transform: translateY(-10px);
+  background-color: #ff64b7;
+  color: black;
 }
 form{
   display: flex;
@@ -340,4 +369,6 @@ select{
 #btn_nova:hover{
   transform: translateY(-10px);
   cursor: pointer;
+  color: white;
+  background-color: var(--btn-color);
 }
