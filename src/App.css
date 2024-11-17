@@ -172,10 +172,16 @@ nav{
   background-color: #e4cadf;
   margin-top: -20px;
   border-radius: 10px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 20px;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5em;
+  
+}
+.celula h3{
+  color: #787878;
 }
 .table_box h2{
   color: var(--btn-color);
@@ -226,7 +232,7 @@ nav{
 .inpts_box h2{
   margin-left: -100px;
 }
-form button{
+form .bnt_form{
   height: 50px;
   width: 60%;
   outline: 0;
@@ -237,9 +243,12 @@ form button{
   transition: 0.5s;
   margin-top: 20px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
 }
-form button:hover{
+form .bnt_form:hover{
   transform: translateY(-10px);
   background-color: #ff64b7;
   color: black;
@@ -364,6 +373,11 @@ select{
   outline: 0;
   border-radius: 10px;
   transition: 0.5s;
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  justify-content: center;
 
 }
 #btn_nova:hover{

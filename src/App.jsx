@@ -15,6 +15,21 @@ function App() {
   const [anoSelecionado, setAnoSelecionado] = useState('');
   const [marcaSelecionada, setMarcaSelecionada] = useState('');
   const [modeloSelecionado, setModeloSelecionado] = useState('');
+  const [cod_modelo, setCod_modelo] = useState('');
+  const anoReferencia = 2024;
+
+
+  const [dados, setInfo] = useState({
+    reference_year: '',
+    reference_month: '',
+    code_model: '',
+    year_model: '',
+    brand: '',
+    model: '',
+    average_price: ''
+  });
+  
+  
    // Função chamada ao selecionar uma marca
 // Função chamada ao selecionar uma marca
 const handleChange = (event) => {
@@ -25,19 +40,26 @@ const handleChange = (event) => {
   if (marca === "") {
     setModelo([]); // Limpa a lista de modelos
     setModeloSelecionado(""); // Reseta o modelo selecionado
+    setAno([]);
   }
 };
-
   //Função ao selecionar um modelo
   const handleChangeModel = (event) => {
     const modelo = event.target.value;
     setModeloSelecionado(modelo);
-    if (modelo === "") {
-      setAno([]); // Limpa a lista de modelos
-      setAnoSelecionado(""); // Reseta o modelo selecionado
-    }
+    setAno([]); // Limpa a lista de anos sempre que o modelo for alterado
+    setAnoSelecionado(''); // Reseta o ano selecionado
   };
   
+  
+
+  const handleSelectChange = (event) => {
+    const [year_model, code_model] = event.target.value.split("-");
+    setAnoSelecionado(year_model);
+    setCod_modelo(code_model);
+    //console.log("Ano:", year_model);
+    //console.log("Código do Modelo:", code_model);
+  };
 
   const fetchModelo = async () => {
     const options = {
@@ -51,7 +73,7 @@ const handleChange = (event) => {
   
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+      //console.log(response.data);
       setModelo(response.data.data);
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
@@ -73,7 +95,7 @@ const handleChange = (event) => {
   
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+      //(response.data);
       setAno(response.data.data)
 
     } catch (error) {
@@ -94,12 +116,71 @@ const handleChange = (event) => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+      //console.log(response.data);
       setMarcas(response.data.data);
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
     }
   };
+
+
+  const calcular = async () => {
+    const options = {
+      method: 'GET',
+      url: `http://0.0.0.0:8087/calcs/average/month/porsche?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
+      headers: {
+        'User-Agent': 'insomnia/10.1.1',
+        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+      }
+    };
+  
+    try {
+      const response = await axios.request(options);
+      //console.log(response.data);
+  
+      // Ajuste aqui com base na estrutura da API
+  // ou response.data.result
+
+      setInfo({
+        reference_year: response.data.monthly_averages[0].reference_year,
+        reference_month: response.data.monthly_averages[0].reference_month,
+        code_model: response.data.monthly_averages[0].code_model,
+        year_model: response.data.monthly_averages[0].year_model,
+        brand: marcaSelecionada,
+        model: modeloSelecionado,
+        average_price: response.data.monthly_averages[0].average_price
+      });
+
+      graphic();
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+    }
+  };
+  
+
+
+
+//FUNÇÃO DO GRÁFICO
+
+const graphic = async () => {
+  const options = {
+    method: 'GET',
+    url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
+    headers: {
+      'User-Agent': 'insomnia/10.1.1',
+      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+    }
+  };
+
+  try {
+    const response = await axios.request(options);
+    //console.log(response.data);
+    console.log(response.data);
+  } catch (error) {
+    console.error('Erro ao fazer a requisição:', error);
+  }
+};
+
 
   // Efeito para buscar marcas ao carregar o componente
   useEffect(() => {
@@ -193,18 +274,19 @@ const handleChange = (event) => {
                     
                     <h3>Ano:</h3>
                   </div>
-                  <select name="marca" id="marca" >
+                  <select name="marca" id="marca" onChange={handleSelectChange}>
                     <option value="">Selecione o modelo do veículo</option>
                     {ano.map((ano, index) => (
-                      <option key={index} value={ano.year_model}>
+                      <option key={index} value={`${ano.year_model}-${ano.code_model}`}>
+                        
                         {ano.year_model}
                       </option>
                     ))}
                   </select>
                 </div>
-                <button type='submit'>
+                <div onClick={calcular} className='bnt_form' >
                   <h3>Pesquisar</h3>
-                </button>
+                </div>
               </form>
             </div>
           </div>
@@ -215,8 +297,27 @@ const handleChange = (event) => {
               <p>Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar.</p>
             </div>
             <div className="table_box">
-                  <h3>Informações de média de mercado</h3>
-                  <h2>R$ 227838,62</h2>
+                <div className='celula'><h3>Ano de referência:</h3></div>
+                <div className='celula'>{dados.reference_year}</div>
+                
+                <div className='celula'><h3>Mês de referência:</h3></div>
+                <div className='celula'>{dados.reference_month}</div>
+                
+                <div className='celula'><h3>Código modelo:</h3></div>
+                <div className='celula'>{dados.code_model}</div>
+                
+                <div className='celula'><h3>Ano modelo:</h3></div>
+                <div className='celula'>{dados.year_model}</div>
+                
+                <div className='celula'><h3>Marca:</h3></div>
+                <div className='celula'>{dados.brand}</div>
+                
+                <div className='celula'><h3>Modelo:</h3></div>
+                <div className='celula'>{dados.model}</div>
+                
+                <div className='celula'><h3>Média de mercado:</h3></div>
+                <div className='celula'>R$ {dados.average_price}</div>
+      
             </div>
           </div>
         </section>
@@ -242,18 +343,21 @@ const handleChange = (event) => {
               <div className="row_info">
                 <FontAwesomeIcon icon={faCrown} size='2x' className='icon_font' />
                 <h3>Marca:</h3>
+                {dados.brand}
               </div>
               <div className="row_info">
                 <FontAwesomeIcon icon={faCar} size='2x' className='icon_font' />
                 <h3>Modelo:</h3>
+                {dados.model}
               </div>
               <div className="row_info">
                 <FontAwesomeIcon icon={faCalendarDays} size='2x' className='icon_font'/>
                 <h3>Ano:</h3>
+                {dados.year_model}
               </div>
-              <button id='btn_nova'>
+              <a href='#consulta'id='btn_nova'>
                 <h2>Nova busca</h2>
-              </button>
+              </a>
             </div>
           </div>
         </section>
