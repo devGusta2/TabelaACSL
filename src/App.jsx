@@ -359,7 +359,7 @@ const graphic = async () => {
         <section id="graphic">
           <div className="row_graphic">
             <div className="desc_graphic">
-              <h1>Gŕafico</h1>
+              <h1>Gráfico</h1>
                 <p>
                   Nesta seção, você encontrará uma análise detalhada 
                   da depreciação de ativos ao longo do tempo. À esquerda,

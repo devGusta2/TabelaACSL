@@ -391,23 +391,6 @@ select{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .chart-container {
   display: flex;
   justify-content: space-around;
@@ -448,5 +431,5 @@ select{
   font-size: 1.2em;
   border: 2px solid var(--btn-color);
   outline: 0;
-
+  padding: 0 10px;
 }
