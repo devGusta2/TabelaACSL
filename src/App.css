@@ -303,7 +303,7 @@ select{
 .row_graphic{
   width: 100%;
   display: flex;
-
+  
   justify-content: center;
   
 }
@@ -356,14 +356,24 @@ select{
 
 } 
 
-.graphic_box{
+/* Caixa principal do gráfico */
+.graphic_box {
   height: 95%;
-  width: 68.5%;
+  width: 90%; /* Reduzi um pouco para evitar excesso nas laterais */
+  max-width: 800px; /* Limitei o tamanho máximo para evitar distorção */
+  margin: 0 auto; /* Centraliza o gráfico horizontalmente */
   background-color: #f0cdea;
   border-radius: 10px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-#btn_nova{
+/* Botão de adicionar */
+#btn_nova {
   height: 70px;
   width: 230px;
   background-color: var(--header-color);
@@ -376,55 +386,17 @@ select{
   color: black;
   text-decoration: none;
   justify-content: center;
-
 }
-#btn_nova:hover{
+
+#btn_nova:hover {
   transform: translateY(-10px);
   cursor: pointer;
   color: white;
   background-color: var(--btn-color);
 }
 
-
-
-
-
-
-
-.chart-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  height: 300px;
-  margin-top: 20px;
-}
-
-.bar {
-  position: relative;
-  width: 50px;
-  margin: 0 10px;
-}
-
-.bar-fill {
-  width: 100%;
-  background-color: var(--btn-color);  /* Cor das barras */
-  transition: height 0.5s ease;
-}
-
-.label {
-  position: absolute;
-  bottom: -20px;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-}
-
-
-.graphic_boxS input{
- 
-}
-
-#inpt_num_bars{
+/* Input para definir número de barras */
+#inpt_num_bars {
   width: 230px;
   height: 30px;
   border-radius: 5px;
@@ -432,4 +404,60 @@ select{
   border: 2px solid var(--btn-color);
   outline: 0;
   padding: 0 10px;
+}
+
+/* Contêiner do gráfico */
+.chart-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Eixo Y dos valores */
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 50px;
+  align-items: flex-end;
+  padding-right: 10px;
+}
+
+.y-axis-label {
+  font-size: 12px;
+  color: #333;
+}
+
+/* Contêiner das barras */
+.bars-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px; /* Ajuste de espaçamento entre as barras */
+  flex-grow: 1;
+  width: 100%;
+  justify-content: center; /* Centraliza as barras */
+}
+
+/* Barra individual */
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar-fill {
+  width: 40px; /* Aumentei um pouco a largura para visualização melhor */
+  background-color: var(--btn-color);
+  transition: height 0.3s;
+  border-radius: 5px 5px 0 0;
+}
+
+.label {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #333;
 }

@@ -10,37 +10,88 @@ import axios from 'axios';
 
 
 const BarChart = ({ data }) => {
+  const maxValue = Math.max(...data.map((item) => item.value));
+  const containerHeight = 400; // Altura da div do gráfico em pixels
+
+  // Função para formatar os números (1000 -> 1k, 1000000 -> 1M)
+  const formatValue = (value) => {
+    if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
+    if (value >= 1000) return `${(value / 1000).toFixed(1)}k`;
+    return value.toString();
+  };
+
   return (
     <div className="chart-container">
-      {data.map((item, index) => (
-        <div key={index} className="bar">
-          <div
-            className="bar-fill"
-            style={{ height: `${item.value * 20}px` }} // A altura da barra é proporcional ao valor
-          ></div>
-          <div className="label">{item.name}</div>
-        </div>
-      ))}
+      <div className="y-axis">
+        {/* Ajustando a escala para exibir de 0 a maxValue de baixo para cima */}
+        {[0, 0.25, 0.5, 0.75, 1].map((percentage) => (
+          <div key={percentage} className="y-axis-label">
+            {formatValue(maxValue * (1 - percentage))} {/* Corrigido */}
+          </div>
+        ))}
+      </div>
+      <div className="bars-container">
+        {data.map((item, index) => (
+          <div key={index} className="bar">
+            <div
+              className="bar-fill"
+              style={{
+                height: `${(item.value / maxValue) * containerHeight}px`,
+              }}
+            ></div>
+            <div className="label">{item.name}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
+
 function App() {
 
-  const updateBars = () => {
-    const newData = Array.from({ length: numBars }, (_, i) => ({
-      name: `Bar ${i + 1}`,
-      value: Math.floor(Math.random() * 10) + 1,  // Valores aleatórios de 1 a 10
-    }));
-    setData(newData);
-  };
 
-  const [numBars, setNumBars] = useState(3);  // Número de barras
-  const [data, setData] = useState([
-    { name: 'Bar 1', value: 3 },
-    { name: 'Bar 2', value: 5 },
-    { name: 'Bar 3', value: 2 },
-  ]);
+  const graphic = async () => {
+    const options = {
+      method: 'GET',
+      url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
+      headers: {
+        'User-Agent': 'insomnia/10.1.1',
+        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+      }
+    };
+  
+    try {
+      const response = await axios.request(options);
+      const items = response.data.items;
+      const top10Items = items.slice(0, 10); // Pega os 10 primeiros itens
+      
+      // Extraindo os valores desejados (annual_average e code_model) de cada item
+      const result = top10Items.map(item => ({
+        annual_average: item.annual_average,
+        code_model: item.code_model
+      }));
+      
+      console.log(result); // Exibe os valores desejados para os 10 itens
+  
+      // Atualizando as barras com os dados coletados
+      updateBars(result); // Passa os 10 itens para a função updateBars
+  
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+    }
+  };
+  
+  const updateBars = (items) => {
+    const newData = items.map((item) => ({
+      name: item.code_model, // Nome da barra com o code_model
+      value: item.annual_average, // O valor da barra será o annual_average
+    }));
+    
+    setData(newData); // Atualiza os dados
+  };
+  
+  const [data, setData] = useState([]);
 
 
   const [marcas, setMarcas] = useState([]);
@@ -197,24 +248,7 @@ const handleChange = (event) => {
 //FUNÇÃO DO GRÁFICO
 
 
-const graphic = async () => {
-  const options = {
-    method: 'GET',
-    url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
-    headers: {
-      'User-Agent': 'insomnia/10.1.1',
-      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-    }
-  };
 
-  try {
-    const response = await axios.request(options);
-    //console.log(response.data);
-    console.log(response.data);
-  } catch (error) {
-    console.error('Erro ao fazer a requisição:', error);
-  }
-};
 
   // Efeito para buscar marcas ao carregar o componente
   useEffect(() => {
@@ -233,6 +267,7 @@ const graphic = async () => {
       fetchAnos();
     }
   }, [modeloSelecionado]);
+
 
   return (
     <>
@@ -392,14 +427,14 @@ const graphic = async () => {
                 <h3>Ano:</h3>
                 {dados.year_model}
               </div>
-              <input
+              {/*<input
                     max={10}
                     min={1}
                     id='inpt_num_bars'
                     type="number"
                     value={numBars}
                     onChange={(e) => setNumBars(Number(e.target.value))}
-                  />
+                  /> */}
               <div onClick={updateBars}id='btn_nova'>
                 <h2>Atualizar</h2>
               </div>
