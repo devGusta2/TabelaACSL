@@ -25,6 +25,7 @@ header{
   background-color: var(--header-color);
   position: fixed;
   align-items: center;
+  z-index: 2;
 }
 
 .logo_box{
@@ -251,7 +252,7 @@ form .bnt_form:hover{
   background-color: #ff64b7;
   color: black;
 }
-form{
+#first_form{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -291,6 +292,7 @@ select{
 /* SEção do gráfico*/
 #graphic{
   height: calc(100vh - 5em);
+
 }
 
 #graphic{
@@ -303,12 +305,13 @@ select{
 .row_graphic{
   width: 100%;
   display: flex;
-  
+
   justify-content: center;
   
 }
 .desc_graphic{
   padding: 50px;
+
 }
 .row_graphic:nth-child(1){
   height: 30%;
@@ -361,7 +364,7 @@ select{
   height: 95%;
   width: 90%; /* Reduzi um pouco para evitar excesso nas laterais */
   max-width: 800px; /* Limitei o tamanho máximo para evitar distorção */
-  margin: 0 auto; /* Centraliza o gráfico horizontalmente */
+   /* Centraliza o gráfico horizontalmente */
   background-color: #f0cdea;
   border-radius: 10px;
   padding: 0px;
@@ -370,6 +373,7 @@ select{
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+
 }
 
 /* Botão de adicionar */
@@ -460,4 +464,95 @@ select{
   margin-top: 5px;
   font-size: 12px;
   color: #333;
+}
+
+
+#listagem{
+  height: calc( 100vh - 5em);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.desc_listagem{
+  height: 30%;
+
+  padding: 10px 50px;
+}
+.desc_listagem h1{
+  font-size: clamp(2.5em , 100vw, 3em);
+  color: var(--btn-color);
+  font-weight: 700;
+}
+.desc_listagem p{
+  font-size: clamp(20px , 100vw, 1.3em);
+
+}
+.info_listagem{
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+gap: 3em;
+
+}
+
+
+
+
+.bnt_lista{
+  height: 70px;
+  width: 20%;
+  outline: 0;
+  border: 0;
+  border-radius: 10px;
+  background-color: var(--header-color);
+  color: white;
+  transition: 0.5s;
+  margin-top: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 10px #a8879d;
+  color: black;
+}
+.bnt_lista:hover{
+  transform: translateY(-10px);
+  background-color: var(--header-color);
+  color: rgb(180, 180, 180);
+  box-shadow: 8px 8px 20px #a8879d;
+}
+
+
+
+#form2 {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
+  width: 40%;
+  background-color: var(--header-color);
+  border-radius: 5px;
+  color: white ;
+  color: #787878;
+}
+
+
+.row_list{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.inpt_list{
+  width: 90%;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  border: 2px solid var(--header-color);
+  outline: 0;
+  padding: 0 10px;
 }

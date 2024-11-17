@@ -244,10 +244,24 @@ const handleChange = (event) => {
   
 
 
+  const listar = async () => {
+    const options = {
+      method: 'POST',
+      url: 'http://0.0.0.0:8087/core/records/list/task/porsche?page=1&page_size=10&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0 ',
+      headers: {
+        'User-Agent': 'insomnia/10.1.1',
+        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+      }
+    };
 
-//FUNÇÃO DO GRÁFICO
+    try {
+      const response = await axios.request(options);
+      //console.log(response.data);
 
-
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+    }
+  };
 
 
   // Efeito para buscar marcas ao carregar o componente
@@ -280,9 +294,10 @@ const handleChange = (event) => {
               </div>
               <ul>
                 <li><a href="">Início</a></li>
-                <li><a href="">Depreciação</a></li>
+                
                 <li><a href="#consulta">Consultar</a></li>
-                <li><a href="">Listar</a></li>
+                <li><a href="#graphic">Depreciação</a></li>
+                <li><a href="#listagem">Listar</a></li>
               </ul>
             </nav>
           </header>
@@ -310,7 +325,7 @@ const handleChange = (event) => {
         <div className="col_consulta">
             <div className="form_box">
               <h2>Pesquisa Comum</h2>
-              <form>
+              <form id="first_form">
                 <div className="inpts_box">
                   <div className='label_and_icon'>
                     <FontAwesomeIcon icon={faCrown} size='2x'/>
@@ -441,6 +456,53 @@ const handleChange = (event) => {
             </div>
           </div>
         </section>
+
+        <section id="listagem">     
+                <div className="desc_listagem">
+                    <h1>Listagem</h1>
+                    <br />
+                    <p>
+                    Nesta seção, você encontrará uma listagem completa 
+                    de anúncios disponíveis. Cada anúncio apresenta 
+                    detalhes essenciais como título, descrição, preço 
+                    e fotos, permitindo que você visualize rapidamente 
+                    as oportunidades disponíveis. Utilize os filtros para
+                    facilitar a busca e encontrar o anúncio que mais se
+                      encaixa no seu interesse.
+                    </p>
+                </div>
+                <div className="info_listagem">
+                <form id="form2"action="">
+                        <div className="row_list">
+                          <h3>Marca</h3>
+                            <select 
+                            style={{width:'94%'}}
+                            name="marca" id="marca" onChange={handleChange}>
+                              <option value="">Selecione a marca do veículo</option>
+                              {marcas.map((marca, index) => (
+                                <option key={index} value={marca.brand}>
+                                  {marca.brand}
+                                </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="row_list">
+                          <h3>Quantidade de anúncios</h3>
+                          <input required className="inpt_list" type="number" max={100} min={1} />
+                        </div>
+                        
+                        <div className="row_list">
+                          <h3>Número da página</h3>
+                          <input required className="inpt_list" type="number" max={100} min={1} />
+                        </div>
+                    </form>
+                  <div className="bnt_lista" onClick={listar}>
+                    <h1>Listar</h1> 
+                  </div>
+                </div>
+        </section>
+
       </div>
     </>
   );

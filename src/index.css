@@ -22,4 +22,6 @@ header{
   background-color: var(--header-color);
   position: fixed;
 }
-
+.inpt_list{
+  display: block;
+}
