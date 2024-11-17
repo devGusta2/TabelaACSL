@@ -8,7 +8,41 @@ import { faCrown, faCalendarDays, faCar} from '@fortawesome/free-solid-svg-icons
 import './App.css';
 import axios from 'axios';
 
+
+const BarChart = ({ data }) => {
+  return (
+    <div className="chart-container">
+      {data.map((item, index) => (
+        <div key={index} className="bar">
+          <div
+            className="bar-fill"
+            style={{ height: `${item.value * 20}px` }} // A altura da barra é proporcional ao valor
+          ></div>
+          <div className="label">{item.name}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 function App() {
+
+  const updateBars = () => {
+    const newData = Array.from({ length: numBars }, (_, i) => ({
+      name: `Bar ${i + 1}`,
+      value: Math.floor(Math.random() * 10) + 1,  // Valores aleatórios de 1 a 10
+    }));
+    setData(newData);
+  };
+
+  const [numBars, setNumBars] = useState(3);  // Número de barras
+  const [data, setData] = useState([
+    { name: 'Bar 1', value: 3 },
+    { name: 'Bar 2', value: 5 },
+    { name: 'Bar 3', value: 2 },
+  ]);
+
+
   const [marcas, setMarcas] = useState([]);
   const [modelo, setModelo] = useState([]);
   const [ano, setAno] = useState([]);
@@ -151,7 +185,7 @@ const handleChange = (event) => {
         average_price: response.data.monthly_averages[0].average_price
       });
 
-      graphic();
+
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
     }
@@ -161,6 +195,7 @@ const handleChange = (event) => {
 
 
 //FUNÇÃO DO GRÁFICO
+
 
 const graphic = async () => {
   const options = {
@@ -181,9 +216,9 @@ const graphic = async () => {
   }
 };
 
-
   // Efeito para buscar marcas ao carregar o componente
   useEffect(() => {
+    graphic();
     fetchMarcas();
   }, []);
 
@@ -337,6 +372,8 @@ const graphic = async () => {
           </div>
           <div className="row_graphic">
             <div className="graphic_box">
+              <BarChart data={data} />
+        
 
             </div>
             <div className="col_infos">
@@ -355,9 +392,17 @@ const graphic = async () => {
                 <h3>Ano:</h3>
                 {dados.year_model}
               </div>
-              <a href='#consulta'id='btn_nova'>
-                <h2>Nova busca</h2>
-              </a>
+              <input
+                    max={10}
+                    min={1}
+                    id='inpt_num_bars'
+                    type="number"
+                    value={numBars}
+                    onChange={(e) => setNumBars(Number(e.target.value))}
+                  />
+              <div onClick={updateBars}id='btn_nova'>
+                <h2>Atualizar</h2>
+              </div>
             </div>
           </div>
         </section>

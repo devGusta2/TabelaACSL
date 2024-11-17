@@ -163,8 +163,7 @@ nav{
   padding: 0 50px;
   width: 50%;
   height: 80%;
-
- margin-top: 50px;
+  margin-top: 50px;
 }
 .table_box{
   height: 100%;
@@ -173,7 +172,6 @@ nav{
   margin-top: -20px;
   border-radius: 10px;
   padding: 20px;
-
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 2fr;
@@ -385,4 +383,70 @@ select{
   cursor: pointer;
   color: white;
   background-color: var(--btn-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.bar {
+  position: relative;
+  width: 50px;
+  margin: 0 10px;
+}
+
+.bar-fill {
+  width: 100%;
+  background-color: var(--btn-color);  /* Cor das barras */
+  transition: height 0.5s ease;
+}
+
+.label {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+.graphic_boxS input{
+ 
+}
+
+#inpt_num_bars{
+  width: 230px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  border: 2px solid var(--btn-color);
+  outline: 0;
+
 }
