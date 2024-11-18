@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import car from '../src/assets/car.jpg';
+import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
@@ -72,7 +72,7 @@ function App() {
         code_model: item.code_model
       }));
       
-      console.log(result); // Exibe os valores desejados para os 10 itens
+      //console.log(result); // Exibe os valores desejados para os 10 itens
   
       // Atualizando as barras com os dados coletados
       updateBars(result); // Passa os 10 itens para a função updateBars
@@ -323,7 +323,7 @@ const listar = async (event) => {
 
   try {
     const response = await axios.request(options);
-    console.log('Dados da resposta da listagem:', response.data);
+    //console.log('Dados da resposta da listagem:', response.data);
 
     const newTaskId = response.data.task_id || null; // Ajuste conforme a estrutura da resposta
     setTaskId(newTaskId);
@@ -351,7 +351,8 @@ const checkTaskStatus = async (task_id) => {
   try {
     const response = await axios.request(options);
     const status = response.data.status;
-    console.log('Status da tarefa:', status);
+    //console.log('Status da tarefa:', status);
+    //console.log(response.data);
     setTaskStatus(status);
 
     // Se o status não for "READY", verifica novamente após 3 segundos
@@ -362,11 +363,6 @@ const checkTaskStatus = async (task_id) => {
     console.error('Erro ao buscar o status da tarefa:', error);
   }
 };
-
-
-
-
-
 
 
 
@@ -398,9 +394,10 @@ return (
             <div className='bottom_row'>
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
+                <br />
                 <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e colecionáveis.</p>
               </div>
-              
+
               <div className="col_bottom">
                 <button id='btn_consulta'>
                   <h2>Consultar</h2>
@@ -561,7 +558,9 @@ return (
                     </p>
                     <div id="status">
                       <h2>Status:</h2>
-                      <p>{taskStatus}</p>
+                      <p className={taskStatus === 'PENDING' ? 'pending' : taskStatus === 'SUCESS' ? 'success' : 'default'}>
+                        {taskStatus}
+                      </p>
                     </div>
                     <div id="btn_donwload">
                     <FontAwesomeIcon icon={faDownload} size='2x'/>

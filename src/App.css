@@ -75,13 +75,15 @@ nav{
 }
 
 .content_sc1 h1{
-  font-size: clamp(2.5em , 100vw, 3em);
-  color: var(--btn-color);
+  font-size: clamp(2.5em , 100vw, 3.4em);
+  color: var(--bg-color);
   font-weight: 700;
 
 }
 .content_sc1 p{
-  font-size: clamp(20px , 100vw, 1.3em);
+  font-size: clamp(20px , 100vw, 1.5em);
+  color: white;
+  font-weight: 500;
 
 }
 .bottom_row{
@@ -89,20 +91,22 @@ nav{
   flex-direction: row;
   width: 100%;
   /* background-color: green; */
-  height: 30%;
+  height: 100%;
   justify-content: space-around;
   align-items: center;
+  position: absolute;
+  margin-top: 30%;
 }
 .img_background{
-  height: 70%;
+  height: 100%;
   width: 100%;
   background-color: rgb(150, 73, 106);
   
 }
 .img_background img{
   height: 100%;
-  width: 70%;
-  margin: 0 15%;
+  width: 100%;
+
   /* background-color: yellow; */
 }
 
@@ -131,8 +135,8 @@ nav{
   border: 0;
   outline: 0;
   border-radius: 10px;
-  background-color: var(--btn-color);
-  color: white;
+  background-color: var(--header-color);
+ 
   cursor: pointer;
   transition: 0.5s ease-in-out;
   
