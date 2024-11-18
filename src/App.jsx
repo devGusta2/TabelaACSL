@@ -269,38 +269,108 @@ const handleChange = (event) => {
 //parte dos dados da parte de listagem
 
 
-  const [listagem_data, setListagem] = useState({
-    marca: '',  // Adicionando a chave para marca
-    qnt_anunc: '',
-    num_page: '',
-  });
 
-  const handleChangeList = (e) => {
-    const { name, value } = e.target;  // Pega o nome do input e o valor
-    setListagem((prevState) => ({
-      ...prevState,
-      [name]: value,  // Atualiza a chave correspondente no estado
-    }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const [listagemData, setListagemData] = useState({ marca: '', qnt_anunc: 1, num_page: 1 });
+
+const [taskStatus, setTaskStatus] = useState('Não iniciado');
+const [taskId, setTaskId] = useState(null);
+
+
+
+
+// Função para atualizar os dados de listagem
+const handleChangeList = (e) => {
+  const { name, value } = e.target;
+  setListagemData((prevState) => ({ ...prevState, [name]: value }));
+};
+
+// Função de listagem
+const listar = async (event) => {
+  event.preventDefault();
+  const { marca, qnt_anunc, num_page } = listagemData;
+
+  if (!marca || !qnt_anunc || !num_page) {
+    alert('Preencha todos os campos antes de listar.');
+    return;
+  }
+
+  const url = `http://0.0.0.0:8087/core/records/list/task/porsche?page=${num_page}&page_size=${qnt_anunc}&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`;
+  const options = {
+    method: 'GET',
+    url: url,
+    headers: {
+      'User-Agent': 'insomnia/10.1.1',
+      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+    },
   };
 
-  const listar = async () => {
-    const options = {
-      method: 'GET',
-      url: `http://0.0.0.0:8087/core/records/list/task/porsche?page=&page_size=10&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
+  try {
+    const response = await axios.request(options);
+    console.log('Dados da resposta da listagem:', response.data);
 
-    try {
-      const response = await axios.request(options);
-      //console.log(response.data);
+    const newTaskId = response.data.task_id || null; // Ajuste conforme a estrutura da resposta
+    setTaskId(newTaskId);
 
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
+    if (newTaskId) {
+      checkTaskStatus(newTaskId);
     }
+  } catch (error) {
+    console.error('Erro ao fazer a requisição de listagem:', error);
+  }
+};
+
+// Função para buscar o status da tarefa
+const checkTaskStatus = async (task_id) => {
+  const url = `http://0.0.0.0:8087/core/tasks/status/${task_id}`;
+  const options = {
+    method: 'GET',
+    url: url,
+    headers: {
+      'User-Agent': 'insomnia/10.1.1',
+      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+    },
   };
+
+  try {
+    const response = await axios.request(options);
+    const status = response.data.status;
+    console.log('Status da tarefa:', status);
+    setTaskStatus(status);
+
+    // Se o status não for "READY", verifica novamente após 3 segundos
+    if (status !== 'READY') {
+      setTimeout(() => checkTaskStatus(task_id), 3000);
+    }
+  } catch (error) {
+    console.error('Erro ao buscar o status da tarefa:', error);
+  }
+};
+
+
+
+
+
+
+
+
+
 
 return (
     <>
@@ -491,7 +561,7 @@ return (
                     </p>
                     <div id="status">
                       <h2>Status:</h2>
-                      <p>Não iniciado</p>
+                      <p>{taskStatus}</p>
                     </div>
                     <div id="btn_donwload">
                     <FontAwesomeIcon icon={faDownload} size='2x'/>
@@ -502,67 +572,62 @@ return (
 
 
                 <div className="info_listagem">
-                  <form id="form2" action="">
-                    <div className="row_list">
-                    <div className='row_icon'>
-                          <FontAwesomeIcon icon={faCrown} size='2x'/>
-                          <h3>Quantidade de anúncios:</h3>
-                        </div>
-                      <select
-                      
-                        name="marca"  // Nome do campo para poder associar com o estado
-                        id="marca"
-                        onChange={handleChangeList} // Função que lida com o onChange
-                        value={listagem_data.marca}  // Liga o valor do select ao estado
-                      >
-                        <option value="">Selecione a marca do veículo</option>
-                        {marcas.map((marca, index) => (
-                          <option key={index} value={marca.brand}>
-                            {marca.brand}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+             
+    <form onSubmit={listar} id='form2'>
+        <div className="row_list">
+          <div className="row_icon">
+            <FontAwesomeIcon icon={faCrown} size="2x" />
+            <h3>Marca:</h3>
+          </div>
+          <select
+            name="marca"
+            id="marca"
+            onChange={handleChangeList}
+            value={listagemData.marca}
+          >
+            <option value="">Selecione a marca do veículo</option>
+            {marcas.map((marca, index) => (
+              <option key={index} value={marca.brand}>
+                {marca.brand}
+              </option>
+            ))}
+        </select>
+        </div>
 
-                    <div className="row_list">
-                        <div className='row_icon'>
-                          <FontAwesomeIcon icon={faFile} size='2x'/>
-                          <h3>Quantidade de páginas:</h3>
-                        </div>
-                      <input
-                        required
-                        className="inpt_list"
-                        type="number"
-                        max={100}
-                        min={1}
-                        name="qnt_anunc"  // Nome do campo para associar com o estado
-                        value={listagem_data.qnt_anunc}  // Liga o valor ao estado
-                        onChange={handleChangeList} // Função para lidar com o onChange
-                         placeholder='Insira a quantidade de páginas'
-                      />
-                    </div>
+            <div className="row_list">
+              <div className="row_icon">
+                <FontAwesomeIcon icon={faList} size="2x" />
+                <h3>Quantidade de anuncios:</h3>
+              </div>
 
-                    <div className="row_list">
-                        <div className='row_icon'>
-                          <FontAwesomeIcon icon={faList} size='2x'/>
-                          <h3>Quantidade de anúncios:</h3>
-                        </div>
+                <input
+              className='inpt_list'
+                type="number"
+                placeholder="Quantidade de Anúncios"
+                name="qnt_anunc"
+                value={listagemData.qnt_anunc}
+                onChange={handleChangeList}
+              />
+            </div>
+            <div className="row_list">
+              <div className="row_icon">
+                <FontAwesomeIcon icon={faFile} size="2x" />
+                <h3>Quantidade de páginas:</h3>
+              </div>
+
                       <input
-                        required
-                        className="inpt_list"
-                        type="number"
-                        max={100}
-                        min={1}
-                        name="num_page"  // Nome do campo para associar com o estado
-                        value={listagem_data.num_page}  // Liga o valor ao estado
-                        onChange={handleChangeList} // Função para lidar com o onChange
-                        placeholder='Insira a quantidade de anuncios'
-                      />
-                    </div>
-                    <button type='submit' className="bnt_lista" onClick={listar}>
-                      <h1>Listar</h1> 
-                    </button>
-                </form>
+                  className='inpt_list'
+                  type="number"
+                  placeholder="Número da Página"
+                  name="num_page"
+                  value={listagemData.num_page}
+                  onChange={handleChangeList}
+                />
+            </div>
+      
+        <button type="submit">Listar</button>
+      </form>
+
                   
                 </div>
         </section>
