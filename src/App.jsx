@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg';
 import car from '../src/assets/car.jpg';
 import logo from '../src/assets/logo4.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCrown, faCalendarDays, faCar} from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import axios from 'axios';
 
@@ -489,58 +489,81 @@ return (
                     facilitar a busca e encontrar o anúncio que mais se
                       encaixa no seu interesse.
                     </p>
+                    <div id="status">
+                      <h2>Status:</h2>
+                      <p>Não iniciado</p>
+                    </div>
+                    <div id="btn_donwload">
+                    <FontAwesomeIcon icon={faDownload} size='2x'/>
+                      <h3>Baixar</h3>
+                      
+                    </div>
                 </div>
+
+
                 <div className="info_listagem">
-                <form id="form2" action="">
-                  <div className="row_list">
-                    <h3>Marca</h3>
-                    <select
-                      style={{ width: '94%' }}
-                      name="marca"  // Nome do campo para poder associar com o estado
-                      id="marca"
-                      onChange={handleChangeList} // Função que lida com o onChange
-                      value={listagem_data.marca}  // Liga o valor do select ao estado
-                    >
-                      <option value="">Selecione a marca do veículo</option>
-                      {marcas.map((marca, index) => (
-                        <option key={index} value={marca.brand}>
-                          {marca.brand}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <form id="form2" action="">
+                    <div className="row_list">
+                    <div className='row_icon'>
+                          <FontAwesomeIcon icon={faCrown} size='2x'/>
+                          <h3>Quantidade de anúncios:</h3>
+                        </div>
+                      <select
+                      
+                        name="marca"  // Nome do campo para poder associar com o estado
+                        id="marca"
+                        onChange={handleChangeList} // Função que lida com o onChange
+                        value={listagem_data.marca}  // Liga o valor do select ao estado
+                      >
+                        <option value="">Selecione a marca do veículo</option>
+                        {marcas.map((marca, index) => (
+                          <option key={index} value={marca.brand}>
+                            {marca.brand}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <div className="row_list">
-                    <h3>Quantidade de anúncios</h3>
-                    <input
-                      required
-                      className="inpt_list"
-                      type="number"
-                      max={100}
-                      min={1}
-                      name="qnt_anunc"  // Nome do campo para associar com o estado
-                      value={listagem_data.qnt_anunc}  // Liga o valor ao estado
-                      onChange={handleChangeList} // Função para lidar com o onChange
-                    />
-                  </div>
+                    <div className="row_list">
+                        <div className='row_icon'>
+                          <FontAwesomeIcon icon={faFile} size='2x'/>
+                          <h3>Quantidade de páginas:</h3>
+                        </div>
+                      <input
+                        required
+                        className="inpt_list"
+                        type="number"
+                        max={100}
+                        min={1}
+                        name="qnt_anunc"  // Nome do campo para associar com o estado
+                        value={listagem_data.qnt_anunc}  // Liga o valor ao estado
+                        onChange={handleChangeList} // Função para lidar com o onChange
+                         placeholder='Insira a quantidade de páginas'
+                      />
+                    </div>
 
-                  <div className="row_list">
-                    <h3>Número da página</h3>
-                    <input
-                      required
-                      className="inpt_list"
-                      type="number"
-                      max={100}
-                      min={1}
-                      name="num_page"  // Nome do campo para associar com o estado
-                      value={listagem_data.num_page}  // Liga o valor ao estado
-                      onChange={handleChangeList} // Função para lidar com o onChange
-                    />
-                  </div>
+                    <div className="row_list">
+                        <div className='row_icon'>
+                          <FontAwesomeIcon icon={faList} size='2x'/>
+                          <h3>Quantidade de anúncios:</h3>
+                        </div>
+                      <input
+                        required
+                        className="inpt_list"
+                        type="number"
+                        max={100}
+                        min={1}
+                        name="num_page"  // Nome do campo para associar com o estado
+                        value={listagem_data.num_page}  // Liga o valor ao estado
+                        onChange={handleChangeList} // Função para lidar com o onChange
+                        placeholder='Insira a quantidade de anuncios'
+                      />
+                    </div>
+                    <button type='submit' className="bnt_lista" onClick={listar}>
+                      <h1>Listar</h1> 
+                    </button>
                 </form>
-                  <div className="bnt_lista" onClick={listar}>
-                    <h1>Listar</h1> 
-                  </div>
+                  
                 </div>
         </section>
 
