@@ -244,25 +244,7 @@ const handleChange = (event) => {
   
 
 
-  const listar = async () => {
-    const options = {
-      method: 'POST',
-      url: 'http://0.0.0.0:8087/core/records/list/task/porsche?page=1&page_size=10&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0 ',
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
-
-    try {
-      const response = await axios.request(options);
-      //console.log(response.data);
-
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-    }
-  };
-
+  
 
   // Efeito para buscar marcas ao carregar o componente
   useEffect(() => {
@@ -283,7 +265,44 @@ const handleChange = (event) => {
   }, [modeloSelecionado]);
 
 
-  return (
+
+//parte dos dados da parte de listagem
+
+
+  const [listagem_data, setListagem] = useState({
+    marca: '',  // Adicionando a chave para marca
+    qnt_anunc: '',
+    num_page: '',
+  });
+
+  const handleChangeList = (e) => {
+    const { name, value } = e.target;  // Pega o nome do input e o valor
+    setListagem((prevState) => ({
+      ...prevState,
+      [name]: value,  // Atualiza a chave correspondente no estado
+    }));
+  };
+
+  const listar = async () => {
+    const options = {
+      method: 'GET',
+      url: `http://0.0.0.0:8087/core/records/list/task/porsche?page=&page_size=10&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`,
+      headers: {
+        'User-Agent': 'insomnia/10.1.1',
+        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+      }
+    };
+
+    try {
+      const response = await axios.request(options);
+      //console.log(response.data);
+
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+    }
+  };
+
+return (
     <>
       <div className="">
         <section id="inicio">
@@ -472,31 +491,53 @@ const handleChange = (event) => {
                     </p>
                 </div>
                 <div className="info_listagem">
-                <form id="form2"action="">
-                        <div className="row_list">
-                          <h3>Marca</h3>
-                            <select 
-                            style={{width:'94%'}}
-                            name="marca" id="marca" onChange={handleChange}>
-                              <option value="">Selecione a marca do veículo</option>
-                              {marcas.map((marca, index) => (
-                                <option key={index} value={marca.brand}>
-                                  {marca.brand}
-                                </option>
-                            ))}
-                          </select>
-                        </div>
+                <form id="form2" action="">
+                  <div className="row_list">
+                    <h3>Marca</h3>
+                    <select
+                      style={{ width: '94%' }}
+                      name="marca"  // Nome do campo para poder associar com o estado
+                      id="marca"
+                      onChange={handleChangeList} // Função que lida com o onChange
+                      value={listagem_data.marca}  // Liga o valor do select ao estado
+                    >
+                      <option value="">Selecione a marca do veículo</option>
+                      {marcas.map((marca, index) => (
+                        <option key={index} value={marca.brand}>
+                          {marca.brand}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                        <div className="row_list">
-                          <h3>Quantidade de anúncios</h3>
-                          <input required className="inpt_list" type="number" max={100} min={1} />
-                        </div>
-                        
-                        <div className="row_list">
-                          <h3>Número da página</h3>
-                          <input required className="inpt_list" type="number" max={100} min={1} />
-                        </div>
-                    </form>
+                  <div className="row_list">
+                    <h3>Quantidade de anúncios</h3>
+                    <input
+                      required
+                      className="inpt_list"
+                      type="number"
+                      max={100}
+                      min={1}
+                      name="qnt_anunc"  // Nome do campo para associar com o estado
+                      value={listagem_data.qnt_anunc}  // Liga o valor ao estado
+                      onChange={handleChangeList} // Função para lidar com o onChange
+                    />
+                  </div>
+
+                  <div className="row_list">
+                    <h3>Número da página</h3>
+                    <input
+                      required
+                      className="inpt_list"
+                      type="number"
+                      max={100}
+                      min={1}
+                      name="num_page"  // Nome do campo para associar com o estado
+                      value={listagem_data.num_page}  // Liga o valor ao estado
+                      onChange={handleChangeList} // Função para lidar com o onChange
+                    />
+                  </div>
+                </form>
                   <div className="bnt_lista" onClick={listar}>
                     <h1>Listar</h1> 
                   </div>
