@@ -415,9 +415,9 @@ return (
               </div>
 
               <div className="col_bottom">
-                <button id='btn_consulta'>
+                <a href='#consulta'id='btn_consulta'>
                   <h2>Consultar</h2>
-                </button>
+                </a>
               </div>
             </div>
           </div>
