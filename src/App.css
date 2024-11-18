@@ -578,3 +578,72 @@ select{
   display: flex;
   align-items: center;gap: 1em;
 }
+
+
+
+#Lista_sect{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.list_box{
+  height: 100%;
+  width: 100%;
+
+
+}
+
+.list_box li{
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+.list_box ul{
+  display: flex;
+  flex-direction: column;
+}
+
+.list_box h3, strong{
+  color: var(--btn-color);
+}
+
+
+#Lista_sect .list_box {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.record-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.record-item {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.record-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.record-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.record-details p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin: 5px 0;
+}

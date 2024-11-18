@@ -293,6 +293,9 @@ const [taskStatus, setTaskStatus] = useState('Não iniciado');
 const [taskId, setTaskId] = useState(null);
 
 
+  const [records, setRecords] = useState([]);  // Estado para armazenar os registros
+  const task_id = "coloque_seu_task_id_aqui";  // Substitua pelo seu ID da tarefa
+
 
 
 // Função para atualizar os dados de listagem
@@ -336,8 +339,12 @@ const listar = async (event) => {
   }
 };
 
-// Função para buscar o status da tarefa
+
+const [isTaskComplete, setIsTaskComplete] = useState(false);
 const checkTaskStatus = async (task_id) => {
+  // Se a tarefa já estiver completa, não continuar a verificação
+  if (isTaskComplete) return;
+
   const url = `http://0.0.0.0:8087/core/tasks/status/${task_id}`;
   const options = {
     method: 'GET',
@@ -351,21 +358,30 @@ const checkTaskStatus = async (task_id) => {
   try {
     const response = await axios.request(options);
     const status = response.data.status;
-    //console.log('Status da tarefa:', status);
-    //console.log(response.data);
+    console.log(response.data);
     setTaskStatus(status);
 
-    // Se o status não for "READY", verifica novamente após 3 segundos
+    if (status === 'SUCCESS') {
+      setRecords(response.data.result.records);  // Atualiza os registros
+      setIsTaskComplete(true); // Marca a tarefa como completa
+
+      return; // Interrompe a execução
+    }
+
+    // Se o status não for "READY" nem "SUCCESS", continua verificando após 3 segundos
     if (status !== 'READY') {
       setTimeout(() => checkTaskStatus(task_id), 3000);
     }
+
   } catch (error) {
     console.error('Erro ao buscar o status da tarefa:', error);
   }
 };
 
-
-
+// useEffect para iniciar a verificação do status da tarefa assim que o componente for montado
+useEffect(() => {
+  checkTaskStatus(task_id);
+}, [task_id]);  // O useEffect é chamado apenas quando o task_id mudar
 
 
 return (
@@ -556,12 +572,14 @@ return (
                     facilitar a busca e encontrar o anúncio que mais se
                       encaixa no seu interesse.
                     </p>
+                 
                     <div id="status">
-                      <h2>Status:</h2>
-                      <p className={taskStatus === 'PENDING' ? 'pending' : taskStatus === 'SUCESS' ? 'success' : 'default'}>
-                        {taskStatus}
-                      </p>
-                    </div>
+                    <h2>Status:</h2>
+                    <p style={{ color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black' }}>
+                      {taskStatus}
+                    </p>
+                  </div>
+
                     <div id="btn_donwload">
                     <FontAwesomeIcon icon={faDownload} size='2x'/>
                       <h3>Baixar</h3>
@@ -624,13 +642,39 @@ return (
                 />
             </div>
       
-        <button type="submit">Listar</button>
+        <button type="submit"><h3>LIstar</h3></button>
       </form>
 
                   
                 </div>
         </section>
 
+
+        <section id="Lista_sect">
+
+        <div className="list_box">
+            <h1>Lista de veículos</h1>
+          {records.length > 0 ? (
+            
+            <ul>
+              {records.map((record, index) => (
+                <li key={index} style={{ border: '1px solid #ddd', padding: '10px', marginBottom: '10px' }}>
+                  <h3>{record.title}</h3>
+                  <p><strong>Marca:</strong> {record.brand}</p>
+                  <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
+                  <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
+                  <p><strong>Descrição:</strong> {record.description}</p>
+                  <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver Detalhes</a></p>
+                  <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
+                  <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Nenhum registro encontrado.</p>
+          )}
+        </div>
+      </section>
       </div>
     </>
   );
