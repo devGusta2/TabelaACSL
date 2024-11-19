@@ -600,8 +600,9 @@ select{
 }
 
 .list_box li{
-  background-color: whitesmoke;
+  background-color: var(--header-color);
   border-radius: 10px;
+ 
 }
 .list_box ul{
   display: flex;

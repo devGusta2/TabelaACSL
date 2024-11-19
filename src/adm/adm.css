@@ -1,0 +1,130 @@
+.adm{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--bg-color);
+}
+
+*{
+  padding: 0;
+  left: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root{
+  --bg-color:#fff7fb;
+  --header-color:#ffcfe9;
+  --btn-color:#ef44a1;
+}
+
+.menu{
+    height: 100%;
+    width: 25%;
+    background-color: #ef44a1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+.menu img{
+    height: 35%;
+    width: 65%;
+}
+nav{
+
+
+    height: 75%;
+    width: 100%;
+    
+    
+}
+ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    margin-top: -100%;
+}
+li{
+
+   
+    gap: 1em;
+    color: white;
+
+    width: 80%;
+    height: 30%;
+    padding: 0 10%;
+}
+
+ul li a{
+    color: white;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+
+.content{
+    height: 100%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.card_box{
+    height: 30%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info   {
+    height: 70%;
+    width: 100%;
+    
+}
+
+.card{
+    height: 150px;
+    width: 200px;
+    background-color: white ;
+    box-shadow: 4px 4px 10px rgb(209, 209, 209);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.5em;
+
+}
+.card h1{
+    color: var(--btn-color);
+}
+.card_box{
+    display: flex;
+    gap: 1em;
+}
+
+.info{
+    width: 100%;
+
+    overflow: auto;
+    
+}
+
+@screen (max-width:768px){
+
+}
+
+tbody{
+    width: 100%;
+
+}
