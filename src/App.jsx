@@ -209,6 +209,7 @@ const handleChange = (event) => {
   };
 
 
+
   const calcular = async () => {
     const options = {
       method: 'GET',
@@ -358,7 +359,7 @@ const checkTaskStatus = async (task_id) => {
   try {
     const response = await axios.request(options);
     const status = response.data.status;
-    console.log(response.data);
+    //console.log(response.data);
     setTaskStatus(status);
 
     if (status === 'SUCCESS') {
@@ -384,6 +385,35 @@ useEffect(() => {
 }, [task_id]);  // O useEffect é chamado apenas quando o task_id mudar
 
 
+
+
+const downloadExcel = async () => {
+  const options = {
+    method: 'GET',
+    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/porsche`,
+    headers: {
+      'User-Agent': 'insomnia/10.1.1',
+      Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+    },
+    responseType: 'blob', // Define o tipo de resposta como blob
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    // Cria um link para o download
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'planilha.xlsx'); // Nome do arquivo
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+
+  } catch (error) {
+    console.error('Erro ao fazer a requisição:', error);
+  }
+};
 return (
     <>
       <div className="">
@@ -580,7 +610,7 @@ return (
                     </p>
                   </div>
 
-                    <div id="btn_donwload">
+                    <div id="btn_donwload" onClick={downloadExcel}>
                     <FontAwesomeIcon icon={faDownload} size='2x'/>
                       <h3>Baixar</h3>
                       
