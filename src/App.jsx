@@ -414,6 +414,7 @@ const downloadExcel = async () => {
     console.error('Erro ao fazer a requisição:', error);
   }
 };
+
 return (
     <>
       <div className="">
@@ -679,12 +680,12 @@ return (
                 </div>
         </section>
 
-
+        {records.length > 0 ? (
         <section id="Lista_sect">
 
         <div className="list_box">
             <h1>Lista de veículos</h1>
-          {records.length > 0 ? (
+          
             
             <ul>
               {records.map((record, index) => (
@@ -700,11 +701,12 @@ return (
                 </li>
               ))}
             </ul>
-          ) : (
-            <p>Nenhum registro encontrado.</p>
-          )}
+          
         </div>
       </section>
+      ) : (
+        <p>Nenhum registro encontrado.</p>
+      )}
       </div>
     </>
   );
