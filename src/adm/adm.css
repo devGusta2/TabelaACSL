@@ -56,7 +56,7 @@
     justify-content: center;
     gap: 1em;
 }
-.login_form h2{
+.login_form h2, p{
     margin-left: -40%;
 }
 .login button{

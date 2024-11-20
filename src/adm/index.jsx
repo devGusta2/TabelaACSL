@@ -160,9 +160,10 @@ export default function Adm() {
                     </div>
                     <div className="login_form">
                         <h2>Login</h2>
+                        <p>Área restrita</p>
                         <input
                             type="password"
-                            placeholder="Digite a senha"
+                            placeholder="Digite a palavra passe"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />

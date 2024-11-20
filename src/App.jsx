@@ -427,7 +427,7 @@ return (
               </div>
               
               <ul>
-                <li><a href="">Início</a></li>
+                <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#graphic">Depreciação</a></li>
@@ -596,16 +596,12 @@ return (
                 <div className="desc_listagem">
                     <h1>Listagem</h1>
                     <br />
-                    <p>
+                    <p id="desc_l">
                     Nesta seção, você encontrará uma listagem completa 
-                    de anúncios disponíveis. Cada anúncio apresenta 
-                    detalhes essenciais como título, descrição, preço 
-                    e fotos, permitindo que você visualize rapidamente 
-                    as oportunidades disponíveis. Utilize os filtros para
-                    facilitar a busca e encontrar o anúncio que mais se
-                      encaixa no seu interesse.
+                    de anúncios disponíveis. 
                     </p>
-                 
+                    <h3 style={{color:'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
+                    <h3 style={{color:'red'}}>* Disponibilizamos serviços de API</h3>
                     <div id="status">
                     <h2>Status:</h2>
                     <p style={{ color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black' }}>

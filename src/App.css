@@ -118,6 +118,9 @@ nav{
   padding: 0 5%;
 
 }
+.col_bottom p{
+  margin-left: 0px;
+}
 
 .col_bottom:nth-child(1){
   width: 60%;
@@ -209,6 +212,7 @@ nav{
 }
 .col_consulta p{
   font-size: clamp(1em , 100vw, 1.3em);
+  margin-left: 5px;
 }
 
 
@@ -313,6 +317,9 @@ select{
 
   justify-content: center;
   
+}
+.desc_graphic p{
+  margin-left: 5px;
 }
 .desc_graphic{
   padding: 5%;
@@ -480,6 +487,12 @@ select{
   flex-direction: row;
 
 }
+#desc_l{
+
+  max-width: 500px;
+  margin-left: 0px;
+}
+
 
 
 .desc_listagem h1{
@@ -489,6 +502,7 @@ select{
 }
 .desc_listagem p{
   font-size: clamp(20px , 100vw, 1.3em);
+ 
 
 }
 .desc_listagem{
