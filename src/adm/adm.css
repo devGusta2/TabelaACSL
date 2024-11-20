@@ -23,7 +23,7 @@ body{
 
 .menu{
     height: 100%;
-    width: 25%;
+    width: 20%;
     background-color: #ef44a1;
     display: flex;
     flex-direction: column;
@@ -33,25 +33,25 @@ body{
 }
 
 .menu img{
-    height: 35%;
-    width: 65%;
+    height: 200px;
+    width: 200px;
 }
-nav{
+.menu nav{
 
 
-    height: 75%;
+    height: 80%;
     width: 100%;
     
     
 }
-ul{
+.menu ul{
     width: 100%;
     display: flex;
     flex-direction: column;
     height: 30%;
     margin-top: -100%;
 }
-li{
+.menu li{
 
    
     gap: 1em;
@@ -62,7 +62,7 @@ li{
     padding: 0 10%;
 }
 
-ul li a{
+.menu ul li a{
     color: white;
     display: flex;
     gap: 1em;
@@ -72,7 +72,7 @@ ul li a{
 
 .content{
     height: 100%;
-    width: 75%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,6 +120,12 @@ ul li a{
     
 }
 
+td {
+    max-width: 150px; /* Define o tamanho máximo da célula */
+    white-space: nowrap; /* Impede a quebra de linha */
+    overflow: hidden; /* Esconde o texto excedente */
+    text-overflow: ellipsis; /* Adiciona "..." ao final */
+}
 @screen (max-width:768px){
 
 }
@@ -127,4 +133,41 @@ ul li a{
 tbody{
     width: 100%;
 
+}
+
+table{
+    width: 100%;
+    height: 100%;
+}
+.btn_delete{
+    background-color: rgb(224, 87, 87);
+    border: 0;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.btn_update{
+    background-color: rgb(110, 128, 175);
+    border: 0;
+    color: white;
+    height: 40px;
+    width: 50%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+thead{
+    background-color: var(--btn-color);
+}
+
+tbody{
+
+}
+
+td input{
+    width: 100%;
+    height: 30px;
 }
