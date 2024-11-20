@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import axios from 'axios';
@@ -424,9 +425,10 @@ return (
               <div className='logo_box'>
                 <img src={logo} alt=""/>
               </div>
+              
               <ul>
                 <li><a href="">Início</a></li>
-                
+
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#graphic">Depreciação</a></li>
                 <li><a href="#listagem">Listar</a></li>

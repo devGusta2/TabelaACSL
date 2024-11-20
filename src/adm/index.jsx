@@ -1,7 +1,7 @@
 import './adm.css';
 import logo from '../../src/assets/logo4.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faUser} from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -136,6 +136,43 @@ export default function Adm() {
         }
     }, [status]);
 
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState('');
+
+    const correctPassword = 'MelÉVida@5'; // Substitua pela senha desejada
+
+    const handleLogin = () => {
+        if (password === correctPassword) {
+            setIsAuthenticated(true);
+        } else {
+            alert('Senha incorreta!');
+        }
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="login">
+                <div className="login_box">
+                    <div className="login_detail">
+                    <FontAwesomeIcon icon={faUser} size="7x" />
+                    <h3>Admin</h3>
+                    </div>
+                    <div className="login_form">
+                        <h2>Login</h2>
+                        <input
+                            type="password"
+                            placeholder="Digite a senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button onClick={handleLogin}>Entrar</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="adm">
             <div className="menu">
@@ -153,12 +190,12 @@ export default function Adm() {
             </div>
             
             <div className="content">
-            <div className="card_box">
-                        <div className="card">
-                            <h1>984</h1>
-                            <h5>Veículos</h5>
-                        </div>
+                <div className="card_box">
+                    <div className="card">
+                        <h1>984</h1>
+                        <h5>Veículos</h5>
                     </div>
+                </div>
                 <div className="info">
                     <table>
                         <thead>
@@ -213,4 +250,4 @@ export default function Adm() {
             </div>
         </div>
     );
-}
+};
