@@ -24,13 +24,22 @@ export default function Adm() {
     // Função para carregar os registros
     const loadCars = async () => {
         const options = {
-            method: 'GET',
-            url: `http://0.0.0.0:8087/core/records/list/task/porsche?page=1&page_size=20&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`,
+            method: 'POST',
+            url: `http://0.0.0.0:8087/core/records/list/task/machine?page=1&page_size=20`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
             },
-        };
+        data: {
+            reference_dates: [
+                {
+                    reference_year: 2024, // Isso tem que ser uma variável
+                    reference_month: 12  // é possível passar uma lista de dicts reference dates
+                }
+            ]
+        }
+    };
+
 
         try {
             const response = await axios.request(options);
