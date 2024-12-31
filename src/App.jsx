@@ -551,11 +551,11 @@ return (
         </section>
 
 
-        <section id="listagem">
-          <div className="desc_listagem">
+        <section id="about">
+          <div className="about_product">
             <h1>Sobre o Produto</h1>
             <br/>
-            <p id="desc_l">
+            <p id="about">
               Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
               funcionalidades,
               entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
