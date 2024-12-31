@@ -150,7 +150,7 @@ const handleChange = (event) => {
   const fetchModelo = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/porsche?brand=${marcaSelecionada}&page=1&page_size=10`,
+      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -172,7 +172,7 @@ const handleChange = (event) => {
   const fetchAnos = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/porsche?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
+      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -193,7 +193,7 @@ const handleChange = (event) => {
   const fetchMarcas = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/core/brand/model/list/porsche',
+      url: 'http://0.0.0.0:8087/core/brand/model/list/machine',
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -214,7 +214,7 @@ const handleChange = (event) => {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/porsche?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
+      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -316,7 +316,7 @@ const listar = async (event) => {
     return;
   }
 
-  const url = `http://0.0.0.0:8087/core/records/list/task/porsche?page=${num_page}&page_size=${qnt_anunc}&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`;
+  const url = `http://0.0.0.0:8087/core/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`;
   const options = {
     method: 'GET',
     url: url,
@@ -391,7 +391,7 @@ useEffect(() => {
 const downloadExcel = async () => {
   const options = {
     method: 'GET',
-    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/porsche`,
+    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
     headers: {
       'User-Agent': 'insomnia/10.1.1',
       Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -430,7 +430,6 @@ return (
                 <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
-                <li><a href="#graphic">Depreciação</a></li>
                 <li><a href="#listagem">Listar</a></li>
               </ul>
             </nav>
@@ -541,85 +540,40 @@ return (
             </div>
           </div>
         </section>
-        <section id="graphic">
-          <div className="row_graphic">
-            <div className="desc_graphic">
-              <h1>Gráfico</h1>
-                <p>
-                  Nesta seção, você encontrará uma análise detalhada 
-                  da depreciação de ativos ao longo do tempo. À esquerda,
-                  são apresentados os principais valores e períodos, 
-                  enquanto à direita um gráfico interativo exibe a evolução
-                  da depreciação, facilitando a visualização da redução do
-                  valor dos ativos.
-                </p>
+
+
+        <section id="listagem">
+          <div className="desc_listagem">
+            <h1>Listagem</h1>
+            <br/>
+            <p id="desc_l">
+              Nesta seção, você encontrará uma listagem completa
+              de anúncios disponíveis.
+            </p>
+            <h3 style={{color: 'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
+            <h3 style={{color: 'red'}}>* Disponibilizamos serviços de API</h3>
+            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo a visualização gráfica dos dados
+              obtidos</h3>
+            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo insights e um estudo completo sobre o
+            mercado de precificação de veículos</h3>
+            <div id="status">
+              <h2>Status:</h2>
+              <p style={{color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black'}}>
+                {taskStatus}
+              </p>
+            </div>
+
+            <div id="btn_donwload" onClick={downloadExcel}>
+              <FontAwesomeIcon icon={faDownload} size='2x'/>
+              <h3>Baixar</h3>
+
             </div>
           </div>
-          <div className="row_graphic">
-            <div className="graphic_box">
-              <BarChart data={data} />
-        
-
-            </div>
-            <div className="col_infos">
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCrown} size='2x' className='icon_font' />
-                <h3>Marca:</h3>
-                {dados.brand}
-              </div>
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCar} size='2x' className='icon_font' />
-                <h3>Modelo:</h3>
-                {dados.model}
-              </div>
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCalendarDays} size='2x' className='icon_font'/>
-                <h3>Ano:</h3>
-                {dados.year_model}
-              </div>
-              {/*<input
-                    max={10}
-                    min={1}
-                    id='inpt_num_bars'
-                    type="number"
-                    value={numBars}
-                    onChange={(e) => setNumBars(Number(e.target.value))}
-                  /> */}
-              <div onClick={updateBars}id='btn_nova'>
-                <h2>Atualizar</h2>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="listagem">     
-                <div className="desc_listagem">
-                    <h1>Listagem</h1>
-                    <br />
-                    <p id="desc_l">
-                    Nesta seção, você encontrará uma listagem completa 
-                    de anúncios disponíveis. 
-                    </p>
-                    <h3 style={{color:'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
-                    <h3 style={{color:'red'}}>* Disponibilizamos serviços de API</h3>
-                    <div id="status">
-                    <h2>Status:</h2>
-                    <p style={{ color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black' }}>
-                      {taskStatus}
-                    </p>
-                  </div>
-
-                    <div id="btn_donwload" onClick={downloadExcel}>
-                    <FontAwesomeIcon icon={faDownload} size='2x'/>
-                      <h3>Baixar</h3>
-                      
-                    </div>
-                </div>
 
 
-                <div className="info_listagem">
-             
-    <form onSubmit={listar} id='form2'>
+          <div className="info_listagem">
+
+            <form onSubmit={listar} id='form2'>
         <div className="row_list">
           <div className="row_icon">
             <FontAwesomeIcon icon={faCrown} size="2x" />

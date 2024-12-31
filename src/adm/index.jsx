@@ -75,7 +75,7 @@ export default function Adm() {
     const handleDelete = async (id) => {
         const options = {
             method: 'DELETE',
-            url: 'http://0.0.0.0:8087/core/records/deactivate/task/porsche',
+            url: 'http://0.0.0.0:8087/core/records/deactivate/task/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -98,7 +98,7 @@ export default function Adm() {
         const updatedRecord = editableRecords.find((record) => record.id === id);
         const options = {
             method: 'PUT',
-            url: 'http://0.0.0.0:8087/core/records/update/porsche',
+            url: 'http://0.0.0.0:8087/core/records/update/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
