@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
+import api_crawler from '../src/assets/api_crawler.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
@@ -438,7 +439,7 @@ return (
                 <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
-                <li><a href="#listagem">Listar</a></li>
+                <li><a href="#Produto">Sobre o Produto</a></li>
               </ul>
             </nav>
           </header>
@@ -552,99 +553,36 @@ return (
 
         <section id="listagem">
           <div className="desc_listagem">
-            <h1>Listagem</h1>
+            <h1>Sobre o Produto</h1>
             <br/>
             <p id="desc_l">
-              Nesta seção, você encontrará uma listagem completa
-              de anúncios disponíveis.
+              Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
+              funcionalidades,
+              entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
+              nossos clientes.
             </p>
             <h3 style={{color: 'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
             <h3 style={{color: 'red'}}>* Disponibilizamos serviços de API</h3>
             <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo a visualização gráfica dos dados
               obtidos</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo insights e um estudo completo sobre o
-            mercado de precificação de veículos</h3>
-            <div id="status">
-              <h2>Status:</h2>
-              <p style={{color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black'}}>
-                {taskStatus}
-              </p>
-            </div>
+            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo insights e um estudo completo sobre
+              o
+              mercado de precificação de veículos</h3>
+          </div>
 
-            <div id="btn_donwload" onClick={downloadExcel}>
-              <FontAwesomeIcon icon={faDownload} size='2x'/>
-              <h3>Baixar</h3>
-
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={api_crawler} alt=""/>
             </div>
           </div>
 
-
-          <div className="info_listagem">
-
-            <form onSubmit={listar} id='form2'>
-        <div className="row_list">
-          <div className="row_icon">
-            <FontAwesomeIcon icon={faCrown} size="2x" />
-            <h3>Marca:</h3>
-          </div>
-          <select
-            name="marca"
-            id="marca"
-            onChange={handleChangeList}
-            value={listagemData.marca}
-          >
-            <option value="">Selecione a marca do veículo</option>
-            {marcas.map((marca, index) => (
-              <option key={index} value={marca.brand}>
-                {marca.brand}
-              </option>
-            ))}
-        </select>
-        </div>
-
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faList} size="2x" />
-                <h3>Quantidade de anuncios:</h3>
-              </div>
-
-                <input
-              className='inpt_list'
-                type="number"
-                placeholder="Quantidade de Anúncios"
-                name="qnt_anunc"
-                value={listagemData.qnt_anunc}
-                onChange={handleChangeList}
-              />
-            </div>
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faFile} size="2x" />
-                <h3>Quantidade de páginas:</h3>
-              </div>
-
-                      <input
-                  className='inpt_list'
-                  type="number"
-                  placeholder="Número da Página"
-                  name="num_page"
-                  value={listagemData.num_page}
-                  onChange={handleChangeList}
-                />
-            </div>
-      
-        <button type="submit"><h3>LIstar</h3></button>
-      </form>
-
-                  
-                </div>
         </section>
 
         {records.length > 0 ? (
-        <section id="Lista_sect">
+            <section id="Lista_sect">
 
-        <div className="list_box">
-            <h1>Lista de veículos</h1>
+              <div className="list_box">
+                <h1>Lista de veículos</h1>
           
             
             <ul>
