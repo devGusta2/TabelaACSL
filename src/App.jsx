@@ -448,26 +448,27 @@ return (
 
           <div className='content_sc1'>
             <div className='img_background'>
-                <img src={car} alt="" />
+              <img src={car} alt=""/>
             </div>
             <div className='bottom_row'>
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
-                <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e colecionáveis.</p>
+                <br/>
+                <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e
+                  colecionáveis.</p>
               </div>
 
               <div className="col_bottom">
-                <a href='#consulta'id='btn_consulta'>
+                <a href='#consulta' id='btn_consulta'>
                   <h2>Consultar</h2>
                 </a>
               </div>
             </div>
           </div>
         </section>
-          
+
         <section id="consulta">
-        <div className="col_consulta">
+          <div className="col_consulta">
             <div className="form_box">
               <h2>Pesquisa Comum</h2>
               <form id="first_form">
@@ -476,13 +477,13 @@ return (
                     <FontAwesomeIcon icon={faCrown} size='2x'/>
                     <h3>Marca:</h3>
                   </div>
-                  
+
                   <select name="marca" id="marca" onChange={handleChange}>
                     <option value="">Selecione a marca do veículo</option>
                     {marcas.map((marca, index) => (
-                      <option key={index} value={marca.brand}>
-                        {marca.brand}
-                      </option>
+                        <option key={index} value={marca.brand}>
+                          {marca.brand}
+                        </option>
                     ))}
                   </select>
 
@@ -493,28 +494,28 @@ return (
                   <select name="marca" id="marca" onChange={handleChangeModel}>
                     <option value="">Selecione o modelo do veículo</option>
                     {modelo.map((modelo, index) => (
-                      <option key={index} value={modelo.model}>
-                        {modelo.model}
-                      </option>
+                        <option key={index} value={modelo.model}>
+                          {modelo.model}
+                        </option>
                     ))}
                   </select>
 
                   <div className='label_and_icon'>
                     <FontAwesomeIcon icon={faCalendarDays} size='2x'/>
-                    
+
                     <h3>Ano:</h3>
                   </div>
                   <select name="marca" id="marca" onChange={handleSelectChange}>
                     <option value="">Selecione o modelo do veículo</option>
                     {ano.map((ano, index) => (
-                      <option key={index} value={`${ano.year_model}-${ano.code_model}`}>
-                        
-                        {ano.year_model}
-                      </option>
+                        <option key={index} value={`${ano.year_model}-${ano.code_model}`}>
+
+                          {ano.year_model}
+                        </option>
                     ))}
                   </select>
                 </div>
-                <div onClick={calcular} className='bnt_form' >
+                <div onClick={calcular} className='bnt_form'>
                   <h3>Pesquisar</h3>
                 </div>
               </form>
@@ -527,70 +528,73 @@ return (
               <p>Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar.</p>
             </div>
             <div className="table_box">
-                <div className='celula'><h3>Ano de referência:</h3></div>
-                <div className='celula'>{dados.reference_year}</div>
-                
-                <div className='celula'><h3>Mês de referência:</h3></div>
-                <div className='celula'>{dados.reference_month}</div>
-                
-                <div className='celula'><h3>Código modelo:</h3></div>
-                <div className='celula'>{dados.code_model}</div>
-                
-                <div className='celula'><h3>Ano modelo:</h3></div>
-                <div className='celula'>{dados.year_model}</div>
-                
-                <div className='celula'><h3>Marca:</h3></div>
-                <div className='celula'>{dados.brand}</div>
-                
-                <div className='celula'><h3>Modelo:</h3></div>
-                <div className='celula'>{dados.model}</div>
-                
-                <div className='celula'><h3>Média de mercado:</h3></div>
-                <div className='celula'>R$ {dados.average_price}</div>
-      
+              <div className='celula'><h3>Ano de referência:</h3></div>
+              <div className='celula'>{dados.reference_year}</div>
+
+              <div className='celula'><h3>Mês de referência:</h3></div>
+              <div className='celula'>{dados.reference_month}</div>
+
+              <div className='celula'><h3>Código modelo:</h3></div>
+              <div className='celula'>{dados.code_model}</div>
+
+              <div className='celula'><h3>Ano modelo:</h3></div>
+              <div className='celula'>{dados.year_model}</div>
+
+              <div className='celula'><h3>Marca:</h3></div>
+              <div className='celula'>{dados.brand}</div>
+
+              <div className='celula'><h3>Modelo:</h3></div>
+              <div className='celula'>{dados.model}</div>
+
+              <div className='celula'><h3>Média de mercado:</h3></div>
+              <div className='celula'>R$ {dados.average_price}</div>
+
             </div>
           </div>
         </section>
 
 
         <section id="about">
-          <div className="about_product">
-            <h1>Sobre o Produto</h1>
-            <br/>
-            <p id="about">
-              Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
-              funcionalidades,
-              entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
-              nossos clientes.
-            </p>
-            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Disponibilizamos serviços de API</h2>
-            <p>
-              Nossa API foi projetada para ser uma solução RESTful robusta, de fácil uso e altamente documentada,
-              permitindo que consumidores integrem suas aplicações de maneira eficiente e segura. Ideal para automação,
-              análise de dados e integração com sistemas de terceiros.
-            </p>
+          <div className="col_consulta">
+            <div className="about_product">
+              <h1>Sobre o Produto</h1>
+              <br/>
+              <p id="about">
+                Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
+                funcionalidades,
+                entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
+                nossos clientes.
+              </p>
+              <h2 style={{color: 'black'}}>FUNCIONALIDADE: Disponibilizamos serviços de API</h2>
+              <p>
+                Nossa API foi projetada para ser uma solução RESTful robusta, de fácil uso e altamente documentada,
+                permitindo que consumidores integrem suas aplicações de maneira eficiente e segura. Ideal para
+                automação,
+                análise de dados e integração com sistemas de terceiros.
+              </p>
 
-            <h3>Principais Características</h3>
-            <p>
-              <strong>Arquitetura RESTful:</strong> A API segue rigorosamente os princípios REST, permitindo operações
-              como criação, leitura, atualização e exclusão (CRUD) em recursos específicos.
-            </p>
-            <p>
-              <strong>Desempenho e Escalabilidade:</strong> Capacidade de lidar com requisições simultâneas de alta
-              carga. Uso de cache em pontos estratégicos para garantir respostas rápidas.
-            </p>
-            <p>
-              <strong>Fácil de Usar:</strong> A API é projetada para ser consumida por desenvolvedores de todos os
-              níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
-              padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
-              avançados e ordenação para lidar com grandes volumes de dados.
-            </p>
-            <p>
-              <strong>Documentação Completa:</strong> Disponibilizamos uma documentação interativa baseada em
-              OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
-              dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
-            </p>
+              <h3>Principais Características</h3>
+              <p>
+                <strong>Arquitetura RESTful:</strong> A API segue rigorosamente os princípios REST, permitindo operações
+                como criação, leitura, atualização e exclusão (CRUD) em recursos específicos.
+              </p>
+              <p>
+                <strong>Desempenho e Escalabilidade:</strong> Capacidade de lidar com requisições simultâneas de alta
+                carga. Uso de cache em pontos estratégicos para garantir respostas rápidas.
+              </p>
+              <p>
+                <strong>Fácil de Usar:</strong> A API é projetada para ser consumida por desenvolvedores de todos os
+                níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
+                padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
+                avançados e ordenação para lidar com grandes volumes de dados.
+              </p>
+              <p>
+                <strong>Documentação Completa:</strong> Disponibilizamos uma documentação interativa baseada em
+                OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
+                dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+              </p>
 
+            </div>
           </div>
 
           <div className='content_sc1'>
@@ -600,37 +604,46 @@ return (
           </div>
 
 
-          <div className="about_product">
-            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Geração de Relatórios</h2>
-            <p>
-              Nossa API permite a <strong>criação de relatórios detalhados</strong>, oferecendo uma visão consolidada
-              dos dados coletados.
-              Esses relatórios são projetados para atender às necessidades estratégicas de empresas e analistas,
-              fornecendo um resumo
-              claro e acionável. Além disso, eles incluem informações organizadas e interpretadas, facilitando o
-              entendimento e a tomada
-              de decisão com base em dados reais.
-            </p>
+          <div className="col_consulta">
+            <div className="about_product">
+              <div className="text-content">
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Geração de Relatórios</h2>
+                <p>
+                  Nossa API permite a <strong>criação de relatórios detalhados</strong>, oferecendo uma visão
+                  consolidada
+                  dos dados coletados.
+                  Esses relatórios são projetados para atender às necessidades estratégicas de empresas e analistas,
+                  fornecendo um resumo
+                  claro e acionável. Além disso, eles incluem informações organizadas e interpretadas, facilitando o
+                  entendimento e a tomada
+                  de decisão com base em dados reais.
+                </p>
 
-            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Visualização Gráfica</h2>
-            <p>
-              Com a funcionalidade de <strong>visualização gráfica</strong>, os dados coletados pela nossa API são
-              transformados em gráficos
-              intuitivos e impactantes. Esses gráficos são ideais para apresentações, relatórios executivos ou para
-              análise visual de tendências
-              e padrões. A representação gráfica permite uma compreensão rápida, clara e eficiente de grandes volumes de
-              informações.
-            </p>
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Visualização Gráfica</h2>
+                <p>
+                  Com a funcionalidade de <strong>visualização gráfica</strong>, os dados coletados pela nossa API são
+                  transformados em gráficos
+                  intuitivos e impactantes. Esses gráficos são ideais para apresentações, relatórios executivos ou para
+                  análise visual de tendências
+                  e padrões. A representação gráfica permite uma compreensão rápida, clara e eficiente de grandes
+                  volumes
+                  de
+                  informações.
+                </p>
 
-            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Insights Sobre os Resultados</h2>
-            <p>
-              Nossa API vai além da simples coleta de dados, oferecendo <strong>insights estratégicos</strong> sobre o
-              mercado. Esses insights
-              ajudam a identificar tendências emergentes, comportamentos de preços e oportunidades de negócio. É a
-              solução perfeita para empresas
-              que desejam se manter competitivas, tomando decisões embasadas em análises robustas e confiáveis.
-            </p>
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Insights Sobre os Resultados</h2>
+                <p>
+                  Nossa API vai além da simples coleta de dados, oferecendo <strong>insights estratégicos</strong> sobre
+                  o
+                  mercado. Esses insights
+                  ajudam a identificar tendências emergentes, comportamentos de preços e oportunidades de negócio. É a
+                  solução perfeita para empresas
+                  que desejam se manter competitivas, tomando decisões embasadas em análises robustas e confiáveis.
+                </p>
+              </div>
+            </div>
           </div>
+
 
           <div className='content_sc1'>
             <div className='img_sec'>
@@ -638,29 +651,34 @@ return (
             </div>
           </div>
 
-          <div className="about_product">
-            <h1>Clientes</h1>
-            <p>
-              Nossos clientes podem se tornar parte do nosso ecossistema adquirindo nosso <strong>plano
-              semestral</strong>. Este plano
-              oferece <strong>acesso completo à API</strong> durante todo o período de vigência do contrato, garantindo
-              uma experiência
-              contínua e sem interrupções.
-            </p>
-            <p>
-              Além disso, nossos clientes recebem <strong>relatórios mensais</strong> de forma automática. Esses
-              relatórios são enviados
-              diretamente para o email cadastrado no momento da assinatura do contrato, logo após cada rodada de
-              automação.
-            </p>
-            <p>
-              Durante o processo, <strong>gráficos detalhados são criados</strong>, <strong>insights estratégicos são
-              gerados</strong>,
-              e um <strong>estudo completo do mercado de veículos</strong> é elaborado. Assim que concluído, todo o
-              material é entregue
-              imediatamente para o cliente, proporcionando informações valiosas e atualizadas para tomada de decisão.
-            </p>
-          </div>
+          <div className="col_consulta">
+            <div className="about_product">
+              <h1>Clientes</h1>
+              <p>
+                Nossos clientes podem se tornar parte do nosso ecossistema adquirindo nosso <strong>plano
+                semestral</strong>. Este plano
+                oferece <strong>acesso completo à API</strong> durante todo o período de vigência do contrato,
+                garantindo
+                uma experiência
+                contínua e sem interrupções.
+              </p>
+              <p>
+                Além disso, nossos clientes recebem <strong>relatórios mensais</strong> de forma automática. Esses
+                relatórios são enviados
+                diretamente para o email cadastrado no momento da assinatura do contrato, logo após cada rodada de
+                automação.
+              </p>
+              <p>
+                Durante o processo, <strong>gráficos detalhados são criados</strong>, <strong>insights estratégicos
+                são
+                gerados</strong>,
+                e um <strong>estudo completo do mercado de veículos</strong> é elaborado. Assim que concluído, todo o
+                material é entregue
+                imediatamente para o cliente, proporcionando informações valiosas e atualizadas para tomada de
+                decisão.
+              </p>
+            </div>
+            </div>
 
         </section>
 
