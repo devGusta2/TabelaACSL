@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
+import api_crawler from '../src/assets/api_crawler.png';
+import final_report from '../src/assets/final_report.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
@@ -433,12 +435,13 @@ return (
               <div className='logo_box'>
                 <img src={logo} alt=""/>
               </div>
-              
+
               <ul>
                 <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
-                <li><a href="#listagem">Listar</a></li>
+                <li><a href="#Produto">Sobre o Produto</a></li>
+                <li><a href="#Clientes">Clientes</a></li>
               </ul>
             </nav>
           </header>
@@ -550,126 +553,149 @@ return (
         </section>
 
 
-        <section id="listagem">
-          <div className="desc_listagem">
-            <h1>Listagem</h1>
+        <section id="about">
+          <div className="about_product">
+            <h1>Sobre o Produto</h1>
             <br/>
-            <p id="desc_l">
-              Nesta seção, você encontrará uma listagem completa
-              de anúncios disponíveis.
+            <p id="about">
+              Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
+              funcionalidades,
+              entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
+              nossos clientes.
             </p>
-            <h3 style={{color: 'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos serviços de API</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo a visualização gráfica dos dados
-              obtidos</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo insights e um estudo completo sobre o
-            mercado de precificação de veículos</h3>
-            <div id="status">
-              <h2>Status:</h2>
-              <p style={{color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black'}}>
-                {taskStatus}
-              </p>
-            </div>
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Disponibilizamos serviços de API</h2>
+            <p>
+              Nossa API foi projetada para ser uma solução RESTful robusta, de fácil uso e altamente documentada,
+              permitindo que consumidores integrem suas aplicações de maneira eficiente e segura. Ideal para automação,
+              análise de dados e integração com sistemas de terceiros.
+            </p>
 
-            <div id="btn_donwload" onClick={downloadExcel}>
-              <FontAwesomeIcon icon={faDownload} size='2x'/>
-              <h3>Baixar</h3>
+            <h3>Principais Características</h3>
+            <p>
+              <strong>Arquitetura RESTful:</strong> A API segue rigorosamente os princípios REST, permitindo operações
+              como criação, leitura, atualização e exclusão (CRUD) em recursos específicos.
+            </p>
+            <p>
+              <strong>Desempenho e Escalabilidade:</strong> Capacidade de lidar com requisições simultâneas de alta
+              carga. Uso de cache em pontos estratégicos para garantir respostas rápidas.
+            </p>
+            <p>
+              <strong>Fácil de Usar:</strong> A API é projetada para ser consumida por desenvolvedores de todos os
+              níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
+              padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
+              avançados e ordenação para lidar com grandes volumes de dados.
+            </p>
+            <p>
+              <strong>Documentação Completa:</strong> Disponibilizamos uma documentação interativa baseada em
+              OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
+              dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+            </p>
 
+          </div>
+
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={api_crawler} alt=""/>
             </div>
           </div>
 
 
-          <div className="info_listagem">
+          <div className="about_product">
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Geração de Relatórios</h2>
+            <p>
+              Nossa API permite a <strong>criação de relatórios detalhados</strong>, oferecendo uma visão consolidada
+              dos dados coletados.
+              Esses relatórios são projetados para atender às necessidades estratégicas de empresas e analistas,
+              fornecendo um resumo
+              claro e acionável. Além disso, eles incluem informações organizadas e interpretadas, facilitando o
+              entendimento e a tomada
+              de decisão com base em dados reais.
+            </p>
 
-            <form onSubmit={listar} id='form2'>
-        <div className="row_list">
-          <div className="row_icon">
-            <FontAwesomeIcon icon={faCrown} size="2x" />
-            <h3>Marca:</h3>
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Visualização Gráfica</h2>
+            <p>
+              Com a funcionalidade de <strong>visualização gráfica</strong>, os dados coletados pela nossa API são
+              transformados em gráficos
+              intuitivos e impactantes. Esses gráficos são ideais para apresentações, relatórios executivos ou para
+              análise visual de tendências
+              e padrões. A representação gráfica permite uma compreensão rápida, clara e eficiente de grandes volumes de
+              informações.
+            </p>
+
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Insights Sobre os Resultados</h2>
+            <p>
+              Nossa API vai além da simples coleta de dados, oferecendo <strong>insights estratégicos</strong> sobre o
+              mercado. Esses insights
+              ajudam a identificar tendências emergentes, comportamentos de preços e oportunidades de negócio. É a
+              solução perfeita para empresas
+              que desejam se manter competitivas, tomando decisões embasadas em análises robustas e confiáveis.
+            </p>
           </div>
-          <select
-            name="marca"
-            id="marca"
-            onChange={handleChangeList}
-            value={listagemData.marca}
-          >
-            <option value="">Selecione a marca do veículo</option>
-            {marcas.map((marca, index) => (
-              <option key={index} value={marca.brand}>
-                {marca.brand}
-              </option>
-            ))}
-        </select>
-        </div>
 
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faList} size="2x" />
-                <h3>Quantidade de anuncios:</h3>
-              </div>
-
-                <input
-              className='inpt_list'
-                type="number"
-                placeholder="Quantidade de Anúncios"
-                name="qnt_anunc"
-                value={listagemData.qnt_anunc}
-                onChange={handleChangeList}
-              />
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={final_report} alt=""/>
             </div>
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faFile} size="2x" />
-                <h3>Quantidade de páginas:</h3>
-              </div>
+          </div>
 
-                      <input
-                  className='inpt_list'
-                  type="number"
-                  placeholder="Número da Página"
-                  name="num_page"
-                  value={listagemData.num_page}
-                  onChange={handleChangeList}
-                />
-            </div>
-      
-        <button type="submit"><h3>LIstar</h3></button>
-      </form>
+          <div className="about_product">
+            <h1>Clientes</h1>
+            <p>
+              Nossos clientes podem se tornar parte do nosso ecossistema adquirindo nosso <strong>plano
+              semestral</strong>. Este plano
+              oferece <strong>acesso completo à API</strong> durante todo o período de vigência do contrato, garantindo
+              uma experiência
+              contínua e sem interrupções.
+            </p>
+            <p>
+              Além disso, nossos clientes recebem <strong>relatórios mensais</strong> de forma automática. Esses
+              relatórios são enviados
+              diretamente para o email cadastrado no momento da assinatura do contrato, logo após cada rodada de
+              automação.
+            </p>
+            <p>
+              Durante o processo, <strong>gráficos detalhados são criados</strong>, <strong>insights estratégicos são
+              gerados</strong>,
+              e um <strong>estudo completo do mercado de veículos</strong> é elaborado. Assim que concluído, todo o
+              material é entregue
+              imediatamente para o cliente, proporcionando informações valiosas e atualizadas para tomada de decisão.
+            </p>
+          </div>
 
-                  
-                </div>
         </section>
 
-        {records.length > 0 ? (
-        <section id="Lista_sect">
 
-        <div className="list_box">
-            <h1>Lista de veículos</h1>
-          
-            
-            <ul>
-              {records.map((record, index) => (
-                <li key={index} style={{ border: '1px solid #ddd', padding: '10px', marginBottom: '10px' }}>
-                  <h3>{record.title}</h3>
-                  <p><strong>Marca:</strong> {record.brand}</p>
-                  <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
-                  <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
-                  <p><strong>Descrição:</strong> {record.description}</p>
-                  <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver Detalhes</a></p>
-                  <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
-                  <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
-                </li>
-              ))}
-            </ul>
-          
-        </div>
-      </section>
-      ) : (
-        <p>Nenhum registro encontrado.</p>
-      )}
+        {records.length > 0 ? (
+            <section id="Lista_sect">
+
+              <div className="list_box">
+                <h1>Lista de veículos</h1>
+
+
+                <ul>
+                  {records.map((record, index) => (
+                      <li key={index} style={{border: '1px solid #ddd', padding: '10px', marginBottom: '10px'}}>
+                        <h3>{record.title}</h3>
+                        <p><strong>Marca:</strong> {record.brand}</p>
+                        <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
+                        <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
+                        <p><strong>Descrição:</strong> {record.description}</p>
+                        <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver
+                          Detalhes</a></p>
+                        <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
+                        <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
+                      </li>
+                  ))}
+                </ul>
+
+              </div>
+            </section>
+        ) : (
+            <p>Nenhum registro encontrado.</p>
+        )}
       </div>
     </>
-  );
+);
 }
 
 export default App;

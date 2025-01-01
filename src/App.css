@@ -667,3 +667,43 @@ select{
   line-height: 1.6;
   margin: 5px 0;
 }
+#about {
+  padding: 2em 1em;
+  background-color: var(--bg-color);
+}
+
+.about_product {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about_product h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.about_product p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+
+.about_product h3 {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+}
+
+.content_sc1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.img_sec img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
