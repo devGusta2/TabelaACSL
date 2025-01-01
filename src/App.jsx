@@ -561,13 +561,34 @@ return (
               entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
               nossos clientes.
             </p>
-            <h3 style={{color: 'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos serviços de API</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo a visualização gráfica dos dados
-              obtidos</h3>
-            <h3 style={{color: 'red'}}>* Disponibilizamos Relatórios finais contendo insights e um estudo completo sobre
-              o
-              mercado de precificação de veículos</h3>
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Disponibilizamos serviços de API</h2>
+            <p>
+              Nossa API foi projetada para ser uma solução RESTful robusta, de fácil uso e altamente documentada,
+              permitindo que consumidores integrem suas aplicações de maneira eficiente e segura. Ideal para automação,
+              análise de dados e integração com sistemas de terceiros.
+            </p>
+
+            <h3>Principais Características</h3>
+            <p>
+              <strong>Arquitetura RESTful:</strong> A API segue rigorosamente os princípios REST, permitindo operações
+              como criação, leitura, atualização e exclusão (CRUD) em recursos específicos.
+            </p>
+            <p>
+              <strong>Desempenho e Escalabilidade:</strong> Capacidade de lidar com requisições simultâneas de alta
+              carga. Uso de cache em pontos estratégicos para garantir respostas rápidas.
+            </p>
+            <p>
+              <strong>Fácil de Usar:</strong> A API é projetada para ser consumida por desenvolvedores de todos os
+              níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
+              padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
+              avançados e ordenação para lidar com grandes volumes de dados.
+            </p>
+            <p>
+              <strong>Documentação Completa:</strong> Disponibilizamos uma documentação interativa baseada em
+              OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
+              dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+            </p>
+
           </div>
 
           <div className='content_sc1'>
@@ -583,31 +604,32 @@ return (
 
               <div className="list_box">
                 <h1>Lista de veículos</h1>
-          
-            
-            <ul>
-              {records.map((record, index) => (
-                <li key={index} style={{ border: '1px solid #ddd', padding: '10px', marginBottom: '10px' }}>
-                  <h3>{record.title}</h3>
-                  <p><strong>Marca:</strong> {record.brand}</p>
-                  <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
-                  <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
-                  <p><strong>Descrição:</strong> {record.description}</p>
-                  <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver Detalhes</a></p>
-                  <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
-                  <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
-                </li>
-              ))}
-            </ul>
-          
-        </div>
-      </section>
-      ) : (
-        <p>Nenhum registro encontrado.</p>
-      )}
+
+
+                <ul>
+                  {records.map((record, index) => (
+                      <li key={index} style={{border: '1px solid #ddd', padding: '10px', marginBottom: '10px'}}>
+                        <h3>{record.title}</h3>
+                        <p><strong>Marca:</strong> {record.brand}</p>
+                        <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
+                        <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
+                        <p><strong>Descrição:</strong> {record.description}</p>
+                        <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver
+                          Detalhes</a></p>
+                        <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
+                        <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
+                      </li>
+                  ))}
+                </ul>
+
+              </div>
+            </section>
+        ) : (
+            <p>Nenhum registro encontrado.</p>
+        )}
       </div>
     </>
-  );
+);
 }
 
 export default App;
