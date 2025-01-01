@@ -435,12 +435,13 @@ return (
               <div className='logo_box'>
                 <img src={logo} alt=""/>
               </div>
-              
+
               <ul>
                 <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
+                <li><a href="#Clientes">Clientes</a></li>
               </ul>
             </nav>
           </header>
@@ -637,7 +638,32 @@ return (
             </div>
           </div>
 
+          <div className="about_product">
+            <h1>Clientes</h1>
+            <p>
+              Nossos clientes podem se tornar parte do nosso ecossistema adquirindo nosso <strong>plano
+              semestral</strong>. Este plano
+              oferece <strong>acesso completo à API</strong> durante todo o período de vigência do contrato, garantindo
+              uma experiência
+              contínua e sem interrupções.
+            </p>
+            <p>
+              Além disso, nossos clientes recebem <strong>relatórios mensais</strong> de forma automática. Esses
+              relatórios são enviados
+              diretamente para o email cadastrado no momento da assinatura do contrato, logo após cada rodada de
+              automação.
+            </p>
+            <p>
+              Durante o processo, <strong>gráficos detalhados são criados</strong>, <strong>insights estratégicos são
+              gerados</strong>,
+              e um <strong>estudo completo do mercado de veículos</strong> é elaborado. Assim que concluído, todo o
+              material é entregue
+              imediatamente para o cliente, proporcionando informações valiosas e atualizadas para tomada de decisão.
+            </p>
+          </div>
+
         </section>
+
 
         {records.length > 0 ? (
             <section id="Lista_sect">
