@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
 import api_crawler from '../src/assets/api_crawler.png';
+import final_report from '../src/assets/final_report.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
@@ -594,6 +595,45 @@ return (
           <div className='content_sc1'>
             <div className='img_sec'>
               <img src={api_crawler} alt=""/>
+            </div>
+          </div>
+
+
+          <div className="about_product">
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Geração de Relatórios</h2>
+            <p>
+              Nossa API permite a <strong>criação de relatórios detalhados</strong>, oferecendo uma visão consolidada
+              dos dados coletados.
+              Esses relatórios são projetados para atender às necessidades estratégicas de empresas e analistas,
+              fornecendo um resumo
+              claro e acionável. Além disso, eles incluem informações organizadas e interpretadas, facilitando o
+              entendimento e a tomada
+              de decisão com base em dados reais.
+            </p>
+
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Visualização Gráfica</h2>
+            <p>
+              Com a funcionalidade de <strong>visualização gráfica</strong>, os dados coletados pela nossa API são
+              transformados em gráficos
+              intuitivos e impactantes. Esses gráficos são ideais para apresentações, relatórios executivos ou para
+              análise visual de tendências
+              e padrões. A representação gráfica permite uma compreensão rápida, clara e eficiente de grandes volumes de
+              informações.
+            </p>
+
+            <h2 style={{color: 'red'}}>FUNCIONALIDADE: Insights Sobre os Resultados</h2>
+            <p>
+              Nossa API vai além da simples coleta de dados, oferecendo <strong>insights estratégicos</strong> sobre o
+              mercado. Esses insights
+              ajudam a identificar tendências emergentes, comportamentos de preços e oportunidades de negócio. É a
+              solução perfeita para empresas
+              que desejam se manter competitivas, tomando decisões embasadas em análises robustas e confiáveis.
+            </p>
+          </div>
+
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={final_report} alt=""/>
             </div>
           </div>
 
