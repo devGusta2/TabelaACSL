@@ -11,7 +11,33 @@
     height: 100vh;
 }
 
+.form_pagination {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center; 
+}
 
+.input_pagination {
+    padding: 5px;
+    border: 2px solid var(--btn-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.btn_pagination {
+    padding: 10px 20px;
+    background-color: var(--btn-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn_pagination:hover {
+    background-color: #fd6db7;
+}
 .btn_download {
     margin-bottom: 20px;
     padding: 10px 20px;

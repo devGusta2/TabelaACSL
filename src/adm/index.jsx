@@ -252,16 +252,17 @@ const handleSubmit = (e) => {
                     </div>
                 </div>
                 <div className="info">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="form_pagination">
                         <label>
                             Página:
-                            <input type="number" value={page} onChange={handlePageChange}/>
+                            <input type="number" value={page} onChange={handlePageChange} className="input_pagination"/>
                         </label>
                         <label>
                             Quantidade de Anúncios:
-                            <input type="number" value={pageSize} onChange={handlePageSizeChange}/>
+                            <input type="number" value={pageSize} onChange={handlePageSizeChange}
+                                   className="input_pagination"/>
                         </label>
-                        <button type="submit">Visualizar</button>
+                        <button type="submit" className="btn_pagination">Visualizar</button>
                     </form>
                     <table>
                         <thead>
