@@ -105,5 +105,6 @@ h1 {
 }
 
 .analyze-data p {
-    margin: 5px 0;
+    margin: 10px 0;
+    line-height: 1.5;
 }
