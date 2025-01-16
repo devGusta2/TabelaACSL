@@ -25,7 +25,7 @@ export default function Adm() {
     const loadCars = async () => {
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/core/records/list/task/machine?page=1&page_size=20`,
+            url: `http://0.0.0.0:8087/records/list/task/machine?page=1&page_size=20`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -33,8 +33,8 @@ export default function Adm() {
         data: {
             reference_dates: [
                 {
-                    reference_year: 2024, // Isso tem que ser uma variável
-                    reference_month: 12  // é possível passar uma lista de dicts reference dates
+                    reference_year: 2025, // Isso tem que ser uma variável
+                    reference_month: 1  // é possível passar uma lista de dicts reference dates
                 }
             ]
         }
@@ -84,7 +84,7 @@ export default function Adm() {
     const handleDelete = async (id) => {
         const options = {
             method: 'DELETE',
-            url: 'http://0.0.0.0:8087/core/records/deactivate/task/machine',
+            url: 'http://0.0.0.0:8087/records/deactivate/task/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -107,7 +107,7 @@ export default function Adm() {
         const updatedRecord = editableRecords.find((record) => record.id === id);
         const options = {
             method: 'PUT',
-            url: 'http://0.0.0.0:8087/core/records/update/machine',
+            url: 'http://0.0.0.0:8087/records/update/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
