@@ -2,6 +2,11 @@
 .insights-container {
     padding: 20px;
     background-color: #ffe6f2; /* Light pink background color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .insights-form {
@@ -12,6 +17,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
 .insights-form label {
@@ -50,4 +56,9 @@
 
 .error-message {
     color: #fa0280; /* Red error message color */
+}
+
+h1 {
+    color: #ff66b2; /* Pink color for the title */
+    text-align: center;
 }
