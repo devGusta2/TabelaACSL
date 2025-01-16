@@ -306,9 +306,9 @@ const handleSubmit = (e) => {
                                     />
                                 </td>
                                 <td>
-                                    <button className='btn_update' onClick={() => handleUpdate(record.id)}>Update
+                                    <button className='btn_update' onClick={() => handleUpdate(record.id)}>Atualizar
                                     </button>
-                                    <button className='btn_delete' onClick={() => handleDelete(record.id)}>Delete
+                                    <button className='btn_delete' onClick={() => handleDelete(record.id)}>Desativar
                                     </button>
                                 </td>
                             </tr>

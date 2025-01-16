@@ -243,17 +243,21 @@ table{
     height: 100%;
 }
 .btn_delete{
-    background-color: rgb(224, 87, 87);
+    background-color: rgb(253, 3, 125);
     border: 0;
     color: white;
     height: 40px;
     border-radius: 5px;
     cursor: pointer;
     width: 50%;
+}
+
+.btn_delete:hover {
+    background-color: #e60073; /* Cor mais escura para o botão de delete */
 }
 
 .btn_update{
-    background-color: rgb(110, 128, 175);
+    background-color: rgb(236, 149, 195);
     border: 0;
     color: white;
     height: 40px;
@@ -261,7 +265,9 @@ table{
     border-radius: 5px;
     cursor: pointer;
 }
-
+.btn_update:hover {
+    background-color: #d98cb3; /* Cor mais escura para o botão de update */
+}
 thead{
     background-color: var(--btn-color);
 }
