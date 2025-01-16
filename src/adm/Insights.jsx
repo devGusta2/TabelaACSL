@@ -21,7 +21,7 @@ const Insights = () => {
                     Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
                 },
             });
-            setTaskId(response.data.taskId);
+            setTaskId(response.data.task_id);
             setStatus('PENDING');
         } catch (error) {
             setError(error);
@@ -39,27 +39,28 @@ const Insights = () => {
                         'User-Agent': 'insomnia/10.1.1',
                         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
                     },
+                    responseType: 'blob',
                 });
-                setStatus(response.data.status);
 
-                if (response.data.status === 'SUCCESS') {
-                    const pdfResponse = await axios.get(`http://0.0.0.0:8087/core/tasks/download/${taskId}`, {
-                        headers: {
-                            'User-Agent': 'insomnia/10.1.1',
-                            Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
-                        },
-                        responseType: 'blob',
-                    });
-                    const url = window.URL.createObjectURL(new Blob([pdfResponse.data]));
+                if (response.data.type === 'application/json') {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const result = JSON.parse(reader.result);
+                        setStatus(result.status);
+                        if (result.status !== 'PDF_GENERATED') {
+                            setTimeout(checkStatus, 2000);
+                        }
+                    };
+                    reader.readAsText(response.data);
+                } else if (response.data.type === 'application/pdf') {
+                    const url = window.URL.createObjectURL(response.data);
                     const link = document.createElement('a');
                     link.href = url;
                     link.setAttribute('download', 'report.pdf');
                     document.body.appendChild(link);
                     link.click();
-                    link.remove();
+                    link.parentNode.removeChild(link);
                     setLoading(false);
-                } else {
-                    setTimeout(checkStatus, 2000);
                 }
             } catch (error) {
                 setError(error);
