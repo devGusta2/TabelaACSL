@@ -1,12 +1,46 @@
 /* Insights.css */
-.insights-container {
-    padding: 20px;
-    background-color: #ffe6f2; /* Light pink background color */
+.insights-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.insights-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.date-selection {
+    display: flex;
+    gap: 10px;
     justify-content: center;
-    height: 100vh;
+    margin-top: 10px;
+}
+
+.date-selection label {
+    font-weight: bold;
+    color: #ff66b2; /* Pink text color */
+}
+
+.date-selection input {
+    padding: 8px;
+    border: 1px solid #ff99cc; /* Light pink border color */
+    border-radius: 4px;
+}
+
+.insights-container {
+    background-color: #ffe6f2; /* Light pink background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .insights-form {
@@ -17,18 +51,8 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.insights-form label {
-    font-weight: bold;
-    color: #ff66b2; /* Pink text color */
-}
-
-.insights-form input {
-    padding: 8px;
-    border: 1px solid #ff99cc; /* Light pink border color */
-    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .insights-form button {
@@ -60,5 +84,17 @@
 
 h1 {
     color: #ff66b2; /* Pink color for the title */
-    text-align: center;
+    margin-bottom: 20px;
+}
+
+.analyze-data {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
 }

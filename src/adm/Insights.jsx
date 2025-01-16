@@ -3,12 +3,13 @@ import axios from 'axios';
 import './Insights.css'; // Import the CSS file
 
 const Insights = () => {
-    const [month, setMonth] = useState('');
-    const [year, setYear] = useState('');
+    const [month, setMonth] = useState(new Date().getMonth() + 1);
+    const [year, setYear] = useState(new Date().getFullYear());
     const [taskId, setTaskId] = useState(null);
     const [status, setStatus] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [analyzeData, setAnalyzeData] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +25,24 @@ const Insights = () => {
             });
             setTaskId(response.data.task_id);
             setStatus('PENDING');
+        } catch (error) {
+            setError(error);
+            setLoading(false);
+        }
+    };
+
+    const handleAnalyze = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const analyzeResponse = await axios.get(`http://0.0.0.0:8087/calcs/analyze/all/code_models/machine/${year}/${month}`, {
+                headers: {
+                    'User-Agent': 'insomnia/10.1.1',
+                    Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                },
+            });
+            setAnalyzeData(analyzeResponse.data);
         } catch (error) {
             setError(error);
             setLoading(false);
@@ -74,36 +93,51 @@ const Insights = () => {
         }
     }, [status, taskId]);
 
+    useEffect(() => {
+        handleAnalyze();
+    }, [month, year]);
+
     return (
-        <div className="insights-container">
-            <h1>Insights</h1>
-            <form onSubmit={handleSubmit} className="insights-form">
-                <label>
-                    Mês:
-                    <input
-                        type="number"
-                        min="1"
-                        max="12"
-                        value={month}
-                        onChange={(e) => setMonth(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Ano:
-                    <input
-                        type="number"
-                        min="2024"
-                        max={new Date().getFullYear()}
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}
-                        required
-                    />
-                </label>
-                <button type="submit">Gerar Relatório</button>
-            </form>
-            {loading && <p className="loading-message">Loading...</p>}
-            {error && <p className="error-message">Error: {error.message}</p>}
+        <div className="insights-wrapper">
+            <div className="insights-header">
+                <h1>Insights sobre Precificação de Veículos</h1>
+                <div className="date-selection">
+                    <label>
+                        Mês:
+                        <input
+                            type="number"
+                            min="1"
+                            max="12"
+                            value={month}
+                            onChange={(e) => setMonth(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Ano:
+                        <input
+                            type="number"
+                            min="2024"
+                            max={new Date().getFullYear()}
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+            </div>
+            <div className="insights-container">
+                <form onSubmit={handleSubmit} className="insights-form">
+                    <button type="submit">Gerar Relatório</button>
+                </form>
+                {loading && <p className="loading-message">Loading...</p>}
+                {error && <p className="error-message">Error: {error.message}</p>}
+                {analyzeData && (
+                    <div className="analyze-data">
+                        <pre>{JSON.stringify(analyzeData, null, 2)}</pre>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
