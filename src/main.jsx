@@ -7,6 +7,7 @@ import {
 import './index.css';
 import App from './App.jsx';
 import Adm from './adm/index.jsx';
+import Insights from './adm/Insights.jsx';
 
 // Configuração do roteador
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: '/adm',
     element: <Adm />, // Corrigido para "element"
+  },
+ {
+    path: '/adm/insights',
+    element: <Insights />, // Add the new route
   },
 ]);
 

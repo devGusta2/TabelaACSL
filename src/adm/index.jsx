@@ -1,9 +1,10 @@
-import './adm.css';
-import logo from '../../src/assets/logo4.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faUser} from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile, faUser, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../src/assets/logo4.png';
+import './adm.css';
 
 export default function Adm() {
     const [taskId, setTaskId] = useState();
@@ -231,27 +232,34 @@ const handleSubmit = (e) => {
     return (
         <div className="adm">
             <div className="menu">
-                <img src={logo} alt="" />
+                <img src={logo} alt=""/>
                 <nav>
                     <ul>
                         <li>
-                            <a link="/adm" href="">
-                                <FontAwesomeIcon icon={faFile} size="2x" />
-                                <h3>Anúncios</h3>
-                            </a>
+                            <Link to="/adm">
+                                <FontAwesomeIcon icon={faFile} size="2x"/>
+                                <h3>Home</h3>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/adm/insights">
+                                <FontAwesomeIcon icon={faChartLine} size="2x"/>
+                                <h3>Insights</h3>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
             </div>
-            
-            <div className="content">
-                <div className="card_box">
-                    <div className="card">
-                        <button onClick={downloadExcel} className="btn_download">Download Excel</button> {/* Download button */}
 
-                    </div>
-                </div>
-                <div className="info">
+    <div className="content">
+        <div className="card_box">
+            <div className="card">
+                <button onClick={downloadExcel} className="btn_download">Download Excel</button>
+                {/* Download button */}
+
+            </div>
+        </div>
+        <div className="info">
                     <form onSubmit={handleSubmit} className="form_pagination">
                         <label>
                             Página:
