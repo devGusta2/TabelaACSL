@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Insights.css'; // Import the CSS file
 
 const Insights = () => {
     const [month, setMonth] = useState('');
@@ -74,9 +75,9 @@ const Insights = () => {
     }, [status, taskId]);
 
     return (
-        <div>
+        <div className="insights-container">
             <h1>Insights</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="insights-form">
                 <label>
                     Mês:
                     <input
@@ -101,8 +102,8 @@ const Insights = () => {
                 </label>
                 <button type="submit">Gerar Relatório</button>
             </form>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error.message}</p>}
+            {loading && <p className="loading-message">Loading...</p>}
+            {error && <p className="error-message">Error: {error.message}</p>}
         </div>
     );
 };

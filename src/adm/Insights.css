@@ -1,0 +1,53 @@
+/* Insights.css */
+.insights-container {
+    padding: 20px;
+    background-color: #ffe6f2; /* Light pink background color */
+}
+
+.insights-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff; /* White form background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.insights-form label {
+    font-weight: bold;
+    color: #ff66b2; /* Pink text color */
+}
+
+.insights-form input {
+    padding: 8px;
+    border: 1px solid #ff99cc; /* Light pink border color */
+    border-radius: 4px;
+}
+
+.insights-form button {
+    padding: 10px;
+    background-color: #ff66b2; /* Pink button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.insights-form button:hover {
+    background-color: #ff3385; /* Darker pink button hover color */
+}
+
+.loading-message,
+.error-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.loading-message {
+    color: #ff66b2; /* Pink loading message color */
+}
+
+.error-message {
+    color: #fa0280; /* Red error message color */
+}
