@@ -21,11 +21,28 @@ export default function Adm() {
         );
     };
 
+    const [page, setPage] = useState(1);
+const [pageSize, setPageSize] = useState(20);
+
+const handlePageChange = (e) => {
+    setPage(e.target.value);
+};
+
+const handlePageSizeChange = (e) => {
+    setPageSize(e.target.value);
+};
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    loadCars();
+};
+
+
     // Função para carregar os registros
     const loadCars = async () => {
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/records/list/task/machine?page=1&page_size=20`,
+            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -235,53 +252,66 @@ export default function Adm() {
                     </div>
                 </div>
                 <div className="info">
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            Página:
+                            <input type="number" value={page} onChange={handlePageChange}/>
+                        </label>
+                        <label>
+                            Quantidade de Anúncios:
+                            <input type="number" value={pageSize} onChange={handlePageSizeChange}/>
+                        </label>
+                        <button type="submit">Visualizar</button>
+                    </form>
                     <table>
                         <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>Preço</th>
-                                <th>Descrição</th>
-                                <th>Ações</th>
-                            </tr>
+                        <tr>
+                            <th>Título</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Preço</th>
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {editableRecords.map((record) => (
-                                <tr key={record.id}>
-                                    <td>
-                                        <input
-                                            value={record.title}
-                                            onChange={(e) =>
-                                                handleChange(record.id, 'title', e.target.value)
-                                            }
-                                        />
-                                    </td>
-                                    <td>{record.brand}</td>
-                                    <td>{record.model}</td>
-                                    <td>
-                                        <input
-                                            type="number"
-                                            value={record.price}
-                                            onChange={(e) =>
-                                                handleChange(record.id, 'price', e.target.value)
-                                            }
-                                        />
-                                    </td>
-                                    <td>
-                                        <input
-                                            value={record.description}
-                                            onChange={(e) =>
-                                                handleChange(record.id, 'description', e.target.value)
-                                            }
-                                        />
-                                    </td>
-                                    <td>
-                                        <button className='btn_update'onClick={() => handleUpdate(record.id)}>Update</button>
-                                        <button className='btn_delete'onClick={() => handleDelete(record.id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))}
+                        {editableRecords.map((record) => (
+                            <tr key={record.id}>
+                                <td>
+                                    <input
+                                        value={record.title}
+                                        onChange={(e) =>
+                                            handleChange(record.id, 'title', e.target.value)
+                                        }
+                                    />
+                                </td>
+                                <td>{record.brand}</td>
+                                <td>{record.model}</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        value={record.price}
+                                        onChange={(e) =>
+                                            handleChange(record.id, 'price', e.target.value)
+                                        }
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        value={record.description}
+                                        onChange={(e) =>
+                                            handleChange(record.id, 'description', e.target.value)
+                                        }
+                                    />
+                                </td>
+                                <td>
+                                    <button className='btn_update' onClick={() => handleUpdate(record.id)}>Update
+                                    </button>
+                                    <button className='btn_delete' onClick={() => handleDelete(record.id)}>Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>
