@@ -134,7 +134,11 @@ const Insights = () => {
                 {error && <p className="error-message">Error: {error.message}</p>}
                 {analyzeData && (
                     <div className="analyze-data">
-                        <pre>{JSON.stringify(analyzeData, null, 2)}</pre>
+                        <h2>Análise para {analyzeData.year_reference}/{analyzeData.month_reference}</h2>
+                        <p><strong>Valorização Máxima:</strong> {analyzeData.analysis["Valorização Máxima"]}</p>
+                        <p><strong>Depreciação Máxima:</strong> {analyzeData.analysis["Depreciação Máxima"]}</p>
+                        <p><strong>Modelo Mais Consistente:</strong> {analyzeData.analysis["Modelo Mais Consistente"]}</p>
+                        <p><strong>Modelo Mais Variado:</strong> {analyzeData.analysis["Modelo Mais Variado"]}</p>
                     </div>
                 )}
             </div>

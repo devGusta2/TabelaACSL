@@ -94,7 +94,16 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     text-align: left;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
     white-space: pre-wrap;
+}
+
+.analyze-data h2 {
+    color: #ff66b2;
+    margin-bottom: 10px;
+}
+
+.analyze-data p {
+    margin: 5px 0;
 }
