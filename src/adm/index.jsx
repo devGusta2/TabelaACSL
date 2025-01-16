@@ -50,6 +50,34 @@ export default function Adm() {
         }
     };
 
+    const downloadExcel = async () => {
+    const options = {
+        method: 'GET',
+        url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
+        headers: {
+            'User-Agent': 'insomnia/10.1.1',
+            Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+        },
+        responseType: 'blob', // Define o tipo de resposta como blob
+    };
+
+    try {
+        const response = await axios.request(options);
+
+        // Cria um link para o download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'planilha.xlsx'); // Nome do arquivo
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+
+    } catch (error) {
+        console.error('Erro ao fazer a requisição:', error);
+    }
+};
+
     // Função para verificar o status da tarefa
     const checkStatus = async () => {
         if (!taskId) return;
@@ -202,8 +230,8 @@ export default function Adm() {
             <div className="content">
                 <div className="card_box">
                     <div className="card">
-                        <h1>984</h1>
-                        <h5>Veículos</h5>
+                        <button onClick={downloadExcel} className="btn_download">Download Excel</button> {/* Download button */}
+
                     </div>
                 </div>
                 <div className="info">

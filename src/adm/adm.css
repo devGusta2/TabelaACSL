@@ -12,7 +12,18 @@
 }
 
 
+.btn_download {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #fa0280;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
+.btn_download:hover {
+    background-color: #fd6db7;
+}
 
 
 
