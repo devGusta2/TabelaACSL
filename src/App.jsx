@@ -104,7 +104,7 @@ function App() {
   const [marcaSelecionada, setMarcaSelecionada] = useState('');
   const [modeloSelecionado, setModeloSelecionado] = useState('');
   const [cod_modelo, setCod_modelo] = useState('');
-  const anoReferencia = 2024;
+  const anoReferencia = 2025;
 
 
   const [dados, setInfo] = useState({
@@ -318,7 +318,7 @@ const listar = async (event) => {
     return;
   }
 
-  const url = `http://0.0.0.0:8087/core/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
+  const url = `http://0.0.0.0:8087/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
   const options = {
     method: 'POST',
     url: url,
@@ -329,8 +329,8 @@ const listar = async (event) => {
   data: {
             reference_dates: [
                 {
-                    reference_year: 2024, // Isso tem que ser uma variável
-                    reference_month: 12  // é possível passar uma lista de dicts reference dates
+                    reference_year: 2025, // Isso tem que ser uma variável
+                    reference_month: 1  // é possível passar uma lista de dicts reference dates
                 }
             ]
         }
