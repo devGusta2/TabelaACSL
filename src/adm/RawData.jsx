@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faDatabase, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faFile, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../src/assets/logo4.png';
-import './adm.css';
+import './RawData.css'; // Import the CSS file
 
-export default function Adm() {
+const RawData = () => {
     const [taskId, setTaskId] = useState();
     const [records, setRecords] = useState([]); // Armazena os registros da API
     const [loading, setLoading] = useState(false); // Indica se está verificando o status
@@ -192,43 +192,6 @@ const handleSubmit = (e) => {
     }, [status]);
 
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState('');
-
-    const correctPassword = 'MelÉVida@5'; // Substitua pela senha desejada
-
-    const handleLogin = () => {
-        if (password === correctPassword) {
-            setIsAuthenticated(true);
-        } else {
-            alert('Senha incorreta!');
-        }
-    };
-
-    if (!isAuthenticated) {
-        return (
-            <div className="login">
-                <div className="login_box">
-                    <div className="login_detail">
-                    <FontAwesomeIcon icon={faUser} size="7x" />
-                    <h3>Admin</h3>
-                    </div>
-                    <div className="login_form">
-                        <h2>Login</h2>
-                        <p>Área restrita</p>
-                        <input
-                            type="password"
-                            placeholder="Digite a palavra passe"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button onClick={handleLogin}>Entrar</button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="adm">
             <div className="menu">
@@ -334,3 +297,5 @@ const handleSubmit = (e) => {
         </div>
     );
 };
+
+export default RawData;
