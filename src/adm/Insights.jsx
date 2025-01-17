@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Insights.css'; // Import the CSS file
+import './adm.css';
+import {faChartLine, faDatabase, faFile} from "@fortawesome/free-solid-svg-icons";
+import logo from '../../src/assets/logo4.png';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
+
 
 const Insights = () => {
     const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -97,50 +103,79 @@ const Insights = () => {
         handleAnalyze();
     }, [month, year]);
 
-    return (
-        <div className="insights-wrapper">
-            <div className="insights-header">
-                <h1>Insights sobre Precificação de Veículos</h1>
-                <div className="date-selection">
-                    <label>
-                        Mês:
-                        <input
-                            type="number"
-                            min="1"
-                            max="12"
-                            value={month}
-                            onChange={(e) => setMonth(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Ano:
-                        <input
-                            type="number"
-                            min="2024"
-                            max={new Date().getFullYear()}
-                            value={year}
-                            onChange={(e) => setYear(e.target.value)}
-                            required
-                        />
-                    </label>
-                </div>
+   return (
+        <div className="adm">
+            <div className="menu">
+                <img src={logo} alt=""/>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/adm">
+                                <FontAwesomeIcon icon={faFile} size="2x"/>
+                                <h3>Home</h3>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/adm/insights">
+                                <FontAwesomeIcon icon={faChartLine} size="2x"/>
+                                <h3>Insights</h3>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/adm/raw-data">
+                                <FontAwesomeIcon icon={faDatabase} size="2x"/>
+                                <h3>Raw Data</h3>
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div className="insights-container">
-                <form onSubmit={handleSubmit} className="insights-form">
-                    <button type="submit">Gerar Relatório</button>
-                </form>
-                {loading && <p className="loading-message">Loading...</p>}
-                {error && <p className="error-message">Error: {error.message}</p>}
-                {analyzeData && (
-                    <div className="analyze-data">
-                        <h2>Análise para {analyzeData.year_reference}/{analyzeData.month_reference}</h2>
-                        <p><strong>Valorização Máxima:</strong> {analyzeData.analysis["Valorização Máxima"]}</p>
-                        <p><strong>Depreciação Máxima:</strong> {analyzeData.analysis["Depreciação Máxima"]}</p>
-                        <p><strong>Modelo Mais Consistente:</strong> {analyzeData.analysis["Modelo Mais Consistente"]}</p>
-                        <p><strong>Modelo Mais Variado:</strong> {analyzeData.analysis["Modelo Mais Variado"]}</p>
+            <div className="content">
+                <div className="insights-wrapper">
+                    <div className="insights-header">
+                        <h1>Insights sobre Precificação de Veículos</h1>
+                        <div className="date-selection">
+                            <label>
+                                Mês:
+                                <input
+                                    type="number"
+                                    min="1"
+                                    max="12"
+                                    value={month}
+                                    onChange={(e) => setMonth(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <label>
+                                Ano:
+                                <input
+                                    type="number"
+                                    min="2024"
+                                    max={new Date().getFullYear()}
+                                    value={year}
+                                    onChange={(e) => setYear(e.target.value)}
+                                    required
+                                />
+                            </label>
+                        </div>
                     </div>
-                )}
+                    <div className="insights-container">
+                        <form onSubmit={handleSubmit} className="insights-form">
+                            <button type="submit">Gerar Relatório</button>
+                        </form>
+                        {loading && <p className="loading-message">Loading...</p>}
+                        {error && <p className="error-message">Error: {error.message}</p>}
+                        {analyzeData && (
+                            <div className="analyze-data">
+                                <h2>Análise para {analyzeData.year_reference}/{analyzeData.month_reference}</h2>
+                                <p><strong>Valorização Máxima:</strong> {analyzeData.analysis["Valorização Máxima"]}</p>
+                                <p><strong>Depreciação Máxima:</strong> {analyzeData.analysis["Depreciação Máxima"]}</p>
+                                <p><strong>Modelo Mais Consistente:</strong> {analyzeData.analysis["Modelo Mais Consistente"]}</p>
+                                <p><strong>Modelo Mais Variado:</strong> {analyzeData.analysis["Modelo Mais Variado"]}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );
