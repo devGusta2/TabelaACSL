@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import car from '../src/assets/carrao.png';
 import logo from '../src/assets/logo4.png';
+import api_crawler from '../src/assets/api_crawler.png';
+import final_report from '../src/assets/final_report.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList} from '@fortawesome/free-solid-svg-icons';
@@ -102,7 +104,7 @@ function App() {
   const [marcaSelecionada, setMarcaSelecionada] = useState('');
   const [modeloSelecionado, setModeloSelecionado] = useState('');
   const [cod_modelo, setCod_modelo] = useState('');
-  const anoReferencia = 2024;
+  const anoReferencia = 2025;
 
 
   const [dados, setInfo] = useState({
@@ -150,7 +152,7 @@ const handleChange = (event) => {
   const fetchModelo = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/porsche?brand=${marcaSelecionada}&page=1&page_size=10`,
+      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -172,7 +174,7 @@ const handleChange = (event) => {
   const fetchAnos = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/porsche?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
+      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -193,7 +195,7 @@ const handleChange = (event) => {
   const fetchMarcas = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/core/brand/model/list/porsche',
+      url: 'http://0.0.0.0:8087/core/brand/model/list/machine',
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -214,7 +216,7 @@ const handleChange = (event) => {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/porsche?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
+      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -316,15 +318,23 @@ const listar = async (event) => {
     return;
   }
 
-  const url = `http://0.0.0.0:8087/core/records/list/task/porsche?page=${num_page}&page_size=${qnt_anunc}&reference_year_start=0&reference_month_start=0&reference_year_end=0&reference_month_end=0`;
+  const url = `http://0.0.0.0:8087/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
   const options = {
-    method: 'GET',
+    method: 'POST',
     url: url,
     headers: {
       'User-Agent': 'insomnia/10.1.1',
       Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
     },
-  };
+  data: {
+            reference_dates: [
+                {
+                    reference_year: 2025, // Isso tem que ser uma variável
+                    reference_month: 1  // é possível passar uma lista de dicts reference dates
+                }
+            ]
+        }
+    };
 
   try {
     const response = await axios.request(options);
@@ -391,7 +401,7 @@ useEffect(() => {
 const downloadExcel = async () => {
   const options = {
     method: 'GET',
-    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/porsche`,
+    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
     headers: {
       'User-Agent': 'insomnia/10.1.1',
       Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -425,39 +435,40 @@ return (
               <div className='logo_box'>
                 <img src={logo} alt=""/>
               </div>
-              
+
               <ul>
                 <li><a href="#inicio">Início</a></li>
 
                 <li><a href="#consulta">Consultar</a></li>
-                <li><a href="#graphic">Depreciação</a></li>
-                <li><a href="#listagem">Listar</a></li>
+                <li><a href="#Produto">Sobre o Produto</a></li>
+                <li><a href="#Clientes">Clientes</a></li>
               </ul>
             </nav>
           </header>
 
           <div className='content_sc1'>
             <div className='img_background'>
-                <img src={car} alt="" />
+              <img src={car} alt=""/>
             </div>
             <div className='bottom_row'>
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
-                <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e colecionáveis.</p>
+                <br/>
+                <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e
+                  colecionáveis.</p>
               </div>
 
               <div className="col_bottom">
-                <a href='#consulta'id='btn_consulta'>
+                <a href='#consulta' id='btn_consulta'>
                   <h2>Consultar</h2>
                 </a>
               </div>
             </div>
           </div>
         </section>
-          
+
         <section id="consulta">
-        <div className="col_consulta">
+          <div className="col_consulta">
             <div className="form_box">
               <h2>Pesquisa Comum</h2>
               <form id="first_form">
@@ -466,13 +477,13 @@ return (
                     <FontAwesomeIcon icon={faCrown} size='2x'/>
                     <h3>Marca:</h3>
                   </div>
-                  
+
                   <select name="marca" id="marca" onChange={handleChange}>
                     <option value="">Selecione a marca do veículo</option>
                     {marcas.map((marca, index) => (
-                      <option key={index} value={marca.brand}>
-                        {marca.brand}
-                      </option>
+                        <option key={index} value={marca.brand}>
+                          {marca.brand}
+                        </option>
                     ))}
                   </select>
 
@@ -483,28 +494,28 @@ return (
                   <select name="marca" id="marca" onChange={handleChangeModel}>
                     <option value="">Selecione o modelo do veículo</option>
                     {modelo.map((modelo, index) => (
-                      <option key={index} value={modelo.model}>
-                        {modelo.model}
-                      </option>
+                        <option key={index} value={modelo.model}>
+                          {modelo.model}
+                        </option>
                     ))}
                   </select>
 
                   <div className='label_and_icon'>
                     <FontAwesomeIcon icon={faCalendarDays} size='2x'/>
-                    
+
                     <h3>Ano:</h3>
                   </div>
                   <select name="marca" id="marca" onChange={handleSelectChange}>
                     <option value="">Selecione o modelo do veículo</option>
                     {ano.map((ano, index) => (
-                      <option key={index} value={`${ano.year_model}-${ano.code_model}`}>
-                        
-                        {ano.year_model}
-                      </option>
+                        <option key={index} value={`${ano.year_model}-${ano.code_model}`}>
+
+                          {ano.year_model}
+                        </option>
                     ))}
                   </select>
                 </div>
-                <div onClick={calcular} className='bnt_form' >
+                <div onClick={calcular} className='bnt_form'>
                   <h3>Pesquisar</h3>
                 </div>
               </form>
@@ -517,197 +528,192 @@ return (
               <p>Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar.</p>
             </div>
             <div className="table_box">
-                <div className='celula'><h3>Ano de referência:</h3></div>
-                <div className='celula'>{dados.reference_year}</div>
-                
-                <div className='celula'><h3>Mês de referência:</h3></div>
-                <div className='celula'>{dados.reference_month}</div>
-                
-                <div className='celula'><h3>Código modelo:</h3></div>
-                <div className='celula'>{dados.code_model}</div>
-                
-                <div className='celula'><h3>Ano modelo:</h3></div>
-                <div className='celula'>{dados.year_model}</div>
-                
-                <div className='celula'><h3>Marca:</h3></div>
-                <div className='celula'>{dados.brand}</div>
-                
-                <div className='celula'><h3>Modelo:</h3></div>
-                <div className='celula'>{dados.model}</div>
-                
-                <div className='celula'><h3>Média de mercado:</h3></div>
-                <div className='celula'>R$ {dados.average_price}</div>
-      
+              <div className='celula'><h3>Ano de referência:</h3></div>
+              <div className='celula'>{dados.reference_year}</div>
+
+              <div className='celula'><h3>Mês de referência:</h3></div>
+              <div className='celula'>{dados.reference_month}</div>
+
+              <div className='celula'><h3>Código modelo:</h3></div>
+              <div className='celula'>{dados.code_model}</div>
+
+              <div className='celula'><h3>Ano modelo:</h3></div>
+              <div className='celula'>{dados.year_model}</div>
+
+              <div className='celula'><h3>Marca:</h3></div>
+              <div className='celula'>{dados.brand}</div>
+
+              <div className='celula'><h3>Modelo:</h3></div>
+              <div className='celula'>{dados.model}</div>
+
+              <div className='celula'><h3>Média de mercado:</h3></div>
+              <div className='celula'>R$ {dados.average_price}</div>
+
             </div>
           </div>
         </section>
-        <section id="graphic">
-          <div className="row_graphic">
-            <div className="desc_graphic">
-              <h1>Gráfico</h1>
+
+
+        <section id="about">
+          <div className="col_consulta">
+            <div className="about_product">
+              <h1>Sobre o Produto</h1>
+              <br/>
+              <p id="about">
+                Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
+                funcionalidades,
+                entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
+                nossos clientes.
+              </p>
+              <h2 style={{color: 'black'}}>FUNCIONALIDADE: Disponibilizamos serviços de API</h2>
+              <p>
+                Nossa API foi projetada para ser uma solução RESTful robusta, de fácil uso e altamente documentada,
+                permitindo que consumidores integrem suas aplicações de maneira eficiente e segura. Ideal para
+                automação,
+                análise de dados e integração com sistemas de terceiros.
+              </p>
+
+              <h3>Principais Características</h3>
+              <p>
+                <strong>Arquitetura RESTful:</strong> A API segue rigorosamente os princípios REST, permitindo operações
+                como criação, leitura, atualização e exclusão (CRUD) em recursos específicos.
+              </p>
+              <p>
+                <strong>Desempenho e Escalabilidade:</strong> Capacidade de lidar com requisições simultâneas de alta
+                carga. Uso de cache em pontos estratégicos para garantir respostas rápidas.
+              </p>
+              <p>
+                <strong>Fácil de Usar:</strong> A API é projetada para ser consumida por desenvolvedores de todos os
+                níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
+                padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
+                avançados e ordenação para lidar com grandes volumes de dados.
+              </p>
+              <p>
+                <strong>Documentação Completa:</strong> Disponibilizamos uma documentação interativa baseada em
+                OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
+                dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+              </p>
+
+            </div>
+          </div>
+
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={api_crawler} alt=""/>
+            </div>
+          </div>
+
+
+          <div className="col_consulta">
+            <div className="about_product">
+              <div className="text-content">
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Geração de Relatórios</h2>
                 <p>
-                  Nesta seção, você encontrará uma análise detalhada 
-                  da depreciação de ativos ao longo do tempo. À esquerda,
-                  são apresentados os principais valores e períodos, 
-                  enquanto à direita um gráfico interativo exibe a evolução
-                  da depreciação, facilitando a visualização da redução do
-                  valor dos ativos.
+                  Nossa API permite a <strong>criação de relatórios detalhados</strong>, oferecendo uma visão
+                  consolidada
+                  dos dados coletados.
+                  Esses relatórios são projetados para atender às necessidades estratégicas de empresas e analistas,
+                  fornecendo um resumo
+                  claro e acionável. Além disso, eles incluem informações organizadas e interpretadas, facilitando o
+                  entendimento e a tomada
+                  de decisão com base em dados reais.
                 </p>
-            </div>
-          </div>
-          <div className="row_graphic">
-            <div className="graphic_box">
-              <BarChart data={data} />
-        
 
-            </div>
-            <div className="col_infos">
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCrown} size='2x' className='icon_font' />
-                <h3>Marca:</h3>
-                {dados.brand}
-              </div>
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCar} size='2x' className='icon_font' />
-                <h3>Modelo:</h3>
-                {dados.model}
-              </div>
-              <div className="row_info">
-                <FontAwesomeIcon icon={faCalendarDays} size='2x' className='icon_font'/>
-                <h3>Ano:</h3>
-                {dados.year_model}
-              </div>
-              {/*<input
-                    max={10}
-                    min={1}
-                    id='inpt_num_bars'
-                    type="number"
-                    value={numBars}
-                    onChange={(e) => setNumBars(Number(e.target.value))}
-                  /> */}
-              <div onClick={updateBars}id='btn_nova'>
-                <h2>Atualizar</h2>
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Visualização Gráfica</h2>
+                <p>
+                  Com a funcionalidade de <strong>visualização gráfica</strong>, os dados coletados pela nossa API são
+                  transformados em gráficos
+                  intuitivos e impactantes. Esses gráficos são ideais para apresentações, relatórios executivos ou para
+                  análise visual de tendências
+                  e padrões. A representação gráfica permite uma compreensão rápida, clara e eficiente de grandes
+                  volumes
+                  de
+                  informações.
+                </p>
+
+                <h2 style={{color: 'black'}}>FUNCIONALIDADE: Insights Sobre os Resultados</h2>
+                <p>
+                  Nossa API vai além da simples coleta de dados, oferecendo <strong>insights estratégicos</strong> sobre
+                  o
+                  mercado. Esses insights
+                  ajudam a identificar tendências emergentes, comportamentos de preços e oportunidades de negócio. É a
+                  solução perfeita para empresas
+                  que desejam se manter competitivas, tomando decisões embasadas em análises robustas e confiáveis.
+                </p>
               </div>
             </div>
           </div>
+
+
+          <div className='content_sc1'>
+            <div className='img_sec'>
+              <img src={final_report} alt=""/>
+            </div>
+          </div>
+
+          <div className="col_consulta">
+            <div className="about_product">
+              <h1>Clientes</h1>
+              <p>
+                Nossos clientes podem se tornar parte do nosso ecossistema adquirindo nosso <strong>plano
+                semestral</strong>. Este plano
+                oferece <strong>acesso completo à API</strong> durante todo o período de vigência do contrato,
+                garantindo
+                uma experiência
+                contínua e sem interrupções.
+              </p>
+              <p>
+                Além disso, nossos clientes recebem <strong>relatórios mensais</strong> de forma automática. Esses
+                relatórios são enviados
+                diretamente para o email cadastrado no momento da assinatura do contrato, logo após cada rodada de
+                automação.
+              </p>
+              <p>
+                Durante o processo, <strong>gráficos detalhados são criados</strong>, <strong>insights estratégicos
+                são
+                gerados</strong>,
+                e um <strong>estudo completo do mercado de veículos</strong> é elaborado. Assim que concluído, todo o
+                material é entregue
+                imediatamente para o cliente, proporcionando informações valiosas e atualizadas para tomada de
+                decisão.
+              </p>
+            </div>
+            </div>
+
         </section>
 
-        <section id="listagem">     
-                <div className="desc_listagem">
-                    <h1>Listagem</h1>
-                    <br />
-                    <p id="desc_l">
-                    Nesta seção, você encontrará uma listagem completa 
-                    de anúncios disponíveis. 
-                    </p>
-                    <h3 style={{color:'red'}}>* Disponibilizamos download de .XLSX, contendo a base completa ou parcial!</h3>
-                    <h3 style={{color:'red'}}>* Disponibilizamos serviços de API</h3>
-                    <div id="status">
-                    <h2>Status:</h2>
-                    <p style={{ color: taskStatus === 'PENDING' ? 'orange' : taskStatus === 'SUCCESS' ? 'green' : 'black' }}>
-                      {taskStatus}
-                    </p>
-                  </div>
-
-                    <div id="btn_donwload" onClick={downloadExcel}>
-                    <FontAwesomeIcon icon={faDownload} size='2x'/>
-                      <h3>Baixar</h3>
-                      
-                    </div>
-                </div>
-
-
-                <div className="info_listagem">
-             
-    <form onSubmit={listar} id='form2'>
-        <div className="row_list">
-          <div className="row_icon">
-            <FontAwesomeIcon icon={faCrown} size="2x" />
-            <h3>Marca:</h3>
-          </div>
-          <select
-            name="marca"
-            id="marca"
-            onChange={handleChangeList}
-            value={listagemData.marca}
-          >
-            <option value="">Selecione a marca do veículo</option>
-            {marcas.map((marca, index) => (
-              <option key={index} value={marca.brand}>
-                {marca.brand}
-              </option>
-            ))}
-        </select>
-        </div>
-
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faList} size="2x" />
-                <h3>Quantidade de anuncios:</h3>
-              </div>
-
-                <input
-              className='inpt_list'
-                type="number"
-                placeholder="Quantidade de Anúncios"
-                name="qnt_anunc"
-                value={listagemData.qnt_anunc}
-                onChange={handleChangeList}
-              />
-            </div>
-            <div className="row_list">
-              <div className="row_icon">
-                <FontAwesomeIcon icon={faFile} size="2x" />
-                <h3>Quantidade de páginas:</h3>
-              </div>
-
-                      <input
-                  className='inpt_list'
-                  type="number"
-                  placeholder="Número da Página"
-                  name="num_page"
-                  value={listagemData.num_page}
-                  onChange={handleChangeList}
-                />
-            </div>
-      
-        <button type="submit"><h3>LIstar</h3></button>
-      </form>
-
-                  
-                </div>
-        </section>
 
         {records.length > 0 ? (
-        <section id="Lista_sect">
+            <section id="Lista_sect">
 
-        <div className="list_box">
-            <h1>Lista de veículos</h1>
-          
-            
-            <ul>
-              {records.map((record, index) => (
-                <li key={index} style={{ border: '1px solid #ddd', padding: '10px', marginBottom: '10px' }}>
-                  <h3>{record.title}</h3>
-                  <p><strong>Marca:</strong> {record.brand}</p>
-                  <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
-                  <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
-                  <p><strong>Descrição:</strong> {record.description}</p>
-                  <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver Detalhes</a></p>
-                  <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
-                  <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
-                </li>
-              ))}
-            </ul>
-          
-        </div>
-      </section>
-      ) : (
-        <p>Nenhum registro encontrado.</p>
-      )}
+              <div className="list_box">
+                <h1>Lista de veículos</h1>
+
+
+                <ul>
+                  {records.map((record, index) => (
+                      <li key={index} style={{border: '1px solid #ddd', padding: '10px', marginBottom: '10px'}}>
+                        <h3>{record.title}</h3>
+                        <p><strong>Marca:</strong> {record.brand}</p>
+                        <p><strong>Modelo:</strong> {record.model} ({record.year_model})</p>
+                        <p><strong>Preço:</strong> R$ {record.price.toLocaleString()}</p>
+                        <p><strong>Descrição:</strong> {record.description}</p>
+                        <p><strong>URL:</strong> <a href={record.url} target="_blank" rel="noopener noreferrer">Ver
+                          Detalhes</a></p>
+                        <p><strong>Data de Criação:</strong> {new Date(record.created_at).toLocaleString()}</p>
+                        <p><strong>Data de Atualização:</strong> {new Date(record.updated_at).toLocaleString()}</p>
+                      </li>
+                  ))}
+                </ul>
+
+              </div>
+            </section>
+        ) : (
+            <p>Nenhum registro encontrado.</p>
+        )}
       </div>
     </>
-  );
+);
 }
 
 export default App;
