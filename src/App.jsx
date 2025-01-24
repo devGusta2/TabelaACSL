@@ -53,11 +53,15 @@ const BarChart = ({ data }) => {
 
 function App() {
 
+  const API_HOST = import.meta.env.VITE_API_URL;
+  console.log("API URL:", API_HOST);
+  
+
 
   const graphic = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
+      url: `${API_HOST}/calcs/average/annual/porsche`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -152,7 +156,7 @@ const handleChange = (event) => {
   const fetchModelo = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
+      url: `${API_HOST}/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -174,7 +178,7 @@ const handleChange = (event) => {
   const fetchAnos = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
+      url: `${API_HOST}/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -195,7 +199,7 @@ const handleChange = (event) => {
   const fetchMarcas = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/core/brand/model/list/machine',
+      url: `${API_HOST}/core/brand/model/list/machine`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -216,7 +220,7 @@ const handleChange = (event) => {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
+      url: `${API_HOST}/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
@@ -318,7 +322,7 @@ const listar = async (event) => {
     return;
   }
 
-  const url = `http://0.0.0.0:8087/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
+  const url = `${API_HOST}/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
   const options = {
     method: 'POST',
     url: url,
@@ -357,7 +361,7 @@ const checkTaskStatus = async (task_id) => {
   // Se a tarefa já estiver completa, não continuar a verificação
   if (isTaskComplete) return;
 
-  const url = `http://0.0.0.0:8087/core/tasks/status/${task_id}`;
+  const url = `${API_HOST}/core/tasks/status/${task_id}`;
   const options = {
     method: 'GET',
     url: url,
@@ -401,7 +405,7 @@ useEffect(() => {
 const downloadExcel = async () => {
   const options = {
     method: 'GET',
-    url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
+    url: `${API_HOST}/core/download/excel/${taskId}/machine`,
     headers: {
       'User-Agent': 'insomnia/10.1.1',
       Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
