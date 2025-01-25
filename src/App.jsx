@@ -446,6 +446,7 @@ return (
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
                 <li><a href="#Clientes">Clientes</a></li>
+                <li><Link to='/adm'>Admin</Link></li>
               </ul>
             </nav>
           </header>
