@@ -634,7 +634,9 @@ select{
   padding: 20px;
 }
 
-.record-list {
+.
+
+-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -667,9 +669,13 @@ select{
   line-height: 1.6;
   margin: 5px 0;
 }
+
+
+
 #about {
-  padding: 2em 1em;
-  background-color: var(--bg-color);
+  
+  /* background-color: var(--bg-color); */
+  background-color: red;
 }
 
 .about_product {
@@ -707,3 +713,5 @@ select{
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
