@@ -1,6 +1,7 @@
 
 :root{
     --bg-1:#FFF7FB;
+    --rosa-1:#EF44A1;
 }
 .predict{
     display: flex;
@@ -15,19 +16,73 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
     height: 100vh;
     width: 80%;
     
 }
 
+.column-predict{
+    
+    height: 100%;
+    width: 33.3%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
 
 #icon-car{
-    height: 200px;
-    width: 300px;
-    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+    height: 20%;
+    width: 85%;
+    box-shadow: 4px 10px 10px rgb(184, 184, 184);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: var(--bg-1);
+}
+
+
+
+#name-model{
+    height: 15% ;
+    width: 85%;
+    box-shadow: 4px 10px 10px rgb(184, 184, 184);
+    border-radius: 16px;
+    background-color: var(--bg-1);
+}
+#graphicBox{
+    height: 55% ;
+    width: 85%;
+    box-shadow: 4px 10px 10px rgb(184, 184, 184);
+    border-radius: 16px;
+    background-color: var(--bg-1);
+}
+
+#form{
+    width: 66.7%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.column-predict-form{
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.column-predict-form:nth-child(1){
+  
+}
+.column-predict-form:nth-child(2){
+    
+}
+.label-box{
+    color: var(--rosa-1);
 }

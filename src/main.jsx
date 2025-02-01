@@ -9,7 +9,7 @@ import App from './App.jsx';
 import Adm from './adm/index.jsx';
 import Insights from './adm/Insights.jsx';
 import RawData from "./adm/RawData.jsx";
-
+import Predict from './adm/predict/index.jsx';
 // Configuração do roteador
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
     {
       path: '/adm/raw-data',
       element: <RawData />, // Add the new route
+    },
+    {
+      path:'/adm/predict',
+      element:< Predict/>,
     }
 ]);
 
