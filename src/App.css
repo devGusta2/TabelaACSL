@@ -667,25 +667,9 @@ select{
   line-height: 1.6;
   margin: 5px 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #about {
-  
-  /* background-color: var(--bg-color); */
-  background-color: red;
+  padding: 2em 1em;
+  background-color: var(--bg-color);
 }
 
 .about_product {
@@ -723,5 +707,3 @@ select{
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
