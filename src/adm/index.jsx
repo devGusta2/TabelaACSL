@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faDatabase, faChartLine, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faDatabase, faChartLine, faUser, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../src/assets/logo4.png';
+
 import './adm.css';
 
 export default function Adm() {
@@ -65,6 +66,12 @@ export default function Adm() {
                             <Link to="/adm/raw-data">
                                 <FontAwesomeIcon icon={faDatabase} size="2x"/>
                                 <h3>Raw Data</h3>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/adm/predict">
+                                <FontAwesomeIcon icon={faCalendar} size="2x"/>
+                                <h3>Predição</h3>
                             </Link>
                         </li>
                     </ul>
