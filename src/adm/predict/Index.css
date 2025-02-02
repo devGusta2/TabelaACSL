@@ -12,7 +12,7 @@
 
 }   
 
-.content{
+.content-predict{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,6 +53,9 @@
     box-shadow: 4px 10px 10px rgb(184, 184, 184);
     border-radius: 16px;
     background-color: var(--bg-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #graphicBox{
     height: 55% ;

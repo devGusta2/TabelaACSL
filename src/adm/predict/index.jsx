@@ -14,7 +14,7 @@ export default function Predict() {
   const fetchData = (param) => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8086/car/list/${param}`,
+      url: `http://127.0.0.1:8086/docs/car/list/${param}`,
       params: { page: '1', page_size: '99' },
       headers: {
         'User-Agent': 'insomnia/10.3.0',
@@ -47,16 +47,20 @@ export default function Predict() {
     <>
       <div className='predict'>
         <Menu />
-        <div className='content'>
+        <div className='content-predict'>
           <div className='column-predict'>
             <div id='icon-car'>
               <FontAwesomeIcon style={{ color: '#EF44A1' }} icon={faCar} size='5x' />
+
+            </div>
+            <div id='name-model'>
               <h3>HB20</h3>
             </div>
-            <div id='name-model'></div>
             <div id='graphicBox'>
               <div className="chart-container">
-                <div className="half-donut"></div>
+                <div className="half-donut">
+
+                </div>
               </div>
             </div>
           </div>
@@ -71,7 +75,7 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faCrown} size='2x' />
                     <label>Marca:</label>
                   </div>
-                  <select>
+                  <select required>
                     <option>Selecione uma marca:</option>
                     {brandList.map((brand, index) => (
                       <option key={index} value={brand}>{brand}</option>
@@ -83,7 +87,7 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faCar} size='2x' />
                     <label>Carroceria:</label>
                   </div>
-                  <select>
+                  <select required>
                     <option>Selecione uma Carroceria:</option>
                     {bodyworkList.map((bodywork, index) => (
                       <option key={index} value={bodywork}>{bodywork}</option>
@@ -95,7 +99,8 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faGear} size='2x' />
                     <label>Câmbio:</label>
                   </div>
-                  <select>
+                  <select required>
+                    <option>Selecione uma câmbio:</option>
                     {gearList.map((gear, index) => (
                       <option key={index} value={gear}>{gear}</option>
                     ))}
@@ -106,7 +111,7 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faGasPump} size='2x' />
                     <label>Combustível:</label>
                   </div>
-                  <select>
+                  <select required>
                     <option>Selecione um combustível:</option>
                     {fuelList.map((fuel, index) => (
                       <option key={index} value={fuel}>{fuel}</option>
@@ -123,27 +128,27 @@ export default function Predict() {
             <div className='column-predict-form'>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCube} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input type='text' id="modelo" placeholder=" " />
+                <input required type='text' id="modelo" placeholder=" " />
                 <label htmlFor="modelo">Modelo:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCalendar} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input type='text' id="modelo" placeholder=" " />
+                <input required min='1950' type='number' id="modelo" placeholder=" " />
                 <label htmlFor="modelo">Ano modelo:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faGauge} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input type='text' id="modelo" placeholder=" " />
+                <input required min='0' type='number' id="modelo" placeholder=" " />
                 <label htmlFor="modelo">Quilometragem:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faMap} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input type='text' id="modelo" placeholder=" " />
+                <input required type='text' id="modelo" placeholder=" " />
                 <label htmlFor="modelo">Unidade federativa:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCity} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input type='text' id="modelo" placeholder=" " />
+                <input required type='text' id="modelo" placeholder=" " />
                 <label htmlFor="modelo">Cidade:</label>
               </div>
             </div>
