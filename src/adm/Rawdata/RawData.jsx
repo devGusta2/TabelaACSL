@@ -3,8 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase, faFile, faChartLine } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../src/assets/logo4.png';
+
 import './RawData.css'; // Import the CSS file
+import Menu from '../Components/Menu';
 
 const RawData = () => {
     const [taskId, setTaskId] = useState();
@@ -194,31 +195,7 @@ const handleSubmit = (e) => {
 
     return (
         <div className="adm">
-            <div className="menu">
-                <img src={logo} alt=""/>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/adm">
-                                <FontAwesomeIcon icon={faFile} size="2x"/>
-                                <h3>Home</h3>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/adm/insights">
-                                <FontAwesomeIcon icon={faChartLine} size="2x"/>
-                                <h3>Insights</h3>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/adm/raw-data">
-                                <FontAwesomeIcon icon={faDatabase} size="2x"/>
-                                <h3>Raw Data</h3>
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <Menu />
 
     <div className="content">
         <div className="card_box">
