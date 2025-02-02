@@ -3,45 +3,66 @@ import axios from 'axios';
 import './Index.css';
 import Menu from '../Components/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBaseball, faC, faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap, faWheelchair } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap } from '@fortawesome/free-solid-svg-icons';
 
 export default function Predict() {
   const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
   const [fuelList, setFuelList] = useState([]);
   const [gearList, setGearList] = useState([]);
+  const [formData, setFormData] = useState({
+    brand: '',
+    model: '',
+    year_model: '',
+    mileage: '',
+    gear: '',
+    fuel: '',
+    bodywork: '',
+    city: '',
+    state: ''
+  });
+  const [prediction, setPrediction] = useState(null);
 
-  const fetchData = (param) => {
-    const options = {
-      method: 'GET',
-      url: `http://127.0.0.1:8086/docs/car/list/${param}`,
+  const fetchData = (param, setState) => {
+    axios.get(`http://0.0.0.0:8086/car/list/${param}`, {
       params: { page: '1', page_size: '99' },
       headers: {
-        'User-Agent': 'insomnia/10.3.0',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
-    };
-
-    return axios.request(options)
+    })
       .then(response => {
-        // Dependendo do parâmetro, extrai a lista correta
         if (response.data && response.data[param]) {
-          return response.data[param]; // Retorna a lista esperada
+          setState(response.data[param]);
         }
-        return [];
       })
-      .catch(error => {
-        console.error(error);
-        return [];
-      });
+      .catch(error => console.error(error));
   };
 
   useEffect(() => {
-    fetchData('bodywork').then(data => setBodyworkList(data));
-    fetchData('brand').then(data => setBrandList(data));
-    fetchData('fuel').then(data => setFuelList(data));
-    fetchData('gear').then(data => setGearList(data));
+    fetchData('bodywork', setBodyworkList);
+    fetchData('brand', setBrandList);
+    fetchData('fuel', setFuelList);
+    fetchData('gear', setGearList);
   }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post('http://0.0.0.0:8086/car/predict', formData, {
+      headers: {
+        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        setPrediction(response.data.predict);
+      })
+      .catch(error => console.error(error));
+  };
 
   return (
     <>
@@ -64,7 +85,7 @@ export default function Predict() {
               </div>
             </div>
           </div>
-          <form id="form">
+          <form id="form" onSubmit={handleSubmit}>
             <div className='column-predict-form'>
               <div id="title-box">
                 Previsão de preços por IA
@@ -75,8 +96,8 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faCrown} size='2x' />
                     <label>Marca:</label>
                   </div>
-                  <select required>
-                    <option>Selecione uma marca:</option>
+                  <select name="brand" value={formData.brand} onChange={handleChange}>
+                    <option value="">Selecione uma marca</option>
                     {brandList.map((brand, index) => (
                       <option key={index} value={brand}>{brand}</option>
                     ))}
@@ -87,8 +108,8 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faCar} size='2x' />
                     <label>Carroceria:</label>
                   </div>
-                  <select required>
-                    <option>Selecione uma Carroceria:</option>
+                  <select name="bodywork" value={formData.bodywork} onChange={handleChange}>
+                    <option value="">Selecione uma carroceria</option>
                     {bodyworkList.map((bodywork, index) => (
                       <option key={index} value={bodywork}>{bodywork}</option>
                     ))}
@@ -99,8 +120,8 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faGear} size='2x' />
                     <label>Câmbio:</label>
                   </div>
-                  <select required>
-                    <option>Selecione uma câmbio:</option>
+                  <select name="gear" value={formData.gear} onChange={handleChange}>
+                    <option value="">Selecione um câmbio</option>
                     {gearList.map((gear, index) => (
                       <option key={index} value={gear}>{gear}</option>
                     ))}
@@ -111,15 +132,15 @@ export default function Predict() {
                     <FontAwesomeIcon icon={faGasPump} size='2x' />
                     <label>Combustível:</label>
                   </div>
-                  <select required>
-                    <option>Selecione um combustível:</option>
+                  <select name="fuel" value={formData.fuel} onChange={handleChange}>
+                    <option value="">Selecione um combustível</option>
                     {fuelList.map((fuel, index) => (
                       <option key={index} value={fuel}>{fuel}</option>
                     ))}
                   </select>
                 </div>
                 <div className='option-box'>
-                  <button>
+                  <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
@@ -128,31 +149,34 @@ export default function Predict() {
             <div className='column-predict-form'>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCube} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input required type='text' id="modelo" placeholder=" " />
+                <input required type='text' id="modelo" name="model" placeholder=" " value={formData.model} onChange={handleChange} />
                 <label htmlFor="modelo">Modelo:</label>
               </div>
+
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCalendar} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input required min='1950' type='number' id="modelo" placeholder=" " />
+                <input required min='1950' type='number' name="year_model" id="modelo" placeholder=" " value={formData.year_model} onChange={handleChange} />
                 <label htmlFor="modelo">Ano modelo:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faGauge} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input required min='0' type='number' id="modelo" placeholder=" " />
+                <input required min='0' name="mileage" type='number' id="modelo" placeholder=" " value={formData.mileage} onChange={handleChange} />
                 <label htmlFor="modelo">Quilometragem:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faMap} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input required type='text' id="modelo" placeholder=" " />
+                <input required type='text' name="state" id="modelo" placeholder=" " value={formData.state} onChange={handleChange} />
                 <label htmlFor="modelo">Unidade federativa:</label>
               </div>
               <div className='option-box'>
                 <FontAwesomeIcon icon={faCity} className='icon-font' size='2x' style={{ color: '#EF44A1' }} />
-                <input required type='text' id="modelo" placeholder=" " />
+                <input required type='text' name="city" id="modelo" placeholder=" " value={formData.city} onChange={handleChange} />
                 <label htmlFor="modelo">Cidade:</label>
               </div>
+
             </div>
           </form>
+          
         </div>
       </div>
     </>
