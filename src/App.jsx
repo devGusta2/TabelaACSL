@@ -454,8 +454,7 @@ function App() {
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
                 <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros de luxo, esportivos e
-                  colecionáveis.</p>
+                <p>Uma plataforma de precificação precisa e exclusiva para carros.</p>
               </div>
 
               <div className="col_bottom">
