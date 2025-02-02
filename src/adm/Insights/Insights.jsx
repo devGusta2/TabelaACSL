@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Insights.css'; // Import the CSS file
-import './adm.css';
+// import './adm.css';
 import {faChartLine, faDatabase, faFile} from "@fortawesome/free-solid-svg-icons";
-import logo from '../../src/assets/logo4.png';
+// import logo from '../../src/assets/logo4.png';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
+import Menu from '../Components/Menu';
 
 
 const Insights = () => {
@@ -105,31 +106,7 @@ const Insights = () => {
 
    return (
         <div className="adm">
-            <div className="menu">
-                <img src={logo} alt=""/>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/adm">
-                                <FontAwesomeIcon icon={faFile} size="2x"/>
-                                <h3>Home</h3>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/adm/insights">
-                                <FontAwesomeIcon icon={faChartLine} size="2x"/>
-                                <h3>Insights</h3>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/adm/raw-data">
-                                <FontAwesomeIcon icon={faDatabase} size="2x"/>
-                                <h3>Raw Data</h3>
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <Menu />
             <div className="content">
                 <div className="insights-wrapper">
                     <div className="insights-header">

@@ -7,8 +7,8 @@ import {
 import './index.css';
 import App from './App.jsx';
 import Adm from './adm/index.jsx';
-import Insights from './adm/Insights.jsx';
-import RawData from "./adm/RawData.jsx";
+import Insights from './adm/Insights/Insights.jsx';
+import RawData from "./adm/Rawdata/RawData.jsx";
 import Predict from './adm/predict/index.jsx';
 // Configuração do roteador
 const router = createBrowserRouter([
