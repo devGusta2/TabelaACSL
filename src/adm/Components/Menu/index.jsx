@@ -19,19 +19,19 @@ export default function Menu(){
                                     <li>
                                         <Link to="/adm/insights">
                                             <FontAwesomeIcon icon={faChartLine} size="2x"/>
-                                            <h3>Insights</h3>
+                                            <h3>Informação Inteligente</h3>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/adm/raw-data">
                                             <FontAwesomeIcon icon={faDatabase} size="2x"/>
-                                            <h3>Raw Data</h3>
+                                            <h3>Dados Brutos</h3>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/adm/predict">
                                             <FontAwesomeIcon icon={faCalendar} size="2x"/>
-                                            <h3>Predição</h3>
+                                            <h3>Predição de Preços</h3>
                                         </Link>
                                     </li>
                                 </ul>
