@@ -760,12 +760,12 @@ select{
 }
 #about-img-box span:nth-child(1){
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 40px;
+  font-size: clamp(20px, 10vw, 50px);
   font-weight: 600;
   color: #ef44a1;
 }
 #about-img-box span:nth-child(2){
-  font-size: 23px;
+  font-size: clamp(20px, 1vw, 30px);
   width: 90%;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -802,10 +802,10 @@ select{
   font-family: Arial, Helvetica, sans-serif;
 }
 .card-about span{
-  font-size: 16px;
+  font-size: clamp(16px, 1vw, 30px);
 }
 .card-about h3{
-  font-size: 23px;
+  font-size: clamp(23px, 1vw, 33px);
 }
 .icon-title{
   height: 20%;
