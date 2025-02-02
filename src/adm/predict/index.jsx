@@ -69,7 +69,6 @@ export default function Predict() {
       <div className='predict'>
         <Menu />
         <div className='content-predict'>
-
           <form id="form" onSubmit={handleSubmit}>
             <div className='column-predict-form'>
               <div id="title-box">
@@ -161,6 +160,7 @@ export default function Predict() {
 
             </div>
           </form>
+
           {prediction && (
             <div className="prediction-result">
               <h2>Preço previsto: {prediction}</h2>
