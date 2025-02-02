@@ -17,15 +17,15 @@ export default function Menu(){
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/adm/insights">
-                                            <FontAwesomeIcon icon={faChartLine} size="2x"/>
-                                            <h3>Informação Inteligente</h3>
-                                        </Link>
-                                    </li>
-                                    <li>
                                         <Link to="/adm/raw-data">
                                             <FontAwesomeIcon icon={faDatabase} size="2x"/>
                                             <h3>Dados Brutos</h3>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/adm/insights">
+                                            <FontAwesomeIcon icon={faChartLine} size="2x"/>
+                                            <h3>Informação Inteligente</h3>
                                         </Link>
                                     </li>
                                     <li>
@@ -36,7 +36,7 @@ export default function Menu(){
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+            </div>
         </>
     );
 }
