@@ -69,22 +69,6 @@ export default function Predict() {
       <div className='predict'>
         <Menu />
         <div className='content-predict'>
-          <div className='column-predict'>
-            <div id='icon-car'>
-              <FontAwesomeIcon style={{ color: '#EF44A1' }} icon={faCar} size='5x' />
-
-            </div>
-            <div id='name-model'>
-              <h3>HB20</h3>
-            </div>
-            <div id='graphicBox'>
-              <div className="chart-container">
-                <div className="half-donut">
-
-                </div>
-              </div>
-            </div>
-          </div>
           <form id="form" onSubmit={handleSubmit}>
             <div className='column-predict-form'>
               <div id="title-box">
@@ -176,7 +160,12 @@ export default function Predict() {
 
             </div>
           </form>
-          
+
+          {prediction && (
+            <div className="prediction-result">
+              <h2>Preço previsto: {prediction}</h2>
+            </div>
+          )}
         </div>
       </div>
     </>

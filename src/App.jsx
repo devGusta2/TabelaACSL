@@ -104,7 +104,6 @@ function App() {
   const [marcaSelecionada, setMarcaSelecionada] = useState('');
   const [modeloSelecionado, setModeloSelecionado] = useState('');
   const [cod_modelo, setCod_modelo] = useState('');
-  const anoReferencia = 2025;
 
 
   const [dados, setInfo] = useState({
@@ -216,7 +215,7 @@ function App() {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&year_reference=${anoReferencia}&page=1&size=10`,
+      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
