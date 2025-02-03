@@ -149,6 +149,12 @@ const handleSubmit = (e) => {
         }
     };
     const handleDuplicate = async (id) => {
+        const recordToDuplicate = editableRecords.find((record) => record.id === id);
+        if (!recordToDuplicate) {
+            alert('Registro não encontrado!');
+            return;
+        }
+    
         const options = {
             method: 'POST',
             url: `http://0.0.0.0:8087/records/duplicate/task/machine`,
@@ -156,12 +162,24 @@ const handleSubmit = (e) => {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
             },
-            data: { record_id: id }, // Enviando o ID do registro a ser duplicado
+            data: {
+                records: [
+                    {
+                        record_id: id,
+                        data: {
+                            price: recordToDuplicate.price || 0,
+                            description: recordToDuplicate.description || '',
+                            mileage: recordToDuplicate.mileage || 0,
+                            title: recordToDuplicate.title || '',
+                        },
+                    },
+                ],
+            },
         };
     
         try {
             const response = await axios.request(options);
-            const newRecord = response.data; // Supondo que a API retorna o novo registro duplicado
+            const newRecord = response.data.records[0]; // Supondo que a API retorna o novo registro duplicado
     
             setEditableRecords((prevRecords) => [...prevRecords, newRecord]);
             alert('Registro duplicado com sucesso!');
@@ -170,6 +188,7 @@ const handleSubmit = (e) => {
             alert('Erro ao duplicar o registro. Verifique o console para mais detalhes.');
         }
     };
+    
     
     
 
