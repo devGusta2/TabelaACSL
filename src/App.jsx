@@ -609,7 +609,7 @@ function App() {
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Arquitetura Restful</h3>
+                  <h3>API e Documentação Interativa</h3>
                   <FontAwesomeIcon icon={faBook} size='2x' />
                 </div>
                 <span>
