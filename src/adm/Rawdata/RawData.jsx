@@ -44,7 +44,7 @@ const handleSubmit = (e) => {
     const loadCars = async () => {
         const options = {
             method: 'POST',
-            url: `https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -103,7 +103,7 @@ const handleSubmit = (e) => {
         setLoading(true);
         const options = {
             method: 'GET',
-            url: `https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/core/tasks/status/${taskId}`,
+            url: `http://0.0.0.0:8087/core/tasks/status/${taskId}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -131,7 +131,7 @@ const handleSubmit = (e) => {
     const handleDelete = async (id) => {
         const options = {
             method: 'DELETE',
-            url: 'https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/deactivate/task/machine',
+            url: 'http://0.0.0.0:8087/records/deactivate/task/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -148,13 +148,23 @@ const handleSubmit = (e) => {
             console.error('Erro ao deletar o registro:', error);
         }
     };
+    const handleDuplicate = (id) => {
+        setEditableRecords((prevRecords) => {
+            const recordToDuplicate = prevRecords.find((record) => record.id === id);
+            if (!recordToDuplicate) return prevRecords;
+    
+            const newRecord = { ...recordToDuplicate, id: Date.now() }; // Novo ID único
+            return [...prevRecords, newRecord];
+        });
+    };
+    
 
     // Função para atualizar um registro
     const handleUpdate = async (id) => {
         const updatedRecord = editableRecords.find((record) => record.id === id);
         const options = {
             method: 'PUT',
-            url: 'https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/update/machine',
+            url: 'http://0.0.0.0:8087/records/update/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -264,6 +274,7 @@ const handleSubmit = (e) => {
                                     </button>
                                     <button className='btn_delete' onClick={() => handleDelete(record.id)}>Desativar
                                     </button>
+                                    <button className='btn_duplicate' onClick={() => handleDuplicate(record.id)}>Duplicar</button>
                                 </td>
                             </tr>
                         ))}
