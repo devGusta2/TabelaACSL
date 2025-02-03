@@ -7,10 +7,11 @@ import api_crawler from '../src/assets/api_crawler.png';
 import final_report from '../src/assets/final_report.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList, faHand, faBuilding, faChartSimple, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faCalendarDays, faCar, faDownload, faFile, faList, faHand, faBuilding, faChartSimple, faBook, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
+import relatorio from './assets/final_report.png'
 
 
 const BarChart = ({ data }) => {
@@ -608,7 +609,7 @@ function App() {
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Arquitetura Restful</h3>
+                  <h3>API e Documentação Interativa</h3>
                   <FontAwesomeIcon icon={faBook} size='2x' />
                 </div>
                 <span>
@@ -620,7 +621,72 @@ function App() {
             </div>
           </div>
         </section>
+        <section id="section-relatorio">
+          <div id='col-cards-relatorio'>
+            <div className="card-relatorio">
+              <div className="icon-title-card-relatorio">
+                <FontAwesomeIcon icon={faFile} size='3x'/>
+                <h4>Geração de relatórios</h4>
 
+              </div>
+              <div className='text-box-relatorio'>
+              <span>
+                Nosso software permite a criação de
+                relatórios detalhados, oferecendo uma
+                visão consolidada dos dados coletados.
+                Esses relatórios são projetados para atender
+                às necessidades estratégicas de empresas e
+                analistas, fornecendo um resumo claro e acionável.
+                Além disso, eles incluem informações organizadas
+                e interpretadas, facilitando o entendimento e a
+                tomada de decisão com base em dados reais.</span>
+              </div>
+              
+            </div>
+            <div className="card-relatorio">
+              <div className="icon-title-card-relatorio">
+                <FontAwesomeIcon icon={faChartSimple} size='3x'/>
+                <h4>Visualização Gráfica</h4>
+
+              </div>
+              <div className='text-box-relatorio'>
+                <span>
+                  A geração de gráficos é focada em representar
+                  visualmente os dados consolidados do mercado
+                  automotivo de forma clara e objetiva. Os gráficos
+                  presentes nos relatórios finais destacam informações
+                  essenciais para gerentes de vendas e analistas
+                  de dados do ramo de precificação de veículos.
+                </span>
+              </div>
+            </div>
+            <div className="card-relatorio">
+            
+              <div className="icon-title-card-relatorio">
+              <FontAwesomeIcon icon={faChartLine} size='3x'/>
+                <h4>Insights de Resultados</h4>
+
+              </div>
+              <div className='text-box-relatorio'>
+              <span>
+                A geração de insights é baseada na análise
+                aprofundada dos dados coletados, transformando
+                informações brutas em conhecimentos estratégicos
+                para o mercado automotivo. Os relatórios finais
+                destacam padrões de comportamento, tendências de
+                preços, oportunidades de negociação e variações
+                significativas entre diferentes modelos, marcas,
+                regiões e períodos.
+              </span>
+              </div>
+              
+            </div>
+          </div>
+          <div id="img-relatorio-box">
+            <span>Relatório de Insights</span>
+            <img src={relatorio} alt="" />
+          </div>
+        </section>
         {/* <section id="about">
           <div className="col_consulta">
             <div className="about_product">

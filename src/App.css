@@ -177,7 +177,7 @@ nav{
 .table_box{
   height: 100%;
   width: calc(100% - 60px);
-  background-color: #e4cadf;
+  background-color: #ffcfe9;
   margin-top: -20px;
   border-radius: 10px;
   padding: 20px;
@@ -815,4 +815,82 @@ select{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+
+
+
+#section-relatorio{
+  height: calc(100vh - 5em);
+  width: 100%;
+  display: flex;
+align-items: center;
+justify-content: space-around;
+}
+
+#col-cards-relatorio{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.card-relatorio{
+  height: 32%;
+  width: 90%;
+  background-color: #EF44A1;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  
+}
+#img-relatorio-box{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#section-relatorio #img-relatorio-box span{
+  font-size: clamp(30px,1vh,40px);
+  color: #EF44A1;
+  font-weight: 500;
+}
+
+#section-relatorio img{
+  box-shadow: 4px 4px 10px rgb(150, 150, 150);
+  height: 85%;
+  border-radius: 10px;
+  
+}
+.icon-title-card-relatorio h4{
+  width: 50%;
+
+}
+.icon-title-card-relatorio{
+  width: 30%;
+  height: 100%;
+ 
+  display: flex;
+  align-items: center;
+ 
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+
+}
+.text-box-relatorio{
+  height: 100%;
+  width: 65%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(15px,1vh,23px);
 }
