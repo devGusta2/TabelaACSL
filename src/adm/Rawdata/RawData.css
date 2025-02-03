@@ -224,11 +224,11 @@ body{
 }
 
 td {
-    max-width: 150px; /* Define o tamanho máximo da célula */
-    white-space: nowrap; /* Impede a quebra de linha */
-    overflow: hidden; /* Esconde o texto excedente */
-    text-overflow: ellipsis; /* Adiciona "..." ao final */
+    white-space: normal; /* Permite que o texto quebre em várias linhas */
+    overflow: visible; /* Mostra todo o conteúdo */
+    text-overflow: clip; /* Remove as reticências */
 }
+
 @screen (max-width:768px){
 
 }
