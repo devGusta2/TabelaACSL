@@ -148,15 +148,29 @@ const handleSubmit = (e) => {
             console.error('Erro ao deletar o registro:', error);
         }
     };
-    const handleDuplicate = (id) => {
-        setEditableRecords((prevRecords) => {
-            const recordToDuplicate = prevRecords.find((record) => record.id === id);
-            if (!recordToDuplicate) return prevRecords;
+    const handleDuplicate = async (id) => {
+        const options = {
+            method: 'POST',
+            url: `http://0.0.0.0:8087/records/duplicate/task/machine`,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+            },
+            data: { record_id: id }, // Enviando o ID do registro a ser duplicado
+        };
     
-            const newRecord = { ...recordToDuplicate, id: Date.now() }; // Novo ID único
-            return [...prevRecords, newRecord];
-        });
+        try {
+            const response = await axios.request(options);
+            const newRecord = response.data; // Supondo que a API retorna o novo registro duplicado
+    
+            setEditableRecords((prevRecords) => [...prevRecords, newRecord]);
+            alert('Registro duplicado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao duplicar o registro:', error);
+            alert('Erro ao duplicar o registro. Verifique o console para mais detalhes.');
+        }
     };
+    
     
 
     // Função para atualizar um registro
@@ -270,10 +284,10 @@ const handleSubmit = (e) => {
                                     />
                                 </td>
                                 <td>
-                                    <button className='btn_update' onClick={() => handleUpdate(record.id)}>Atualizar
+                                    {/* <button className='btn_update' onClick={() => handleUpdate(record.id)}>Atualizar
                                     </button>
                                     <button className='btn_delete' onClick={() => handleDelete(record.id)}>Desativar
-                                    </button>
+                                    </button> */}
                                     <button className='btn_duplicate' onClick={() => handleDuplicate(record.id)}>Duplicar</button>
                                 </td>
                             </tr>
