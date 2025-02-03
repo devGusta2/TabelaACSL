@@ -44,7 +44,7 @@ const handleSubmit = (e) => {
     const loadCars = async () => {
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -103,7 +103,7 @@ const handleSubmit = (e) => {
         setLoading(true);
         const options = {
             method: 'GET',
-            url: `http://0.0.0.0:8087/core/tasks/status/${taskId}`,
+            url: `https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/core/tasks/status/${taskId}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -131,7 +131,7 @@ const handleSubmit = (e) => {
     const handleDelete = async (id) => {
         const options = {
             method: 'DELETE',
-            url: 'http://0.0.0.0:8087/records/deactivate/task/machine',
+            url: 'https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/deactivate/task/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -154,7 +154,7 @@ const handleSubmit = (e) => {
         const updatedRecord = editableRecords.find((record) => record.id === id);
         const options = {
             method: 'PUT',
-            url: 'http://0.0.0.0:8087/records/update/machine',
+            url: 'https://e17e-2804-214-8024-2fde-d0dc-32f2-6465-bee6.ngrok-free.app/records/update/machine',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
