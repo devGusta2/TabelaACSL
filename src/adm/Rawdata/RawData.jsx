@@ -24,40 +24,40 @@ const RawData = () => {
     };
 
     const [page, setPage] = useState(1);
-const [pageSize, setPageSize] = useState(20);
+    const [pageSize, setPageSize] = useState(20);
 
-const handlePageChange = (e) => {
-    setPage(e.target.value);
-};
+    const handlePageChange = (e) => {
+        setPage(e.target.value);
+    };
 
-const handlePageSizeChange = (e) => {
-    setPageSize(e.target.value);
-};
+    const handlePageSizeChange = (e) => {
+        setPageSize(e.target.value);
+    };
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    loadCars();
-};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        loadCars();
+    };
 
 
     // Função para carregar os registros
     const loadCars = async () => {
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `https://005c-2804-214-8024-2fde-9eb9-6cd9-7780-6b73.ngrok-free.app/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
             },
-        data: {
-            reference_dates: [
-                {
-                    reference_year: 2025, // Isso tem que ser uma variável
-                    reference_month: 1  // é possível passar uma lista de dicts reference dates
-                }
-            ]
-        }
-    };
+            data: {
+                reference_dates: [
+                    {
+                        reference_year: 2025, // Isso tem que ser uma variável
+                        reference_month: 1  // é possível passar uma lista de dicts reference dates
+                    }
+                ]
+            }
+        };
 
 
         try {
@@ -70,32 +70,32 @@ const handleSubmit = (e) => {
     };
 
     const downloadExcel = async () => {
-    const options = {
-        method: 'GET',
-        url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
-        headers: {
-            'User-Agent': 'insomnia/10.1.1',
-            Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
-        },
-        responseType: 'blob', // Define o tipo de resposta como blob
+        const options = {
+            method: 'GET',
+            url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+            },
+            responseType: 'blob', // Define o tipo de resposta como blob
+        };
+
+        try {
+            const response = await axios.request(options);
+
+            // Cria um link para o download
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'planilha.xlsx'); // Nome do arquivo
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+
+        } catch (error) {
+            console.error('Erro ao fazer a requisição:', error);
+        }
     };
-
-    try {
-        const response = await axios.request(options);
-
-        // Cria um link para o download
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'planilha.xlsx'); // Nome do arquivo
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-
-    } catch (error) {
-        console.error('Erro ao fazer a requisição:', error);
-    }
-};
 
     // Função para verificar o status da tarefa
     const checkStatus = async () => {
@@ -154,7 +154,7 @@ const handleSubmit = (e) => {
             alert('Registro não encontrado!');
             return;
         }
-    
+
         const options = {
             method: 'POST',
             url: `http://0.0.0.0:8087/records/duplicate/task/machine`,
@@ -176,21 +176,21 @@ const handleSubmit = (e) => {
                 ],
             },
         };
-    
+
         try {
             const response = await axios.request(options);
             const newRecord = response.data.records[0]; // Supondo que a API retorna o novo registro duplicado
-    
+
             setEditableRecords((prevRecords) => [...prevRecords, newRecord]);
             alert('Registro duplicado com sucesso!');
         } catch (error) {
             console.error('Erro ao duplicar o registro:', error);
-            alert('Erro ao duplicar o registro. Verifique o console para mais detalhes.');
+            alert('O dado está sendo duplicado.');
         }
     };
-    
-    
-    
+
+
+
 
     // Função para atualizar um registro
     const handleUpdate = async (id) => {
@@ -240,77 +240,78 @@ const handleSubmit = (e) => {
         <div className="adm">
             <Menu />
 
-    <div className="content">
-        <div className="card_box">
-            <div className="card">
-                <button onClick={downloadExcel} className="btn_download">Download Excel</button>
-                {/* Download button */}
+            <div className="content">
+                <div className="card_box">
+                    <div className="card">
+                        <button onClick={downloadExcel} className="btn_download">Download Excel</button>
+                        {/* Download button */}
 
-            </div>
-        </div>
-        <div className="info">
+                    </div>
+                </div>
+                <div className="info">
                     <form onSubmit={handleSubmit} className="form_pagination">
                         <label>
                             Página:
-                            <input type="number" value={page} onChange={handlePageChange} className="input_pagination"/>
+                            <input min='1' type="number" value={page} onChange={handlePageChange} className="input_pagination" />
                         </label>
                         <label>
                             Quantidade de Anúncios:
-                            <input type="number" value={pageSize} onChange={handlePageSizeChange}
-                                   className="input_pagination"/>
+                            <input  min='1'type="number" value={pageSize} onChange={handlePageSizeChange}
+                                className="input_pagination" />
                         </label>
                         <button type="submit" className="btn_pagination">Visualizar</button>
                     </form>
                     <table>
                         <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Preço</th>
-                            <th>Descrição</th>
-                            <th>Ações</th>
-                        </tr>
+                            <tr>
+                                <th>Título</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {editableRecords.map((record) => (
-                            <tr key={record.id}>
-                                <td>
-                                    <input
-                                        value={record.title}
-                                        onChange={(e) =>
-                                            handleChange(record.id, 'title', e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>{record.brand}</td>
-                                <td>{record.model}</td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        value={record.price}
-                                        onChange={(e) =>
-                                            handleChange(record.id, 'price', e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        value={record.description}
-                                        onChange={(e) =>
-                                            handleChange(record.id, 'description', e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>
-                                    <button className='btn_update' onClick={() => handleUpdate(record.id)}>Atualizar
-                                    </button>
-                                    <button className='btn_delete' onClick={() => handleDelete(record.id)}>Desativar
-                                    </button>
-                                    <button className='btn_duplicate' onClick={() => handleDuplicate(record.id)}>Duplicar</button>
-                                </td>
-                            </tr>
-                        ))}
+                            {editableRecords.map((record) => (
+                                <tr key={record.id}>
+                                    <td>
+                                        <input
+                                            value={record.title}
+                                            onChange={(e) =>
+                                                handleChange(record.id, 'title', e.target.value)
+                                            }
+                                        />
+                                    </td>
+                                    <td>{record.brand}</td>
+                                    <td>{record.model}</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            value={record.price}
+                                            onChange={(e) =>
+                                                handleChange(record.id, 'price', e.target.value)
+                                            }
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            value={record.description}
+                                            onChange={(e) =>
+                                                handleChange(record.id, 'description', e.target.value)
+                                            }
+                                        />
+                                    </td>
+                                    <td>
+                                        <button className='btn_update' onClick={() => handleUpdate(record.id)}>Atualizar
+                                        </button>
+
+                                        <button className='btn_duplicate' onClick={() => handleDuplicate(record.id)}>Duplicar</button>
+                                        <button className='btn_delete' onClick={() => handleDelete(record.id)}>Desativar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
