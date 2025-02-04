@@ -249,9 +249,22 @@ table{
     height: 40px;
     border-radius: 5px;
     cursor: pointer;
-    width: 50%;
+    width: 33.3%;
+    transition: 0.5s;
 }
-
+.btn_duplicate{
+    background-color: rgb(181, 100, 228);
+    border: 0;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 33.3%;
+    transition: 0.5s;
+}
+.btn_duplicate:hover{
+    background-color: rgb(221, 111, 206);
+}
 .btn_delete:hover {
     background-color: #e60073; /* Cor mais escura para o botão de delete */
 }
@@ -261,9 +274,10 @@ table{
     border: 0;
     color: white;
     height: 40px;
-    width: 50%;
+    width: 33.3%;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.5s;
 }
 .btn_update:hover {
     background-color: #d98cb3; /* Cor mais escura para o botão de update */
