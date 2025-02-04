@@ -229,9 +229,6 @@ td {
     text-overflow: clip; /* Remove as reticências */
 }
 
-@screen (max-width:768px){
-
-}
 
 tbody{
     width: 100%;
@@ -253,7 +250,8 @@ table{
     transition: 0.5s;
 }
 .btn_duplicate{
-    background-color: #ffd2ed;
+    background-color:  rgb(236, 149, 195);
+ 
     border: 0;
     color: white;
     height: 40px;
@@ -263,14 +261,15 @@ table{
     transition: 0.5s;
 }
 .btn_duplicate:hover{
-    background-color: #ffa2da;
+    background-color: #d98cb3;
+
 }
 .btn_delete:hover {
     background-color: #e60073; /* Cor mais escura para o botão de delete */
 }
 
 .btn_update{
-    background-color: rgb(236, 149, 195);
+    background-color: #ffd2ed;
     border: 0;
     color: white;
     height: 40px;
@@ -280,15 +279,13 @@ table{
     transition: 0.5s;
 }
 .btn_update:hover {
-    background-color: #d98cb3; /* Cor mais escura para o botão de update */
+    background-color: #ffa2da;
+     /* Cor mais escura para o botão de update */
 }
 thead{
     background-color: var(--btn-color);
 }
 
-tbody{
-
-}
 
 td input{
     width: 100%;
