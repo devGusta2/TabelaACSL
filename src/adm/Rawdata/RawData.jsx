@@ -23,7 +23,7 @@ const RawData = () => {
         setShowFilterModal(false);
         loadCars(newFilters); // Recarregar os anúncios com os novos filtros
     };
-    
+
     // Função para lidar com mudanças nos valores dos inputs
     const handleChange = (id, field, value) => {
         setEditableRecords((prevRecords) =>
@@ -63,7 +63,7 @@ const RawData = () => {
                 reference_dates: filtersToUse // Usa os filtros selecionados
             }
         };
-    
+
         try {
             const response = await axios.request(options);
             setTaskId(response.data.task_id);
@@ -72,7 +72,7 @@ const RawData = () => {
             console.error('Erro ao carregar os carros:', error);
         }
     };
-    
+
 
     const downloadExcel = async () => {
         const options = {
@@ -247,15 +247,22 @@ const RawData = () => {
 
             <div className="content">
                 <div className="card_box">
-                    <div className="card">
+                    <div className="modal-box">
+                        {/* <button onClick={() => setShowFilterModal(true)} className="btn_filtro">Filtrar</button> */}
+                       <FilterModal onClose={() => setShowFilterModal(false)} onApply={applyFilters} />
+                    </div>
+                    <div className="card-btn-box">
+                        <h3>Baixar planilha</h3>
+                        <div className="card">
                         <button onClick={downloadExcel} className="btn_download">Download Excel</button>
+                        </div>
                         {/* Download button */}
 
                     </div>
-                    <button onClick={() => setShowFilterModal(true)} className="btn_filtro">Filtrar</button>
-                    {showFilterModal && <FilterModal onClose={() => setShowFilterModal(false)} onApply={applyFilters} />}
+
 
                 </div>
+
                 <div className="info">
                     <form onSubmit={handleSubmit} className="form_pagination">
                         <label>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
-
+import './index.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faPlus} from '@fortawesome/free-solid-svg-icons';
 const FilterModal = ({ onClose, onApply }) => {
     const [localFilters, setLocalFilters] = useState([{ reference_year: 2025, reference_month: 1 }]);
 
@@ -34,9 +35,11 @@ const FilterModal = ({ onClose, onApply }) => {
                         />
                     </div>
                 ))}
-                <button onClick={addFilter}>Adicionar Filtro</button>
-                <button onClick={() => onApply(localFilters)}>Aplicar Filtros</button>
-                <button onClick={onClose}>Fechar</button>
+                <div className='btn-filter-box'>
+                    <button onClick={addFilter}><FontAwesomeIcon icon={faPlus} size='2x'/>Adicionar Filtro</button>
+                    <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x'/>Aplicar Filtros</button>
+                 
+                </div>
             </div>
         </div>
     );
