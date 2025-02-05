@@ -39,8 +39,6 @@
     background-color: #fd6db7;
 }
 .btn_download {
-    margin-bottom: 20px;
-    padding: 10px 20px;
     background-color: #fa0280;
     color: white;
     border: none;
@@ -217,17 +215,6 @@ body{
     font-size: 25px;
 }
 .card{
-    height: 50%;
-    width: 50%;
-    background-color: white ;
-    box-shadow: 4px 4px 10px rgb(209, 209, 209);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 1.5em;
-    gap: 0.5em;
 
 
 }

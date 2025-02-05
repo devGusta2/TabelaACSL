@@ -54,7 +54,7 @@ const RawData = () => {
     const loadCars = async (filtersToUse = filters) => {
         const options = {
             method: 'POST',
-            url: `https://005c-2804-214-8024-2fde-9eb9-6cd9-7780-6b73.ngrok-free.app/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
@@ -253,10 +253,10 @@ const RawData = () => {
                     </div>
                     <div className="card-btn-box">
                         
-                        <div className="card">
-              
+                       
+                        
                         <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x'icon={faDownload}/>Download</button>
-                        </div>
+                     
                         {/* Download button */}
 
                     </div>

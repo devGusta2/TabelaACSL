@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -20,11 +21,16 @@ const FilterModal = ({ onClose, onApply }) => {
             return newFilters;
         });
     };
+ 
 
+    useEffect(() => {
+        onApply(localFilters); // Chama a função sempre que os filtros mudam
+    }, [localFilters]);
+    
     return (
         <div className="modal">
             <div className="modal_content">
-                <h2>Filtrar Anúncios</h2>
+                <h2>Filtrar datas</h2>
                 {localFilters.map((filter, index) => (
                     <div key={index} className="filter_item">
                         <div className='icon-inpt'>
@@ -58,7 +64,7 @@ const FilterModal = ({ onClose, onApply }) => {
                 ))}
                 <div className='btn-filter-box'>
                     <button onClick={addFilter}><FontAwesomeIcon icon={faPlus} size='2x' />Adicionar Filtro</button>
-                    {/* <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' />Aplicar Filtros</button> */}
+                    <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' />Aplicar Filtros</button>
                 </div>
             </div>
         </div>
