@@ -18,7 +18,6 @@ const FilterModal = ({ onClose, onApply }) => {
     return (
         <div className="modal">
             <div className="modal_content">
-                <h2>Filtrar Anúncios</h2>
                 {localFilters.map((filter, index) => (
                     <div key={index} className="filter_item">
                         <div className='icon-inpt'>

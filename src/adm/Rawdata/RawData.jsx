@@ -254,7 +254,6 @@ const RawData = () => {
                     <div className="card-btn-box">
                         
                         <div className="card">
-                        <h3>Baixar planilha</h3>
                         <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x'icon={faDownload}/>Download</button>
                         </div>
                         {/* Download button */}
