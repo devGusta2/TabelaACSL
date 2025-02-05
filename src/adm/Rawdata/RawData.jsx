@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faFile, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faFile, faChartLine, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 import './RawData.css'; // Import the CSS file
 import Menu from '../Components/Menu';
@@ -252,9 +252,10 @@ const RawData = () => {
                        <FilterModal onClose={() => setShowFilterModal(false)} onApply={applyFilters} />
                     </div>
                     <div className="card-btn-box">
-                        <h3>Baixar planilha</h3>
+                        
                         <div className="card">
-                        <button onClick={downloadExcel} className="btn_download">Download Excel</button>
+                        <h3>Baixar planilha</h3>
+                        <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x'icon={faDownload}/>Download</button>
                         </div>
                         {/* Download button */}
 
