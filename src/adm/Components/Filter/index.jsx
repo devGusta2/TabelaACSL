@@ -3,7 +3,11 @@ import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 const FilterModal = ({ onClose, onApply }) => {
-    const [localFilters, setLocalFilters] = useState([{ reference_year: 2025, reference_month: 1 }]);
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() returns 0-11, so add 1
+
+    const [localFilters, setLocalFilters] = useState([{ reference_year: currentYear, reference_month: currentMonth }]);
 
     const addFilter = () => {
         setLocalFilters([...localFilters, { reference_year: 0, reference_month: 0 }]);
