@@ -217,7 +217,7 @@ body{
     font-size: 25px;
 }
 .card{
-    height: 70%;
+    height: 50%;
     width: 50%;
     background-color: white ;
     box-shadow: 4px 4px 10px rgb(209, 209, 209);
@@ -228,6 +228,7 @@ body{
     flex-direction: column;
     font-size: 1.5em;
     gap: 0.5em;
+
 
 }
 .card h1{

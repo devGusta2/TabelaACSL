@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import './index.css'
+import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 const FilterModal = ({ onClose, onApply }) => {
-    const [localFilters, setLocalFilters] = useState([{ reference_year: 2025, reference_month: 1 }]);
+    const [localFilters, setLocalFilters] = useState([{ 
+        reference_year: new Date().getFullYear(), 
+        reference_month: new Date().getMonth() + 1 
+    }]);
 
     const addFilter = () => {
-        setLocalFilters([...localFilters, { reference_year: 0, reference_month: 0 }]);
+        setLocalFilters([...localFilters, { reference_year: new Date().getFullYear(), reference_month: new Date().getMonth() + 1 }]);
     };
 
     const updateFilter = (index, field, value) => {
-        const updatedFilters = [...localFilters];
-        updatedFilters[index][field] = value;
-        setLocalFilters(updatedFilters);
+        setLocalFilters((prevFilters) => {
+            const newFilters = [...prevFilters];
+            newFilters[index] = { ...newFilters[index], [field]: Number(value) }; // Converte para número
+            return newFilters;
+        });
     };
 
     return (
@@ -29,13 +35,12 @@ const FilterModal = ({ onClose, onApply }) => {
                             <input
                                 type="number"
                                 placeholder="Ano"
-                                min='1950'
+                                min="1950"
                                 value={filter.reference_year}
                                 onChange={(e) => updateFilter(index, 'reference_year', e.target.value)}
                             />
                         </div>
                         <div className='icon-inpt'>
-
                             <div className="icon-label">
                                 <FontAwesomeIcon icon={faCalendar} className='icon-filter' size='2x' color='#EF44A1' />
                                 <label>Mês:</label>
@@ -43,19 +48,17 @@ const FilterModal = ({ onClose, onApply }) => {
                             <input
                                 type="number"
                                 placeholder="Mês"
-                                min='1'
-                                max='12'
+                                min="1"
+                                max="12"
                                 value={filter.reference_month}
                                 onChange={(e) => updateFilter(index, 'reference_month', e.target.value)}
                             />
                         </div>
-
                     </div>
                 ))}
                 <div className='btn-filter-box'>
                     <button onClick={addFilter}><FontAwesomeIcon icon={faPlus} size='2x' />Adicionar Filtro</button>
-                    <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' />Aplicar Filtros</button>
-
+                    {/* <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' />Aplicar Filtros</button> */}
                 </div>
             </div>
         </div>
