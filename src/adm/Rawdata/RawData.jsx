@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faFile, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faFile, faChartLine, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 import './RawData.css'; // Import the CSS file
 import Menu from '../Components/Menu';
+import FilterModal from '../Components/Filter';
 
 const RawData = () => {
     const [taskId, setTaskId] = useState();
@@ -13,6 +14,15 @@ const RawData = () => {
     const [loading, setLoading] = useState(false); // Indica se está verificando o status
     const [status, setStatus] = useState('');
     const [editableRecords, setEditableRecords] = useState([]);
+
+    const [filters, setFilters] = useState([{ reference_year: 2025, reference_month: 1 }]);
+    const [showFilterModal, setShowFilterModal] = useState(false);
+
+    const applyFilters = (newFilters) => {
+        setFilters(newFilters);
+        setShowFilterModal(false);
+        loadCars(newFilters); // Recarregar os anúncios com os novos filtros
+    };
 
     // Função para lidar com mudanças nos valores dos inputs
     const handleChange = (id, field, value) => {
@@ -41,24 +51,18 @@ const RawData = () => {
 
 
     // Função para carregar os registros
-    const loadCars = async () => {
+    const loadCars = async (filtersToUse = filters) => {
         const options = {
             method: 'POST',
-            url: `https://005c-2804-214-8024-2fde-9eb9-6cd9-7780-6b73.ngrok-free.app/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
                 Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
             },
             data: {
-                reference_dates: [
-                    {
-                        reference_year: 2025, // Isso tem que ser uma variável
-                        reference_month: 1  // é possível passar uma lista de dicts reference dates
-                    }
-                ]
+                reference_dates: filtersToUse // Usa os filtros selecionados
             }
         };
-
 
         try {
             const response = await axios.request(options);
@@ -68,6 +72,7 @@ const RawData = () => {
             console.error('Erro ao carregar os carros:', error);
         }
     };
+
 
     const downloadExcel = async () => {
         const options = {
@@ -242,12 +247,23 @@ const RawData = () => {
 
             <div className="content">
                 <div className="card_box">
-                    <div className="card">
-                        <button onClick={downloadExcel} className="btn_download">Download Excel</button>
+                    <div className="modal-box">
+                        {/* <button onClick={() => setShowFilterModal(true)} className="btn_filtro">Filtrar</button> */}
+                       <FilterModal onClose={() => setShowFilterModal(false)} onApply={applyFilters} />
+                    </div>
+                    <div className="card-btn-box">
+                        
+                       
+                        
+                        <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x'icon={faDownload}/>Download</button>
+                     
                         {/* Download button */}
 
                     </div>
+
+
                 </div>
+
                 <div className="info">
                     <form onSubmit={handleSubmit} className="form_pagination">
                         <label>
@@ -256,7 +272,7 @@ const RawData = () => {
                         </label>
                         <label>
                             Quantidade de Anúncios:
-                            <input  min='1'type="number" value={pageSize} onChange={handlePageSizeChange}
+                            <input min='1' type="number" value={pageSize} onChange={handlePageSizeChange}
                                 className="input_pagination" />
                         </label>
                         <button type="submit" className="btn_pagination">Visualizar</button>
