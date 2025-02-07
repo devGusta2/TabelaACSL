@@ -8,6 +8,9 @@ import './RawData.css'; // Import the CSS file
 import Menu from '../Components/Menu';
 import FilterModal from '../Components/Filter';
 
+const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
+const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+
 const RawData = () => {
     const [taskId, setTaskId] = useState();
     const [records, setRecords] = useState([]); // Armazena os registros da API
@@ -54,10 +57,11 @@ const RawData = () => {
     const loadCars = async (filtersToUse = filters) => {
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/records/list/task/machine?page=${page}&page_size=${pageSize}`,
+            url: `${host_crawler}/records/list/task/machine?page=${page}&page_size=${pageSize}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
             data: {
                 reference_dates: filtersToUse // Usa os filtros selecionados
@@ -77,10 +81,11 @@ const RawData = () => {
     const downloadExcel = async () => {
         const options = {
             method: 'GET',
-            url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
+            url: `${host_crawler}/core/download/excel/${taskId}/machine`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
             responseType: 'blob', // Define o tipo de resposta como blob
         };
@@ -108,10 +113,11 @@ const RawData = () => {
         setLoading(true);
         const options = {
             method: 'GET',
-            url: `http://0.0.0.0:8087/core/tasks/status/${taskId}`,
+            url: `${host_crawler}/core/tasks/status/${taskId}`,
             headers: {
                 'User-Agent': 'insomnia/10.1.1',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
         };
 
@@ -136,10 +142,11 @@ const RawData = () => {
     const handleDelete = async (id) => {
         const options = {
             method: 'DELETE',
-            url: 'http://0.0.0.0:8087/records/deactivate/task/machine',
+            url: `${host_crawler}/records/deactivate/task/machine`,
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
             data: [id],
         };
@@ -162,10 +169,11 @@ const RawData = () => {
 
         const options = {
             method: 'POST',
-            url: `http://0.0.0.0:8087/records/duplicate/task/machine`,
+            url: `${host_crawler}/records/duplicate/task/machine`,
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
             data: {
                 records: [
@@ -202,10 +210,11 @@ const RawData = () => {
         const updatedRecord = editableRecords.find((record) => record.id === id);
         const options = {
             method: 'PUT',
-            url: 'http://0.0.0.0:8087/records/update/machine',
+            url: `${host_crawler}/records/update/machine`,
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${token_crawler}`,
             },
             data: {
                 records: [

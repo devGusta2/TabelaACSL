@@ -8,6 +8,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import Menu from '../Components/Menu';
 
+const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
+const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
 
 const Insights = () => {
     const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -24,10 +26,11 @@ const Insights = () => {
         setError(null);
 
         try {
-            const response = await axios.get(`http://0.0.0.0:8087/calcs/report/insights/task/machine/${year}/${month}`, {
+            const response = await axios.get(`${host_crawler}/calcs/report/insights/task/machine/${year}/${month}`, {
                 headers: {
                     'User-Agent': 'insomnia/10.1.1',
-                    Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                    'ngrok-skip-browser-warning': '69420',
+                    Authorization: `Bearer ${token_crawler}`,
                 },
             });
             setTaskId(response.data.task_id);
@@ -43,10 +46,11 @@ const Insights = () => {
         setError(null);
 
         try {
-            const analyzeResponse = await axios.get(`http://0.0.0.0:8087/calcs/analyze/all/code_models/machine/${year}/${month}`, {
+            const analyzeResponse = await axios.get(`${host_crawler}/calcs/analyze/all/code_models/machine/${year}/${month}`, {
                 headers: {
                     'User-Agent': 'insomnia/10.1.1',
-                    Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                    'ngrok-skip-browser-warning': '69420',
+                    Authorization: `Bearer ${token_crawler}`,
                 },
             });
             setAnalyzeData(analyzeResponse.data);
@@ -61,10 +65,11 @@ const Insights = () => {
             if (!taskId) return;
 
             try {
-                const response = await axios.get(`http://0.0.0.0:8087/core/tasks/status/${taskId}`, {
+                const response = await axios.get(`${host_crawler}/core/tasks/status/${taskId}`, {
                     headers: {
                         'User-Agent': 'insomnia/10.1.1',
-                        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+                        'ngrok-skip-browser-warning': '69420',
+                        Authorization: `Bearer ${token_crawler}`,
                     },
                     responseType: 'blob',
                 });

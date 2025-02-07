@@ -7,6 +7,7 @@ import logo from '../../src/assets/logo4.png';
 
 import './adm.css';
 
+
 export default function Adm() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');

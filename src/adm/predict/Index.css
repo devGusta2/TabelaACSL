@@ -1,29 +1,29 @@
-
-:root{
-    --bg-1:#FFF7FB;
-    --rosa-1:#EF44A1;
+:root {
+    --bg-1: #FFF7FB;
+    --rosa-1: #EF44A1;
 }
-.predict{
+
+.predict {
     display: flex;
     height: 100vh;
     width: 100%;
     background-color: var(--bg-1);
 
 
-}   
+}
 
-.content-predict{
+.content-predict {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     height: 100vh;
     width: 80%;
-    
+
 }
 
-.column-predict{
-    
+.column-predict {
+
     height: 100%;
     width: 33.3%;
 
@@ -33,7 +33,7 @@
     justify-content: space-around;
 }
 
-#icon-car{
+#icon-car {
     height: 20%;
     width: 85%;
     box-shadow: 4px 10px 10px rgb(184, 184, 184);
@@ -47,8 +47,8 @@
 
 
 
-#name-model{
-    height: 15% ;
+#name-model {
+    height: 15%;
     width: 85%;
     box-shadow: 4px 10px 10px rgb(184, 184, 184);
     border-radius: 16px;
@@ -57,8 +57,9 @@
     align-items: center;
     justify-content: center;
 }
-#graphicBox{
-    height: 55% ;
+
+#graphicBox {
+    height: 55%;
     width: 85%;
     box-shadow: 4px 10px 10px rgb(184, 184, 184);
     border-radius: 16px;
@@ -69,7 +70,7 @@
     background-color: var(--bg-1);
 }
 
-#form{
+#form {
     width: 66.7%;
     height: 100%;
 
@@ -77,13 +78,15 @@
     flex-direction: row;
     justify-content: space-around;
 }
-.column-predict-form{
+
+.column-predict-form {
 
     width: 50%;
 
 
 }
-#title-box{
+
+#title-box {
     height: 20%;
     width: 100%;
     display: flex;
@@ -93,24 +96,28 @@
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
 }
-#selects-box{
+
+#selects-box {
     height: 80%;
     width: 100%;
 }
 
-.column-predict-form:nth-child(1){
+.column-predict-form:nth-child(1) {
     align-items: center;
 
 
 }
-.column-predict-form:nth-child(2){
+
+.column-predict-form:nth-child(2) {
     align-items: center;
     justify-content: center;
 }
-.label-box{
+
+.label-box {
     color: var(--rosa-1);
 }
-.option-box button{
+
+.option-box button {
     height: 50%;
     width: 90%;
     background-color: #EF44A1;
@@ -124,12 +131,14 @@
     transition: 0.5s;
     cursor: pointer;
 }
-.option-box button:hover{
+
+.option-box button:hover {
     transform: translateY(10px);
     background-color: #ff96ce;
     color: #80094a;
 }
-.option-box{
+
+.option-box {
     height: 20%;
     width: 100%;
 
@@ -138,7 +147,8 @@
     gap: 0.5em;
     align-items: center;
 }
-.label-box{
+
+.label-box {
     height: 25%;
     width: 90%;
 
@@ -148,12 +158,13 @@
     gap: 1em;
 }
 
-.option-box select{
+.option-box select {
     box-shadow: 4px 10px 10px rgb(184, 184, 184);
     width: 90%;
     color: rgb(82, 82, 82);
 }
-.option-box input{
+
+.option-box input {
 
     border: 2px solid #EF44A1;
     /* border-top: 0;
@@ -169,13 +180,14 @@
 
 }
 
-.column-predict-form:nth-child(2) .option-box{
+.column-predict-form:nth-child(2) .option-box {
     position: relative;
     height: 20%;
     width: 90%;
 
 }
-.column-predict-form:nth-child(2) .option-box label{
+
+.column-predict-form:nth-child(2) .option-box label {
     color: rgb(94, 94, 94);
     position: absolute;
     left: 20px;
@@ -184,34 +196,33 @@
     transition: 0.3s;
     font-size: 15px;
 }
-.column-predict-form:nth-child(2) .option-box input:focus ~ label,
-.column-predict-form:nth-child(2) .option-box input:not(:placeholder-shown) ~ label {
+
+.column-predict-form:nth-child(2) .option-box input:focus~label,
+.column-predict-form:nth-child(2) .option-box input:not(:placeholder-shown)~label {
     margin-top: -25px;
     margin-left: 15%;
     font-size: 12px;
 }
 
 
-.icon-font{
+.icon-font {
     margin-left: -80%;
 }
+
 .chart-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 90%;
     height: 90%;
-  }
-  
-  .half-donut {
+}
+
+.half-donut {
     width: 70%;
     height: 70%;
     border-radius: 50%;
-    background: conic-gradient(
-       #EF44A1 0deg 200deg,
-      #FFCFE9 180deg 360deg
-    );
+    background: conic-gradient(#EF44A1 0deg 200deg,
+            #FFCFE9 180deg 360deg);
     mask: radial-gradient(circle, transparent 40%, black 41%);
     -webkit-mask: radial-gradient(circle, transparent 40%, black 41%);
-  }
-  
+}
