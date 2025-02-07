@@ -5,6 +5,9 @@ import Menu from '../Components/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap } from '@fortawesome/free-solid-svg-icons';
 
+
+const host_ia = import.meta.env.VITE_API_URL_IA;
+const token_ia = import.meta.env.VITE_TOKEN_IA;
 export default function Predict() {
   const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
@@ -24,10 +27,11 @@ export default function Predict() {
   const [prediction, setPrediction] = useState(null);
 
   const fetchData = (param, setState) => {
-    axios.get(`http://0.0.0.0:8086/car/list/${param}`, {
+    axios.get(`${host_ia}/car/list/${param}`, {
       params: { page: '1', page_size: '99' },
       headers: {
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+       'ngrok-skip-browser-warning': '69420',
+        Authorization: `Bearer ${token_ia}`
       }
     })
       .then(response => {
@@ -52,10 +56,12 @@ export default function Predict() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://0.0.0.0:8086/car/predict', formData, {
+    axios.post(`${host_ia}/car/predict`, formData, {
       headers: {
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+        Authorization: `Bearer ${token_ia}`
       }
     })
       .then(response => {
