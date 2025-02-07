@@ -13,6 +13,7 @@ import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
 import relatorio from './assets/final_report.png'
 
+const host  =  import.meta.env.VITE_API_URL;
 
 const BarChart = ({ data }) => {
   const maxValue = Math.max(...data.map((item) => item.value));
@@ -61,6 +62,7 @@ function App() {
       url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
     };
@@ -152,9 +154,10 @@ function App() {
   const fetchModelo = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
+      url: `${host}/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
     };
@@ -174,9 +177,10 @@ function App() {
   const fetchAnos = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
+      url:  `${host}/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
     };
@@ -195,9 +199,10 @@ function App() {
   const fetchMarcas = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/core/brand/model/list/machine',
+      url: `${host}/core/brand/model/list/machine`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
     };
@@ -216,9 +221,10 @@ function App() {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
+      url: `${host}/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
       }
     };
@@ -318,12 +324,13 @@ function App() {
       return;
     }
 
-    const url = `http://0.0.0.0:8087/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
+    const url = `${host}/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
     const options = {
       method: 'POST',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
       },
       data: {
@@ -357,12 +364,13 @@ function App() {
     // Se a tarefa já estiver completa, não continuar a verificação
     if (isTaskComplete) return;
 
-    const url = `http://0.0.0.0:8087/core/tasks/status/${task_id}`;
+    const url = `${host}/core/tasks/status/${task_id}`;
     const options = {
       method: 'GET',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
+        'ngrok-skip-browser-warning': '69420',
         Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
       },
     };
@@ -425,6 +433,7 @@ function App() {
       console.error('Erro ao fazer a requisição:', error);
     }
   };
+
 
   return (
     <>
