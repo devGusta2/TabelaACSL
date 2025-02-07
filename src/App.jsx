@@ -573,7 +573,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Fácil de usar</h3>
-                  <FontAwesomeIcon icon={faHand} size='2x' />
+                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }}/>
                 </div>
                 <span>
                   A API é projetada para ser consumida por desenvolvedores de todos os
@@ -586,7 +586,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Arquitetura Restful</h3>
-                  <FontAwesomeIcon icon={faBuilding} size='2x' />
+                  <FontAwesomeIcon icon={faBuilding}style={{ fontSize: 'clamp(16px, 3vw, 32px)' }}/>
                 </div>
                 <span>
                   A API segue rigorosamente os
@@ -598,7 +598,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Desempenho e escalabilidade</h3>
-                  <FontAwesomeIcon icon={faChartSimple} size='2x' />
+                  <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Capacidade de lidar com requisições
@@ -610,7 +610,8 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>API e Documentação Interativa</h3>
-                  <FontAwesomeIcon icon={faBook} size='2x' />
+                  <FontAwesomeIcon icon={faBook} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+
                 </div>
                 <span>
                   Disponibilizamos uma documentação interativa baseada em
@@ -625,7 +626,7 @@ function App() {
           <div id='col-cards-relatorio'>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faFile} size='3x'/>
+                <FontAwesomeIcon icon={faFile}  style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
                 <h4>Geração de relatórios</h4>
 
               </div>
@@ -645,7 +646,7 @@ function App() {
             </div>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartSimple} size='3x'/>
+                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
                 <h4>Visualização Gráfica</h4>
 
               </div>
@@ -663,7 +664,7 @@ function App() {
             <div className="card-relatorio">
             
               <div className="icon-title-card-relatorio">
-              <FontAwesomeIcon icon={faChartLine} size='3x'/>
+              <FontAwesomeIcon icon={faChartLine}  style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
                 <h4>Insights de Resultados</h4>
 
               </div>
