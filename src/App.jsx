@@ -13,8 +13,8 @@ import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
 import relatorio from './assets/final_report.png'
 
-const host  =  import.meta.env.VITE_API_URL;
-
+const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
+const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
 const BarChart = ({ data }) => {
   const maxValue = Math.max(...data.map((item) => item.value));
   const containerHeight = 400; // Altura da div do gráfico em pixels
@@ -63,7 +63,7 @@ function App() {
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+        Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -154,11 +154,11 @@ function App() {
   const fetchModelo = async () => {
     const options = {
       method: 'GET',
-      url: `${host}/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
+      url: `${host_crawler}/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+          Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -177,11 +177,11 @@ function App() {
   const fetchAnos = async () => {
     const options = {
       method: 'GET',
-      url:  `${host}/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
+      url: `${host_crawler}/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+          Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -199,11 +199,11 @@ function App() {
   const fetchMarcas = async () => {
     const options = {
       method: 'GET',
-      url: `${host}/core/brand/model/list/machine`,
+      url: `${host_crawler}/core/brand/model/list/machine`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+          Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -221,11 +221,11 @@ function App() {
   const calcular = async () => {
     const options = {
       method: 'GET',
-      url: `${host}/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
+      url: `${host_crawler}/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+          Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -324,14 +324,14 @@ function App() {
       return;
     }
 
-    const url = `${host}/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
+    const url = `${host_crawler}/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
     const options = {
       method: 'POST',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+         Authorization: `Bearer ${token_crawler}`
       },
       data: {
         reference_dates: [
@@ -364,14 +364,14 @@ function App() {
     // Se a tarefa já estiver completa, não continuar a verificação
     if (isTaskComplete) return;
 
-    const url = `${host}/core/tasks/status/${task_id}`;
+    const url = `${host_crawler}/core/tasks/status/${task_id}`;
     const options = {
       method: 'GET',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+          Authorization: `Bearer ${token_crawler}`
       },
     };
 
@@ -412,7 +412,7 @@ function App() {
       url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+       Authorization: `Bearer ${token_crawler}`
       },
       responseType: 'blob', // Define o tipo de resposta como blob
     };
@@ -582,7 +582,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Fácil de usar</h3>
-                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }}/>
+                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   A API é projetada para ser consumida por desenvolvedores de todos os
@@ -595,7 +595,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Arquitetura Restful</h3>
-                  <FontAwesomeIcon icon={faBuilding}style={{ fontSize: 'clamp(16px, 3vw, 32px)' }}/>
+                  <FontAwesomeIcon icon={faBuilding} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   A API segue rigorosamente os
@@ -635,27 +635,27 @@ function App() {
           <div id='col-cards-relatorio'>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faFile}  style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
+                <FontAwesomeIcon icon={faFile} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Geração de relatórios</h4>
 
               </div>
               <div className='text-box-relatorio'>
-              <span>
-                Nosso software permite a criação de
-                relatórios detalhados, oferecendo uma
-                visão consolidada dos dados coletados.
-                Esses relatórios são projetados para atender
-                às necessidades estratégicas de empresas e
-                analistas, fornecendo um resumo claro e acionável.
-                Além disso, eles incluem informações organizadas
-                e interpretadas, facilitando o entendimento e a
-                tomada de decisão com base em dados reais.</span>
+                <span>
+                  Nosso software permite a criação de
+                  relatórios detalhados, oferecendo uma
+                  visão consolidada dos dados coletados.
+                  Esses relatórios são projetados para atender
+                  às necessidades estratégicas de empresas e
+                  analistas, fornecendo um resumo claro e acionável.
+                  Além disso, eles incluem informações organizadas
+                  e interpretadas, facilitando o entendimento e a
+                  tomada de decisão com base em dados reais.</span>
               </div>
-              
+
             </div>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
+                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Visualização Gráfica</h4>
 
               </div>
@@ -671,25 +671,25 @@ function App() {
               </div>
             </div>
             <div className="card-relatorio">
-            
+
               <div className="icon-title-card-relatorio">
-              <FontAwesomeIcon icon={faChartLine}  style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }}/>
+                <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Insights de Resultados</h4>
 
               </div>
               <div className='text-box-relatorio'>
-              <span>
-                A geração de insights é baseada na análise
-                aprofundada dos dados coletados, transformando
-                informações brutas em conhecimentos estratégicos
-                para o mercado automotivo. Os relatórios finais
-                destacam padrões de comportamento, tendências de
-                preços, oportunidades de negociação e variações
-                significativas entre diferentes modelos, marcas,
-                regiões e períodos.
-              </span>
+                <span>
+                  A geração de insights é baseada na análise
+                  aprofundada dos dados coletados, transformando
+                  informações brutas em conhecimentos estratégicos
+                  para o mercado automotivo. Os relatórios finais
+                  destacam padrões de comportamento, tendências de
+                  preços, oportunidades de negociação e variações
+                  significativas entre diferentes modelos, marcas,
+                  regiões e períodos.
+                </span>
               </div>
-              
+
             </div>
           </div>
           <div id="img-relatorio-box">
