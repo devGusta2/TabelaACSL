@@ -58,7 +58,6 @@ export default function Predict() {
 
     axios.post(`${host_ia}/car/predict`, formData, {
       headers: {
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': '69420',
         Authorization: `Bearer ${token_ia}`
