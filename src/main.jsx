@@ -11,6 +11,9 @@ import Insights from './adm/Insights/Insights.jsx';
 import RawData from "./adm/Rawdata/RawData.jsx";
 import Predict from './adm/predict/index.jsx';
 // Configuração do roteador
+
+//Login
+import Login from './Pages/Login/index.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
     {
       path:'/adm/predict',
       element:< Predict/>,
+    },
+    {
+      path:'/pages/Login',
+      element:<Login />
     }
 ]);
 
