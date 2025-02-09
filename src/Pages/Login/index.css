@@ -17,7 +17,7 @@
 
 
 #login-title-box {
-    height: 20%;
+    height: 30%;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -27,14 +27,16 @@
     color: var(--pink2);
     font-size: clamp(16px, 10vw, 40px);
     display: block;
+    font-weight: 200;
 }
 
 #login-title-box span:nth-child(3) {
     color: var(--pink2);
+    font-size: clamp(10px, 10vw, 18px);
 }
 
 #login-form-box {
-    height: 70%;
+    height: 60%;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -45,7 +47,7 @@
 
 .inpt-form-login-field {
     width: 100%;
-    height: 20%;
+    height: 40%;
     position: relative;
 }
 
@@ -93,8 +95,34 @@
     color: var(--pink2);
     margin-left: 10px;
     font-size: 14px;
-}
 
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"] {
+    
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ef44a1; /* Borda da caixinha */
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"]:checked {
+    background-color: #ef44a1; /* Cor de fundo quando estiver marcado */
+    border-color: #ef44a1;
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"]:checked::before {
+    content: "✔";
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
 #btn-login-box{
     height: 20%;
     width:100%;

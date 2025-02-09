@@ -32,7 +32,7 @@ export default function Login() {
                                 <input type="checkbox" />
                                 <span>Manter logado</span>
                             </div>
-                            <Link to='*'>Esqueceu sua senha ?</Link>
+                            <Link to='*' style={{color:'#ef44a1'}}>Esqueceu sua senha ?</Link>
                         </div>
                         <div id="btn-login-box">
                             <button>
@@ -41,7 +41,7 @@ export default function Login() {
                         </div>
                     </form>
                     <div id="login-signup-box">
-                        <span>Ainda não tem uma conta? <span>Faça já seu cadastro!</span></span>
+                        <span>Ainda não tem uma conta? <span style={{color:'#ef44a1'}}>Faça já seu cadastro!</span></span>
                     </div>
                 </div>
             </div>
