@@ -70,12 +70,13 @@
     outline: 0;
 }
 
-.inpt-form-login-field input:focus~label,
-.inpt-form-login-field label:not(:placeholder-shown)~label {
+.inpt-form-login-field input:focus ~ label,
+.inpt-form-login-field input:valid ~ label {
     font-size: 13px;
     top: 20px;
     left: 40px;
 }
+
 
 .icon-login-form {
     color: var(--pink2);
@@ -134,14 +135,18 @@
 
 #btn-login-box button{
     width:80%;
-    height: 60%;
-    border-radius: 16px;
+    height: 80%;
+    border-radius: 10px;
     background-color: var(--pink2);
     outline: 0;
     border: 0;
     color: white;
+    cursor: pointer;
+    transition: 0.5s;
 }
-
+#btn-login-box button:hover{
+    background-color: rgb(230, 129, 191);
+}
 #background-img{
      width: 70%;
      object-fit: cover;
