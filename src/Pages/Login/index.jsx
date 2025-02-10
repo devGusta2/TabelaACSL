@@ -9,19 +9,29 @@ import './index.css'
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 
-//requisição auth
+
 
 
 export default function Login() {
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("");
 
+ 
+
     const auth = async (e) => {
         e.preventDefault();
+        
+        // Verifica se username e password existem antes de enviar
+        if (!username || !password) {
+            console.log("Erro: Preencha os campos corretamente.");
+            return;
+        }
+    
         const data = {
             username: username,
             password: password
         };
+    
         const options = {
             method: 'POST',
             url: `${host_django}/user/api/token/`,
@@ -31,14 +41,22 @@ export default function Login() {
                 'Content-Type': 'application/json'
             },
             data: data
-          };
-        try{
-            const reponse = await axios.request(options);
+        };
     
-        }catch(error){
-            console.log("Erro ao logar" + error);
+        try {
+            const response = await axios.request(options);
+    
+            // Exibir resposta no console
+            console.log("Login bem-sucedido!", response.data);
+    
+            // Se precisar armazenar o token para próximas requisições
+            localStorage.setItem("token", response.data.access);
+    
+        } catch (error) {
+            console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
         }
-    }
+    };
+    
     
     return (
         <>
