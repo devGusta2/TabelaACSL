@@ -1,101 +1,105 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import "./index.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import img from '../../assets/eff2c64b788c57a76c97565a3ec96e6d.jpg'
 import axios from "axios";
-import './index.css'
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
-
-
-
-
-import { useNavigate } from "react-router-dom";
-
-export default function Login() {
+export default function Cadastro() {
+    const [name, setName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [company, setCompany] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUserName] = useState("");
-    const navigate = useNavigate(); // Hook para navegação
+    const [password2, setPassword2] = useState("");
 
-    const auth = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!username || !password) {
-            console.log("Erro: Preencha os campos corretamente.");
+        
+        if (password !== password2) {
+            alert("As senhas não coincidem!");
             return;
         }
 
-        const data = { username, password };
-
-        const options = {
-            method: 'POST',
-            url: `${host_django}/user/api/token/`,
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-                'Content-Type': 'application/json'
-            },
-            data
+        const userData = {
+            first_name: name,
+            last_name: lastName,
+            username: username,
+            company: company || null,
+            email: email,
+            password: password,
+            is_admin: true,
+            is_superuser: false,
+            is_staff: false,
+            is_active: true,
+            is_corporative: false,
+            contract_start: new Date().toISOString().split('T')[0],
+            contract_end: new Date().toISOString().split('T')[0]
         };
 
         try {
-            const response = await axios.request(options);
-            console.log("Login bem-sucedido!", response.data);
-
-            localStorage.setItem("token", response.data.access);
-
-            // Redireciona após o login bem-sucedido
-            navigate("/adm/predict?");  // Substitua "/dashboard" pela rota desejada
-
+            const response = await axios.post(`${host_django}/user/api/register/`, userData, {
+                headers: {
+                    'User-Agent': 'insomnia/10.1.1',
+                    'ngrok-skip-browser-warning': '69420',
+                    'Content-Type': 'application/json'
+                }
+            });
+            alert("Cadastro realizado com sucesso!");
+            console.log("Response:", response.data);
         } catch (error) {
-            console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
+            console.error( error.response?.data?.username?.[0]);
+            alert(error.response?.data?.username?.[0] )
         }
     };
-    
-    
-    return (
-        <>
-            <div className="login-container">
-                <img id="background-img" src={img}>
 
-                </img>
-                <div id="login-column">
-                    <div id="login-title-box">
-                        <span>Login</span>
-                        <br />
-                        <span>Bem vindo(a) de volta. Entre na sua conta!</span>
+    return (
+        <div className="cad-container">
+            <form id="form-cad" onSubmit={handleSubmit}>
+                <div id="title-box-cad">
+                    <span>COMECE DE GRAÇA</span>
+                    <span>Crie uma nova conta!</span>
+                    <span>Já possui cadastro?<Link style={{ marginLeft: '20px' }} to='/Pages/Login'>Login</Link></span>
+                </div>
+                <div id="inpts-box-cad">
+                    <div className="row-inpt-cad">
+                        <div className="inpt-form-cad-field">
+                            <input className='half-inpt' type="text" placeholder=" Nome" required onChange={(e) => setName(e.target.value)} />
+                            {/* <label>Nome:</label> */}
+                        </div>
+                        <div className="inpt-form-cad-field">
+                            <input className='half-inpt' type="text" placeholder="Sobrenome " required onChange={(e) => setLastName(e.target.value)} />
+                            {/* <label>Sobrenome:</label> */}
+                        </div>
                     </div>
-                    <form id="login-form-box" onSubmit={auth}>
-                        <div className="inpt-form-login-field">
-                            <FontAwesomeIcon className='icon-login-form' icon={faUser} size="2x" />
-                            <input type="text" placeholder=" " required onChange={(e) => setUserName(e.target.value)} />
-                            <label>Nome de usuário:</label>
+                    <div className="row-inpt-cad">
+                        <div className="inpt-form-cad-field">
+                            <input className='half-inpt' type="text" placeholder="Nome de usuário " required onChange={(e) => setUsername(e.target.value)} />
+                            {/* <label>Nome de usuário:</label> */}
                         </div>
-                        <div className="inpt-form-login-field">
-                            <FontAwesomeIcon className='icon-login-form' icon={faLock} size="2x" />
-                            <input type="text" placeholder=" " required onChange={(e) => setPassword(e.target.value)} />
-                            <label>Senha:</label>
+                        <div className="inpt-form-cad-field">
+                            <input className='half-inpt' type="text" placeholder="Empresa (Opcional) " onChange={(e) => setCompany(e.target.value)} />
+                            {/* <label>Empresa (Opcional):</label> */}
                         </div>
-                        <div id="btn-remeber-and-forgot-pass">
-                            <div>
-                                <input type="checkbox" />
-                                <span>Manter logado</span>
-                            </div>
-                            <Link to='*' style={{ color: '#ef44a1' }}>Esqueceu sua senha ?</Link>
-                        </div>
-                        <div id="btn-login-box">
-                            <button type="submit">
-                                <span>Login</span>
-                            </button>
-                        </div>
-                    </form>
-                    <div id="login-signup-box">
-                        <span>Ainda não tem uma conta? <span style={{ color: '#ef44a1' }}>Faça já seu cadastro!</span></span>
+                    </div>
+                    <div className="inpt-form-cad-field2">
+                        <input className='complete-inpt' type="email" placeholder=" E-mail" required onChange={(e) => setEmail(e.target.value)} />
+                        {/* <label>E-mail:</label> */}
+                    </div>
+                    <div className="inpt-form-cad-field2">
+                        <input className='complete-inpt' type="password" placeholder=" Senha" required onChange={(e) => setPassword(e.target.value)} />
+                        {/* <label>Senha:</label> */}
+                    </div>
+                    <div className="inpt-form-cad-field2">
+                        <input className='complete-inpt' type="password" placeholder="Confirme sua senha " required onChange={(e) => setPassword2(e.target.value)} />
+                        {/* <label>Confirme sua senha:</label> */}
                     </div>
                 </div>
-            </div>
-        </>
+                <div id="bnt-box-cad">
+                    <button type="submit"><h3>Criar conta</h3></button>
+                </div>
+            </form>
+        </div>
     );
 }
