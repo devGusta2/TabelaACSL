@@ -10,6 +10,7 @@ import Menu from '../Components/Menu';
 
 const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
 const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const Insights = () => {
     const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -42,23 +43,35 @@ const Insights = () => {
     };
 
     const handleAnalyze = async () => {
-        setLoading(true);
-        setError(null);
+    setLoading(true);
+    setError(null);
 
-        try {
-            const analyzeResponse = await axios.get(`${host_crawler}/calcs/analyze/all/code_models/machine/${year}/${month}`, {
-                headers: {
-                    'User-Agent': 'insomnia/10.1.1',
-                    'ngrok-skip-browser-warning': '69420',
-                    Authorization: `Bearer ${token_crawler}`,
-                },
-            });
-            setAnalyzeData(analyzeResponse.data);
-        } catch (error) {
-            setError(error);
-            setLoading(false);
-        }
-    };
+    const userToken = localStorage.getItem('token');
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        setError("Token de autenticação não encontrado.");
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const analyzeResponse = await axios.get(`${host_django}/crawler/calcs/analyze/machine/${year}/${month}/`, {
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+                Authorization: `Bearer ${userToken}`,
+            },
+        });
+
+        // Extraindo os dados dentro de "content"
+        setAnalyzeData(analyzeResponse.data.content);
+    } catch (error) {
+        console.error('Erro ao obter análise:', error);
+        setError(error.response ? error.response.data : 'Erro desconhecido');
+        setLoading(false);
+    }
+};
+
 
     useEffect(() => {
         const checkStatus = async () => {
