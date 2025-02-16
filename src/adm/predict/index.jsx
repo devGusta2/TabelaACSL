@@ -35,7 +35,7 @@ export default function Predict() {
         return;
       }
       try {
-        const response = await axios.get(`${host_django}/artificial_intelligence/list/${param}`, {
+        const response = await axios.get(`${host_django}/artificial_intelligence/list/${param}/?page=1&page_size=99`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': '69420',
