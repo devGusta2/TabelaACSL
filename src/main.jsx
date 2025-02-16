@@ -17,13 +17,15 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/adm" element={<Adm />} />
-        <Route path="/adm/insights" element={<Insights />} />
-        <Route path="/adm/raw-data" element={<RawData />} />
+        
+        
         <Route path="/pages/Login" element={<Login />} />
 
         {/* Rotas protegidas */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/adm/predict" element={<Predict />} />
+          <Route path="/adm/raw-data" element={<RawData />} />
+          <Route path="/adm/insights" element={<Insights />} />
         </Route>
       </Routes>
     </BrowserRouter>
