@@ -29,6 +29,7 @@ export default function Cadastro() {
             company: company,
             email: email,
             password: password,
+            is_admin: true,
         };
 
         try {
