@@ -10,6 +10,7 @@ import FilterModal from '../Components/Filter';
 
 const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
 const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const RawData = () => {
     const [taskId, setTaskId] = useState();
@@ -54,28 +55,38 @@ const RawData = () => {
 
 
     // Função para carregar os registros
-    const loadCars = async (filtersToUse = filters) => {
-        const options = {
-            method: 'POST',
-            url: `${host_crawler}/records/list/task/machine?page=${page}&page_size=${pageSize}`,
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-            data: {
-                reference_dates: filtersToUse // Usa os filtros selecionados
-            }
-        };
+   const loadCars = async (filtersToUse = filters) => {
+    const userToken = localStorage.getItem('token');
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        return;
+    }
 
-        try {
-            const response = await axios.request(options);
-            setTaskId(response.data.task_id);
+    try {
+        const response = await axios.post(
+            `${host_django}/crawler/records/list/machine/?page=${page}&page_size=${pageSize}`,
+            { reference_dates: filtersToUse }, // Usa os filtros selecionados
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': '69420',
+                    Authorization: `Bearer ${userToken}`
+                }
+            }
+        );
+
+        if (response.data?.content?.task_id) {
+            setTaskId(response.data.content.task_id);
             setStatus('PENDING');
-        } catch (error) {
-            console.error('Erro ao carregar os carros:', error);
+        } else {
+            console.error("Erro: task_id não encontrado na resposta.");
         }
-    };
+
+    } catch (error) {
+        console.error('Erro ao carregar os carros:', error);
+    }
+};
+
 
 
     const downloadExcel = async () => {
