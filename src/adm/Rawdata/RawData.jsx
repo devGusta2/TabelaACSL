@@ -217,38 +217,46 @@ const RawData = () => {
 
 
     // Função para atualizar um registro
-    const handleUpdate = async (id) => {
-        const updatedRecord = editableRecords.find((record) => record.id === id);
-        const options = {
-            method: 'PUT',
-            url: `${host_crawler}/records/update/machine`,
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-            data: {
-                records: [
-                    {
-                        record_id: id,
-                        data: {
-                            title: updatedRecord.title,
-                            price: updatedRecord.price,
-                            description: updatedRecord.description,
-                            mileage: updatedRecord.mileage || 0, // Ajuste conforme os dados
-                        },
-                    },
-                ],
-            },
-        };
+   const handleUpdate = async (id) => {
+    const updatedRecord = editableRecords.find((record) => record.id === id);
+    const userToken = localStorage.getItem('token'); // Obtendo o token do usuário logado
 
-        try {
-            await axios.request(options);
-            alert('Registro atualizado com sucesso!');
-        } catch (error) {
-            console.error('Erro ao atualizar o registro:', error);
-        }
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        return;
+    }
+
+    const options = {
+        method: 'PUT',
+        url: `${host_django}/crawler/records/update/machine/`, // Usando host_django
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            Authorization: `Bearer ${userToken}`, // Usando o token do usuário autenticado
+        },
+        data: {
+            records: [
+                {
+                    record_id: id,
+                    data: {
+                        title: updatedRecord.title,
+                        price: updatedRecord.price,
+                        description: updatedRecord.description,
+                        mileage: updatedRecord.mileage || 0, // Garantindo que mileage seja numérico
+                    },
+                },
+            ],
+        },
     };
+
+    try {
+        const response = await axios.request(options);
+        alert(response.data.content?.message || 'Registro atualizado com sucesso!');
+    } catch (error) {
+        console.error('Erro ao atualizar o registro:', error.response ? error.response.data : error.message);
+        alert('Erro ao atualizar o registro. Tente novamente.');
+    }
+};
 
     useEffect(() => {
         loadCars();
