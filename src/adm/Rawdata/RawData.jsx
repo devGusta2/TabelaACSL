@@ -119,35 +119,35 @@ const RawData = () => {
     };
 
     // Função para verificar o status da tarefa
-    const checkStatus = async () => {
-        if (!taskId) return;
-        setLoading(true);
-        const options = {
-            method: 'GET',
-            url: `${host_crawler}/core/tasks/status/${taskId}`,
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-        };
+   const checkStatus = async () => {
+    if (!taskId) return;
+    setLoading(true);
 
-        try {
-            const response = await axios.request(options);
-            setStatus(response.data.status);
-
-            if (response.data.status === 'SUCCESS') {
-                setRecords(response.data.result.records);
-                setEditableRecords(response.data.result.records); // Define os registros como editáveis
-                setLoading(false);
-            } else {
-                setTimeout(checkStatus, 2000); // Recheca após 2 segundos
-            }
-        } catch (error) {
-            console.error('Erro ao verificar o status:', error);
-            setLoading(false);
-        }
+    const options = {
+        method: 'GET',
+        url: `${host_django}/crawler/tasks/status/${taskId}`, // Ajustado para usar host_django
+        headers: {
+            'User-Agent': 'insomnia/10.1.1',
+            'ngrok-skip-browser-warning': '69420',
+        },
     };
+
+    try {
+        const response = await axios.request(options);
+        setStatus(response.data.status);
+
+        if (response.data.status === 'SUCCESS') {
+            setRecords(response.data.result.records);
+            setEditableRecords(response.data.result.records); // Define os registros como editáveis
+            setLoading(false);
+        } else {
+            setTimeout(checkStatus, 2000); // Recheca após 2 segundos
+        }
+    } catch (error) {
+        console.error('Erro ao verificar o status:', error);
+        setLoading(false);
+    }
+};
 
     // Função para deletar um registro
     const handleDelete = async (id) => {
