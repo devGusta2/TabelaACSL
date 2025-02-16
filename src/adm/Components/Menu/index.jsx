@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine, faDatabase, faCalendar, faFile } from '@fortawesome/free-solid-svg-icons';
 const permission = {
-    canViewRawData: "false",
-    canAcesseInsights: "false",
-    canPricePredict: "false",
+    canViewRawData: "True",
+    canAcesseInsights: "True",
+    canPricePredict: "True",
 }
 export default function Menu() {
     return (
