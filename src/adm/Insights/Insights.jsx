@@ -24,32 +24,33 @@ const Insights = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.get(
-                `${host_django}/crawler/download/final_report/${year}/${month}/`,
-                {
-                    headers: {
-                        'User-Agent': 'insomnia/10.1.1',
-                        'ngrok-skip-browser-warning': '69420',
-                        Authorization: `Bearer ${token}`,
-                    },
-                    responseType: 'blob',
-                }
-            );
+        const response = await axios.get(
+            `${host_django}/crawler/download/final_report/${year}/${month}/`,
+            {
+                headers: {
+                    'User-Agent': 'insomnia/10.1.1',
+                    'ngrok-skip-browser-warning': '69420',
+                    Authorization: `Bearer ${token}`,
+                },
+                responseType: 'blob',
+            }
+        );
 
-            const url = window.URL.createObjectURL(response.data);
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', `final_report_${year}_${month}.pdf`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } catch (error) {
-            console.error('Erro ao baixar o relatório:', error);
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
-    };
+        const url = window.URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `final_report_${year}_${month}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        // Se a API retornar a mensagem no content.message, exibe a mensagem corretamente
+        const errorMessage = error.response?.data?.content?.message || 'Erro ao baixar o relatório.';
+        setError(errorMessage);
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleAnalyze = async () => {
         setLoading(true);
