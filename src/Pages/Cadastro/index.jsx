@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import img from '../../assets/eff2c64b788c57a76c97565a3ec96e6d.jpg'
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
@@ -16,7 +17,7 @@ export default function Cadastro() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (password !== password2) {
             alert("As senhas não coincidem!");
             return;
@@ -59,6 +60,7 @@ export default function Cadastro() {
 
     return (
         <div className="cad-container">
+            <img id="background-img" src={img} alt="background" />
             <form id="form-cad" onSubmit={handleSubmit}>
                 <div id="title-box-cad">
                     <span>COMECE DE GRAÇA</span>
