@@ -8,8 +8,7 @@ import './RawData.css'; // Import the CSS file
 import Menu from '../Components/Menu';
 import FilterModal from '../Components/Filter';
 
-const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
-const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const RawData = () => {
@@ -88,35 +87,42 @@ const RawData = () => {
 };
 
 
+const downloadExcel = async () => {
+    const userToken = localStorage.getItem('token'); // Obtendo o token do usuário logado
 
-    const downloadExcel = async () => {
-        const options = {
-            method: 'GET',
-            url: `${host_crawler}/core/download/excel/${taskId}/machine`,
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-            responseType: 'blob', // Define o tipo de resposta como blob
-        };
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        return;
+    }
 
-        try {
-            const response = await axios.request(options);
-
-            // Cria um link para o download
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'planilha.xlsx'); // Nome do arquivo
-            document.body.appendChild(link);
-            link.click();
-            link.parentNode.removeChild(link);
-
-        } catch (error) {
-            console.error('Erro ao fazer a requisição:', error);
-        }
+    const options = {
+        method: 'GET',
+        url: `${host_django}/crawler/download/excel/${taskId}/machine`, // Ajustado para host_django
+        headers: {
+            'User-Agent': 'insomnia/10.1.1',
+            'ngrok-skip-browser-warning': '69420',
+            Authorization: `Bearer ${userToken}`, // Token do usuário autenticado
+        },
+        responseType: 'blob', // Define o tipo de resposta como blob
     };
+
+    try {
+        const response = await axios.request(options);
+
+        // Cria um link para o download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `planilha_${taskId}.xlsx`); // Nome do arquivo com Task ID
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Remove o link após o clique
+
+    } catch (error) {
+        console.error('Erro ao fazer a requisição:', error.response ? error.response.data : error.message);
+        alert('Erro ao baixar o arquivo. Verifique se a tarefa foi concluída.');
+    }
+};
 
     // Função para verificar o status da tarefa
    const checkStatus = async () => {
