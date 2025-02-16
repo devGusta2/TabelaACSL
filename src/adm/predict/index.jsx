@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap } from '@fortawesome/free-solid-svg-icons';
 
 
-const host_ia = import.meta.env.VITE_API_URL_IA;
-const token_ia = import.meta.env.VITE_TOKEN_IA;
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 export default function Predict() {
   const [bodyworkList, setBodyworkList] = useState([]);
