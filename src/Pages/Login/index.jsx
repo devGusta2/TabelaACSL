@@ -53,13 +53,6 @@ export default function Login() {
             console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
         }
     };
-<<<<<<< HEAD
-    
-    
-=======
-
-
->>>>>>> b5d1686f69ac2d3066c34eda087946c611063323
     return (
         <>
             <div className="login-container">

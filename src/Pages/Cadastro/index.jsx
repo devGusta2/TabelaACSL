@@ -31,15 +31,6 @@ export default function Cadastro() {
             email: email,
             password: password,
             is_admin: true,
-<<<<<<< HEAD
-            is_superuser: false,
-            is_staff: false,
-            is_active: true,
-            is_corporative: false,
-            contract_start: new Date().toISOString().split('T')[0],
-            contract_end: new Date().toISOString().split('T')[0]
-=======
->>>>>>> b5d1686f69ac2d3066c34eda087946c611063323
         };
 
         try {
