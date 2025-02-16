@@ -185,47 +185,56 @@ const RawData = () => {
     }
 };
 
-    const handleDuplicate = async (id) => {
-        const recordToDuplicate = editableRecords.find((record) => record.id === id);
-        if (!recordToDuplicate) {
-            alert('Registro não encontrado!');
-            return;
-        }
+   const handleDuplicate = async (id) => {
+    const userToken = localStorage.getItem('token'); // Obtendo o token do usuário logado
 
-        const options = {
-            method: 'POST',
-            url: `${host_crawler}/records/duplicate/task/machine`,
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-            data: {
-                records: [
-                    {
-                        record_id: id,
-                        data: {
-                            price: recordToDuplicate.price || 0,
-                            description: recordToDuplicate.description || '',
-                            mileage: recordToDuplicate.mileage || 0,
-                            title: recordToDuplicate.title || '',
-                        },
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        return;
+    }
+
+    const recordToDuplicate = editableRecords.find((record) => record.id === id);
+    if (!recordToDuplicate) {
+        alert('Registro não encontrado!');
+        return;
+    }
+
+    const options = {
+        method: 'POST',
+        url: `${host_django}/crawler/records/duplicate/machine/`, // Ajustando para host_django
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            Authorization: `Bearer ${userToken}`, // Token do usuário autenticado
+        },
+        data: {
+            records: [
+                {
+                    record_id: id,
+                    data: {
+                        price: recordToDuplicate.price || 0,
+                        description: recordToDuplicate.description || '',
+                        mileage: recordToDuplicate.mileage || 0,
+                        title: recordToDuplicate.title || '',
                     },
-                ],
-            },
-        };
-
-        try {
-            const response = await axios.request(options);
-            const newRecord = response.data.records[0]; // Supondo que a API retorna o novo registro duplicado
-
-            setEditableRecords((prevRecords) => [...prevRecords, newRecord]);
-            alert('Registro duplicado com sucesso!');
-        } catch (error) {
-            console.error('Erro ao duplicar o registro:', error);
-            alert('O dado está sendo duplicado.');
-        }
+                },
+            ],
+        },
     };
+
+    try {
+        const response = await axios.request(options);
+
+        if (response.data?.content?.task_id) {
+            alert(`A duplicação foi iniciada! Task ID: ${response.data.content.task_id}`);
+        } else {
+            alert(response.data?.content?.message || 'A duplicação foi iniciada.');
+        }
+    } catch (error) {
+        console.error('Erro ao duplicar o registro:', error.response ? error.response.data : error.message);
+        alert(error.response?.data?.content?.message || 'Erro ao duplicar o registro. Tente novamente.');
+    }
+};
 
 
 
