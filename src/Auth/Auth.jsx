@@ -1,9 +1,11 @@
 import { Outlet, Navigate, BrowserRouter, Routes, Route} from "react-router-dom";
 
-const ProtectedRoutes = () =>{
-    const user = false;
-    return user ? <Outlet /> : <Navigate to='./Pages/Login'/>
-}
+const ProtectedRoutes = () => {
+  // Verifica se o token de autenticação está presente no localStorage
+  const user = localStorage.getItem("token");
+  return user ? <Outlet /> : <Navigate to="/pages/Login" />;
+};
+
 export default ProtectedRoutes; 
 
 

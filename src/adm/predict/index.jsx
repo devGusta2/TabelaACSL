@@ -8,6 +8,8 @@ import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear,
 
 const host_ia = import.meta.env.VITE_API_URL_IA;
 const token_ia = import.meta.env.VITE_TOKEN_IA;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
+
 export default function Predict() {
   const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
@@ -27,19 +29,27 @@ export default function Predict() {
   const [prediction, setPrediction] = useState(null);
 
   const fetchData = (param, setState) => {
-    axios.get(`${host_ia}/car/list/${param}`, {
-      params: { page: '1', page_size: '99' },
+    const userToken = localStorage.getItem('token');
+
+    if (!userToken) {
+      console.error("Erro: Token não encontrado!");
+      return;
+    }
+
+    axios.get(`${host_django}/artificial_intelligence/list/${param}`, {
       headers: {
-       'ngrok-skip-browser-warning': '69420',
-        Authorization: `Bearer ${token_ia}`
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+        Authorization: `Bearer ${userToken}`
       }
     })
-      .then(response => {
-        if (response.data && response.data[param]) {
-          setState(response.data[param]);
-        }
-      })
-      .catch(error => console.error(error));
+    .then(response => {
+      console.log("Resposta da API:", response.data);
+      setState(response.data.predict || []);
+    })
+    .catch(error => {
+      console.error("Erro na requisição:", error.response ? error.response.data : error.message);
+    });
   };
 
   useEffect(() => {
@@ -56,17 +66,24 @@ export default function Predict() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(`${host_ia}/car/predict`, formData, {
+    const userToken = localStorage.getItem('token');
+
+    if (!userToken) {
+      console.error("Erro: Token não encontrado!");
+      return;
+    }
+
+    axios.post(`${host_django}/artificial_intelligence/predict/price/`, formData, {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': '69420',
-        Authorization: `Bearer ${token_ia}`
+        Authorization: `Bearer ${userToken}`
       }
     })
-      .then(response => {
-        setPrediction(response.data.predict);
-      })
-      .catch(error => console.error(error));
+    .then(response => {
+      setPrediction(response.data.predict);
+    })
+    .catch(error => console.error("Erro na previsão:", error));
   };
 
   return (
