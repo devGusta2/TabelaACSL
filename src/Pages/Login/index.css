@@ -1,0 +1,160 @@
+:root {
+    --bg-pink1-: #FFF7FB;
+    --pink2: #ef44a1;
+}
+
+.login-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+#login-column {
+    height: 100%;
+    width: 30%;
+    background-color: var(--bg-pink1-);
+}
+
+
+#login-title-box {
+    height: 30%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#login-title-box span:nth-child(1) {
+    color: var(--pink2);
+    font-size: clamp(16px, 10vw, 40px);
+    display: block;
+    font-weight: 200;
+}
+
+#login-title-box span:nth-child(3) {
+    color: var(--pink2);
+    font-size: clamp(10px, 10vw, 18px);
+}
+
+#login-form-box {
+    height: 60%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.inpt-form-login-field {
+    width: 100%;
+    height: 40%;
+    position: relative;
+}
+
+.inpt-form-login-field label {
+    color: var(--pink2);
+    position: absolute;
+    font-size: 15px;
+    top: 42px;
+    transition: 0.5s;
+}
+
+.inpt-form-login-field input {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 3px solid var(--pink2);
+    background-color: transparent;
+    width: 100%;
+    height: 35px;
+    outline: 0;
+}
+
+.inpt-form-login-field input:focus ~ label,
+.inpt-form-login-field input:valid ~ label {
+    font-size: 13px;
+    top: 20px;
+    left: 40px;
+}
+
+
+.icon-login-form {
+    color: var(--pink2);
+
+}
+
+
+#btn-remeber-and-forgot-pass {
+    height: 20%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#btn-remeber-and-forgot-pass span{
+    color: var(--pink2);
+    margin-left: 10px;
+    font-size: 14px;
+
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"] {
+    
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ef44a1; /* Borda da caixinha */
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"]:checked {
+    background-color: #ef44a1; /* Cor de fundo quando estiver marcado */
+    border-color: #ef44a1;
+}
+#btn-remeber-and-forgot-pass input[type="checkbox"]:checked::before {
+    content: "✔";
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+#btn-login-box{
+    height: 20%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#btn-login-box button{
+    width:80%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: var(--pink2);
+    outline: 0;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#btn-login-box button:hover{
+    background-color: rgb(230, 129, 191);
+}
+#background-img{
+     width: 70%;
+     object-fit: cover;
+    margin-top: -30%;
+}
+
+#login-signup-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

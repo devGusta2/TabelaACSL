@@ -59,7 +59,7 @@ function App() {
   const graphic = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
+      url: `${host_crawler}/user/api/token/`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
         'ngrok-skip-browser-warning': '69420',
