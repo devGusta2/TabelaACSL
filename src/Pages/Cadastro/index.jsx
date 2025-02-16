@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import img from '../../assets/eff2c64b788c57a76c97565a3ec96e6d.jpg'
+import "./index.css";
+import img from '../../assets/eff2c64b788c57a76c97565a3ec96e6d.jpg';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
@@ -14,6 +14,8 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,6 +45,7 @@ export default function Cadastro() {
             });
             alert("Cadastro realizado com sucesso!");
             console.log("Response:", response.data);
+            navigate('/Pages/Login');
         } catch (error) {
             console.error("Erro no cadastro:", error.response?.data || error.message);
             alert(error.response?.data?.username?.[0] || "Erro ao realizar cadastro. Tente novamente.");
