@@ -35,6 +35,7 @@ export default function Cadastro() {
             is_active: true,
             is_corporative: false,
             contract_start: new Date().toISOString().split('T')[0],
+            
             contract_end: new Date().toISOString().split('T')[0]
         };
 
