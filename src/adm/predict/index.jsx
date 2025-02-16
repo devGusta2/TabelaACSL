@@ -62,25 +62,34 @@ export default function Predict() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userToken = localStorage.getItem('token');
-    if (!userToken) {
-      console.error("Erro: Token não encontrado!");
-      return;
+  e.preventDefault();
+  const userToken = localStorage.getItem('token');
+  if (!userToken) {
+    console.error("Erro: Token não encontrado!");
+    return;
+  }
+  try {
+    const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/`, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '69420',
+        Authorization: `Bearer ${userToken}`
+      }
+    });
+
+    // Garante que estamos acessando corretamente a resposta dentro de "content"
+    const predictedValue = response.data.content?.predict;
+
+    if (predictedValue !== undefined) {
+      setPrediction(predictedValue);
+    } else {
+      console.error("Erro: A resposta da API não contém 'predict' dentro de 'content'.", response.data);
     }
-    try {
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${userToken}`
-        }
-      });
-      setPrediction(response.data.predict);
-    } catch (error) {
-      console.error("Erro na previsão:", error);
-    }
-  };
+
+  } catch (error) {
+    console.error("Erro na previsão:", error);
+  }
+};
 
   return (
     <div className='predict'>
