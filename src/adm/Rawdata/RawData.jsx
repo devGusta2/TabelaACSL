@@ -151,26 +151,40 @@ const RawData = () => {
 
     // Função para deletar um registro
     const handleDelete = async (id) => {
-        const options = {
-            method: 'DELETE',
-            url: `${host_crawler}/records/deactivate/task/machine`,
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': '69420',
-                Authorization: `Bearer ${token_crawler}`,
-            },
-            data: [id],
-        };
+    const userToken = localStorage.getItem('token'); // Obtendo o token do usuário logado
 
-        try {
-            await axios.request(options);
+    if (!userToken) {
+        console.error("Erro: Token não encontrado!");
+        return;
+    }
+
+    const options = {
+        method: 'DELETE',
+        url: `${host_django}/crawler/records/deactivate/machine/`, // Ajustando para host_django
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            Authorization: `Bearer ${userToken}`, // Token do usuário autenticado
+        },
+        data: [id],
+    };
+
+    try {
+        const response = await axios.request(options);
+
+        if (response.status === 204) {
             alert('Registro deletado com sucesso!');
             setRecords(records.filter((record) => record.id !== id));
             setEditableRecords(editableRecords.filter((record) => record.id !== id));
-        } catch (error) {
-            console.error('Erro ao deletar o registro:', error);
+        } else {
+            alert(response.data.content?.detail || 'Erro inesperado ao deletar o registro.');
         }
-    };
+    } catch (error) {
+        console.error('Erro ao deletar o registro:', error.response ? error.response.data : error.message);
+        alert(error.response?.data?.content?.detail || 'Erro ao deletar o registro. Tente novamente.');
+    }
+};
+
     const handleDuplicate = async (id) => {
         const recordToDuplicate = editableRecords.find((record) => record.id === id);
         if (!recordToDuplicate) {
