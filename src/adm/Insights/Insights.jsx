@@ -8,108 +8,86 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import Menu from '../Components/Menu';
 
-const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
-const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const Insights = () => {
     const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [year, setYear] = useState(new Date().getFullYear());
-    const [taskId, setTaskId] = useState(null);
-    const [status, setStatus] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [analyzeData, setAnalyzeData] = useState(null);
 
-    const handleSubmit = async (e) => {
+    const handleDownload = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
+        const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.get(`${host_crawler}/calcs/report/insights/task/machine/${year}/${month}`, {
+        const response = await axios.get(
+            `${host_django}/crawler/download/final_report/${year}/${month}/`,
+            {
                 headers: {
                     'User-Agent': 'insomnia/10.1.1',
                     'ngrok-skip-browser-warning': '69420',
-                    Authorization: `Bearer ${token_crawler}`,
+                    Authorization: `Bearer ${token}`,
                 },
-            });
-            setTaskId(response.data.task_id);
-            setStatus('PENDING');
-        } catch (error) {
-            setError(error);
-            setLoading(false);
-        }
-    };
+                responseType: 'blob',
+            }
+        );
+
+        const url = window.URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `final_report_${year}_${month}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        // Se a API retornar a mensagem no content.message, exibe a mensagem corretamente
+        const errorMessage = error.response?.data?.content?.message || 'Erro ao baixar o relatório.';
+        setError(errorMessage);
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleAnalyze = async () => {
         setLoading(true);
         setError(null);
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            setError("Token de autenticação não encontrado.");
+            setLoading(false);
+            return;
+        }
 
         try {
-            const analyzeResponse = await axios.get(`${host_crawler}/calcs/analyze/all/code_models/machine/${year}/${month}`, {
-                headers: {
-                    'User-Agent': 'insomnia/10.1.1',
-                    'ngrok-skip-browser-warning': '69420',
-                    Authorization: `Bearer ${token_crawler}`,
-                },
-            });
-            setAnalyzeData(analyzeResponse.data);
-        } catch (error) {
-            setError(error);
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        const checkStatus = async () => {
-            if (!taskId) return;
-
-            try {
-                const response = await axios.get(`${host_crawler}/core/tasks/status/${taskId}`, {
+            const response = await axios.get(
+                `${host_django}/crawler/calcs/analyze/machine/${year}/${month}/`,
+                {
                     headers: {
                         'User-Agent': 'insomnia/10.1.1',
                         'ngrok-skip-browser-warning': '69420',
-                        Authorization: `Bearer ${token_crawler}`,
+                        Authorization: `Bearer ${token}`,
                     },
-                    responseType: 'blob',
-                });
-
-                if (response.data.type === 'application/json') {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        const result = JSON.parse(reader.result);
-                        setStatus(result.status);
-                        if (result.status !== 'PDF_GENERATED') {
-                            setTimeout(checkStatus, 2000);
-                        }
-                    };
-                    reader.readAsText(response.data);
-                } else if (response.data.type === 'application/pdf') {
-                    const url = window.URL.createObjectURL(response.data);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'report.pdf');
-                    document.body.appendChild(link);
-                    link.click();
-                    link.parentNode.removeChild(link);
-                    setLoading(false);
                 }
-            } catch (error) {
-                setError(error);
-                setLoading(false);
-            }
-        };
-
-        if (status === 'PENDING') {
-            checkStatus();
+            );
+            setAnalyzeData(response.data.content);
+        } catch (error) {
+            console.error('Erro ao obter análise:', error);
+            setError(error.response ? error.response.data : 'Erro desconhecido');
+        } finally {
+            setLoading(false);
         }
-    }, [status, taskId]);
+    };
 
     useEffect(() => {
         handleAnalyze();
     }, [month, year]);
 
-   return (
+    return (
         <div className="adm">
             <Menu />
             <div className="content">
@@ -124,7 +102,7 @@ const Insights = () => {
                                     min="1"
                                     max="12"
                                     value={month}
-                                    onChange={(e) => setMonth(e.target.value)}
+                                    onChange={(e) => setMonth(Number(e.target.value))}
                                     required
                                 />
                             </label>
@@ -135,18 +113,16 @@ const Insights = () => {
                                     min="2024"
                                     max={new Date().getFullYear()}
                                     value={year}
-                                    onChange={(e) => setYear(e.target.value)}
+                                    onChange={(e) => setYear(Number(e.target.value))}
                                     required
                                 />
                             </label>
                         </div>
                     </div>
                     <div className="insights-container">
-                        <form onSubmit={handleSubmit} className="insights-form">
-                            <button type="submit">Gerar Relatório</button>
-                        </form>
-                        {loading && <p className="loading-message">Loading...</p>}
-                        {error && <p className="error-message">Error: {error.message}</p>}
+                        <button onClick={handleDownload}>Baixar Relatório</button>
+                        {loading && <p className="loading-message">Carregando...</p>}
+                        {error && <p className="error-message">Erro: {error}</p>}
                         {analyzeData && (
                             <div className="analyze-data">
                                 <h2>Análise para {analyzeData.year_reference}/{analyzeData.month_reference}</h2>

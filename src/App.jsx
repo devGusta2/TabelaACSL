@@ -15,6 +15,8 @@ import relatorio from './assets/final_report.png'
 
 const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
 const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
+
 const BarChart = ({ data }) => {
   const maxValue = Math.max(...data.map((item) => item.value));
   const containerHeight = 400; // Altura da div do gráfico em pixels
@@ -151,106 +153,102 @@ function App() {
     //console.log("Código do Modelo:", code_model);
   };
 
-  const fetchModelo = async () => {
-    const options = {
-      method: 'GET',
-      url: `${host_crawler}/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${token_crawler}`
-      }
-    };
-
-    try {
-      const response = await axios.request(options);
-      //console.log(response.data);
-      setModelo(response.data.data);
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-    }
-  };
-
-
-
-
-  const fetchAnos = async () => {
-    const options = {
-      method: 'GET',
-      url: `${host_crawler}/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${token_crawler}`
-      }
-    };
-
-    try {
-      const response = await axios.request(options);
-      //(response.data);
-      setAno(response.data.data)
-
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-    }
-  };
-
-  // Função para buscar marcas da API
   const fetchMarcas = async () => {
-    const options = {
-      method: 'GET',
-      url: `${host_crawler}/core/brand/model/list/machine`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${token_crawler}`
-      }
-    };
-
     try {
-      const response = await axios.request(options);
-      //console.log(response.data);
-      setMarcas(response.data.data);
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
+
+        // Extraindo os dados dentro de "content"
+        setMarcas(response.data.content.data);
     } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
+        console.error('Erro ao buscar marcas:', error);
     }
-  };
+};
 
-
-
-  const calcular = async () => {
-    const options = {
-      method: 'GET',
-      url: `${host_crawler}/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${token_crawler}`
-      }
-    };
-
+const fetchModelo = async () => {
     try {
-      const response = await axios.request(options);
-      //console.log(response.data);
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                brand: marcaSelecionada,
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
 
-      // Ajuste aqui com base na estrutura da API
-      // ou response.data.result
+        setModelo(response.data.content.data);
+    } catch (error) {
+        console.error('Erro ao buscar modelos:', error);
+    }
+};
 
-      setInfo({
-        reference_year: response.data.monthly_averages[0].reference_year,
-        reference_month: response.data.monthly_averages[0].reference_month,
-        code_model: response.data.monthly_averages[0].code_model,
-        year_model: response.data.monthly_averages[0].year_model,
-        brand: marcaSelecionada,
-        model: modeloSelecionado,
-        average_price: response.data.monthly_averages[0].average_price
-      });
+const fetchAnos = async () => {
+    try {
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                brand: marcaSelecionada,
+                model: modeloSelecionado,
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
 
+        setAno(response.data.content.data);
+    } catch (error) {
+        console.error('Erro ao buscar anos:', error);
+    }
+};
+
+
+
+
+const calcular = async () => {
+    try {
+        const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
+            params: {
+                year_model: anoSelecionado,
+                page: 1,
+                page_size: 10
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
+
+        // Pegando o primeiro item dentro de "content.monthly_averages"
+        const data = response.data.content.monthly_averages[0];
+
+        setInfo({
+            reference_year: data.reference_year,
+            reference_month: data.reference_month,
+            code_model: data.code_model,
+            year_model: data.year_model,
+            brand: marcaSelecionada,
+            model: modeloSelecionado,
+            average_price: data.average_price
+        });
 
     } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
+        console.error('Erro ao fazer a requisição:', error);
     }
-  };
+};
+
 
 
 
