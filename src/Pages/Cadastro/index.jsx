@@ -26,18 +26,31 @@ export default function Cadastro() {
             first_name: name,
             last_name: lastName,
             username: username,
-            company: company,
+            company: company || null,
             email: email,
             password: password,
+            is_admin: true,
+            is_superuser: false,
+            is_staff: false,
+            is_active: true,
+            is_corporative: false,
+            contract_start: new Date().toISOString().split('T')[0],
+            contract_end: new Date().toISOString().split('T')[0]
         };
 
         try {
-            const response = await axios.post(`${host_django}/user/api/register/`, userData);
+            const response = await axios.post(`${host_django}/user/api/register/`, userData, {
+                headers: {
+                    'User-Agent': 'insomnia/10.1.1',
+                    'ngrok-skip-browser-warning': '69420',
+                    'Content-Type': 'application/json'
+                }
+            });
             alert("Cadastro realizado com sucesso!");
             console.log("Response:", response.data);
         } catch (error) {
             console.error("Erro no cadastro:", error.response?.data || error.message);
-            alert("Erro ao realizar cadastro. Tente novamente.");
+            alert(error.response?.data?.username?.[0] || "Erro ao realizar cadastro. Tente novamente.");
         }
     };
 
