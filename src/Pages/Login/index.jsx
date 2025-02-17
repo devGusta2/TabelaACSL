@@ -47,7 +47,7 @@ export default function Login() {
             localStorage.setItem("token", response.data.access);
 
             // Redireciona após o login bem-sucedido
-            navigate("/adm/predict?");  // Substitua "/dashboard" pela rota desejada
+            navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
 
         } catch (error) {
             console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
