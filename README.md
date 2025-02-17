@@ -14,8 +14,8 @@
 # React + Vite
 
 ## Variáveis de ambiente
-  VITE_API_URL=https://meu-servidor.com/api
-  VITE_APP_NAME=MeuApp
+  VITE_API_URL_CRAWLER: Endpoint do micro serviço de RPA
+  VITE_TOKEN_CRAWLER: Token de autenticação do serviço de RPA
 
 
 

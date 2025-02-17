@@ -1,0 +1,12 @@
+.containter-home{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#bg-home{
+    height: 100%;
+    width: 80%;
+    object-fit:fill;
+}

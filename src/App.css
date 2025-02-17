@@ -765,7 +765,7 @@ select{
   color: #ef44a1;
 }
 #about-img-box span:nth-child(2){
-  font-size: clamp(20px, 1vw, 30px);
+  font-size: clamp(20px, 1.8vw, 30px);
   width: 90%;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -793,7 +793,7 @@ select{
   height: 100%;
   width: 18%;
   background-color: #EF44A1;
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 20px;
   color: white;
   display: flex;
@@ -802,10 +802,10 @@ select{
   font-family: Arial, Helvetica, sans-serif;
 }
 .card-about span{
-  font-size: clamp(16px, 1vw, 30px);
+  font-size: clamp(16px, 1.2vw, 30px);
 }
 .card-about h3{
-  font-size: clamp(23px, 1vw, 33px);
+  font-size: clamp(23px, 1.2vw, 33px);
 }
 .icon-title{
   height: 20%;
@@ -857,7 +857,7 @@ justify-content: space-around;
   align-items: center;
 }
 #section-relatorio #img-relatorio-box span{
-  font-size: clamp(30px,1vh,40px);
+  font-size: clamp(30px, 1.2vw, 40px);
   color: #EF44A1;
   font-weight: 500;
 }
@@ -892,5 +892,5 @@ justify-content: space-around;
   align-items: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(15px,1vh,23px);
+  font-size: clamp(16px, 1.2vw, 24px);
 }

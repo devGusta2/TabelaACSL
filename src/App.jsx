@@ -13,6 +13,9 @@ import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
 import relatorio from './assets/final_report.png'
 
+const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
+const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const BarChart = ({ data }) => {
   const maxValue = Math.max(...data.map((item) => item.value));
@@ -58,10 +61,11 @@ function App() {
   const graphic = async () => {
     const options = {
       method: 'GET',
-      url: 'http://0.0.0.0:8087/calcs/average/annual/porsche',
+      url: `${host_crawler}/user/api/token/`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
+        'ngrok-skip-browser-warning': '69420',
+        Authorization: `Bearer ${token_crawler}`
       }
     };
 
@@ -149,102 +153,102 @@ function App() {
     //console.log("Código do Modelo:", code_model);
   };
 
-  const fetchModelo = async () => {
-    const options = {
-      method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&page=1&page_size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
-
-    try {
-      const response = await axios.request(options);
-      //console.log(response.data);
-      setModelo(response.data.data);
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-    }
-  };
-
-
-
-
-  const fetchAnos = async () => {
-    const options = {
-      method: 'GET',
-      url: `http://0.0.0.0:8087/core/brand/model/list/machine?brand=${marcaSelecionada}&model=${modeloSelecionado}&page=1&page_size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
-
-    try {
-      const response = await axios.request(options);
-      //(response.data);
-      setAno(response.data.data)
-
-    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-    }
-  };
-
-  // Função para buscar marcas da API
   const fetchMarcas = async () => {
-    const options = {
-      method: 'GET',
-      url: 'http://0.0.0.0:8087/core/brand/model/list/machine',
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
-
     try {
-      const response = await axios.request(options);
-      //console.log(response.data);
-      setMarcas(response.data.data);
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
+
+        // Extraindo os dados dentro de "content"
+        setMarcas(response.data.content.data);
     } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
+        console.error('Erro ao buscar marcas:', error);
     }
-  };
+};
 
-
-
-  const calcular = async () => {
-    const options = {
-      method: 'GET',
-      url: `http://0.0.0.0:8087/calcs/average/month/machine?year_model=${anoSelecionado}&code_model=${cod_modelo}&page=1&size=10`,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529'
-      }
-    };
-
+const fetchModelo = async () => {
     try {
-      const response = await axios.request(options);
-      //console.log(response.data);
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                brand: marcaSelecionada,
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
 
-      // Ajuste aqui com base na estrutura da API
-      // ou response.data.result
+        setModelo(response.data.content.data);
+    } catch (error) {
+        console.error('Erro ao buscar modelos:', error);
+    }
+};
 
-      setInfo({
-        reference_year: response.data.monthly_averages[0].reference_year,
-        reference_month: response.data.monthly_averages[0].reference_month,
-        code_model: response.data.monthly_averages[0].code_model,
-        year_model: response.data.monthly_averages[0].year_model,
-        brand: marcaSelecionada,
-        model: modeloSelecionado,
-        average_price: response.data.monthly_averages[0].average_price
-      });
+const fetchAnos = async () => {
+    try {
+        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+            params: {
+                brand: marcaSelecionada,
+                model: modeloSelecionado,
+                page: 1,
+                page_size: 99
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
 
+        setAno(response.data.content.data);
+    } catch (error) {
+        console.error('Erro ao buscar anos:', error);
+    }
+};
+
+
+
+
+const calcular = async () => {
+    try {
+        const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
+            params: {
+                year_model: anoSelecionado,
+                page: 1,
+                page_size: 10
+            },
+            headers: {
+                'User-Agent': 'insomnia/10.1.1',
+                'ngrok-skip-browser-warning': '69420',
+            }
+        });
+
+        // Pegando o primeiro item dentro de "content.monthly_averages"
+        const data = response.data.content.monthly_averages[0];
+
+        setInfo({
+            reference_year: data.reference_year,
+            reference_month: data.reference_month,
+            code_model: data.code_model,
+            year_model: data.year_model,
+            brand: marcaSelecionada,
+            model: modeloSelecionado,
+            average_price: data.average_price
+        });
 
     } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
+        console.error('Erro ao fazer a requisição:', error);
     }
-  };
+};
+
 
 
 
@@ -318,13 +322,14 @@ function App() {
       return;
     }
 
-    const url = `http://0.0.0.0:8087/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
+    const url = `${host_crawler}/records/list/task/machine?page=${num_page}&page_size=${qnt_anunc}`;
     const options = {
       method: 'POST',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+        'ngrok-skip-browser-warning': '69420',
+         Authorization: `Bearer ${token_crawler}`
       },
       data: {
         reference_dates: [
@@ -357,13 +362,14 @@ function App() {
     // Se a tarefa já estiver completa, não continuar a verificação
     if (isTaskComplete) return;
 
-    const url = `http://0.0.0.0:8087/core/tasks/status/${task_id}`;
+    const url = `${host_crawler}/core/tasks/status/${task_id}`;
     const options = {
       method: 'GET',
       url: url,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+        'ngrok-skip-browser-warning': '69420',
+          Authorization: `Bearer ${token_crawler}`
       },
     };
 
@@ -404,7 +410,7 @@ function App() {
       url: `http://0.0.0.0:8087/core/download/excel/${taskId}/machine`,
       headers: {
         'User-Agent': 'insomnia/10.1.1',
-        Authorization: 'Bearer a7f3e4f0b118bcf44c6f76dce9d56be8d12081c9a0107b214de617ac4a1a0529',
+       Authorization: `Bearer ${token_crawler}`
       },
       responseType: 'blob', // Define o tipo de resposta como blob
     };
@@ -426,6 +432,7 @@ function App() {
     }
   };
 
+
   return (
     <>
       <div className="">
@@ -442,7 +449,7 @@ function App() {
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
                 <li><a href="#Clientes">Clientes</a></li>
-                <li><Link to='/adm'>Admin</Link></li>
+                <li><Link to='/pages/cadastro'>Autenticação</Link></li>
               </ul>
             </nav>
           </header>
@@ -573,7 +580,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Fácil de usar</h3>
-                  <FontAwesomeIcon icon={faHand} size='2x' />
+                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   A API é projetada para ser consumida por desenvolvedores de todos os
@@ -586,7 +593,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Arquitetura Restful</h3>
-                  <FontAwesomeIcon icon={faBuilding} size='2x' />
+                  <FontAwesomeIcon icon={faBuilding} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   A API segue rigorosamente os
@@ -598,7 +605,7 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>Desempenho e escalabilidade</h3>
-                  <FontAwesomeIcon icon={faChartSimple} size='2x' />
+                  <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Capacidade de lidar com requisições
@@ -610,7 +617,8 @@ function App() {
               <div className="card-about">
                 <div className='icon-title'>
                   <h3>API e Documentação Interativa</h3>
-                  <FontAwesomeIcon icon={faBook} size='2x' />
+                  <FontAwesomeIcon icon={faBook} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+
                 </div>
                 <span>
                   Disponibilizamos uma documentação interativa baseada em
@@ -625,27 +633,27 @@ function App() {
           <div id='col-cards-relatorio'>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faFile} size='3x'/>
+                <FontAwesomeIcon icon={faFile} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Geração de relatórios</h4>
 
               </div>
               <div className='text-box-relatorio'>
-              <span>
-                Nosso software permite a criação de
-                relatórios detalhados, oferecendo uma
-                visão consolidada dos dados coletados.
-                Esses relatórios são projetados para atender
-                às necessidades estratégicas de empresas e
-                analistas, fornecendo um resumo claro e acionável.
-                Além disso, eles incluem informações organizadas
-                e interpretadas, facilitando o entendimento e a
-                tomada de decisão com base em dados reais.</span>
+                <span>
+                  Nosso software permite a criação de
+                  relatórios detalhados, oferecendo uma
+                  visão consolidada dos dados coletados.
+                  Esses relatórios são projetados para atender
+                  às necessidades estratégicas de empresas e
+                  analistas, fornecendo um resumo claro e acionável.
+                  Além disso, eles incluem informações organizadas
+                  e interpretadas, facilitando o entendimento e a
+                  tomada de decisão com base em dados reais.</span>
               </div>
-              
+
             </div>
             <div className="card-relatorio">
               <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartSimple} size='3x'/>
+                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Visualização Gráfica</h4>
 
               </div>
@@ -661,25 +669,25 @@ function App() {
               </div>
             </div>
             <div className="card-relatorio">
-            
+
               <div className="icon-title-card-relatorio">
-              <FontAwesomeIcon icon={faChartLine} size='3x'/>
+                <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
                 <h4>Insights de Resultados</h4>
 
               </div>
               <div className='text-box-relatorio'>
-              <span>
-                A geração de insights é baseada na análise
-                aprofundada dos dados coletados, transformando
-                informações brutas em conhecimentos estratégicos
-                para o mercado automotivo. Os relatórios finais
-                destacam padrões de comportamento, tendências de
-                preços, oportunidades de negociação e variações
-                significativas entre diferentes modelos, marcas,
-                regiões e períodos.
-              </span>
+                <span>
+                  A geração de insights é baseada na análise
+                  aprofundada dos dados coletados, transformando
+                  informações brutas em conhecimentos estratégicos
+                  para o mercado automotivo. Os relatórios finais
+                  destacam padrões de comportamento, tendências de
+                  preços, oportunidades de negociação e variações
+                  significativas entre diferentes modelos, marcas,
+                  regiões e períodos.
+                </span>
               </div>
-              
+
             </div>
           </div>
           <div id="img-relatorio-box">
