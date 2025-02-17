@@ -47,14 +47,12 @@ export default function Login() {
             localStorage.setItem("token", response.data.access);
 
             // Redireciona após o login bem-sucedido
-            navigate("/adm/predict?");  // Substitua "/dashboard" pela rota desejada
+            navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
 
         } catch (error) {
             console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
         }
     };
-    
-    
     return (
         <>
             <div className="login-container">
@@ -69,21 +67,22 @@ export default function Login() {
                     </div>
                     <form id="login-form-box" onSubmit={auth}>
                         <div className="inpt-form-login-field">
-                            <FontAwesomeIcon className='icon-login-form' icon={faUser} size="2x" />
-                            <input type="text" placeholder=" " required onChange={(e) => setUserName(e.target.value)} />
+                            <FontAwesomeIcon className='icon-login-form' icon={faUser} size="2x"/>
+                            <input type="text" placeholder=" " required onChange={(e) => setUserName(e.target.value)}/>
                             <label>Nome de usuário:</label>
                         </div>
                         <div className="inpt-form-login-field">
-                            <FontAwesomeIcon className='icon-login-form' icon={faLock} size="2x" />
-                            <input type="text" placeholder=" " required onChange={(e) => setPassword(e.target.value)} />
+                            <FontAwesomeIcon className='icon-login-form' icon={faLock} size="2x"/>
+                            <input type="password" placeholder=" " required
+                                   onChange={(e) => setPassword(e.target.value)}/>
                             <label>Senha:</label>
                         </div>
                         <div id="btn-remeber-and-forgot-pass">
                             <div>
-                                <input type="checkbox" />
+                                <input type="checkbox"/>
                                 <span>Manter logado</span>
                             </div>
-                            <Link to='*' style={{ color: '#ef44a1' }}>Esqueceu sua senha ?</Link>
+                            <Link to='*' style={{color: '#ef44a1'}}>Esqueceu sua senha ?</Link>
                         </div>
                         <div id="btn-login-box">
                             <button type="submit">
@@ -92,7 +91,8 @@ export default function Login() {
                         </div>
                     </form>
                     <div id="login-signup-box">
-                        <span>Ainda não tem uma conta? <span style={{ color: '#ef44a1' }}>Faça já seu cadastro!</span></span>
+                        <span>Ainda não tem uma conta? <span
+                            style={{color: '#ef44a1'}}>Faça já seu cadastro!</span></span>
                     </div>
                 </div>
             </div>
