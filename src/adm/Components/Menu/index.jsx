@@ -2,7 +2,7 @@ import './index.css'
 import logo from '../../../../src/assets/logo4.png';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faDatabase, faCalendar, faFile } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faDatabase, faCalendar, faFile, faHome } from '@fortawesome/free-solid-svg-icons';
 const permission = {
     canViewRawData: "True",
     canAcesseInsights: "True",
@@ -16,8 +16,8 @@ export default function Menu() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/adm">
-                                <FontAwesomeIcon icon={faFile} size="2x" />
+                            <Link to="/adm/Home">
+                                <FontAwesomeIcon icon={faHome} size="2x" />
                                 <h3>Home</h3>
                             </Link>
                         </li>
