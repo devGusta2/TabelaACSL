@@ -32,7 +32,7 @@ export default function Cadastro() {
             company: company || null,
             email: email,
             password: password,
-            is_admin: true,
+            is_admin: false,
         };
 
         try {
@@ -78,8 +78,8 @@ export default function Cadastro() {
                             <label>Nome de usuário:</label>
                         </div>
                         <div className="inpt-form-cad-field">
-                            <input className='half-inpt' type="text" placeholder=" " onChange={(e) => setCompany(e.target.value)} />
-                            <label>Empresa (Opcional):</label>
+                            <input className='half-inpt' type="text" placeholder=" " required onChange={(e) => setUsername(e.target.value)} />
+                            <label>Empresa (Opcional)</label>
                         </div>
                     </div>
                     <div className="inpt-form-cad-field2">

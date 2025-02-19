@@ -58,14 +58,39 @@
     align-items: center;
 }
 
+.inpt-form-cad-field input:focus ~ label,
+.inpt-form-cad-field input:valid ~ label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 13px;
+    top: -7px;
+    transition: 0.5s;
+}
+
 .inpt-form-cad-field label {
     color: var(--color-pink1);
     position: absolute;
     font-size: 15px;
     top: 5px;
     transition: 0.5s;
+    pointer-events: none;
 }
-
+.inpt-form-cad-field2  label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 15px;
+    top: 42px;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.inpt-form-cad-field2 input:focus ~ label,
+.inpt-form-cad-field2 input:valid ~ label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 13px;
+    top: -7px;
+    transition: 0.5s;
+}
 .inpt-cad {
     border-top: 0;
     border-left: 0;

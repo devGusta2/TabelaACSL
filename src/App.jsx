@@ -445,11 +445,10 @@ const calcular = async () => {
 
               <ul>
                 <li><a href="#inicio">Início</a></li>
-
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
                 <li><a href="#Clientes">Clientes</a></li>
-                <li><Link to='/pages/cadastro'>Autenticação</Link></li>
+                <li><Link to='/pages/cadastro'>Login</Link></li>
               </ul>
             </nav>
           </header>
