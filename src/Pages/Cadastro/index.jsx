@@ -64,6 +64,7 @@ export default function Cadastro() {
 
     return (
         <div className="cad-container">
+            <img src={img} alt="" id='background-img' />
             <form id="form-cad" onSubmit={handleSubmit}>
                 <div id="title-box-cad">
                     <span>COMECE DE GRAÇA</span>
@@ -148,6 +149,7 @@ export default function Cadastro() {
                     </button>
                 </div>
             </form>
+            
         </div>
     );
 }
