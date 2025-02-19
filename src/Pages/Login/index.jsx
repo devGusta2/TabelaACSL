@@ -115,7 +115,7 @@ export default function Login() {
                     </form>
                     <div id="login-signup-box">
                         <span>Ainda não tem uma conta? <span
-                            style={{color: '#ef44a1'}}>Faça já seu cadastro!</span></span>
+                            style={{color: '#ef44a1'}}><Link to='/Pages/Cadastro'>Faça já seu cadastro!</Link></span></span>
                     </div>
                 </div>
             </div>
