@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Insights.css'; // Import the CSS file
-// import './adm.css';
-import {faChartLine, faDatabase, faFile} from "@fortawesome/free-solid-svg-icons";
-// import logo from '../../src/assets/logo4.png';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
+import './Insights.css'; 
 import Menu from '../Components/Menu';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
