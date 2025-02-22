@@ -4,9 +4,7 @@ import './Index.css';
 import Menu from '../Components/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap } from '@fortawesome/free-solid-svg-icons';
-
-
-const host_django = import.meta.env.VITE_API_URL_DJANGO;
+const host_django = import.meta.env.VITE_API_URL_DJANGO
 export default function Predict() {
   const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
@@ -74,8 +72,6 @@ export default function Predict() {
         Authorization: `Bearer ${userToken}`
       }
     });
-
-    // Garante que estamos acessando corretamente a resposta dentro de "content"
     const predictedValue = response.data.content?.predict;
 
     if (predictedValue !== undefined) {
@@ -88,7 +84,6 @@ export default function Predict() {
     console.error("Erro na previsão:", error);
   }
 };
-
   return (
     <div className='predict'>
       <Menu />
