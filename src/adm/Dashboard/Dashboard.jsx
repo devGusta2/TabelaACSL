@@ -113,7 +113,7 @@ const Dashboard = () => {
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quantidade de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
                                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                     <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
                                 </ScatterChart>
@@ -124,7 +124,7 @@ const Dashboard = () => {
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quantidade de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
                                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                     <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
                                 </ScatterChart>
