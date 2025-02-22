@@ -48,21 +48,13 @@ const Dashboard = () => {
         }
     };
 
-    const priceDistributionData = [
-        { range: "0-30K", value: kpiData?.average_price * 0.1 },
-        { range: "30K-60K", value: kpiData?.average_price * 0.2 },
-        { range: "60K-90K", value: kpiData?.average_price * 0.3 },
-        { range: "90K-120K", value: kpiData?.average_price * 0.2 },
-        { range: "120K+", value: kpiData?.average_price * 0.2 }
-    ];
+    const priceDistributionData = kpiData?.top_25_price_distribution
+        .filter(price => price !== null)
+        .map((price, index) => ({ range: `Faixa ${index + 1}`, value: price }));
 
-    const yearDistributionData = [
-        { year: 2015, count: kpiData?.total_ads * 0.05 },
-        { year: 2017, count: kpiData?.total_ads * 0.1 },
-        { year: 2019, count: kpiData?.total_ads * 0.2 },
-        { year: 2021, count: kpiData?.total_ads * 0.3 },
-        { year: 2023, count: kpiData?.total_ads * 0.35 }
-    ];
+    const yearDistributionData = kpiData?.top_25_year_model_distribution
+        .filter(year => year !== null)
+        .map((year, index) => ({ year: year, count: index + 1 }));
 
     return (
         <div className="adm p-4">
@@ -104,8 +96,8 @@ const Dashboard = () => {
                             <div className="kpi-data bg-white p-4 rounded-lg shadow-md w-full mb-4">
                                 <h2 className="text-xl font-bold text-pink-600 mb-2">KPI para {year}/{month}</h2>
                                 <p className="mb-2"><strong>Quantidade total de anúncios analisados:</strong> {kpiData.total_ads}</p>
-                                <p className="mb-2"><strong>Ano modelo médio dos veículos:</strong> {kpiData.average_year_model}</p>
-                                <p className="mb-2"><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                                <p className="mb-2"><strong>Ano modelo médio dos veículos:</strong> {kpiData.total_average_year_model}</p>
+                                <p className="mb-2"><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                             </div>
                         )}
                         <div className="charts w-full">
