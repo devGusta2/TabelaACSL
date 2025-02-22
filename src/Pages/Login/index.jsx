@@ -57,7 +57,8 @@ export default function Login() {
                 const userPermissions = {
                     canViewRawData: "False",
                     canAcesseInsights: response.data.user.can_insights ? "True" : "False",
-                    canPricePredict: response.data.user.can_predict ? "True" : "False"
+                    canPricePredict: response.data.user.can_predict ? "True" : "False",
+                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False"
                 };
             
                 localStorage.setItem("userPermissions", JSON.stringify(userPermissions));
