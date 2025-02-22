@@ -2,23 +2,23 @@
 // src/adm/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import Menu from '../Components/Menu';
-import './Dashboard.css'; // Import the CSS file
+import './Dashboard.css';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const Dashboard = () => {
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [month, setMonth] = useState(1);
+    const [year, setYear] = useState(2025);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [kpiData, setKpiData] = useState(null);
-    const [geoData, setGeoData] = useState(null); // New state for geographic data
+    const [geoData, setGeoData] = useState(null);
 
     useEffect(() => {
         fetchKpiData();
-        fetchGeoData(); // Fetch geographic data
+        fetchGeoData();
     }, [month, year]);
 
     const fetchKpiData = async () => {
@@ -97,6 +97,12 @@ const Dashboard = () => {
         }))
         : [];
 
+    const geoChartData = geoData?.top_10_states?.map((stateData) => ({
+        name: stateData.state,
+        total_ads: stateData.total_ads,
+        average_price: stateData.average_price
+    })) || [];
+
     return (
         <div className="adm">
             <Menu />
@@ -140,40 +146,37 @@ const Dashboard = () => {
                                 <p><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                             </div>
                         )}
-                        {geoData && (
-                            <div className="geo-data">
-                                <h2 className="text-xl">Análise Geográfica de Preços</h2>
-                                <ul>
-                                    {geoData.top_10_states.map((stateData) => (
-                                        <li key={stateData.state}>
-                                            <strong>{stateData.state}:</strong> {stateData.total_ads} anúncios, Preço médio: R$ {stateData.average_price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
                         <div className="charts">
                             <h2 className="text-lg">Dispersão de Preços</h2>
-                            <h4 className="text-sm">Distribuição de preços por frequência</h4>
                             <ResponsiveContainer width="100%" height={300}>
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
+                                    <XAxis dataKey="x" name="Preço" />
+                                    <YAxis dataKey="y" name="Quantidade" />
                                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                     <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
                                 </ScatterChart>
                             </ResponsiveContainer>
                             <h2 className="text-lg mt-6">Dispersão de Ano Modelo</h2>
-                            <h4 className="text-sm">Distribuição de anos modelos por frequência</h4>
                             <ResponsiveContainer width="100%" height={300}>
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
+                                    <XAxis dataKey="x" name="Ano Modelo" />
+                                    <YAxis dataKey="y" name="Quantidade" />
                                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                                     <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
                                 </ScatterChart>
+                            </ResponsiveContainer>
+                            <h2 className="text-lg mt-6">Análise Geográfica</h2>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <BarChart data={geoChartData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="total_ads" fill="#82ca9d" name="Total de Anúncios" />
+                                    <Bar dataKey="average_price" fill="#8884d8" name="Preço Médio" />
+                                </BarChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
