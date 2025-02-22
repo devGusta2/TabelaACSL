@@ -1,7 +1,7 @@
 // src/adm/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Label } from 'recharts';
 import './Dashboard.css';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -51,7 +51,7 @@ const Dashboard = () => {
     const priceDistributionData = Array.isArray(kpiData?.top_10_price_distribution)
         ? kpiData.top_10_price_distribution.map((item, index) => ({
             range: `Faixa ${index + 1}`,
-            value: item.price,
+            price: item.price,
             frequency: item.frequency
         }))
         : [];
@@ -111,8 +111,12 @@ const Dashboard = () => {
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={priceDistributionData}>
                                         <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="range" />
-                                        <YAxis />
+                                        <XAxis dataKey="price">
+                                            <Label value="Preços" offset={-5} position="insideBottom" />
+                                        </XAxis>
+                                        <YAxis>
+                                            <Label value="Frequência" angle={-90} position="insideLeft" />
+                                        </YAxis>
                                         <Tooltip />
                                         <Bar dataKey="frequency" fill="#ec4899" />
                                     </BarChart>
@@ -126,8 +130,12 @@ const Dashboard = () => {
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={yearDistributionData}>
                                         <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="year" />
-                                        <YAxis />
+                                        <XAxis dataKey="year">
+                                            <Label value="Ano Modelo" offset={-5} position="insideBottom" />
+                                        </XAxis>
+                                        <YAxis>
+                                            <Label value="Frequência" angle={-90} position="insideLeft" />
+                                        </YAxis>
                                         <Tooltip />
                                         <Bar dataKey="frequency" fill="#ec4899" />
                                     </BarChart>
