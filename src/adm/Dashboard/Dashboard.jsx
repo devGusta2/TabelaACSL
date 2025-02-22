@@ -107,32 +107,34 @@ const Dashboard = () => {
                         )}
                         <div className="charts w-full">
                             <h2 className="text-lg font-bold text-pink-600 mb-2">Distribuição de Preços</h2>
+                            <h4 className="text-sm text-gray-600 mb-2">Top 10 preços mais frequentes</h4>
                             <ResponsiveContainer width="100%" height={300}>
                                 <BarChart data={priceDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <CartesianGrid strokeDasharray="3 3"/>
                                     <XAxis dataKey="price">
-                                        <Label value="Preços" offset={-5} position="insideBottom" />
+                                        <Label value="Preços" offset={-5} position="insideBottom"/>
                                     </XAxis>
                                     <YAxis>
-                                        <Label value="Frequência" angle={-90} position="insideLeft" />
+                                        <Label value="Frequência" angle={-90} position="insideLeft"/>
                                     </YAxis>
-                                    <Tooltip />
-                                    <Bar dataKey="frequency" fill="#ec4899" />
+                                    <Tooltip/>
+                                    <Bar dataKey="frequency" fill="#ec4899"/>
                                 </BarChart>
                             </ResponsiveContainer>
 
                             <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Distribuição de Ano Modelo</h2>
+                            <h4 className="text-sm text-gray-600 mb-2">Top 10 anos modelos mais frequentes</h4>
                             <ResponsiveContainer width="100%" height={300}>
                                 <BarChart data={yearDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <CartesianGrid strokeDasharray="3 3"/>
                                     <XAxis dataKey="year">
-                                        <Label value="Ano Modelo" offset={-5} position="insideBottom" />
+                                        <Label value="Ano Modelo" offset={-5} position="insideBottom"/>
                                     </XAxis>
                                     <YAxis>
-                                        <Label value="Frequência" angle={-90} position="insideLeft" />
+                                        <Label value="Frequência" angle={-90} position="insideLeft"/>
                                     </YAxis>
-                                    <Tooltip />
-                                    <Bar dataKey="frequency" fill="#ec4899" />
+                                    <Tooltip/>
+                                    <Bar dataKey="frequency" fill="#ec4899"/>
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
