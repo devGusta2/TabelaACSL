@@ -9,8 +9,7 @@ import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
 import relatorio from './assets/final_report.png'
 
-const host_crawler = import.meta.env.VITE_API_URL_CRAWLER;
-const token_crawler = import.meta.env.VITE_TOKEN_CRAWLER;
+
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 function App() {
@@ -177,52 +176,8 @@ const calcular = async () => {
   }, [modeloSelecionado]);
 
  // Estado para armazenar os registros
-  const task_id = "coloque_seu_task_id_aqui";  // Substitua pelo seu ID da tarefa
+  // Substitua pelo seu ID da tarefa
 
-
-  const [isTaskComplete, setIsTaskComplete] = useState(false);
-  const checkTaskStatus = async (task_id) => {
-    // Se a tarefa já estiver completa, não continuar a verificação
-    if (isTaskComplete) return;
-
-    const url = `${host_crawler}/core/tasks/status/${task_id}`;
-    const options = {
-      method: 'GET',
-      url: url,
-      headers: {
-        'User-Agent': 'insomnia/10.1.1',
-        'ngrok-skip-browser-warning': '69420',
-          Authorization: `Bearer ${token_crawler}`
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      const status = response.data.status;
-      //console.log(response.data);
-      setTaskStatus(status);
-
-      if (status === 'SUCCESS') {
-        setRecords(response.data.result.records);  // Atualiza os registros
-        setIsTaskComplete(true); // Marca a tarefa como completa
-
-        return; // Interrompe a execução
-      }
-
-      // Se o status não for "READY" nem "SUCCESS", continua verificando após 3 segundos
-      if (status !== 'READY') {
-        setTimeout(() => checkTaskStatus(task_id), 3000);
-      }
-
-    } catch (error) {
-      console.error('Erro ao buscar o status da tarefa:', error);
-    }
-  };
-
-  // useEffect para iniciar a verificação do status da tarefa assim que o componente for montado
-  useEffect(() => {
-    checkTaskStatus(task_id);
-  }, [task_id]);  // O useEffect é chamado apenas quando o task_id mudar
 
 
 
