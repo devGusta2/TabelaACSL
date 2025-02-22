@@ -1,4 +1,5 @@
 // src/adm/Dashboard/Dashboard.jsx
+// src/adm/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
@@ -13,9 +14,11 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [kpiData, setKpiData] = useState(null);
+    const [geoData, setGeoData] = useState(null); // New state for geographic data
 
     useEffect(() => {
         fetchKpiData();
+        fetchGeoData(); // Fetch geographic data
     }, [month, year]);
 
     const fetchKpiData = async () => {
@@ -43,6 +46,37 @@ const Dashboard = () => {
             setKpiData(response.data.content);
         } catch (error) {
             console.error('Erro ao obter dados do KPI:', error);
+            setError(error.response ? error.response.data : 'Erro desconhecido');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchGeoData = async () => {
+        setLoading(true);
+        setError(null);
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            setError("Token de autenticação não encontrado.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await axios.get(
+                `${host_django}/crawler/dashboard/geographic_pricing_analysis/machine/${year}/${month}/`,
+                {
+                    headers: {
+                        'User-Agent': 'insomnia/10.1.1',
+                        'ngrok-skip-browser-warning': '69420',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setGeoData(response.data.content);
+        } catch (error) {
+            console.error('Erro ao obter dados geográficos:', error);
             setError(error.response ? error.response.data : 'Erro desconhecido');
         } finally {
             setLoading(false);
@@ -104,6 +138,18 @@ const Dashboard = () => {
                                 <p><strong>Quantidade total de anúncios analisados:</strong> {kpiData.total_ads}</p>
                                 <p><strong>Ano modelo médio dos veículos:</strong> {kpiData.total_average_year_model}</p>
                                 <p><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                            </div>
+                        )}
+                        {geoData && (
+                            <div className="geo-data">
+                                <h2 className="text-xl">Análise Geográfica de Preços</h2>
+                                <ul>
+                                    {geoData.top_10_states.map((stateData) => (
+                                        <li key={stateData.state}>
+                                            <strong>{stateData.state}:</strong> {stateData.total_ads} anúncios, Preço médio: R$ {stateData.average_price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         )}
                         <div className="charts">
