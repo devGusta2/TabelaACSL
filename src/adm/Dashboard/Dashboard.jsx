@@ -48,13 +48,15 @@ const Dashboard = () => {
         }
     };
 
-    const priceDistributionData = kpiData?.top_25_price_distribution
-        .filter(price => price !== null)
-        .map((price, index) => ({ range: `Faixa ${index + 1}`, value: price }));
+    const priceDistributionData = kpiData?.top_25_price_distribution?.map((price, index) => ({
+        range: `Faixa ${index + 1}`,
+        value: price || 0,
+    })) || [];
 
-    const yearDistributionData = kpiData?.top_25_year_model_distribution
-        .filter(year => year !== null)
-        .map((year, index) => ({ year: year, count: index + 1 }));
+    const yearDistributionData = kpiData?.top_25_year_model_distribution?.map((year, index) => ({
+        year: year || 'Desconhecido',
+        count: index + 1,
+    })) || [];
 
     return (
         <div className="adm p-4">
@@ -71,7 +73,6 @@ const Dashboard = () => {
                                     max="12"
                                     value={month}
                                     onChange={(e) => setMonth(Number(e.target.value))}
-                                    required
                                     className="p-2 border border-pink-300 rounded"
                                 />
                             </label>
@@ -83,7 +84,6 @@ const Dashboard = () => {
                                     max={new Date().getFullYear()}
                                     value={year}
                                     onChange={(e) => setYear(Number(e.target.value))}
-                                    required
                                     className="p-2 border border-pink-300 rounded"
                                 />
                             </label>
@@ -95,9 +95,9 @@ const Dashboard = () => {
                         {kpiData && (
                             <div className="kpi-data bg-white p-4 rounded-lg shadow-md w-full mb-4">
                                 <h2 className="text-xl font-bold text-pink-600 mb-2">KPI para {year}/{month}</h2>
-                                <p className="mb-2"><strong>Quantidade total de anúncios analisados:</strong> {kpiData.total_ads}</p>
-                                <p className="mb-2"><strong>Ano modelo médio dos veículos:</strong> {kpiData.total_average_year_model}</p>
-                                <p className="mb-2"><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                                <p><strong>Quantidade total de anúncios analisados:</strong> {kpiData.total_ads}</p>
+                                <p><strong>Ano modelo médio dos veículos:</strong> {kpiData.total_average_year_model}</p>
+                                <p><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                             </div>
                         )}
                         <div className="charts w-full">
