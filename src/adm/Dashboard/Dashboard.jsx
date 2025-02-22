@@ -1,7 +1,7 @@
 // src/adm/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Label } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import './Dashboard.css';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -48,20 +48,19 @@ const Dashboard = () => {
         }
     };
 
-    const priceDistributionData = Array.isArray(kpiData?.top_10_price_distribution)
-        ? kpiData.top_10_price_distribution.map((item, index) => ({
-            range: `Faixa ${index + 1}`,
-            price: item.price,
-            frequency: item.frequency
-        }))
-        : [{ range: 'Sem dados', price: 0, frequency: 0 }];
-
-    const yearDistributionData = Array.isArray(kpiData?.top_10_year_model_distribution)
+    const scatterData = Array.isArray(kpiData?.top_10_year_model_distribution)
         ? kpiData.top_10_year_model_distribution.map((item) => ({
-            year: item.year_model,
-            frequency: item.frequency
+            x: item.year_model,
+            y: item.frequency
         }))
-        : [{ year: 'Sem dados', frequency: 0 }];
+        : [];
+
+    const priceScatterData = Array.isArray(kpiData?.top_10_price_distribution)
+        ? kpiData.top_10_price_distribution.map((item) => ({
+            x: item.price,
+            y: item.frequency
+        }))
+        : [];
 
     return (
         <div className="adm p-4">
@@ -106,36 +105,27 @@ const Dashboard = () => {
                             </div>
                         )}
                         <div className="charts w-full">
-                            <h2 className="text-lg font-bold text-pink-600 mb-2">Distribuição de Preços</h2>
-                            <h4 className="text-sm text-gray-600 mb-2">Top 10 preços mais frequentes</h4>
+                            <h2 className="text-lg font-bold text-pink-600 mb-2">Dispersão de Preços</h2>
+                            <h4 className="text-sm text-gray-600 mb-2">Distribuição de preços por frequência</h4>
                             <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={priceDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3"/>
-                                    <XAxis dataKey="price">
-                                        <Label value="Preços" offset={-5} position="insideBottom"/>
-                                    </XAxis>
-                                    <YAxis>
-                                        <Label value="Frequência" angle={-90} position="insideLeft"/>
-                                    </YAxis>
-                                    <Tooltip/>
-                                    <Bar dataKey="frequency" fill="#ec4899"/>
-                                </BarChart>
+                                <ScatterChart>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quantidade de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                    <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
+                                </ScatterChart>
                             </ResponsiveContainer>
-
-                            <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Distribuição de Ano Modelo</h2>
-                            <h4 className="text-sm text-gray-600 mb-2">Top 10 anos modelos mais frequentes</h4>
+                            <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Dispersão de Ano Modelo</h2>
+                            <h4 className="text-sm text-gray-600 mb-2">Distribuição de anos modelos por frequência</h4>
                             <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={yearDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3"/>
-                                    <XAxis dataKey="year">
-                                        <Label value="Ano Modelo" offset={-5} position="insideBottom"/>
-                                    </XAxis>
-                                    <YAxis>
-                                        <Label value="Frequência" angle={-90} position="insideLeft"/>
-                                    </YAxis>
-                                    <Tooltip/>
-                                    <Bar dataKey="frequency" fill="#ec4899"/>
-                                </BarChart>
+                                <ScatterChart>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quantidade de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                    <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
+                                </ScatterChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
@@ -146,3 +136,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
