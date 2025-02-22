@@ -48,15 +48,20 @@ const Dashboard = () => {
         }
     };
 
-    const priceDistributionData = kpiData?.top_25_price_distribution?.map((price, index) => ({
-        range: `Faixa ${index + 1}`,
-        value: price || 0,
-    })) || [];
+    const priceDistributionData = Array.isArray(kpiData?.top_10_price_distribution)
+        ? kpiData.top_10_price_distribution.map((item, index) => ({
+            range: `Faixa ${index + 1}`,
+            value: item.price,
+            frequency: item.frequency
+        }))
+        : [];
 
-    const yearDistributionData = kpiData?.top_25_year_model_distribution?.map((year, index) => ({
-        year: year || 'Desconhecido',
-        count: index + 1,
-    })) || [];
+    const yearDistributionData = Array.isArray(kpiData?.top_10_year_model_distribution)
+        ? kpiData.top_10_year_model_distribution.map((item) => ({
+            year: item.year_model,
+            frequency: item.frequency
+        }))
+        : [];
 
     return (
         <div className="adm p-4">
@@ -102,25 +107,34 @@ const Dashboard = () => {
                         )}
                         <div className="charts w-full">
                             <h2 className="text-lg font-bold text-pink-600 mb-2">Distribuição de Preços</h2>
-                            <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={priceDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="range" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Bar dataKey="value" fill="#ec4899" />
-                                </BarChart>
-                            </ResponsiveContainer>
+                            {priceDistributionData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={priceDistributionData}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="range" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Bar dataKey="frequency" fill="#ec4899" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            ) : (
+                                <p className="text-gray-500 text-center">Sem dados disponíveis para distribuição de preços.</p>
+                            )}
+
                             <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Distribuição de Ano Modelo</h2>
-                            <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={yearDistributionData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="year" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Bar dataKey="count" fill="#ec4899" />
-                                </BarChart>
-                            </ResponsiveContainer>
+                            {yearDistributionData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={yearDistributionData}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="year" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Bar dataKey="frequency" fill="#ec4899" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            ) : (
+                                <p className="text-gray-500 text-center">Sem dados disponíveis para distribuição de ano modelo.</p>
+                            )}
                         </div>
                     </div>
                 </div>
