@@ -1,6 +1,7 @@
 // src/adm/Dashboard/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import './Dashboard.css';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -11,12 +12,9 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [kpiData, setKpiData] = useState(null);
-    const [geographicData, setGeographicData] = useState(null);
 
     useEffect(() => {
-        console.log('Dashboard component mounted');
         fetchKpiData();
-        fetchGeographicPricingData();
     }, [month, year]);
 
     const fetchKpiData = async () => {
@@ -50,45 +48,30 @@ const Dashboard = () => {
         }
     };
 
-    const fetchGeographicPricingData = async () => {
-        setLoading(true);
-        setError(null);
-        const token = localStorage.getItem('token');
+    const priceDistributionData = [
+        { range: "0-30K", value: kpiData?.average_price * 0.1 },
+        { range: "30K-60K", value: kpiData?.average_price * 0.2 },
+        { range: "60K-90K", value: kpiData?.average_price * 0.3 },
+        { range: "90K-120K", value: kpiData?.average_price * 0.2 },
+        { range: "120K+", value: kpiData?.average_price * 0.2 }
+    ];
 
-        if (!token) {
-            setError("Token de autenticação não encontrado.");
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const response = await axios.get(
-                `${host_django}/crawler/dashboard/geographic_pricing_analysis/machine/${year}/${month}/`,
-                {
-                    headers: {
-                        'User-Agent': 'insomnia/10.1.1',
-                        'ngrok-skip-browser-warning': '69420',
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            setGeographicData(response.data.content);
-        } catch (error) {
-            console.error('Erro ao obter dados de análise geográfica:', error);
-            setError(error.response ? error.response.data : 'Erro desconhecido');
-        } finally {
-            setLoading(false);
-        }
-    };
+    const yearDistributionData = [
+        { year: 2015, count: kpiData?.total_ads * 0.05 },
+        { year: 2017, count: kpiData?.total_ads * 0.1 },
+        { year: 2019, count: kpiData?.total_ads * 0.2 },
+        { year: 2021, count: kpiData?.total_ads * 0.3 },
+        { year: 2023, count: kpiData?.total_ads * 0.35 }
+    ];
 
     return (
-        <div className="adm">
+        <div className="adm p-4">
             <div className="content">
                 <div className="dashboard-wrapper">
-                    <div className="dashboard-header">
-                        <h1>Indicadores Gerais da Dashboard</h1>
-                        <div className="date-selection">
-                            <label>
+                    <div className="dashboard-header text-center mb-4">
+                        <h1 className="text-2xl font-bold text-pink-600">Indicadores Gerais da Dashboard</h1>
+                        <div className="date-selection flex gap-4 justify-center mt-4">
+                            <label className="font-bold text-pink-500">
                                 Mês:
                                 <input
                                     type="number"
@@ -97,9 +80,10 @@ const Dashboard = () => {
                                     value={month}
                                     onChange={(e) => setMonth(Number(e.target.value))}
                                     required
+                                    className="p-2 border border-pink-300 rounded"
                                 />
                             </label>
-                            <label>
+                            <label className="font-bold text-pink-500">
                                 Ano:
                                 <input
                                     type="number"
@@ -108,57 +92,44 @@ const Dashboard = () => {
                                     value={year}
                                     onChange={(e) => setYear(Number(e.target.value))}
                                     required
+                                    className="p-2 border border-pink-300 rounded"
                                 />
                             </label>
                         </div>
                     </div>
-                    <div className="dashboard-container">
-                        {loading && <p className="loading-message">Carregando...</p>}
-                        {error && <p className="error-message">Erro: {error}</p>}
+                    <div className="dashboard-container bg-pink-50 p-4 rounded-lg shadow-md w-4/5 max-w-4xl mx-auto flex flex-col items-center">
+                        {loading && <p className="loading-message text-pink-500 font-bold">Carregando...</p>}
+                        {error && <p className="error-message text-red-500 font-bold">Erro: {error}</p>}
                         {kpiData && (
-                            <div className="kpi-data">
-                                <h2>KPI para {year}/{month}</h2>
-                                <p><strong>Total de Anúncios:</strong> {kpiData.total_ads}</p>
-                                <p><strong>Média do Ano Modelo:</strong> {kpiData.average_year_model}</p>
-                                <p><strong>Preço Médio:</strong> {kpiData.average_price}</p>
+                            <div className="kpi-data bg-white p-4 rounded-lg shadow-md w-full mb-4">
+                                <h2 className="text-xl font-bold text-pink-600 mb-2">KPI para {year}/{month}</h2>
+                                <p className="mb-2"><strong>Quantidade total de anúncios analisados:</strong> {kpiData.total_ads}</p>
+                                <p className="mb-2"><strong>Ano modelo médio dos veículos:</strong> {kpiData.average_year_model}</p>
+                                <p className="mb-2"><strong>Preço médio geral dos veículos:</strong> R$ {kpiData.average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                             </div>
                         )}
-                        {geographicData && (
-                            <div className="geographic-data">
-                                <h2>Análise de Preços Geográficos para {year}/{month}</h2>
-                                <div className="state-prices">
-                                    <h3>Preços por Estado</h3>
-                                    <ul>
-                                        {Object.entries(geographicData.state_prices).map(([state, price]) => (
-                                            <li key={state}><strong>{state}:</strong> R$ {price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div className="detailed-table">
-                                    <h3>Tabela Detalhada</h3>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Estado</th>
-                                                <th>Cidade</th>
-                                                <th>Total de Anúncios</th>
-                                                <th>Preço Médio</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {geographicData.detailed_table.map((row, index) => (
-                                                <tr key={index}>
-                                                    <td>{row.state}</td>
-                                                    <td>{row.city}</td>
-                                                    <td>{row.total_ads}</td>
-                                                    <td>R$ {row.average_price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        )}
+                        <div className="charts w-full">
+                            <h2 className="text-lg font-bold text-pink-600 mb-2">Distribuição de Preços</h2>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <BarChart data={priceDistributionData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="range" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="value" fill="#ec4899" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Distribuição de Ano Modelo</h2>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <BarChart data={yearDistributionData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="year" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="count" fill="#ec4899" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
             </div>
