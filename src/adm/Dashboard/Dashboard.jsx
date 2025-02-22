@@ -54,14 +54,14 @@ const Dashboard = () => {
             price: item.price,
             frequency: item.frequency
         }))
-        : [];
+        : [{ range: 'Sem dados', price: 0, frequency: 0 }];
 
     const yearDistributionData = Array.isArray(kpiData?.top_10_year_model_distribution)
         ? kpiData.top_10_year_model_distribution.map((item) => ({
             year: item.year_model,
             frequency: item.frequency
         }))
-        : [];
+        : [{ year: 'Sem dados', frequency: 0 }];
 
     return (
         <div className="adm p-4">
@@ -107,42 +107,34 @@ const Dashboard = () => {
                         )}
                         <div className="charts w-full">
                             <h2 className="text-lg font-bold text-pink-600 mb-2">Distribuição de Preços</h2>
-                            {priceDistributionData.length > 0 ? (
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <BarChart data={priceDistributionData}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="price">
-                                            <Label value="Preços" offset={-5} position="insideBottom" />
-                                        </XAxis>
-                                        <YAxis>
-                                            <Label value="Frequência" angle={-90} position="insideLeft" />
-                                        </YAxis>
-                                        <Tooltip />
-                                        <Bar dataKey="frequency" fill="#ec4899" />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            ) : (
-                                <p className="text-gray-500 text-center">Sem dados disponíveis para distribuição de preços.</p>
-                            )}
+                            <ResponsiveContainer width="100%" height={300}>
+                                <BarChart data={priceDistributionData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="price">
+                                        <Label value="Preços" offset={-5} position="insideBottom" />
+                                    </XAxis>
+                                    <YAxis>
+                                        <Label value="Frequência" angle={-90} position="insideLeft" />
+                                    </YAxis>
+                                    <Tooltip />
+                                    <Bar dataKey="frequency" fill="#ec4899" />
+                                </BarChart>
+                            </ResponsiveContainer>
 
                             <h2 className="text-lg font-bold text-pink-600 mt-6 mb-2">Distribuição de Ano Modelo</h2>
-                            {yearDistributionData.length > 0 ? (
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <BarChart data={yearDistributionData}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="year">
-                                            <Label value="Ano Modelo" offset={-5} position="insideBottom" />
-                                        </XAxis>
-                                        <YAxis>
-                                            <Label value="Frequência" angle={-90} position="insideLeft" />
-                                        </YAxis>
-                                        <Tooltip />
-                                        <Bar dataKey="frequency" fill="#ec4899" />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            ) : (
-                                <p className="text-gray-500 text-center">Sem dados disponíveis para distribuição de ano modelo.</p>
-                            )}
+                            <ResponsiveContainer width="100%" height={300}>
+                                <BarChart data={yearDistributionData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="year">
+                                        <Label value="Ano Modelo" offset={-5} position="insideBottom" />
+                                    </XAxis>
+                                    <YAxis>
+                                        <Label value="Frequência" angle={-90} position="insideLeft" />
+                                    </YAxis>
+                                    <Tooltip />
+                                    <Bar dataKey="frequency" fill="#ec4899" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </div>
                     </div>
                 </div>
