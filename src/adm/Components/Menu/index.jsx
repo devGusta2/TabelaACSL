@@ -3,13 +3,14 @@ import './index.css';
 import logo from '../../../../src/assets/logo4.png';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faDatabase, faCalendar, faHome, faFile } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faDatabase, faCalendar, faHome, faChartBar } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
     const [permission, setPermission] = useState({
         canViewRawData: "False",
         canAcesseInsights: "False",
-        canPricePredict: "False"
+        canPricePredict: "False",
+        canDataVisualization: "False"
     });
 
     useEffect(() => {
@@ -20,14 +21,16 @@ export default function Menu() {
             setPermission({
                 canViewRawData: "True",
                 canAcesseInsights: "True",
-                canPricePredict: "True"
+                canPricePredict: "True",
+                canDataVisualization: "True"
             });
         } else {
             // Se não for admin, pega as permissões do localStorage (se existirem)
             const storedPermissions = JSON.parse(localStorage.getItem("userPermissions")) || {
                 canViewRawData: "False",
                 canAcesseInsights: "False",
-                canPricePredict: "False"
+                canPricePredict: "False",
+                canDataVisualization: "False"
             };
             setPermission(storedPermissions);
         }
@@ -65,6 +68,14 @@ export default function Menu() {
                             <Link to="/adm/predict">
                                 <FontAwesomeIcon icon={faCalendar} size="2x" />
                                 <h3>Predição de Preços</h3>
+                            </Link>
+                        </li>
+                    )}
+                    {permission.canDataVisualization === "True" && (
+                        <li>
+                            <Link to="/adm/dashboard">
+                                <FontAwesomeIcon icon={faChartBar} size="2x" />
+                                <h3>Visualização de Dados</h3>
                             </Link>
                         </li>
                     )}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import './Dashboard.css';
+import Menu from '../Components/Menu'; // Import the Menu component
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
@@ -64,6 +65,7 @@ const Dashboard = () => {
 
     return (
         <div className="adm p-4">
+             <Menu />
             <div className="content">
                 <div className="dashboard-wrapper">
                     <div className="dashboard-header text-center mb-4">
