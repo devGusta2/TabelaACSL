@@ -28,3 +28,26 @@ header{
 .inpt_list{
   display: block;
 }
+
+/* Add this to your existing CSS file */
+/* Add this to your existing CSS file */
+#footer {
+  background-color: var(--header-color); /* Use the same color as the header */
+  color: deeppink;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* Ensure the text is centered */
+
+}
+
+.footer-content p {
+  text-align: center; /* Center the text in the paragraph */
+}

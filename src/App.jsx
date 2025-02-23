@@ -422,6 +422,11 @@ const calcular = async () => {
             <img src={relatorio} alt="" />
           </div>
         </section>
+        <footer id="footer">
+          <div className="footer-content">
+            <p>&copy; 2025 DriveIntel. Todos direitos são reservados.</p>
+          </div>
+        </footer>
       </div>
     </>
   );
