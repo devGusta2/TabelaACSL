@@ -3,14 +3,15 @@ import './index.css';
 import logo from '../../../../src/assets/logo4.png';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faDatabase, faCalendar, faHome, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import {faChartLine, faDatabase, faCalendar, faHome, faChartBar, faFileAlt} from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
     const [permission, setPermission] = useState({
         canViewRawData: "False",
         canAcesseInsights: "False",
         canPricePredict: "False",
-        canDataVisualization: "False"
+        canDataVisualization: "False",
+        canFinalReport: "False"
     });
 
     useEffect(() => {
@@ -22,7 +23,8 @@ export default function Menu() {
                 canViewRawData: "True",
                 canAcesseInsights: "True",
                 canPricePredict: "True",
-                canDataVisualization: "True"
+                canDataVisualization: "True",
+                canFinalReport: "True"
             });
         } else {
             // Se não for admin, pega as permissões do localStorage (se existirem)
@@ -30,7 +32,8 @@ export default function Menu() {
                 canViewRawData: "False",
                 canAcesseInsights: "False",
                 canPricePredict: "False",
-                canDataVisualization: "False"
+                canDataVisualization: "False",
+                canFinalReport: "False"
             };
             setPermission(storedPermissions);
         }
@@ -76,6 +79,14 @@ export default function Menu() {
                             <Link to="/adm/dashboard">
                                 <FontAwesomeIcon icon={faChartBar} size="2x" />
                                 <h3>Visualização de Dados</h3>
+                            </Link>
+                        </li>
+                    )}
+                    {permission.canFinalReport === "True" && (
+                        <li>
+                            <Link to="/adm/final-report">
+                                <FontAwesomeIcon icon={faFileAlt} size="2x" />
+                                <h3>Relatórios</h3>
                             </Link>
                         </li>
                     )}

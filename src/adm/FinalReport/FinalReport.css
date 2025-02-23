@@ -1,0 +1,49 @@
+/* src/adm/FinalReport/FinalReport.css */
+
+.final-report {
+    padding: 20px;
+    text-align: center;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ec4899;
+    margin-bottom: 1rem;
+}
+
+.loading-message {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.reference-dates-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reference-dates-table th,
+.reference-dates-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.reference-dates-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: left;
+}
+
+.reference-dates-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.reference-dates-table tr:hover {
+    background-color: #f1f1f1;
+}
