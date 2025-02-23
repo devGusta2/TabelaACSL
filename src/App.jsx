@@ -296,7 +296,7 @@ const calcular = async () => {
           </div>
         </section>
         {/* Secção sobre */}
-        <section id="section-about">
+        <section id="Produto">
           <div id='info-about'>
             <div id="about-img-box">
               <div id="col-title-desc">
