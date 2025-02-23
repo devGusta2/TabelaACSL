@@ -45,14 +45,14 @@ export default function Menu() {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/adm/Home">
+                        <Link to="../Pages/Home">
                             <FontAwesomeIcon icon={faHome} size="2x" />
                             <h3>Inicío</h3>
                         </Link>
                     </li>
                     {permission.canViewRawData === "True" && (
                         <li>
-                            <Link to="/adm/raw-data">
+                            <Link to="../Pages/Rawdata">
                                 <FontAwesomeIcon icon={faDatabase} size="2x" />
                                 <h3>Dados Brutos</h3>
                             </Link>
@@ -60,7 +60,7 @@ export default function Menu() {
                     )}
                     {permission.canAcesseInsights === "True" && (
                         <li>
-                            <Link to="/adm/insights">
+                            <Link to="../Pages/insights">
                                 <FontAwesomeIcon icon={faChartLine} size="2x" />
                                 <h3>Informação Inteligente</h3>
                             </Link>
@@ -68,7 +68,7 @@ export default function Menu() {
                     )}
                     {permission.canPricePredict === "True" && (
                         <li>
-                            <Link to="/adm/predict">
+                            <Link to="../Pages/predict">
                                 <FontAwesomeIcon icon={faCalendar} size="2x" />
                                 <h3>Predição de Preços</h3>
                             </Link>
@@ -76,7 +76,7 @@ export default function Menu() {
                     )}
                     {permission.canDataVisualization === "True" && (
                         <li>
-                            <Link to="/adm/dashboard">
+                            <Link to="../Pages/Dashboard">
                                 <FontAwesomeIcon icon={faChartBar} size="2x" />
                                 <h3>Visualização de Dados</h3>
                             </Link>
@@ -84,7 +84,7 @@ export default function Menu() {
                     )}
                     {permission.canFinalReport === "True" && (
                         <li>
-                            <Link to="/adm/final-report">
+                            <Link to="../Pages/FinalReport">
                                 <FontAwesomeIcon icon={faFileAlt} size="2x" />
                                 <h3>Relatórios</h3>
                             </Link>
