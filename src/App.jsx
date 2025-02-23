@@ -210,7 +210,7 @@ const calcular = async () => {
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
                 <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros.</p>
+                <p>Plataforma de inteligência de mercado automotivo, focada em precificação de veículos para empresas do setor.</p>
               </div>
 
               <div className="col_bottom">
