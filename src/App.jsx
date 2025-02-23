@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import car from '../src/assets/carrao.png';
-import logo from '../src/assets/logo4.png';
+import car from '../src/assets/pink-car.png';
+import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faFile, faHand, faBuilding, faChartSimple, faBook, faChartLine } from '@fortawesome/free-solid-svg-icons';
@@ -210,7 +210,7 @@ const calcular = async () => {
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
                 <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros.</p>
+                <p>Plataforma de inteligência de mercado automotivo, focada em precificação de veículos para empresas do setor.</p>
               </div>
 
               <div className="col_bottom">
