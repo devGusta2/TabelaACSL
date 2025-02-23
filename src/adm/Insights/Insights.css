@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
     padding: 20px;
     min-height: 100vh;
 }
@@ -22,17 +21,17 @@
 
 .date-selection label {
     font-weight: bold;
-    color: #ff66b2; 
+    color: #ff66b2;
 }
 
 .date-selection input {
     padding: 8px;
-    border: 1px solid #ff99cc; 
+    border: 1px solid #ff99cc;
     border-radius: 4px;
 }
 
 .insights-container {
-    background-color: #ffe6f2; 
+    background-color: #ffe6f2;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -47,7 +46,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -65,7 +64,7 @@
 }
 
 .insights-form button:hover {
-    background-color: #ff3385; 
+    background-color: #ff3385;
 }
 
 .loading-message,
@@ -75,15 +74,15 @@
 }
 
 .loading-message {
-    color: #ff66b2; 
+    color: #ff66b2;
 }
 
 .error-message {
-    color: #fa0280; 
+    color: #fa0280;
 }
 
 h1 {
-    color: #ff66b2; 
+    color: #ff66b2;
     margin-bottom: 20px;
 }
 
