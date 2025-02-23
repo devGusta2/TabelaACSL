@@ -58,7 +58,8 @@ export default function Login() {
                     canViewRawData: "False",
                     canAcesseInsights: response.data.user.can_insights ? "True" : "False",
                     canPricePredict: response.data.user.can_predict ? "True" : "False",
-                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False"
+                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False",
+                    canFinalReport: response.data.user.can_final_report ? "True" : "False"
                 };
             
                 localStorage.setItem("userPermissions", JSON.stringify(userPermissions));
