@@ -197,7 +197,7 @@ const calcular = async () => {
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
                 <li><a href="#Clientes">Clientes</a></li>
-                <li><Link to='/pages/cadastro'>Login</Link></li>
+                <li><Link to='/pages/cadastro'>Autenticação</Link></li>
               </ul>
             </nav>
           </header>
@@ -296,7 +296,7 @@ const calcular = async () => {
           </div>
         </section>
         {/* Secção sobre */}
-        <section id="section-about">
+        <section id="Produto">
           <div id='info-about'>
             <div id="about-img-box">
               <div id="col-title-desc">

@@ -47,7 +47,7 @@ export default function Menu() {
                     <li>
                         <Link to="/adm/Home">
                             <FontAwesomeIcon icon={faHome} size="2x" />
-                            <h3>Home</h3>
+                            <h3>Inicío</h3>
                         </Link>
                     </li>
                     {permission.canViewRawData === "True" && (
