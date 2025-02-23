@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Insights.css'; // Import the CSS file
-// import './adm.css';
-import {faChartLine, faDatabase, faFile} from "@fortawesome/free-solid-svg-icons";
-// import logo from '../../src/assets/logo4.png';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
+import './Insights.css'; 
 import Menu from '../Components/Menu';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -16,41 +11,6 @@ const Insights = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [analyzeData, setAnalyzeData] = useState(null);
-
-    const handleDownload = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
-        const token = localStorage.getItem('token');
-
-        try {
-        const response = await axios.get(
-            `${host_django}/crawler/download/final_report/${year}/${month}/`,
-            {
-                headers: {
-                    'User-Agent': 'insomnia/10.1.1',
-                    'ngrok-skip-browser-warning': '69420',
-                    Authorization: `Bearer ${token}`,
-                },
-                responseType: 'blob',
-            }
-        );
-
-        const url = window.URL.createObjectURL(response.data);
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', `final_report_${year}_${month}.pdf`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } catch (error) {
-        // Se a API retornar a mensagem no content.message, exibe a mensagem corretamente
-        const errorMessage = error.response?.data?.content?.message || 'Erro ao baixar o relatório.';
-        setError(errorMessage);
-    } finally {
-        setLoading(false);
-    }
-};
 
     const handleAnalyze = async () => {
         setLoading(true);
@@ -120,7 +80,6 @@ const Insights = () => {
                         </div>
                     </div>
                     <div className="insights-container">
-                        <button onClick={handleDownload}>Baixar Relatório</button>
                         {loading && <p className="loading-message">Carregando...</p>}
                         {error && <p className="error-message">Erro: {error}</p>}
                         {analyzeData && (

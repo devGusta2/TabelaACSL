@@ -7,11 +7,13 @@
     height: 100vh;
     width: 100%;
     display: flex;
+    /* align-items: center;
+    justify-content: center; */
 }
 
 #form-cad {
     height: 100%;
-    width: 30%;
+    width: 40%;
     position: relative;
     z-index: 1;
     background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background color to make the form more readable */
@@ -58,14 +60,39 @@
     align-items: center;
 }
 
+.inpt-form-cad-field input:focus ~ label,
+.inpt-form-cad-field input:valid ~ label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 13px;
+    top: -7px;
+    transition: 0.5s;
+}
+
 .inpt-form-cad-field label {
     color: var(--color-pink1);
     position: absolute;
     font-size: 15px;
     top: 5px;
     transition: 0.5s;
+    pointer-events: none;
 }
-
+.inpt-form-cad-field2  label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 15px;
+    top: 42px;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.inpt-form-cad-field2 input:focus ~ label,
+.inpt-form-cad-field2 input:valid ~ label {
+    color: var(--color-pink1);
+    position: absolute;
+    font-size: 13px;
+    top: -7px;
+    transition: 0.5s;
+}
 .inpt-cad {
     border-top: 0;
     border-left: 0;
@@ -127,12 +154,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 20%;
+    height: 10%;
     width: 100%;
+    
 }
 
 #bnt-box-cad button {
-    height: 50%;
+    height: 90%;
     width: 70%;
     background-color: var(--color-pink1);
     border-radius: 5px;
@@ -142,7 +170,22 @@
 }
 
 #background-img {
-    width: 70%;
+    width: 60%;
     object-fit: cover;
     margin-top: -30%;
+}
+
+#permissions-box{
+    width: 95%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  
+}
+
+#permissions-box label{
+    margin-left: 20px;
+    color: #EF44A1;
+    font-size: 16px;
 }

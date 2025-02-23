@@ -11,6 +11,8 @@ import ProtectedRoutes from './Auth/Auth.jsx';
 import Login from './Pages/Login/index.jsx';
 import Cadastro from './Pages/Cadastro/index.jsx';
 import Home from './adm/Home/index.jsx';
+import Dashboard from "./adm/Dashboard/Dashboard.jsx";
+import FinalReport from "./adm/FinalReport/FinalReport.jsx";
 // Renderização correta com React 18
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -28,6 +30,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/adm/predict" element={<Predict />} />
           <Route path="/adm/raw-data" element={<RawData />} />
           <Route path="/adm/insights" element={<Insights />} />
+          <Route path={"/adm/dashboard"} element={<Dashboard />} />
+           <Route path={"/adm/final-report"} element={<FinalReport />} />
         </Route>
       </Routes>
     </BrowserRouter>

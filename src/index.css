@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *{
   padding: 0;
@@ -24,4 +27,20 @@ header{
 }
 .inpt_list{
   display: block;
+}
+
+.footer-content {
+  background-color: var(--header-color); /* Use the same color as the header */
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os elementos no eixo horizontal */
+  justify-content: center; /* Centraliza no eixo vertical (se necessário) */
+  height: 100%; /* Garante que ocupa toda a altura disponível */
+  text-align: center;
+}
+
+.footer-content p {
+  margin: 0; /* Remove margens indesejadas */
+  text-align: center;
 }

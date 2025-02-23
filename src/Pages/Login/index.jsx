@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("");
+    const [erroSenha, setErroSenha] = useState(false);
     const navigate = useNavigate(); // Hook para navegação
 
     const auth = async (e) => {
@@ -45,12 +46,34 @@ export default function Login() {
             console.log("Login bem-sucedido!", response.data);
 
             localStorage.setItem("token", response.data.access);
-
+            // const permissions = {
+            //     canViewRawData: response.user.is_admin ? "True" : "False",
+            //     canAcesseInsights: response.user.can_insights ? "True" : "False",
+            //     canPricePredict: response.user.can_predict ? "True" : "False"
+            // };
+            // localStorage.setItem("userPermissions", JSON.stringify(permissions));
+            localStorage.setItem("isAdmin", response.data.user.is_admin)
+            if (!response.data.user.is_admin) {
+                const userPermissions = {
+                    canViewRawData: "False",
+                    canAcesseInsights: response.data.user.can_insights ? "True" : "False",
+                    canPricePredict: response.data.user.can_predict ? "True" : "False",
+                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False",
+                    canFinalReport: response.data.user.can_final_report ? "True" : "False"
+                };
+            
+                localStorage.setItem("userPermissions", JSON.stringify(userPermissions));
+            }
+            console.log( response.data.user.can_final_report,response.data.user.can_insights , response.data.user.can_predict)
             // Redireciona após o login bem-sucedido
-            navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
+             navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
+          
 
         } catch (error) {
             console.log("Erro ao logar: ", error.response ? error.response.data : error.message);
+            if (error.response && error.response.data.detail === "Usuário e/ou senha incorreto(s)") {
+                setErroSenha(true);
+            }
         }
     };
     return (
@@ -77,6 +100,7 @@ export default function Login() {
                                    onChange={(e) => setPassword(e.target.value)}/>
                             <label>Senha:</label>
                         </div>
+                        {erroSenha && <h5 style={{color:'red'}}>Login ou senha incorretos!</h5>}
                         <div id="btn-remeber-and-forgot-pass">
                             <div>
                                 <input type="checkbox"/>
@@ -84,6 +108,7 @@ export default function Login() {
                             </div>
                             <Link to='*' style={{color: '#ef44a1'}}>Esqueceu sua senha ?</Link>
                         </div>
+                        
                         <div id="btn-login-box">
                             <button type="submit">
                                 <span>Login</span>
@@ -92,7 +117,7 @@ export default function Login() {
                     </form>
                     <div id="login-signup-box">
                         <span>Ainda não tem uma conta? <span
-                            style={{color: '#ef44a1'}}>Faça já seu cadastro!</span></span>
+                            style={{color: '#ef44a1'}}><Link to='/Pages/Cadastro'>Faça já seu cadastro!</Link></span></span>
                     </div>
                 </div>
             </div>

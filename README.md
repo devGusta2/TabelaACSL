@@ -14,9 +14,7 @@
 # React + Vite
 
 ## Variáveis de ambiente
-  VITE_API_URL_CRAWLER: Endpoint do micro serviço de RPA
-  VITE_TOKEN_CRAWLER: Token de autenticação do serviço de RPA
-
+  VITE_API_URL_DJANGO: Endpoint do micro serviço de RPA
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
