@@ -12,6 +12,7 @@
 .menu img{
     height: 200px;
     width: 200px;
+    margin-top: 30px; /* Ajuste a margem superior conforme necessário */
 }
 .menu nav{
 

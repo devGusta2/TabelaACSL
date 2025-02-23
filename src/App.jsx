@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import car from '../src/assets/pink-car.png';
-import logo from '../src/assets/logo4.png';
+import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faCrown, faCalendarDays, faCar, faFile, faHand, faBuilding, faChartSimple, faBook, faChartLine } from '@fortawesome/free-solid-svg-icons';
