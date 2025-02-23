@@ -1,0 +1,96 @@
+
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ec4899;
+}
+
+.date-selection {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.font-bold {
+    font-weight: bold;
+    color: #ec4899;
+}
+
+.p-2 {
+    padding: 0.5rem;
+    border: 1px solid #ec4899;
+    border-radius: 0.25rem;
+}
+
+/*.dashboard-container {*/
+/*    background-color: #fce7f3;*/
+/*    padding: 1rem;*/
+/*    border-radius: 0.5rem;*/
+/*    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);*/
+/*    width: 80%;*/
+/*    max-width: 64rem;*/
+/*    margin: 0 auto;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
+
+.loading-message {
+    color: #ec4899;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.kpi-data {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center; /* Center the text horizontally */
+    display: flex; /* Use Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Align items in column */
+    height: auto; /* Adjust the flex container to the content height */
+}
+
+.text-xl {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ec4899;
+    margin-bottom: 0.5rem;
+}
+
+.charts {
+    width: 100%;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #ec4899;
+    margin-bottom: 0.5rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}

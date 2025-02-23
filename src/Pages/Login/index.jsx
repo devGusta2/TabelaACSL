@@ -66,7 +66,7 @@ export default function Login() {
             }
             console.log( response.data.user.can_final_report,response.data.user.can_insights , response.data.user.can_predict)
             // Redireciona após o login bem-sucedido
-             navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
+             navigate("../Pages/Home");  // Substitua "/dashboard" pela rota desejada
           
 
         } catch (error) {
