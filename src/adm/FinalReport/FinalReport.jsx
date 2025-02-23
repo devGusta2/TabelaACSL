@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './FinalReport.css';
 import Menu from "../Components/Menu/index.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
@@ -75,7 +77,7 @@ const FinalReport = () => {
         }
     };
 
-    return (
+     return (
         <div className="adm">
             <Menu />
             <div className="final-report">
@@ -97,8 +99,8 @@ const FinalReport = () => {
                                     <td>{date.year_reference}</td>
                                     <td>{date.month_reference}</td>
                                     <td>
-                                        <button onClick={() => handleDownload(date.year_reference, date.month_reference)}>
-                                            Baixar Relatório
+                                        <button className="download-button" onClick={() => handleDownload(date.year_reference, date.month_reference)}>
+                                            <FontAwesomeIcon icon={faDownload} />
                                         </button>
                                     </td>
                                 </tr>
