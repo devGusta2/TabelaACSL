@@ -48,11 +48,6 @@
     height: 10px; /* Define uma altura fixa para as células */
 }
 
-/*.reference-dates-table th {*/
-/*    background-color: #f2f2f2;*/
-/*    color: #333;*/
-/*}*/
-
 .reference-dates-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
