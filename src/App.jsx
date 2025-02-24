@@ -4,7 +4,18 @@ import car from '../src/assets/revuelto-porquinho-da-india.png';
 import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faCrown, faCalendarDays, faCar, faFile, faHand, faBuilding, faChartSimple, faBook, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCrown,
+    faCalendarDays,
+    faCar,
+    faFile,
+    faHand,
+    faBuilding,
+    faChartSimple,
+    faBook,
+    faChartLine,
+    faCalendar, faChartBar, faFileAlt
+} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import crawlerImg from './assets/api_crawler.png'
 import relatorio from './assets/final_report.png'
@@ -313,49 +324,46 @@ const calcular = async () => {
             <div id="about-cards-box">
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Fácil de usar</h3>
-                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Informação Inteligente</h3>
+                  <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  A API é projetada para ser consumida por desenvolvedores de todos os
-                  níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
-                  padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
-                  avançados e ordenação para lidar com grandes volumes de dados.
+                  Tenha acesso a dados estratégicos sobre o mercado automotivo. Nossa plataforma analisa milhares de
+                    anúncios para fornecer insights precisos sobre a valorização e depreciação de veículos, ajudando sua
+                    empresa a tomar decisões mais assertivas.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Arquitetura Restful</h3>
-                  <FontAwesomeIcon icon={faBuilding} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Predição de Preços</h3>
+                  <FontAwesomeIcon icon={faCalendar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  A API segue rigorosamente os
-                  princípios REST, permitindo operações
-                  como criação, leitura, atualização e
-                  exclusão (CRUD) em recursos específicos.
+                  Nossa inteligência artificial aprende com o histórico do mercado para prever o valor real de cada
+                    veículo com alta precisão. Evite pagar mais do que deveria ou vender abaixo do preço justo com um
+                    modelo treinado nos dados mais recentes.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Desempenho e escalabilidade</h3>
-                  <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Visualização de Dados</h3>
+                  <FontAwesomeIcon icon={faChartBar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  Capacidade de lidar com requisições
-                  simultâneas de alta carga. Uso de
-                  cache em pontos estratégicos para
-                  garantir respostas rápidas.
+                  Acompanhe o comportamento do mercado por meio de gráficos claros e objetivos. Nossa plataforma
+                    transforma grandes volumes de dados em visualizações simples, permitindo uma análise rápida das
+                    tendências de preços e variações do mercado automotivo.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>API e Documentação Interativa</h3>
-                  <FontAwesomeIcon icon={faBook} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Geração de Relatórios</h3>
+                  <FontAwesomeIcon icon={faFileAlt} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  Disponibilizamos uma documentação interativa baseada em
-                  OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
-                  dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+                  Receba relatórios completos e detalhados sobre o mercado de veículos. Nossa plataforma processa
+                    grandes volumes de dados para entregar informações precisas, facilitando sua análise e otimizando
+                    suas estratégias de precificação.
                 </span>
               </div>
             </div>
