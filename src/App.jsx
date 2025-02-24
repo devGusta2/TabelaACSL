@@ -8,17 +8,10 @@ import {
     faCrown,
     faCalendarDays,
     faCar,
-    faFile,
-    faHand,
-    faBuilding,
-    faChartSimple,
-    faBook,
     faChartLine,
     faCalendar, faChartBar, faFileAlt
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import crawlerImg from './assets/api_crawler.png'
-import relatorio from './assets/final_report.png'
 
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -284,8 +277,8 @@ const calcular = async () => {
           <div className="col_consulta">
             <div className="desc_col_consult">
               <h1>Consulta de carros</h1>
-              <p>Sua pesquisa será realizada de acordo com o seguinte mês e ano de referência.</p>
-              <p>Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar.</p>
+              <p>Obtenha a média de mercado de veículos com base em dados atualizados. Selecione a marca, o
+              modelo e o ano do veículo para acessar informações precisas sobre os preços praticados, auxiliando na sua análise e tomada de decisão.</p>
             </div>
             <div className="table_box">
               <div className='celula'><h3>Ano de referência:</h3></div>
