@@ -313,10 +313,11 @@ const calcular = async () => {
               <div id="col-title-desc">
                 <span>Sobre o produto</span>
                 <span>
-                  Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
-                  funcionalidades,
-                  entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
-                  nossos clientes.
+                  O DriveIntel é uma plataforma especializada em análise de dados do mercado automotivo.
+                    Nosso foco é transformar informações em inteligência acionável, auxiliando equipes na tomada de
+                    decisões estratégicas com mais precisão e confiança. Com insights aprofundados, relatórios detalhados
+                    e visualizações claras, ajudamos a antecipar tendências, otimizar precificação e fortalecer estratégias
+                    de mercado.
                 </span>
               </div>
               <img src={crawlerImg} alt="" />
@@ -367,67 +368,6 @@ const calcular = async () => {
                 </span>
               </div>
             </div>
-          </div>
-        </section>
-        <section id="section-relatorio">
-          <div id='col-cards-relatorio'>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faFile} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Geração de relatórios</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  Nosso software permite a criação de
-                  relatórios detalhados, oferecendo uma
-                  visão consolidada dos dados coletados.
-                  Esses relatórios são projetados para atender
-                  às necessidades estratégicas de empresas e
-                  analistas, fornecendo um resumo claro e acionável.
-                  Além disso, eles incluem informações organizadas
-                  e interpretadas, facilitando o entendimento e a
-                  tomada de decisão com base em dados reais.</span>
-              </div>
-            </div>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Visualização Gráfica</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  A geração de gráficos é focada em representar
-                  visualmente os dados consolidados do mercado
-                  automotivo de forma clara e objetiva. Os gráficos
-                  presentes nos relatórios finais destacam informações
-                  essenciais para gerentes de vendas e analistas
-                  de dados do ramo de precificação de veículos.
-                </span>
-              </div>
-            </div>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Insights de Resultados</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  A geração de insights é baseada na análise
-                  aprofundada dos dados coletados, transformando
-                  informações brutas em conhecimentos estratégicos
-                  para o mercado automotivo. Os relatórios finais
-                  destacam padrões de comportamento, tendências de
-                  preços, oportunidades de negociação e variações
-                  significativas entre diferentes modelos, marcas,
-                  regiões e períodos.
-                </span>
-              </div>
-
-            </div>
-          </div>
-          <div id="img-relatorio-box">
-            <span>Relatório de Insights</span>
-            <img src={relatorio} alt="" />
           </div>
         </section>
         <footer id="footer">
