@@ -319,7 +319,7 @@ const calcular = async () => {
                     de mercado.
                 </span>
               </div>
-              <img src={crawlerImg} alt="" />
+        <img src={logo} alt="" className="logo-about"/>
             </div>
             <div id="about-cards-box">
               <div className="card-about">
