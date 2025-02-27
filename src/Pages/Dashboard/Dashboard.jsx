@@ -81,50 +81,57 @@ const Dashboard = () => {
         <div className="adm">
             <Menu />
             <div className="content">
-                <div className="dashboard-wrapper">
-                    <div className="dashboard-header">
-                        <h1 className="text-2xl">Indicadores Gerais da Dashboard</h1>
-                        <div className="date-selection">
-                            <label className="font-bold">
-                                Mês:
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max="12"
-                                    value={month}
-                                    onChange={(e) => setMonth(Number(e.target.value))}
-                                    className="p-2"
-                                    aria-label="Selecione o mês"
-                                />
-                            </label>
-                            <label className="font-bold">
-                                Ano:
-                                <input
-                                    type="number"
-                                    min="2024"
-                                    max={new Date().getFullYear()}
-                                    value={year}
-                                    onChange={(e) => setYear(Number(e.target.value))}
-                                    className="p-2"
-                                    aria-label="Selecione o ano"
-                                />
-                            </label>
-                        </div>
+
+                <div className="dashboard-header">
+                    <div className="title_box">
+                        <h2 className='text-2xl '>Indicadores gerais da dashboard</h2>
                     </div>
-                    <div className="dashboard-container">
-                        {loadingCount > 0 && <p className="loading-message">Carregando...</p>}
-                        {error && <p className="error-message">Erro: {error}</p>}
-                        {kpiData && (
-                            <div className="kpi-data">
-                                <h2 className="text-xl">KPI para {year}/{month}</h2>
-                                <p><strong>Total de anúncios:</strong> {kpiData.total_ads}</p>
-                                <p><strong>Ano modelo médio:</strong> {kpiData.total_average_year_model}</p>
-                                <p><strong>Preço médio:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                            </div>
-                        )}
-                        <div className="charts">
-                            <h2 className="text-lg">Dispersão de Preços</h2>
-                            <ResponsiveContainer width="100%" height={300}>
+                    <div className="date-selection">
+
+                        <label className="font-bold">
+                            Mês:
+                            <input
+                                type="number"
+                                min="1"
+                                max="12"
+                                value={month}
+                                onChange={(e) => setMonth(Number(e.target.value))}
+                                className="p-2"
+                                aria-label="Selecione o mês"
+                            />
+                        </label>
+                        <label className="font-bold">
+                            Ano:
+                            <input
+                                type="number"
+                                min="2024"
+                                max={new Date().getFullYear()}
+                                value={year}
+                                onChange={(e) => setYear(Number(e.target.value))}
+                                className="p-2"
+                                aria-label="Selecione o ano"
+                            />
+                        </label>
+                    </div>
+                    {loadingCount > 0 && <p className="loading-message">Carregando...</p>}
+                    {error && <p className="error-message">Erro: {error}</p>}
+                    {kpiData && (
+                        <div className="kpi-data">
+                            <h2 className="text-xl">KPI para {year}/{month}</h2>
+                            <p><strong>Total de anúncios:</strong> {kpiData.total_ads}</p>
+                            <p><strong>Ano modelo médio:</strong> {kpiData.total_average_year_model}</p>
+                            <p><strong>Preço médio:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                    )}
+                </div>
+                <div className="dashboard-container">
+                    <div id="title_chart_box">
+                        <h2 className="text-lg">Dispersão de Preços</h2>
+                        <h2 className="text-lg">Dispersão de Ano Modelo</h2>
+                    </div>
+                    <div className="charts">
+                        <div className="row-chart">
+                            <ResponsiveContainer width="50%" height='100%'>
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
@@ -133,8 +140,8 @@ const Dashboard = () => {
                                     <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
                                 </ScatterChart>
                             </ResponsiveContainer>
-                            <h2 className="text-lg mt-6">Dispersão de Ano Modelo</h2>
-                            <ResponsiveContainer width="100%" height={300}>
+
+                            <ResponsiveContainer width="50%" height='100%'>
                                 <ScatterChart>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
@@ -143,8 +150,13 @@ const Dashboard = () => {
                                     <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
                                 </ScatterChart>
                             </ResponsiveContainer>
+                        </div>
+                        <div id="title_chart_box">
                             <h2 className="text-lg mt-6">Correlação por Estado</h2>
-                            <ResponsiveContainer width="100%" height={400}>
+                        </div>
+                        <div className="row-chart">
+
+                            <ResponsiveContainer width="90%" height='100%'>
                                 <ComposedChart data={geoChartData}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="name" />
@@ -156,8 +168,23 @@ const Dashboard = () => {
                                 </ComposedChart>
                             </ResponsiveContainer>
                         </div>
+                        {/* 
+                            
+                            <h2 className="text-lg mt-6">Correlação por Estado</h2>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <ComposedChart data={geoChartData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis yAxisId="left" orientation="left" label={{ value: 'Total de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                    <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
+                                    <Tooltip />
+                                    <Bar yAxisId="left" dataKey="total_ads" fill="#82ca9d" name="Total de Anúncios" />
+                                    <Scatter yAxisId="right" dataKey="average_price" fill="#8884d8" name="Preço Médio" />
+                                </ComposedChart>
+                            </ResponsiveContainer> */}
                     </div>
                 </div>
+
             </div>
         </div>
     );

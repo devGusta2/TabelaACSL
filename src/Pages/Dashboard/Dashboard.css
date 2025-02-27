@@ -1,7 +1,16 @@
 
 .dashboard-header {
     text-align: center;
-    margin-bottom: 1rem;
+    
+
+    height: 30%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+
 }
 
 .text-2xl {
@@ -9,12 +18,27 @@
     font-weight: bold;
     color: #ec4899;
 }
-
+.title_box{
+    height: 20%;
+}
 .date-selection {
     display: flex;
-    gap: 1rem;
+
     justify-content: center;
-    margin-top: 1rem;
+    height: 40%;
+
+    width: 100%;
+    align-items: center;
+}
+.content{
+    height: 100%;
+    width: 80%;
+    
+}
+.dashboard-wrapper{
+    background-color: orange;
+    height: 20%;
+    width: 100%;
 }
 
 .font-bold {
@@ -23,11 +47,16 @@
 }
 
 .p-2 {
-    padding: 0.5rem;
+   
     border: 1px solid #ec4899;
     border-radius: 0.25rem;
 }
+.dashboard-container{
+    height: 80%;
+    width: 100%;
 
+
+}
 /*.dashboard-container {*/
 /*    background-color: #fce7f3;*/
 /*    padding: 1rem;*/
@@ -56,13 +85,16 @@
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 50%;
+    height: 50%;
     margin-bottom: 1rem;
     text-align: center; /* Centraliza o texto */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+ 
+    box-sizing: border-box;
 }
 
 .kpi-data p {
@@ -81,13 +113,25 @@
 
 .charts {
     width: 100%;
+    height: 90%;
+
+}
+#title_chart_box{
+    height: 10%;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 5%;
+    box-sizing: border-box;
 }
 
 .text-lg {
     font-size: 1.125rem;
     font-weight: bold;
     color: #ec4899;
-    margin-bottom: 0.5rem;
+
 }
 
 .text-sm {
@@ -98,4 +142,13 @@
 
 .mt-6 {
     margin-top: 1.5rem;
+}
+
+
+.row-chart{
+    height: 44%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
 }
