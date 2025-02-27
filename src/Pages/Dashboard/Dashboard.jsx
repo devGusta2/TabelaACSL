@@ -32,13 +32,13 @@ const Dashboard = () => {
         setLoading(true);
         setError(null);
         const token = localStorage.getItem('token');
-    
+
         if (!token) {
             setError("Token de autenticação não encontrado.");
             setLoading(false);
             return;
         }
-    
+
         try {
             const response = await axios.get(`${host_django}${endpoint}`, {
                 headers: {
@@ -56,42 +56,42 @@ const Dashboard = () => {
             setLoading(false);
         }
     }, []);
-    
+
     useEffect(() => {
-        fetchData(`/crawler/dashboard/general_kpi/machine/${year}/${month}/`, setKpiData, { 
-            total_ads: 0, 
-            total_average_year_model: 0, 
+        fetchData(`/crawler/dashboard/general_kpi/machine/${year}/${month}/`, setKpiData, {
+            total_ads: 0,
+            total_average_year_model: 0,
             total_average_price: 0,
             top_10_year_model_distribution: [], // Adicionando fallback para top_10_year_model_distribution
             top_10_price_distribution: [], // Adicionando fallback para top_10_price_distribution
         });
         fetchData(`/crawler/dashboard/geographic_pricing_analysis/machine/${year}/${month}/`, setGeoData, { top_10_states: [] });
     }, [month, year, fetchData]);
-    
-    
-    const scatterData = Array.isArray(kpiData?.top_10_year_model_distribution) 
-    ? kpiData.top_10_year_model_distribution.map(({ year_model, frequency }) => ({
-        x: year_model,
-        y: frequency,
-    })) 
-    : [];
 
-const priceScatterData = Array.isArray(kpiData?.top_10_price_distribution) 
-    ? kpiData.top_10_price_distribution.map(({ price, frequency }) => ({
-        x: price,
-        y: frequency,
-    })) 
-    : [];
 
-const geoChartData = Array.isArray(geoData?.top_10_states) 
-    ? geoData.top_10_states.map(({ state, total_ads, average_price }) => ({
-        name: state,
-        total_ads,
-        average_price,
-    })) 
-    : [];
+    const scatterData = Array.isArray(kpiData?.top_10_year_model_distribution)
+        ? kpiData.top_10_year_model_distribution.map(({ year_model, frequency }) => ({
+            x: year_model,
+            y: frequency,
+        }))
+        : [];
 
-    
+    const priceScatterData = Array.isArray(kpiData?.top_10_price_distribution)
+        ? kpiData.top_10_price_distribution.map(({ price, frequency }) => ({
+            x: price,
+            y: frequency,
+        }))
+        : [];
+
+    const geoChartData = Array.isArray(geoData?.top_10_states)
+        ? geoData.top_10_states.map(({ state, total_ads, average_price }) => ({
+            name: state,
+            total_ads,
+            average_price,
+        }))
+        : [];
+
+
     return (
         <div className="adm">
             <Menu />
@@ -129,15 +129,15 @@ const geoChartData = Array.isArray(geoData?.top_10_states)
                         </label>
                     </div>
                     {loadingCount > 0 && <p className="loading-message">Carregando...</p>}
-{error && <p className="error-message">Erro: {error}</p>}
-{(kpiData || {}) && (
-    <div className="kpi-data">
-        <h2 className="text-xl">KPI para {year}/{month}</h2>
-        <p><strong>Total de anúncios:</strong> {kpiData?.total_ads ?? 0}</p>
-        <p><strong>Ano modelo médio:</strong> {kpiData?.total_average_year_model ?? 0}</p>
-        <p><strong>Preço médio:</strong> R$ {(kpiData?.total_average_price ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-    </div>
-)}
+                    {error && <p className="error-message">Erro: {error}</p>}
+                    {(kpiData || {}) && (
+                        <div className="kpi-data">
+                            <h2 className="text-xl">KPI para {year}/{month}</h2>
+                            <p><strong>Total de anúncios:</strong> {kpiData?.total_ads ?? 0}</p>
+                            <p><strong>Ano modelo médio:</strong> {kpiData?.total_average_year_model ?? 0}</p>
+                            <p><strong>Preço médio:</strong> R$ {(kpiData?.total_average_price ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                    )}
 
                 </div>
                 <div className="dashboard-container">
@@ -179,25 +179,12 @@ const geoChartData = Array.isArray(geoData?.top_10_states)
                                     <YAxis yAxisId="left" orientation="left" label={{ value: 'Total de Anúncios', angle: -90, position: 'insideLeft' }} />
                                     <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
                                     <Tooltip />
-                                    <Bar yAxisId="left" dataKey="total_ads" fill="#82ca9d" name="Total de Anúncios" />
-                                    <Scatter yAxisId="right" dataKey="average_price" fill="#8884d8" name="Preço Médio" />
+                                    <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Total de Anúncios" />
+                                    <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
                                 </ComposedChart>
                             </ResponsiveContainer>
                         </div>
-                        {/* 
-                            
-                            <h2 className="text-lg mt-6">Correlação por Estado</h2>
-                            <ResponsiveContainer width="100%" height={400}>
-                                <ComposedChart data={geoChartData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" />
-                                    <YAxis yAxisId="left" orientation="left" label={{ value: 'Total de Anúncios', angle: -90, position: 'insideLeft' }} />
-                                    <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
-                                    <Tooltip />
-                                    <Bar yAxisId="left" dataKey="total_ads" fill="#82ca9d" name="Total de Anúncios" />
-                                    <Scatter yAxisId="right" dataKey="average_price" fill="#8884d8" name="Preço Médio" />
-                                </ComposedChart>
-                            </ResponsiveContainer> */}
+                  
                     </div>
                 </div>
 
