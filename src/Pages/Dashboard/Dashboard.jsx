@@ -21,24 +21,24 @@ const Dashboard = () => {
     const [year, setYear] = useState(2025);
     const [loadingCount, setLoadingCount] = useState(0);
     const [error, setError] = useState(null);
-    const [kpiData, setKpiData] = useState(null);
-    const [geoData, setGeoData] = useState(null);
+    const [kpiData, setKpiData] = useState({ total_ads: 0, total_average_year_model: 0, total_average_price: 0 });
+    const [geoData, setGeoData] = useState({ top_10_states: [] });
 
     const setLoading = (isLoading) => {
         setLoadingCount((prev) => (isLoading ? prev + 1 : Math.max(prev - 1, 0)));
     };
 
-    const fetchData = useCallback(async (endpoint, setData) => {
+    const fetchData = useCallback(async (endpoint, setData, defaultData) => {
         setLoading(true);
         setError(null);
         const token = localStorage.getItem('token');
-
+    
         if (!token) {
             setError("Token de autenticação não encontrado.");
             setLoading(false);
             return;
         }
-
+    
         try {
             const response = await axios.get(`${host_django}${endpoint}`, {
                 headers: {
@@ -47,36 +47,51 @@ const Dashboard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setData(response.data.content);
+            setData(response.data.content || defaultData);
         } catch (error) {
             console.error(`Erro ao obter dados de ${endpoint}:`, error);
             setError(error.response?.data?.message || error.message || 'Erro desconhecido');
+            setData(defaultData);
         } finally {
             setLoading(false);
         }
     }, []);
-
+    
     useEffect(() => {
-        fetchData(`/crawler/dashboard/general_kpi/machine/${year}/${month}/`, setKpiData);
-        fetchData(`/crawler/dashboard/geographic_pricing_analysis/machine/${year}/${month}/`, setGeoData);
+        fetchData(`/crawler/dashboard/general_kpi/machine/${year}/${month}/`, setKpiData, { 
+            total_ads: 0, 
+            total_average_year_model: 0, 
+            total_average_price: 0,
+            top_10_year_model_distribution: [], // Adicionando fallback para top_10_year_model_distribution
+            top_10_price_distribution: [], // Adicionando fallback para top_10_price_distribution
+        });
+        fetchData(`/crawler/dashboard/geographic_pricing_analysis/machine/${year}/${month}/`, setGeoData, { top_10_states: [] });
     }, [month, year, fetchData]);
-
-    const scatterData = kpiData?.top_10_year_model_distribution?.map(({ year_model, frequency }) => ({
+    
+    
+    const scatterData = Array.isArray(kpiData?.top_10_year_model_distribution) 
+    ? kpiData.top_10_year_model_distribution.map(({ year_model, frequency }) => ({
         x: year_model,
         y: frequency,
-    })) || [];
+    })) 
+    : [];
 
-    const priceScatterData = kpiData?.top_10_price_distribution?.map(({ price, frequency }) => ({
+const priceScatterData = Array.isArray(kpiData?.top_10_price_distribution) 
+    ? kpiData.top_10_price_distribution.map(({ price, frequency }) => ({
         x: price,
         y: frequency,
-    })) || [];
+    })) 
+    : [];
 
-    const geoChartData = geoData?.top_10_states?.map(({ state, total_ads, average_price }) => ({
+const geoChartData = Array.isArray(geoData?.top_10_states) 
+    ? geoData.top_10_states.map(({ state, total_ads, average_price }) => ({
         name: state,
         total_ads,
         average_price,
-    })) || [];
+    })) 
+    : [];
 
+    
     return (
         <div className="adm">
             <Menu />
@@ -114,15 +129,16 @@ const Dashboard = () => {
                         </label>
                     </div>
                     {loadingCount > 0 && <p className="loading-message">Carregando...</p>}
-                    {error && <p className="error-message">Erro: {error}</p>}
-                    {kpiData && (
-                        <div className="kpi-data">
-                            <h2 className="text-xl">KPI para {year}/{month}</h2>
-                            <p><strong>Total de anúncios:</strong> {kpiData.total_ads}</p>
-                            <p><strong>Ano modelo médio:</strong> {kpiData.total_average_year_model}</p>
-                            <p><strong>Preço médio:</strong> R$ {kpiData.total_average_price?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                        </div>
-                    )}
+{error && <p className="error-message">Erro: {error}</p>}
+{(kpiData || {}) && (
+    <div className="kpi-data">
+        <h2 className="text-xl">KPI para {year}/{month}</h2>
+        <p><strong>Total de anúncios:</strong> {kpiData?.total_ads ?? 0}</p>
+        <p><strong>Ano modelo médio:</strong> {kpiData?.total_average_year_model ?? 0}</p>
+        <p><strong>Preço médio:</strong> R$ {(kpiData?.total_average_price ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+    </div>
+)}
+
                 </div>
                 <div className="dashboard-container">
                     <div id="title_chart_box">
