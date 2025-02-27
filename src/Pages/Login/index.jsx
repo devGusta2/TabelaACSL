@@ -58,14 +58,15 @@ export default function Login() {
                     canViewRawData: "False",
                     canAcesseInsights: response.data.user.can_insights ? "True" : "False",
                     canPricePredict: response.data.user.can_predict ? "True" : "False",
-                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False"
+                    canDataVisualization: response.data.user.can_data_visualization ? "True" : "False",
+                    canFinalReport: response.data.user.can_final_report ? "True" : "False"
                 };
             
                 localStorage.setItem("userPermissions", JSON.stringify(userPermissions));
             }
             console.log( response.data.user.can_final_report,response.data.user.can_insights , response.data.user.can_predict)
             // Redireciona após o login bem-sucedido
-             navigate("/adm/Home");  // Substitua "/dashboard" pela rota desejada
+             navigate("../Pages/Home");  // Substitua "/dashboard" pela rota desejada
           
 
         } catch (error) {

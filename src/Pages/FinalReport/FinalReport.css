@@ -1,0 +1,69 @@
+/* src/adm/FinalReport/FinalReport.css */
+
+.final-report {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    max-height: 90vh; /* Evita que a div ocupe toda a tela */
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ec4899;
+    margin-bottom: 1rem;
+}
+
+.loading-message {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.reference-dates-table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    height: 10px;
+}
+
+.reference-dates-table th,
+.reference-dates-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 33%; /* Define uma largura fixa para as células */
+    max-width: 200px; /* Define a largura máxima para as células */
+    white-space: nowrap; /* Impede a quebra de linha */
+    overflow: hidden; /* Esconde o texto excedente */
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto excedente */
+    height: 10px; /* Define uma altura fixa para as células */
+}
+
+.reference-dates-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.reference-dates-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.download-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ec4899;
+    font-size: 1.2rem;
+}
+
+.download-button:hover {
+    color: #d81b60;
+}

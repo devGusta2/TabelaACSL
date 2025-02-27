@@ -1,13 +1,17 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import car from '../src/assets/carrao.png';
-import logo from '../src/assets/logo4.png';
+import car from '../src/assets/revuelto-porquinho-da-india.png';
+import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faCrown, faCalendarDays, faCar, faFile, faHand, faBuilding, faChartSimple, faBook, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCrown,
+    faCalendarDays,
+    faCar,
+    faChartLine,
+    faCalendar, faChartBar, faFileAlt
+} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import crawlerImg from './assets/api_crawler.png'
-import relatorio from './assets/final_report.png'
 
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -196,8 +200,7 @@ const calcular = async () => {
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
-                <li><a href="#Clientes">Clientes</a></li>
-                <li><Link to='/pages/cadastro'>Login</Link></li>
+                <li><Link to='/pages/cadastro'>Autenticação</Link></li>
               </ul>
             </nav>
           </header>
@@ -210,7 +213,7 @@ const calcular = async () => {
               <div className="col_bottom">
                 <h1>Revelando o verdadeiro valor de cada máquina</h1>
                 <br />
-                <p>Uma plataforma de precificação precisa e exclusiva para carros.</p>
+                <p>Plataforma de inteligência de mercado automotivo, focada em precificação de veículos para empresas do setor.</p>
               </div>
 
               <div className="col_bottom">
@@ -274,8 +277,8 @@ const calcular = async () => {
           <div className="col_consulta">
             <div className="desc_col_consult">
               <h1>Consulta de carros</h1>
-              <p>Sua pesquisa será realizada de acordo com o seguinte mês e ano de referência.</p>
-              <p>Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar.</p>
+              <p>Obtenha a média de mercado de veículos com base em dados atualizados. Selecione a marca, o
+              modelo e o ano do veículo para acessar informações precisas sobre os preços praticados, auxiliando na sua análise e tomada de decisão.</p>
             </div>
             <div className="table_box">
               <div className='celula'><h3>Ano de referência:</h3></div>
@@ -296,132 +299,74 @@ const calcular = async () => {
           </div>
         </section>
         {/* Secção sobre */}
-        <section id="section-about">
+        <section id="Produto">
           <div id='info-about'>
             <div id="about-img-box">
               <div id="col-title-desc">
                 <span>Sobre o produto</span>
                 <span>
-                  Nesta seção será possível conhecer um pouco mais sobre o produto que está sendo ofertado, suas
-                  funcionalidades,
-                  entender o problema que a aplicação se propõe a resolver. E apresentar os benefícios de se tornar um de
-                  nossos clientes.
+                  O DriveIntel é uma plataforma especializada em análise de dados do mercado automotivo.
+                    Nosso foco é transformar informações em inteligência acionável, auxiliando equipes na tomada de
+                    decisões estratégicas com mais precisão e confiança. Com insights aprofundados, relatórios detalhados
+                    e visualizações claras, ajudamos a antecipar tendências, otimizar precificação e fortalecer estratégias
+                    de mercado.
                 </span>
               </div>
-              <img src={crawlerImg} alt="" />
+        <img src={logo} alt="" className="logo-about"/>
             </div>
             <div id="about-cards-box">
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Fácil de usar</h3>
-                  <FontAwesomeIcon icon={faHand} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Informação Inteligente</h3>
+                  <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  A API é projetada para ser consumida por desenvolvedores de todos os
-                  níveis. Além da documentação, incluímos endpoints consistentes e intuitivos, padrões de resposta
-                  padronizados em JSON (simplificando a integração e o consumo dos dados), suporte para paginação, filtros
-                  avançados e ordenação para lidar com grandes volumes de dados.
+                  Tenha acesso a dados estratégicos sobre o mercado automotivo. Nossa plataforma analisa milhares de
+                    anúncios para fornecer insights precisos sobre a valorização e depreciação de veículos, ajudando sua
+                    empresa a tomar decisões mais assertivas.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Arquitetura Restful</h3>
-                  <FontAwesomeIcon icon={faBuilding} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Predição de Preços</h3>
+                  <FontAwesomeIcon icon={faCalendar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  A API segue rigorosamente os
-                  princípios REST, permitindo operações
-                  como criação, leitura, atualização e
-                  exclusão (CRUD) em recursos específicos.
+                  Nossa inteligência artificial aprende com o histórico do mercado para prever o valor real de cada
+                    veículo com alta precisão. Evite pagar mais do que deveria ou vender abaixo do preço justo com um
+                    modelo treinado nos dados mais recentes.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Desempenho e escalabilidade</h3>
-                  <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Visualização de Dados</h3>
+                  <FontAwesomeIcon icon={faChartBar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  Capacidade de lidar com requisições
-                  simultâneas de alta carga. Uso de
-                  cache em pontos estratégicos para
-                  garantir respostas rápidas.
+                  Acompanhe o comportamento do mercado por meio de gráficos claros e objetivos. Nossa plataforma
+                    transforma grandes volumes de dados em visualizações simples, permitindo uma análise rápida das
+                    tendências de preços e variações do mercado automotivo.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>API e Documentação Interativa</h3>
-                  <FontAwesomeIcon icon={faBook} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Geração de Relatórios</h3>
+                  <FontAwesomeIcon icon={faFileAlt} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  Disponibilizamos uma documentação interativa baseada em
-                  OpenAPI/Swagger, com exemplos detalhados de requisições e respostas para cada endpoint. Explicação clara
-                  dos parâmetros de entrada, campos obrigatórios e possíveis códigos de erro.
+                  Receba relatórios completos e detalhados sobre o mercado de veículos. Nossa plataforma processa
+                    grandes volumes de dados para entregar informações precisas, facilitando sua análise e otimizando
+                    suas estratégias de precificação.
                 </span>
               </div>
             </div>
           </div>
         </section>
-        <section id="section-relatorio">
-          <div id='col-cards-relatorio'>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faFile} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Geração de relatórios</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  Nosso software permite a criação de
-                  relatórios detalhados, oferecendo uma
-                  visão consolidada dos dados coletados.
-                  Esses relatórios são projetados para atender
-                  às necessidades estratégicas de empresas e
-                  analistas, fornecendo um resumo claro e acionável.
-                  Além disso, eles incluem informações organizadas
-                  e interpretadas, facilitando o entendimento e a
-                  tomada de decisão com base em dados reais.</span>
-              </div>
-            </div>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Visualização Gráfica</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  A geração de gráficos é focada em representar
-                  visualmente os dados consolidados do mercado
-                  automotivo de forma clara e objetiva. Os gráficos
-                  presentes nos relatórios finais destacam informações
-                  essenciais para gerentes de vendas e analistas
-                  de dados do ramo de precificação de veículos.
-                </span>
-              </div>
-            </div>
-            <div className="card-relatorio">
-              <div className="icon-title-card-relatorio">
-                <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3.5vw, 100px)' }} />
-                <h4>Insights de Resultados</h4>
-              </div>
-              <div className='text-box-relatorio'>
-                <span>
-                  A geração de insights é baseada na análise
-                  aprofundada dos dados coletados, transformando
-                  informações brutas em conhecimentos estratégicos
-                  para o mercado automotivo. Os relatórios finais
-                  destacam padrões de comportamento, tendências de
-                  preços, oportunidades de negociação e variações
-                  significativas entre diferentes modelos, marcas,
-                  regiões e períodos.
-                </span>
-              </div>
-
-            </div>
+        <footer id="footer">
+          <div className="footer-content">
+            <p>&copy; 2025 DriveIntel. Todos direitos são reservados.</p>
           </div>
-          <div id="img-relatorio-box">
-            <span>Relatório de Insights</span>
-            <img src={relatorio} alt="" />
-          </div>
-        </section>
+        </footer>
       </div>
     </>
   );

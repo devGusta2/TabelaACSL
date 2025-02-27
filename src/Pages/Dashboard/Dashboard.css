@@ -1,5 +1,4 @@
 
-
 .dashboard-header {
     text-align: center;
     margin-bottom: 1rem;
@@ -59,13 +58,19 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     width: 100%;
     margin-bottom: 1rem;
-    text-align: center; /* Center the text horizontally */
-    display: flex; /* Use Flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: column; /* Align items in column */
-    height: auto; /* Adjust the flex container to the content height */
+    text-align: center; /* Centraliza o texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.kpi-data p {
+    text-align: center; /* Garante que o texto dentro dos parágrafos fique centralizado */
+    width: 100%;
+    margin: 0; /* Remove margens que podem estar desalinhando */
+}
+
 
 .text-xl {
     font-size: 1.25rem;
