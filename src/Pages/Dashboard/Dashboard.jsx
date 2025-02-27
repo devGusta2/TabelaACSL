@@ -17,8 +17,8 @@ import './Dashboard.css';
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 const Dashboard = () => {
-    const [month, setMonth] = useState(1);
-    const [year, setYear] = useState(2025);
+    const [month, setMonth] = useState(new Date().getMonth() + 1);
+    const [year, setYear] = useState(new Date().getFullYear());
     const [loadingCount, setLoadingCount] = useState(0);
     const [error, setError] = useState(null);
     const [kpiData, setKpiData] = useState({ total_ads: 0, total_average_year_model: 0, total_average_price: 0 });
