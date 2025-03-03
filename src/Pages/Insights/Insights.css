@@ -119,10 +119,11 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    color: #fa0280;
 }
 #title_box span{
-    font-size: clamp(20px,20vw , 45px);
-    color: #fa0280;
+    font-size: clamp(20px,20vw , 40px);
+
     font-weight: 100;
 }
 
@@ -161,6 +162,8 @@ h1 {
     border-radius: 16px;
     box-shadow: 4px 4px 10px rgb(184, 184, 184);
     margin-left: -1.7%;
+    display: flex;
+    flex-direction: row;
 }
 #data_box{
     height: 95%;
@@ -175,6 +178,8 @@ h1 {
     background-color: #FCFCFC;
     border-radius: 16px;
     box-shadow: 4px 4px 10px rgb(184, 184, 184);
+    display: flex;
+    flex-direction: row;
 }
 #col_cards{
     height: 100%;
@@ -185,4 +190,99 @@ h1 {
     justify-content: space-around;
 
 }
+.label_icon_box{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  
+    padding: 0 10%;
+    box-sizing: border-box;
+    gap: 1em;
+    color: #fa0280;
+    height: 50%;
+    width: 100%;
 
+}
+.inpt_label_field{
+    height: 45%;
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.inpt_label_field label{
+    display: block;
+    font-size: clamp(16px,10vh,25px);
+}
+
+.inpt_label_field input{
+    height: 25%;
+    width: 90%;
+    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.icon_box_val{
+    width: 30% ;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon_box_val1{
+    width: 60% ;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon_box_content{
+    width: 70%;
+    height: 100%;
+    padding: 0px 3% 0 0px;
+    box-sizing: border-box;
+}
+
+
+.icon_up{
+    border: 7px solid #fa0280;
+    border-radius: 50%;
+    width: 40%;
+    height: 60%;
+    color: #fa0280;
+}
+.icon_up1{
+    width: 40%;
+    height: 60%;
+    color: #fa0280;
+}
+
+
+.title_val{
+    font-size: clamp(15px, 10vw, 25px);   
+    color: #fa0280;
+    display: block;
+    height: 30%;
+    display: flex;
+
+    align-items: center;
+
+}
+.content_val{
+    font-size: clamp(10px, 10vw, 20px); 
+    height: 60%;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:justify;
+
+}
