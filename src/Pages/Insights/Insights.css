@@ -107,3 +107,82 @@ h1 {
     margin: 10px 0;
     line-height: 1.5;
 }
+
+
+
+
+
+
+#title_box{
+    height: 25%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#title_box span{
+    font-size: clamp(20px,20vw , 45px);
+    color: #fa0280;
+    font-weight: 100;
+}
+
+#cards_info_box{
+    height: 75%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    
+}
+.row_cards:nth-child(1){
+    height: 65%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+.row_cards:nth-child(2){
+    height: 35%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+}
+.dp_val_card1{
+    height: 85%;
+    width: 93.5%;
+    background-color: #FCFCFC;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+    margin-left: -1.7%;
+}
+#data_box{
+    height: 95%;
+    width: 25%;
+    background-color: #FCFCFC;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+}
+.dp_val_card{
+    height: 45%;
+    width: 95%;
+    background-color: #FCFCFC;
+    border-radius: 16px;
+    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+}
+#col_cards{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+

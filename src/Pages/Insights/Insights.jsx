@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Insights.css'; 
+import './Insights.css';
 import Menu from '../Components/Menu';
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -51,7 +51,32 @@ const Insights = () => {
         <div className="adm">
             <Menu />
             <div className="content">
-                <div className="insights-wrapper">
+                <div id="title_box">
+                    <span>Informações inteligentes sobre Precificação de Veículos</span>
+                </div>
+                <div id="cards_info_box">
+                    <div className="row_cards">
+                        <div id="data_box">
+
+                        </div>
+                        <div id="col_cards">
+                            <div className="dp_val_card">
+
+                            </div>
+                            <div className="dp_val_card">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row_cards">
+                        <div className="dp_val_card1">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                {/* <div className="insights-wrapper">
                     <div className="insights-header">
                         <h1>Insights sobre Precificação de Veículos</h1>
                         <div className="date-selection">
@@ -92,7 +117,7 @@ const Insights = () => {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
