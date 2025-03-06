@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Index.css';
 import Menu from '../Components/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faMap } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCar, faCity, faCrown, faCube, faGasPump, faGauge, faGear, faInfo, faLightbulb, faMap } from '@fortawesome/free-solid-svg-icons';
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 export default function Predict() {
@@ -138,47 +138,64 @@ export default function Predict() {
     setFormData({ ...formData, model: '', year_model: '' }); // Resetando model e year_model quando voltar para a previsão normal
   };
 
+  const messageInfo = () => {
+    alert("Colocar descrição aqui");
+  }
+
   return (
     <div className='predict'>
       <Menu />
       <div className='content-predict'>
         <div className='toggle-buttons'>
-          <button onClick={handleGeneralSelect}>Previsão Geral</button>
-          <button onClick={handleBrandSelect}>Previsão por Marca</button>
+
+          {/* <button onClick={handleGeneralSelect}>Previsão Geral</button>
+        
+          <button onClick={handleBrandSelect}>Previsão por Marca</button> */}
         </div>
 
         {/* Formulário de Previsão Normal (Com Modelo e Ano) */}
         {!isBrandPrediction && (
-          <form id="form" onSubmit={handleSubmit}>
-            <div className='column-predict-form'>
-              <div id="title-box">Previsão de preços por IA</div>
-              <div id="selects-box">
+          <div id="main_predict">
+            <div id="title-box-predict">Previsão de preços por IA <FontAwesomeIcon size='2x' icon={faLightbulb} /></div>
+            <div id="switch_container">
+              <div id="switch_box" onClick={handleGeneralSelect}>
+                <div id="switch">
+
+                </div>
+              </div>
+              <span>Modo playground</span>
+              <div id='icon-info' onClick={messageInfo}>i</div>
+            </div>
+            <div id="form">
+              <div className="col_options_form">
                 {[{ label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
-                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
-                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }].map(({ label, icon, name, list }) => (
-                    <div className='option-box' key={name}>
-                      <div className="label-box">
-                        <FontAwesomeIcon icon={icon} size='2x' />
-                        <label>{label}:</label>
-                      </div>
-                      <select name={name} value={formData[name]} onChange={handleChange}>
-                        <option value="">Selecione {label.toLowerCase()}</option>
-                        {list.map((item, index) => (
-                          <option key={index} value={item}>{item}</option>
-                        ))}
-                      </select>
+                { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
+                { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
+                { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }].map(({ label, icon, name, list }) => (
+                  <div className='option-box' key={name}>
+                    <div className="label-box">
+                      <FontAwesomeIcon icon={icon} size='2x' />
+                      <label>{label}:</label>
                     </div>
+                    <select name={name} value={formData[name]} onChange={handleChange}>
+                      <option value="">Selecione {label.toLowerCase()}</option>
+                      {list.map((item, index) => (
+                        <option key={index} value={item}>{item}</option>
+                      ))}
+                    </select>
+                  </div>
                 ))}
+              </div>
+              {/* <div id="selects-box">
+
                 <div className='option-box'>
                   <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
-              </div>
-            </div>
-            <div className='column-predict-form'>
-              {[{ label: "Modelo", icon: faCube, name: "model", type: "text" },
+              </div> */}
+              <div id="second_part_col_opt">
+                {[{ label: "Modelo", icon: faCube, name: "model", type: "text" },
                 { label: "Ano modelo", icon: faCalendar, name: "year_model", type: "number", min: 1950 },
                 { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
                 { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
@@ -188,9 +205,15 @@ export default function Predict() {
                     <input required type={type} name={name} placeholder=" " value={formData[name]} onChange={handleChange} min={min} />
                     <label>{label}:</label>
                   </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </form>
+
+          </div>
+
+          // <form id="form" onSubmit={handleSubmit}>
+
+          // </form>
         )}
 
         {/* Formulário de Previsão por Marca (Sem Modelo e Ano) */}
