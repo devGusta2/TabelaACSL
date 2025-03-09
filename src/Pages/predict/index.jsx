@@ -114,6 +114,12 @@ export default function Predict() {
     }
   };
 
+  const activePred = () => {
+    setActive(!active)
+    setIsBrandPrediction((prev) => !prev);
+
+  }
+
   return (
     <div className='predict'>
       <Menu />
@@ -133,7 +139,7 @@ export default function Predict() {
             </div>
 
             <div id="switch_container">
-              <div id="switch_box" onClick={() => setActive(!active)}>
+              <div id="switch_box" onClick={() => activePred()}>
                 <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
               </div>
               <span>Modo playground</span>
@@ -163,10 +169,10 @@ export default function Predict() {
                 ))}
 
                 <div className="result-box">
-                  <FontAwesomeIcon icon={faCar} size="2x" style={{color:'#EF44A1'}}/>
+                  {/* <FontAwesomeIcon icon={faCar} size="2x" style={{ color: '#EF44A1' }} /> */}
                   {prediction && (
                     <div className="result">
-                       <span>O valor estimado é:</span><span>{prediction}</span>
+                      <span>O valor estimado é:</span><span>{prediction}</span>
                     </div>
                   )}
                 </div>
@@ -197,104 +203,193 @@ export default function Predict() {
           </div>
         )}
         {/* Formulário de Previsão por Marca (Sem Modelo e Ano) */}
+
+
+
         {isBrandPrediction && (
-          <form id="brand-form" onSubmit={handleBrandSubmit}>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faCrown} size='2x' />
-                <label>Marca:</label>
+          <div id="main_predict">
+            <div id="title-box-predict">
+              Previsão de preços por IA <FontAwesomeIcon size="2x" icon={faLightbulb} />
+            </div>
+
+            <div id="switch_container">
+              <div id="switch_box" onClick={() => activePred()}>
+                <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
               </div>
-              <select name="brand" value={formData.brand} onChange={handleChange}>
-                <option value="">Selecione a marca</option>
-                {brandList.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
+              <span>Modo playground</span>
+              <div id="icon-info" onClick={() => alert("Simulação Inteligente de Preços para Veículos Inexistentes no Mercado Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <form id="form" onSubmit={handleBrandSubmit} style={{
+              display:'flex', flexDirection:'column'
+              
+              }}>
+              <div id="opt-brand-pred">
+                <div className="col_options_form">
+                {[
+                  { label: "Marca", icon: faCrown, name: "brand", list: brandList },
+                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
+                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
+                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }
+                ].map(({ label, icon, name, list }) => (
+                  <div className="option-box" key={name}>
+                    <div className="label-box">
+                      <FontAwesomeIcon icon={icon} size="2x" />
+                      <label>{label}:</label>
+                    </div>
+                    <select name={name} value={formData[name] || ""} onChange={handleChange}>
+                      <option value="">Selecione {label.toLowerCase()}</option>
+                      {list.map((item, index) => (
+                        <option key={index} value={item}>{item}</option>
+                      ))}
+                    </select>
+                  </div>
                 ))}
-              </select>
-            </div>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faCar} size='2x' />
-                <label>Carroceria:</label>
               </div>
-              <select name="bodywork" value={formData.bodywork} onChange={handleChange}>
-                <option value="">Selecione a carroceria</option>
-                {bodyworkList.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
+
+              <div id="second_part_col_opt">
+                {[
+                  { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
+                  { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
+                  { label: "Cidade", icon: faCity, name: "city", type: "text" }
+                ].map(({ label, icon, name, type, min }) => (
+                  <div className="option-box" key={name}>
+                    <FontAwesomeIcon icon={icon} className="icon-font" size="2x" style={{ color: "#EF44A1" }} />
+                    <input required type={type} name={name} placeholder=" " value={formData[name] || ""} onChange={handleChange} min={min} />
+                    <label>{label}:</label>
+                  </div>
                 ))}
-              </select>
-            </div>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faGauge} size='2x' />
-                <label>Quilometragem:</label>
+                <div className="option-box">
+                  <button type="submit">
+                    <h3>Prever</h3>
+                  </button>
+                </div>
               </div>
-              <input required type="number" name="mileage" value={formData.mileage} onChange={handleChange} min="0" />
-            </div>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faGear} size='2x' />
-                <label>Câmbio:</label>
+
+              
               </div>
-              <select name="gear" value={formData.gear} onChange={handleChange}>
-                <option value="">Selecione o câmbio</option>
-                {gearList.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))}
-              </select>
-            </div>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faGasPump} size='2x' />
-                <label>Combustível:</label>
-              </div>
-              <select name="fuel" value={formData.fuel} onChange={handleChange}>
-                <option value="">Selecione o combustível</option>
-                {fuelList.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))}
-              </select>
-            </div>
+              {brandPrediction && (
+                <div className="result-box" style={{width:'80%', height:'20%', flexDirection:'column', padding:'20px'}}>
+                  <h3>Previsões por Modelo:</h3>
+                  <ul>
+                    {brandPrediction.map((item, index) => (
+                      <li key={index}>
+                        <strong>{item.model}</strong>: R$ {item.predicted_value}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </form>
 
-
-
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faMap} size='2x' />
-                <label>Estado:</label>
-              </div>
-              <input required type="text" name="state" placeholder="Estado" value={formData.state} onChange={handleChange} />
-            </div>
-            <div className='option-box'>
-              <div className="label-box">
-                <FontAwesomeIcon icon={faCity} size='2x' />
-                <label>Cidade:</label>
-              </div>
-              <input required type="text" name="city" placeholder="Cidade" value={formData.city} onChange={handleChange} />
-            </div>
-            <div className='option-box'>
-              <button type="submit">
-                <h3>Prever</h3>
-              </button>
-            </div>
-          </form>
-        )}
-
-        {/* Resultado da Previsão */}
-
-
-        {/* Resultado da Previsão por Marca */}
-        {brandPrediction && (
-          <div className="result-box">
-            <h3>Previsões por Modelo:</h3>
-            <ul>
-              {brandPrediction.map((item, index) => (
-                <li key={index}>
-                  <strong>{item.model}</strong>: R$ {item.predicted_value}
-                </li>
-              ))}
-            </ul>
           </div>
+
+
+
+
+          //   <form id="brand-form" onSubmit={handleBrandSubmit}>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faCrown} size='2x' />
+          //         <label>Marca:</label>
+          //       </div>
+          //       <select name="brand" value={formData.brand} onChange={handleChange}>
+          //         <option value="">Selecione a marca</option>
+          //         {brandList.map((item, index) => (
+          //           <option key={index} value={item}>{item}</option>
+          //         ))}
+          //       </select>
+          //     </div>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faCar} size='2x' />
+          //         <label>Carroceria:</label>
+          //       </div>
+          //       <select name="bodywork" value={formData.bodywork} onChange={handleChange}>
+          //         <option value="">Selecione a carroceria</option>
+          //         {bodyworkList.map((item, index) => (
+          //           <option key={index} value={item}>{item}</option>
+          //         ))}
+          //       </select>
+          //     </div>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faGauge} size='2x' />
+          //         <label>Quilometragem:</label>
+          //       </div>
+          //       <input required type="number" name="mileage" value={formData.mileage} onChange={handleChange} min="0" />
+          //     </div>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faGear} size='2x' />
+          //         <label>Câmbio:</label>
+          //       </div>
+          //       <select name="gear" value={formData.gear} onChange={handleChange}>
+          //         <option value="">Selecione o câmbio</option>
+          //         {gearList.map((item, index) => (
+          //           <option key={index} value={item}>{item}</option>
+          //         ))}
+          //       </select>
+          //     </div>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faGasPump} size='2x' />
+          //         <label>Combustível:</label>
+          //       </div>
+          //       <select name="fuel" value={formData.fuel} onChange={handleChange}>
+          //         <option value="">Selecione o combustível</option>
+          //         {fuelList.map((item, index) => (
+          //           <option key={index} value={item}>{item}</option>
+          //         ))}
+          //       </select>
+          //     </div>
+
+
+
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faMap} size='2x' />
+          //         <label>Estado:</label>
+          //       </div>
+          //       <input required type="text" name="state" placeholder="Estado" value={formData.state} onChange={handleChange} />
+          //     </div>
+          //     <div className='option-box'>
+          //       <div className="label-box">
+          //         <FontAwesomeIcon icon={faCity} size='2x' />
+          //         <label>Cidade:</label>
+          //       </div>
+          //       <input required type="text" name="city" placeholder="Cidade" value={formData.city} onChange={handleChange} />
+          //     </div>
+          //     <div className='option-box'>
+          //       <button type="submit">
+          //         <h3>Prever</h3>
+          //       </button>
+          //     </div>
+          //     {brandPrediction && (
+          //   <div className="result-box">
+          //     <h3>Previsões por Modelo:</h3>
+          //     <ul>
+          //       {brandPrediction.map((item, index) => (
+          //         <li key={index}>
+          //           <strong>{item.model}</strong>: R$ {item.predicted_value}
+          //         </li>
+          //       ))}
+          //     </ul>
+          //   </div>
+          // )}
+          //   </form>
+
         )}
+
       </div>
     </div>
   );
