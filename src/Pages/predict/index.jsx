@@ -216,8 +216,8 @@ export default function Predict() {
               <div id="switch_box" onClick={() => activePred()}>
                 <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
               </div>
-              <span>Modo playground</span>
-              <div id="icon-info" onClick={() => alert("Simulação Inteligente de Preços para Veículos Inexistentes no Mercado Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
+              <span>Voltar para modo Geral</span>
+              <div id="icon-info" onClick={() => alert("Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
             </div>
 
 
@@ -277,9 +277,10 @@ export default function Predict() {
 
               
               </div>
+              <h3>Previsões por Modelo:</h3>
               {brandPrediction && (
-                <div className="result-box" style={{width:'80%', height:'20%', flexDirection:'column', padding:'20px'}}>
-                  <h3>Previsões por Modelo:</h3>
+                <div className="result-box" style={{width:'80%', height:'20%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
+          
                   <ul>
                     {brandPrediction.map((item, index) => (
                       <li key={index}>
