@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Insights.css';
 import Menu from '../Components/Menu';
-import { faCalendar, faArrowUp, faArrowDown, faChartBar, faCheck, faChargingStation, faChartArea, faChartColumn } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faArrowUp, faArrowDown, faChartBar, faCheck, faChartColumn } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
