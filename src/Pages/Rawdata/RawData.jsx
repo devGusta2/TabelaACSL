@@ -305,8 +305,7 @@ const RawData = () => {
                         <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x' icon={faDownload} />Download</button>
                     </div>
                 </div>
-                <div className="info">
-                    <form onSubmit={handleSubmit} className="form_pagination">
+                <form onSubmit={handleSubmit} className="form_pagination" >
                         <label>
                             Página:
                             <input min='1' type="number" value={page} onChange={handlePageChange} className="input_pagination" />
@@ -318,7 +317,9 @@ const RawData = () => {
                         </label>
                         <button type="submit" className="btn_pagination">Visualizar</button>
                     </form>
-                    <table>
+                <div className="info" style={{   overflow: 'auto'}}>
+                    
+                    <table >
                         <thead>
                             <tr>
                                 <th>Título</th>
@@ -329,7 +330,7 @@ const RawData = () => {
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             {editableRecords.map((record) => (
                                 <tr key={record.id}>
                                     <td>
