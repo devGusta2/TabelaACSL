@@ -265,7 +265,7 @@ const RawData = () => {
                         data: {
                             title: updatedRecord.title,
                             price: String(updatedRecord.price),
-                            description: updatedRecord.description,
+                            description: updatedRecord.description || '',
                             mileage: updatedRecord.mileage || 0,
                         },
                     },
