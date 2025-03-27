@@ -8,5 +8,62 @@
 #bg-home{
     height: 100%;
     width: 80%;
-    object-fit:fill;
+    background-color: #FFCFE9;
+    display: grid;
+    
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+.card-map-home{
+    background-color: #F8F8F8;
+    height: 90%;
+    width: 95%;
+    margin: auto;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #EF44A1;
+}
+
+.row-title-icon{
+    height: 30%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.text-dots{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    list-style: circle;
+    gap: 1em;
+    text-align: left;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+.text-dots ul{
+    margin-left: 10%;
+}
+
+.list{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
 }

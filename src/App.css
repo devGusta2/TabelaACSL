@@ -40,7 +40,7 @@ header{
   height: 70px;
   width: 70px;
 }
-ul{
+.ul-inicio{
   display: flex;
   flex-direction: row;
   justify-content: space-around;

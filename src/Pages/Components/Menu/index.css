@@ -28,6 +28,7 @@
     flex-direction: column;
     height: 30%;
     margin-top: -100%;
+    gap: 1em;
 }
 .menu li{
 

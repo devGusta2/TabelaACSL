@@ -196,7 +196,7 @@ const calcular = async () => {
                 <img src={logo} alt="" />
               </div>
 
-              <ul>
+              <ul className='ul-inicio'>
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
