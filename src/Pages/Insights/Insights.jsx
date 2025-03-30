@@ -53,8 +53,8 @@ const Insights = () => {
             <Menu />
             <div className="content">
                 <div id="title_box">
-                    <FontAwesomeIcon className="icon-pink" size='5x' icon={faChartBar} />
-                    <span>Informações inteligentes sobre Precificação de Veículos</span>
+                    <FontAwesomeIcon className="icon-pink" size='3x' icon={faChartBar} />
+                    <span>Informações Acionáveis</span>
                 </div>
 
                 <div id="data_box">
