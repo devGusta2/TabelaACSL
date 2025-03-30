@@ -53,58 +53,54 @@ const Insights = () => {
             <Menu />
             <div className="content">
                 <div id="title_box">
-                    <FontAwesomeIcon size='5x' icon={faChartBar} />
+                    <FontAwesomeIcon className="icon-pink" size='5x' icon={faChartBar} />
                     <span>Informações inteligentes sobre Precificação de Veículos</span>
+                </div>
+
+                <div id="data_box">
+                    <div className="inpt_label_field">
+                        <div className="label_icon_box">
+                            <FontAwesomeIcon className="icon-pink" size='3x' icon={faCalendar} />
+                            <label>Mês</label>
+                        </div>
+                        <input
+                            placeholder='Insira um mês'
+                            type="number"
+                            min="1"
+                            max="12"
+                            value={month}
+                            onChange={(e) => setMonth(Number(e.target.value))}
+                            required
+                        />
+                    </div>
+                    <div className="inpt_label_field">
+                        <div className="label_icon_box">
+                            <FontAwesomeIcon className="icon-pink" size='3x' icon={faCalendar} />
+                            <label>Ano</label>
+                        </div>
+                        <input
+                            type="number"
+                            min="2024"
+                            max={new Date().getFullYear()}
+                            value={year}
+                            onChange={(e) => setYear(Number(e.target.value))}
+                            required
+                            placeholder='Insira ano modelo'
+                        />
+                    </div>
                 </div>
 
                 {loading && <p className="loading-message">Carregando...</p>}
                 {error && <p className="error-message">Erro: {error}</p>}
+
                 {insightsData && (
-                    <div id="cards_info_box">
-                        <div className="row_cards">
-                            <div id="data_box">
-                                <div className="inpt_label_field">
-                                    <div className="label_icon_box">
-                                        <FontAwesomeIcon size='3x' icon={faCalendar} />
-                                        <label>Mês</label>
-                                    </div>
-                                    <input
-                                        placeholder='Insira um mês'
-                                        type="number"
-                                        min="1"
-                                        max="12"
-                                        value={month}
-                                        onChange={(e) => setMonth(Number(e.target.value))}
-                                        required
-                                    />
-                                </div>
-                                <div className="inpt_label_field">
-                                    <div className="label_icon_box">
-                                        <FontAwesomeIcon size='3x' icon={faCalendar} />
-                                        <label>Ano:</label>
-                                    </div>
-                                    <input
-                                        type="number"
-                                        min="2024"
-                                        max={new Date().getFullYear()}
-                                        value={year}
-                                        onChange={(e) => setYear(Number(e.target.value))}
-                                        required
-                                        placeholder='Insira ano modelo'
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row_cards">
-                            <div className="insights">
-                                <h2>Insights para {insightsData.year_reference}/{insightsData.month_reference}</h2>
-                                <ul>
-                                    {insightsData.insights.map((insight, index) => (
-                                        <li key={index}>{insight}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
+                    <div className="insights">
+                        <h2>Insights para {insightsData.year_reference}/{insightsData.month_reference}</h2>
+                        <ul>
+                            {insightsData.insights.map((insight, index) => (
+                                <li key={index}>{insight}</li>
+                            ))}
+                        </ul>
                     </div>
                 )}
             </div>

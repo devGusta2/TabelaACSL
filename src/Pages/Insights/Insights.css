@@ -1,14 +1,21 @@
-/* Align the date selectors at the top and next to each other */
+/* Deixa os ícones rosa */
+.icon-pink {
+    color: #ec4899;
+}
+
+/* Mantém os seletores de mês e ano no topo */
 #data_box {
     display: flex;
     justify-content: flex-start;
+    gap: 15px;
     margin-bottom: 20px;
+    margin-top: 10px; /* Ajuste para colar abaixo do título */
 }
 
+/* Alinha os campos de mês e ano verticalmente */
 .inpt_label_field {
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
 }
 
 .inpt_label_field input {
@@ -17,13 +24,13 @@
     font-size: 14px;
 }
 
-/* Adjust the title size and color */
+/* Estiliza o título */
 #title_box span {
     font-size: 1.5rem;
-    color: #ec4899; /* Baby pink color */
+    color: #ec4899;
 }
 
-/* Style the insights section */
+/* Estiliza a área de insights */
 .insights {
     background-color: #f9f9f9;
     padding: 20px;
@@ -31,21 +38,26 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Define a cor do título dos insights */
 .insights h2 {
     font-size: 1.25rem;
     margin-bottom: 10px;
-    color: #ec4899; /* Baby pink color */
+    color: #ec4899;
 }
 
+/* Remove marcadores da lista e ajusta espaçamento */
 .insights ul {
     list-style-type: none;
     padding: 0;
 }
 
+/* Deixa cada insight em uma linha separada */
 .insights li {
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
+    background-color: white;
+    margin-bottom: 5px;
     padding: 10px;
     font-size: 14px;
-    color: #333; /* Text color */
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
