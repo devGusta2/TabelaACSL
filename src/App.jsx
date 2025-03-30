@@ -132,6 +132,7 @@ const calcular = async () => {
         const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
             params: {
                 year_model: anoSelecionado,
+                is_active: true,
                 page: 1,
                 page_size: 10
             },
