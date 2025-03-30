@@ -152,3 +152,51 @@
     flex-direction: row;
 
 }
+
+.kpi-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-info {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ec4899;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Oculta o tooltip por padrão */
+.tooltip {
+    display: none;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Exibe o tooltip ao passar o mouse no ícone */
+.tooltip-container:hover .tooltip {
+    display: block;
+}

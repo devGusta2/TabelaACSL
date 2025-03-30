@@ -127,25 +127,32 @@ const Dashboard = () => {
                                 aria-label="Selecione o ano"
                             />
                         </label>
-                    </div>
+                   </div>
     {loadingCount > 0 && <p className="loading-message">Carregando...</p>}
     {error && <p className="error-message">Erro: {error}</p>}
     {(kpiData || {}) && (
         <div className="kpi-data">
             <div className="kpi-header">
                 <h2 className="text-xl">Visão Geral do Mercado {year}/{month}</h2>
-                <div
-                    id="icon-info"
-                    onClick={() => alert("Essas métricas representam um panorama geral dos anúncios de veículos disponíveis no mercado para o período selecionado.")}>
-                    i
+
+                {/* Ícone de informação com tooltip */}
+                <div className="tooltip-container">
+                    <div className="icon-info">i</div>
+                    <div className="tooltip">
+                        Esses indicadores representam um panorama abrangente do mercado automotivo
+                        para o período selecionado. O <strong>recorte</strong> considera todos os anúncios
+                        disponíveis no mês e ano de referência, permitindo uma análise completa da oferta de veículos.
+                    </div>
                 </div>
             </div>
+
             <p><strong>Total de anúncios:</strong> {kpiData?.total_ads ?? 0}</p>
             <p><strong>Ano modelo médio:</strong> {kpiData?.total_average_year_model ?? 0}</p>
             <p><strong>Preço médio:</strong> R$ {(kpiData?.total_average_price ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
         </div>
     )}
 </div>
+
 
                 <div className="dashboard-container">
                     <div id="title_chart_box">
