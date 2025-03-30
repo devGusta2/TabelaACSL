@@ -154,57 +154,74 @@ const Dashboard = () => {
 </div>
 
 
-                <div className="dashboard-container">
-                    <div id="title_chart_box">
-                        <h2 className="text-lg">Dispersão de Preços</h2>
-                        <h2 className="text-lg">Dispersão de Ano Modelo</h2>
+             <div className="dashboard-container">
+                <div id="title_chart_box">
+                    <h2 className="text-lg">Dispersão de Preços</h2>
+                    <div className="tooltip-container">
+                        <div className="icon-info">i</div>
+ <div className="tooltip">
+    Tais dados demonstram a distribuição dos preços mais ofertados, a análise se embasa no recorte dos <strong>10 preços mais frequentes</strong> do mercado para as determinadas datas de referência, evidenciando as faixas mais comuns de preço, revelando assim tendências predominantes e os clusters de mercado na área de precificação.
+</div>
                     </div>
-                    <div className="charts">
-                        <div className="row-chart">
-                            <ResponsiveContainer width="50%" height='100%'>
-                                <ScatterChart>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                    <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
-                                </ScatterChart>
-                            </ResponsiveContainer>
 
-                            <ResponsiveContainer width="50%" height='100%'>
-                                <ScatterChart>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                    <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
-                                </ScatterChart>
-                            </ResponsiveContainer>
+                    <h2 className="text-lg">Dispersão de Ano Modelo</h2>
+                    <div className="tooltip-container">
+                        <div className="icon-info">i</div>
+                        <div className="tooltip">
+                            <strong>Este gráfico mostra a dispersão dos anos de modelo mais frequentes no mercado de veículos, com um recorte baseado nos 10 anos de modelo mais frequentes.</strong>
+                            Ou seja, ele destaca os anos de modelo com maior presença no mercado, permitindo visualizar as faixas de anos que dominam a oferta de veículos disponíveis.
+                            <br /><br />
+                            Focar nos <strong>10 anos mais frequentes</strong> oferece uma visão detalhada das preferências do mercado e da disponibilidade de veículos em determinadas faixas de ano. Essa análise é importante para entender quais anos de modelo estão mais em alta, refletindo diretamente nas escolhas dos consumidores e na oferta de veículos no mercado.
                         </div>
-                        <div id="title_chart_box">
-                            <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
-                        </div>
-                        <div className="row-chart">
-
-                            <ResponsiveContainer width="90%" height='100%'>
-                                <ComposedChart data={geoChartData}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                     <XAxis dataKey="name" label={{ value: 'Estado', position: 'insideBottom', offset: -5 }} />
-                                    <YAxis yAxisId="left" orientation="left" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft' }} />
-                                    <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
-                                    <Tooltip />
-                                    <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Quant. Anúncios" />
-                                    <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
-                                </ComposedChart>
-                            </ResponsiveContainer>
-                        </div>
-                  
                     </div>
                 </div>
 
+                <div className="charts">
+                    <div className="row-chart">
+                        <ResponsiveContainer width="50%" height="100%">
+                            <ScatterChart>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
+                                <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
+                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
+                            </ScatterChart>
+                        </ResponsiveContainer>
+
+                        <ResponsiveContainer width="50%" height="100%">
+                            <ScatterChart>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
+                                <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
+                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
+                            </ScatterChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    <div id="title_chart_box">
+                        <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
+                    </div>
+
+                    <div className="row-chart">
+                        <ResponsiveContainer width="90%" height="100%">
+                            <ComposedChart data={geoChartData}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" label={{ value: 'Estado', position: 'insideBottom', offset: -5 }} />
+                                <YAxis yAxisId="left" orientation="left" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft' }} />
+                                <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
+                                <Tooltip />
+                                <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Quant. Anúncios" />
+                                <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
+                            </ComposedChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
             </div>
         </div>
-    );
+    </div>
+
+);
 };
 
 export default Dashboard;
