@@ -168,10 +168,8 @@ const Dashboard = () => {
                     <div className="tooltip-container">
                         <div className="icon-info">i</div>
                         <div className="tooltip">
-                            <strong>Este gráfico mostra a dispersão dos anos de modelo mais frequentes no mercado de veículos, com um recorte baseado nos 10 anos de modelo mais frequentes.</strong>
-                            Ou seja, ele destaca os anos de modelo com maior presença no mercado, permitindo visualizar as faixas de anos que dominam a oferta de veículos disponíveis.
-                            <br /><br />
-                            Focar nos <strong>10 anos mais frequentes</strong> oferece uma visão detalhada das preferências do mercado e da disponibilidade de veículos em determinadas faixas de ano. Essa análise é importante para entender quais anos de modelo estão mais em alta, refletindo diretamente nas escolhas dos consumidores e na oferta de veículos no mercado.
+                             Os seguintes dados mostram os anos modelo mais ofertados no mercado, com o recorte dos <strong>10 anos de modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação dos anos modelos mais procurados.
+
                         </div>
                     </div>
                 </div>
