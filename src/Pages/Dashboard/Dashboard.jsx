@@ -189,11 +189,11 @@ const Dashboard = () => {
                             <ResponsiveContainer width="90%" height='100%'>
                                 <ComposedChart data={geoChartData}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" />
-                                    <YAxis yAxisId="left" orientation="left" label={{ value: 'Total de Anúncios', angle: -90, position: 'insideLeft' }} />
+                                     <XAxis dataKey="name" label={{ value: 'Estado', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis yAxisId="left" orientation="left" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft' }} />
                                     <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
                                     <Tooltip />
-                                    <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Total de Anúncios" />
+                                    <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Quant. Anúncios" />
                                     <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
                                 </ComposedChart>
                             </ResponsiveContainer>
