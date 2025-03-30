@@ -182,7 +182,7 @@ const Dashboard = () => {
                             </ResponsiveContainer>
                         </div>
                         <div id="title_chart_box">
-                            <h2 className="text-lg mt-6">Correlação por Estado</h2>
+                            <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
                         </div>
                         <div className="row-chart">
 
