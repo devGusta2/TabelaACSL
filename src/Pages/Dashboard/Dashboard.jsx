@@ -197,10 +197,16 @@ const Dashboard = () => {
                         </ResponsiveContainer>
                     </div>
 
-                    <div id="title_chart_box">
-                        <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
-                    </div>
+                  <div id="title_chart_box">
+    <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
+    <div className="tooltip-container">
+        <div className="icon-info">i</div>
+        <div className="tooltip">
+                       A análise considera os <strong>10 estados com maior número de anúncios</strong>, permitindo entender a relação entre a oferta de veículos e os preços médios em regiões com maior representatividade no mercado.
 
+        </div>
+    </div>
+</div>
                     <div className="row-chart">
                         <ResponsiveContainer width="90%" height="100%">
                             <ComposedChart data={geoChartData}>
