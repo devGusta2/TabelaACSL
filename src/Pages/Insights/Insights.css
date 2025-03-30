@@ -1,288 +1,74 @@
+.content{
+    height: 100%;
+    width: 80%;
 
-.insights-wrapper {
+}
+/* Deixa os ícones rosa */
+.icon-pink {
+    color: #ec4899;
+}
+
+/* Mantém os seletores de mês e ano no topo */
+#data_box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px; /* Ajuste para colar abaixo do título */
+}
+
+/* Alinha os campos de mês e ano verticalmente */
+.inpt_label_field {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    min-height: 100vh;
 }
 
-.insights-header {
-    text-align: center;
-    margin-bottom: 20px;
+.inpt_label_field input {
+    width: 100px;
+    padding: 5px;
+    font-size: 14px;
 }
 
-.date-selection {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
+/* Estiliza o título */
+#title_box span {
+    font-size: 1.5rem;
+    color: #ec4899;
 }
 
-.date-selection label {
-    font-weight: bold;
-    color: #ff66b2;
-}
-
-.date-selection input {
-    padding: 8px;
-    border: 1px solid #ff99cc;
-    border-radius: 4px;
-}
-
-.insights-container {
-    background-color: #ffe6f2;
+/* Estiliza a área de insights */
+.insights {
+    background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.insights-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-bottom: 20px;
 }
 
-.insights-form button {
-    padding: 10px;
-    background-color: #ff66b2;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.insights-form button:hover {
-    background-color: #ff3385;
-}
-
-.loading-message,
-.error-message {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.loading-message {
-    color: #ff66b2;
-}
-
-.error-message {
-    color: #fa0280;
-}
-
-h1 {
-    color: #ff66b2;
-    margin-bottom: 20px;
-}
-
-.analyze-data {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    text-align: left;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    white-space: pre-wrap;
-}
-
-.analyze-data h2 {
-    color: #ff66b2;
+/* Define a cor do título dos insights */
+.insights h2 {
+    font-size: 1.25rem;
     margin-bottom: 10px;
+    color: #ec4899;
 }
 
-.analyze-data p {
-    margin: 10px 0;
-    line-height: 1.5;
-}
-
-
-
-
-
-
-#title_box{
-    height: 25%;
+/* Ajustar a lista de insights para ocupar toda a largura disponível */
+.insights ul {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    color: #fa0280;
-}
-#title_box span{
-    font-size: clamp(20px,20vw , 40px);
-
-    font-weight: 100;
+    max-width: 800px; /* Define uma largura máxima para não ficar muito espalhado */
+    margin: 0 auto; /* Centraliza a lista */
+    padding: 0;
+    list-style-type: none;
+    display: block; /* Garante que a lista não seja flexível */
 }
 
-#cards_info_box{
-    height: 75%;
+/* Garantir que cada insight fique um abaixo do outro */
+.insights li {
+    display: block; /* Garante que cada li ocupe uma linha inteira */
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    
-}
-.row_cards:nth-child(1){
-    height: 65%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    
-}
-.row_cards:nth-child(2){
-    height: 35%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-
-}
-.dp_val_card1{
-    height: 85%;
-    width: 93.5%;
-    background-color: #FCFCFC;
-    border-radius: 16px;
-    box-shadow: 4px 4px 10px rgb(184, 184, 184);
-    margin-left: -1.7%;
-    display: flex;
-    flex-direction: row;
-}
-#data_box{
-    height: 95%;
-    width: 25%;
-    background-color: #FCFCFC;
-    border-radius: 16px;
-    box-shadow: 4px 4px 10px rgb(184, 184, 184);
-}
-.dp_val_card{
-    height: 45%;
-    width: 95%;
-    background-color: #FCFCFC;
-    border-radius: 16px;
-    box-shadow: 4px 4px 10px rgb(184, 184, 184);
-    display: flex;
-    flex-direction: row;
-}
-#col_cards{
-    height: 100%;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-
-}
-.label_icon_box{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-  
-    padding: 0 10%;
-    box-sizing: border-box;
-    gap: 1em;
-    color: #fa0280;
-    height: 50%;
-    width: 100%;
-
-}
-.inpt_label_field{
-    height: 45%;
-    display: flex;
-    width: 100%;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-
-}
-.inpt_label_field label{
-    display: block;
-    font-size: clamp(16px,10vh,25px);
-}
-
-.inpt_label_field input{
-    height: 25%;
-    width: 90%;
-    box-shadow: 4px 4px 10px rgb(184, 184, 184);
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
     border-radius: 5px;
-    outline: 0;
-    border: 0;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-
-.icon_box_val{
-    width: 30% ;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.icon_box_val1{
-    width: 60% ;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.icon_box_content{
-    width: 70%;
-    height: 100%;
-    padding: 0px 3% 0 0px;
-    box-sizing: border-box;
-}
-
-
-.icon_up{
-    border: 7px solid #fa0280;
-    border-radius: 50%;
-    width: 40%;
-    height: 60%;
-    color: #fa0280;
-}
-.icon_up1{
-    width: 40%;
-    height: 60%;
-    color: #fa0280;
-}
-
-
-.title_val{
-    font-size: clamp(15px, 10vw, 25px);   
-    color: #fa0280;
-    display: block;
-    height: 30%;
-    display: flex;
-
-    align-items: center;
-
-}
-.content_val{
-    font-size: clamp(10px, 10vw, 20px); 
-    height: 60%;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align:justify;
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
 }
