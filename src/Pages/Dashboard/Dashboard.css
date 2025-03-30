@@ -184,16 +184,24 @@
 .tooltip {
     display: none;
     position: absolute;
-    bottom: 25px;
+    bottom: 100%; /* Faz o tooltip aparecer acima do ícone */
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     font-size: 12px;
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: break-word; /* Quebra palavras longas */
+    max-width: 220px; /* Define uma largura máxima */
     z-index: 10;
+
+    /* Faz o texto se adaptar ao tamanho necessário */
+    width: auto;
+    min-width: 150px;
+    max-height: 120px; /* Garante que a caixa não fique gigante */
+    overflow: auto; /* Adiciona rolagem caso o texto seja muito grande */
 }
 
 /* Exibe o tooltip ao passar o mouse no ícone */
