@@ -99,7 +99,7 @@ const Dashboard = () => {
 
                 <div className="dashboard-header">
                     <div className="title_box">
-                        <h2 className='text-2xl '>Indicadores gerais da dashboard</h2>
+                        <h2 className='text-2xl '>Dashboard {year}/{month}</h2>
                     </div>
                     <div className="date-selection">
 
@@ -133,14 +133,14 @@ const Dashboard = () => {
     {(kpiData || {}) && (
         <div className="kpi-data">
             <div className="kpi-header">
-                <h2 className="text-xl">Visão Geral do Mercado {year}/{month}</h2>
+                <h2 className="text-xl">Visão Geral do Mercado</h2>
 
                 {/* Ícone de informação com tooltip */}
                 <div className="tooltip-container">
                     <div className="icon-info">i</div>
                     <div className="tooltip">
-                        Esses indicadores representam um panorama abrangente do mercado automotivo
-                        para o período selecionado. O <strong>recorte</strong> considera todos os anúncios
+                        Tais indicadores representam um panorama abrangente do mercado automotivo
+                        para o período selecionado. O recorte considera <strong>todos</strong>  os anúncios
                         disponíveis no mês e ano de referência, permitindo uma análise completa da oferta de veículos.
                     </div>
                 </div>
