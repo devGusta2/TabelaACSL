@@ -1,3 +1,8 @@
+.content{
+    height: 100%;
+    width: 80%;
+
+}
 /* Deixa os ícones rosa */
 .icon-pink {
     color: #ec4899;
@@ -45,19 +50,25 @@
     color: #ec4899;
 }
 
-/* Remove marcadores da lista e ajusta espaçamento */
+/* Ajustar a lista de insights para ocupar toda a largura disponível */
 .insights ul {
-    list-style-type: none;
+    width: 100%;
+    max-width: 800px; /* Define uma largura máxima para não ficar muito espalhado */
+    margin: 0 auto; /* Centraliza a lista */
     padding: 0;
+    list-style-type: none;
+    display: block; /* Garante que a lista não seja flexível */
 }
 
-/* Deixa cada insight em uma linha separada */
+/* Garantir que cada insight fique um abaixo do outro */
 .insights li {
-    background-color: white;
-    margin-bottom: 5px;
-    padding: 10px;
-    font-size: 14px;
-    color: #333;
+    display: block; /* Garante que cada li ocupe uma linha inteira */
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
 }
