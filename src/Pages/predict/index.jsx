@@ -133,15 +133,15 @@ export default function Predict() {
         {!isBrandPrediction && (
           <div id="main_predict">
             <div id="title-box-predict">
-              Previsão de preços por IA <FontAwesomeIcon size="2x" icon={faLightbulb} />
+              Previsão de preços com Inteligência Artificial <FontAwesomeIcon size="2x" icon={faLightbulb} />
             </div>
 
             <div id="switch_container">
               <div id="switch_box" onClick={() => activePred()}>
                 <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
               </div>
-              <span>Modo playground</span>
-              <div id="icon-info" onClick={() => alert("Simulação Inteligente de Preços para Veículos Inexistentes no Mercado Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
+              <span>Previsão Exploratória</span>
+              <div id="icon-info" onClick={() => alert("Preveja o preço de veículos personalizados com base em características hipotéticas, Explore como diferentes configurações impactam o preço de um veículo, utilizando dados históricos para obter estimativas de preços em cenários alternativos.")}>i</div>
             </div>
 
             <form id="form" onSubmit={handleSubmit}>
@@ -211,8 +211,8 @@ export default function Predict() {
               <div id="switch_box" onClick={() => activePred()}>
                 <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
               </div>
-              <span>Voltar para modo Geral</span>
-              <div id="icon-info" onClick={() => alert("Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
+              <span>Previsão por Marca</span>
+              <div id="icon-info" onClick={() => alert("Preveja o preço de todos os modelos de uma marca, com base nos dados históricos já existentes para seus respectivos modelos.")}>i</div>
             </div>
 
             <form id="form" onSubmit={handleBrandSubmit} style={{
