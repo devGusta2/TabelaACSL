@@ -4,6 +4,9 @@ import car from '../src/assets/revuelto-porquinho-da-india.png';
 import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+
+import carDefinition from '../src/assets/carDefinition.png'
+import handShakeImg from '../src/assets/handshake.jpg'
 import {
     faCrown,
     faCalendarDays,
@@ -360,6 +363,44 @@ const calcular = async () => {
                     suas estratégias de precificação.
                 </span>
               </div>
+            </div>
+          </div>
+        </section>
+        <section id='secttion-drive-intel-aplications'>
+          <div className="row-aplications-driveintel">
+            <div className="img-box-aplications">
+              <img src={handShakeImg} alt="" className='img-aplications'/>
+            </div>
+            <div className="text-aplications-box">
+              <h1>Para quem o DriveIntel é relevante ?</h1>
+              <span>
+                O DriveIntel ajuda lojistas, 
+                concessionárias, gestores de frotas, 
+                empresas de aluguel, investidores, 
+                instituições financeiras e leiloeiros 
+                a tomar decisões estratégicas, como 
+                definir preços, prever variações de 
+                mercado, calcular ...
+              </span>
+              <Link   className='aplications-btn' to='/pages/Description/Description-1'><h2>Ler mais</h2></Link>
+             
+            </div>
+          </div>
+          <div className="row-aplications-driveintel">
+            <div className="img-box-aplications">
+              <img src={carDefinition} alt="" className='img-aplications'/>
+            </div>
+            <div className="text-aplications-box">
+              <h1>Definição do DriveIntel</h1>
+              <span>
+              O DriveIntel é uma ferramenta de inteligência de 
+              mercado para precificação automotiva, desenvolvida 
+              para apoiar negócios do setor na tomada de decisão 
+              estratégica de preços. Ele coleta e analisa dados 
+              históricos e atuais de anúncios de veículos por 
+              meio de web scraping (RPA) ...
+              </span>
+              <Link   className='aplications-btn' to='/pages/Description/Description-2'><h2>Ler mais</h2></Link>
             </div>
           </div>
         </section>
