@@ -168,7 +168,7 @@ const Dashboard = () => {
                     <div className="tooltip-container">
                         <div className="icon-info">i</div>
                         <div className="tooltip">
-                             Os seguintes dados mostram os anos modelo mais ofertados, com o recorte dos <strong>10 anos modelos mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação dos anos modelos mais procurados.
+                             Os seguintes dados mostram os anos-modelo mais ofertados, com o recorte dos <strong>10 anos-modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação de períodos em que o mercado está mais aquecido.
 
                         </div>
                     </div>
