@@ -5,9 +5,7 @@ const Tooltip = ({ text, children }) => {
     return (
         <div className="tooltip-container">
             <div className="icon-info">i</div>
-            <div className="tooltip">
-                {text}
-            </div>
+            <div className="tooltip" dangerouslySetInnerHTML={{ __html: text }} />
             {children}
         </div>
     );

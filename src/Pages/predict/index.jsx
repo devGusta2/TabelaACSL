@@ -142,7 +142,7 @@ export default function Predict() {
     <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
   </div>
   <span>Previsão Exploratória</span>
-  <Tooltip text="Preveja o preço de veículos personalizados com base em características hipotéticas, Explore como diferentes configurações impactam o preço de um veículo, utilizando dados históricos para obter estimativas de preços em cenários alternativos.">
+  <Tooltip text="Preveja o preço de veículos personalizados com base em <strong>características hipotéticas</strong>, Explore como diferentes configurações impactam o preço de um veículo, utilizando dados históricos para obter estimativas de preços em <strong>cenários alternativos</strong>.">
     <div ></div>
   </Tooltip>
 </div>
@@ -215,7 +215,7 @@ export default function Predict() {
         <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
       </div>
       <span>Previsão por Marca</span>
-      <Tooltip text="Preveja o preço de todos os modelos de uma marca, com base nos dados históricos já existentes para seus respectivos modelos.">
+      <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
         <div></div>
       </Tooltip>
     </div>
