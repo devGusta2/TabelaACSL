@@ -96,10 +96,8 @@ export default function Predict() {
     if (!userToken) return console.error("Erro: Token não encontrado!");
 
     try {
-      const { brand, mileage, gear, fuel, bodywork, city, state } = formData;
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {
-        mileage, gear, fuel, bodywork, city, state
-      }, {
+      const { brand } = formData;
+      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {}, {
         headers: {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "69420",
@@ -237,9 +235,6 @@ export default function Predict() {
                 <div className="col_options_form">
                 {[
                   { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
-                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
-                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }
                 ].map(({ label, icon, name, list }) => (
                   <div className="option-box" key={name}>
                     <div className="label-box">
@@ -256,24 +251,12 @@ export default function Predict() {
                 ))}
               </div>
 
-              <div id="second_part_col_opt">
-                {[
-                  { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
-                  { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
-                  { label: "Cidade", icon: faCity, name: "city", type: "text" }
-                ].map(({ label, icon, name, type, min }) => (
-                  <div className="option-box" key={name}>
-                    <FontAwesomeIcon icon={icon} className="icon-font" size="2x" style={{ color: "#EF44A1" }} />
-                    <input required type={type} name={name} placeholder=" " value={formData[name] || ""} onChange={handleChange} min={min} />
-                    <label>{label}:</label>
-                  </div>
-                ))}
+                
                 <div className="option-box">
                   <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
-              </div>
 
               
               </div>
