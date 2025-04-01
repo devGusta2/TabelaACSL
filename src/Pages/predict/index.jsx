@@ -204,7 +204,7 @@ export default function Predict() {
         {isBrandPrediction && (
           <div id="main_predict">
             <div id="title-box-predict">
-              Previsão de preços por IA <FontAwesomeIcon size="2x" icon={faLightbulb} />
+              Previsão de preços com Inteligência Artificial<FontAwesomeIcon size="2x" icon={faLightbulb} />
             </div>
 
             <div id="switch_container">
