@@ -59,12 +59,13 @@ export default function Login() {
                     canAcesseInsights: response.data.user.can_insights ? "True" : "False",
                     canPricePredict: response.data.user.can_predict ? "True" : "False",
                     canDataVisualization: response.data.user.can_data_visualization ? "True" : "False",
-                    canFinalReport: response.data.user.can_final_report ? "True" : "False"
+                    canFinalReport: response.data.user.can_final_report ? "True" : "False",
+                    canStats: response.data.user.can_stats ? "True" : "False"
                 };
             
                 localStorage.setItem("userPermissions", JSON.stringify(userPermissions));
             }
-            console.log( response.data.user.can_final_report,response.data.user.can_insights , response.data.user.can_predict)
+            console.log( response.data.user.can_final_report,response.data.user.can_insights , response.data.user.can_predict, response.data.user.can_stats)
             // Redireciona após o login bem-sucedido
              navigate("../Pages/Home");  // Substitua "/dashboard" pela rota desejada
           

@@ -104,7 +104,7 @@ export default function Menu() {
                     {permission.canStats === "True" && (
                         <li>
                             <Link to="../Pages/FinalReport">
-                                <FontAwesomeIcon icon={faChartPie} size="2x" />  {/* BUG não aparece para usuário corporativo que tem a permissão */}
+                                <FontAwesomeIcon icon={faChartPie} size="2x" />
                                 <h3>Estatísticas</h3>
                             </Link>
                         </li>

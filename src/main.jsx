@@ -12,6 +12,7 @@ import Cadastro from './Pages/Cadastro/index.jsx';
 import Home from './Pages/Home/index.jsx';
 import FinalReport from './Pages/FinalReport/FinalReport.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';
+import Stats from "./Pages/Stats/Stats.jsx";
 // Renderização correta com React 18
 
 createRoot(document.getElementById('root')).render(
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/pages/insights" element={<Insights />} />
           <Route path="/pages/FinalReport" element={<FinalReport />} />
           <Route path="/pages/Dashboard" element={<Dashboard />} />
+          <Route path="/pages/Stats" element={<Stats />} />
         </Route>
       </Routes>
     </BrowserRouter>
