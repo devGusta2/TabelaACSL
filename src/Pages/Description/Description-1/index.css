@@ -83,3 +83,6 @@
     display: flex;
     text-align: justify;
   }
+  .desc-publico-alvo-page li::marker{
+    color: #EF44A1;
+  }
