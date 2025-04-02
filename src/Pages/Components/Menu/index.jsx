@@ -103,7 +103,7 @@ export default function Menu() {
                     )}
                     {permission.canStats === "True" && (
                         <li>
-                            <Link to="../Pages/FinalReport">
+                            <Link to="../Pages/Stats">
                                 <FontAwesomeIcon icon={faChartPie} size="2x" />
                                 <h3>Estatísticas</h3>
                             </Link>
