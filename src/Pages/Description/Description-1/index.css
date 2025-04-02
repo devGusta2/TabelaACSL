@@ -27,7 +27,7 @@
   
   .section-title {
     font-size: 1.8rem;
-    color: #2c3e50;
+    color: #EF44A1;
     margin-bottom: 15px;
     font-weight: bold;
     text-align: center;
@@ -44,7 +44,7 @@
   .list li {
     display: flex;
     align-items: center;
-    background-color: #ecf0f1;
+    color: white;
     padding: 20px;
     border-radius: 8px;
     width: 250px;
@@ -70,5 +70,16 @@
   .relevant-section,
   .not-relevant-section {
     margin-bottom: 40px;
+    display: flex;
+    gap: 3em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
   
+
+  .desc-publico-alvo-page{
+    font-size: 25px;
+    display: flex;
+    text-align: justify;
+  }

@@ -77,4 +77,23 @@ body {
 
 .points-section {
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+#list-div ul{
+  display: flex;
+  list-style: disc;
+  flex-direction: column;
+  justify-content: space-around;
+  list
+
+}
+#list-div ul li::marker{
+  color: #EF44A1;
+}
+.desc-publico-alvo-page{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

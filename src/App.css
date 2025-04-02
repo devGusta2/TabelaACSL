@@ -939,7 +939,7 @@ justify-content: space-around;
   font-size: clamp(20px,100vw,55px);
 }
 .text-aplications-box span{
-  font-size: clamp(20px,100vw,30px);
+  font-size: clamp(20px,100vw,25px);
 }
 .aplications-btn{
   height: 80px;
