@@ -3,7 +3,15 @@ import './index.css';
 import logo from '../../../../src/assets/logo4.png';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChartLine, faDatabase, faCalendar, faHome, faChartBar, faFileAlt} from '@fortawesome/free-solid-svg-icons';
+import {
+    faChartLine,
+    faDatabase,
+    faCalendar,
+    faHome,
+    faChartBar,
+    faFileAlt,
+    faChartPie
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
     const [permission, setPermission] = useState({
@@ -11,7 +19,8 @@ export default function Menu() {
         canAcesseInsights: "False",
         canPricePredict: "False",
         canDataVisualization: "False",
-        canFinalReport: "False"
+        canFinalReport: "False",
+        canStats: "False"
     });
 
     useEffect(() => {
@@ -24,7 +33,8 @@ export default function Menu() {
                 canAcesseInsights: "True",
                 canPricePredict: "True",
                 canDataVisualization: "True",
-                canFinalReport: "True"
+                canFinalReport: "True",
+                canStats: "True"
             });
         } else {
             // Se não for admin, pega as permissões do localStorage (se existirem)
@@ -33,7 +43,8 @@ export default function Menu() {
                 canAcesseInsights: "False",
                 canPricePredict: "False",
                 canDataVisualization: "False",
-                canFinalReport: "False"
+                canFinalReport: "False",
+                canStats: "False"
             };
             setPermission(storedPermissions);
         }
@@ -87,6 +98,14 @@ export default function Menu() {
                             <Link to="../Pages/FinalReport">
                                 <FontAwesomeIcon icon={faFileAlt} size="2x" />
                                 <h3>Relatórios</h3>
+                            </Link>
+                        </li>
+                    )}
+                    {permission.canStats === "True" && (
+                        <li>
+                            <Link to="../Pages/FinalReport">
+                                <FontAwesomeIcon icon={faChartPie} size="2x" />  {/* BUG não aparece para usuário corporativo que tem a permissão */}
+                                <h3>Estatísticas</h3>
                             </Link>
                         </li>
                     )}

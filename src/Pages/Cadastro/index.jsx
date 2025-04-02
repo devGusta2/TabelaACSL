@@ -18,6 +18,7 @@ export default function Cadastro() {
     const [canFinalReport, setCanFinalReport] = useState(false);
     const [canPredict, setCanPredict] = useState(false);
     const [canDataVisualization, setCanDataVisualization] = useState(false);
+    const [canStats, setCanStats] = useState(false);
 
 
     const navigate = useNavigate();
@@ -42,7 +43,8 @@ export default function Cadastro() {
             can_insights: canInsights, // Valor do checkbox
             can_final_report: canFinalReport, // Valor do checkbox
             can_predict: canPredict, // Valor do checkbox
-            can_data_visualization: canDataVisualization // Valor do checkbox
+            can_data_visualization: canDataVisualization, // Valor do checkbox
+            can_stats: canStats // Valor do checkbox
         };
 
         try {
@@ -149,6 +151,14 @@ export default function Cadastro() {
                             onChange={(e) => setCanDataVisualization(e.target.checked)}
                         />
                         <label>Visualização de dados</label>
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={canStats}
+                            onChange={(e) => setCanStats(e.target.checked)}
+                        />
+                        <label>Estatísticas</label>
                     </label>
                 </div>
                 <div id="bnt-box-cad">
