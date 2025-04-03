@@ -122,8 +122,9 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 0 5%;
+    justify-content: center;
+    gap: 5%;
+    padding: 0 10%;
     box-sizing: border-box;
 }
 

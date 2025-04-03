@@ -165,9 +165,9 @@ const Dashboard = () => {
 
 
                         <h2 className="text-lg">Dispersão de Ano Modelo</h2>
-                        <Tooltip  style={{marginLeft:'-20px'}}text="
+                        <Tooltip  text="
                               Os seguintes dados mostram os anos-modelo mais ofertados, com o recorte dos <strong>10 anos-modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação de períodos em que o mercado está mais aquecido.">
-                            <div ></div>
+                            
                         </Tooltip>
 
                     </div>
