@@ -23,7 +23,7 @@
     display: none;
     position: absolute;
     top: 50%; /* Alinha verticalmente no meio do ícone */
-    left: 110%; /* Coloca o tooltip à direita do ícone */
+     /* Coloca o tooltip à direita do ícone */
     transform: translateY(-50%); /* Centraliza o tooltip verticalmente em relação ao ícone */
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
@@ -38,6 +38,8 @@
     min-width: 200px;
     max-height: 200px;
     overflow: visible;
+    margin-left: 200%;
+    overflow: auto;
 }
 
 /* Exibe o tooltip ao passar o mouse no ícone */
@@ -48,5 +50,6 @@
 /* Responsivo: Se a posição do ícone estiver perto da borda direita, exibe o tooltip à esquerda */
 .tooltip-container:hover .tooltip {
     left: auto;
-    right: 110%; /* Coloca o tooltip à esquerda do ícone */
+    margin-left: 30px; /* Coloca o tooltip à esquerda do ícone */
+
 }

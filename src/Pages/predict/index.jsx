@@ -142,7 +142,8 @@ export default function Predict() {
     <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
   </div>
   <span>Previsão Exploratória</span>
-  <Tooltip text="Preveja o preço de veículos personalizados com base em <strong>características hipotéticas</strong>. Explore como diferentes configurações afetam o preço de um automóvel, considerando <strong>cenários alternativos</strong> e obtendo estimativas para essas variações.">
+  <Tooltip text="Preveja
+ o preço de veículos personalizados com base em <strong>características hipotéticas</strong>. Explore como diferentes configurações afetam o preço de um automóvel, considerando <strong>cenários alternativos</strong> e obtendo estimativas para essas variações.">
     <div ></div>
   </Tooltip>
 </div>
@@ -229,7 +230,7 @@ export default function Predict() {
                 {[
                   { label: "Marca", icon: faCrown, name: "brand", list: brandList },
                 ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name}>
+                  <div className="option-box" key={name} style={{height:'100px'}}>
                     <div className="label-box">
                       <FontAwesomeIcon icon={icon} size="2x" />
                       <label>{label}:</label>
@@ -253,11 +254,11 @@ export default function Predict() {
 
               
               </div>
-              <h3>Previsões por Modelo:</h3>
+      
               {brandPrediction && (
-                <div className="result-box" style={{width:'80%', height:'20%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
-          
-                  <ul>
+                <div className="result-box" style={{width:'80%', height:'40%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
+                  <h3>Previsões por Modelo:</h3>
+                  <ul className='ul-results'>
                     {brandPrediction.map((item, index) => (
                       <li key={index}>
                         <strong>{item.model}</strong>: R$ {item.predicted_value}

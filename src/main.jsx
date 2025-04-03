@@ -12,6 +12,8 @@ import Cadastro from './Pages/Cadastro/index.jsx';
 import Home from './Pages/Home/index.jsx';
 import FinalReport from './Pages/FinalReport/FinalReport.jsx';
 import Dashboard from './Pages/Dashboard/Dashboard.jsx';
+import Description1 from './Pages/Description/Description-1/index.jsx';
+import Description2 from './Pages/Description/Description-2/index.jsx';
 // Renderização correta com React 18
 
 createRoot(document.getElementById('root')).render(
@@ -21,6 +23,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/pages/Login" element={<Login />} />
         <Route path="/pages/Cadastro" element={<Cadastro />} />
+        <Route path="/pages/Description/Description-1" element={<Description1 />} />
+        <Route path="/pages/Description/Description-2" element={<Description2 />} />
         {/* Rotas protegidas */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/pages/Home" element={<Home />} />
