@@ -28,7 +28,9 @@ header{
 .inpt_list{
   display: block;
 }
-
+#footer{
+  margin-top: 10%;
+}
 .footer-content {
   background-color: var(--header-color); /* Use the same color as the header */
   color: #000000;
