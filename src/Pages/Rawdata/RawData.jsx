@@ -216,7 +216,7 @@ const RawData = () => {
                     {
                         record_id: id,
                         data: {
-                            price: recordToDuplicate.price || 0,
+                            price: String(recordToDuplicate.price)  || 0,
                             description: recordToDuplicate.description || '',
                             mileage: recordToDuplicate.mileage || 0,
                             title: recordToDuplicate.title || '',
@@ -264,8 +264,8 @@ const RawData = () => {
                         record_id: id,
                         data: {
                             title: updatedRecord.title,
-                            price: updatedRecord.price,
-                            description: updatedRecord.description,
+                            price: String(updatedRecord.price),
+                            description: updatedRecord.description || '',
                             mileage: updatedRecord.mileage || 0,
                         },
                     },

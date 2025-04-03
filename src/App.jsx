@@ -4,6 +4,9 @@ import car from '../src/assets/revuelto-porquinho-da-india.png';
 import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+
+import carDefinition from '../src/assets/carDefinition.png'
+import handShakeImg from '../src/assets/handshake.jpg'
 import {
     faCrown,
     faCalendarDays,
@@ -132,6 +135,7 @@ const calcular = async () => {
         const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
             params: {
                 year_model: anoSelecionado,
+                is_active: true,
                 page: 1,
                 page_size: 10
             },
@@ -200,6 +204,7 @@ const calcular = async () => {
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
+                <li><a href="#secttion-drive-intel-aplications">Púbico Alvo e Aplicações</a></li>
                 <li><Link to='/pages/cadastro'>Autenticação</Link></li>
               </ul>
             </nav>
@@ -359,6 +364,44 @@ const calcular = async () => {
                     suas estratégias de precificação.
                 </span>
               </div>
+            </div>
+          </div>
+        </section>
+        <section id='secttion-drive-intel-aplications'>
+          <div className="row-aplications-driveintel">
+            <div className="img-box-aplications">
+              <img src={handShakeImg} alt="" className='img-aplications'/>
+            </div>
+            <div className="text-aplications-box">
+              <h1>Para quem o DriveIntel é relevante ?</h1>
+              <span>
+                O DriveIntel ajuda lojistas, 
+                concessionárias, gestores de frotas, 
+                empresas de aluguel, investidores, 
+                instituições financeiras e leiloeiros 
+                a tomar decisões estratégicas, como 
+                definir preços, prever variações de 
+                mercado, calcular ...
+              </span>
+              <Link   className='aplications-btn' to='/pages/Description/Description-1'><h2>Ler mais</h2></Link>
+             
+            </div>
+          </div>
+          <div className="row-aplications-driveintel">
+            <div className="img-box-aplications">
+              <img src={carDefinition} alt="" className='img-aplications'/>
+            </div>
+            <div className="text-aplications-box">
+              <h1>Definição do DriveIntel</h1>
+              <span>
+              O DriveIntel é uma ferramenta de inteligência de 
+              mercado para precificação automotiva, desenvolvida 
+              para apoiar negócios do setor na tomada de decisão 
+              estratégica de preços. Ele coleta e analisa dados 
+              históricos e atuais de anúncios de veículos por 
+              meio de web scraping (RPA) ...
+              </span>
+              <Link   className='aplications-btn' to='/pages/Description/Description-2'><h2>Ler mais</h2></Link>
             </div>
           </div>
         </section>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Index.css";
 import Menu from "../Components/Menu";
+import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendar, faCar, faCity, faCrown, faCube, faGasPump,
@@ -96,10 +97,8 @@ export default function Predict() {
     if (!userToken) return console.error("Erro: Token não encontrado!");
 
     try {
-      const { brand, mileage, gear, fuel, bodywork, city, state } = formData;
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {
-        mileage, gear, fuel, bodywork, city, state
-      }, {
+      const { brand } = formData;
+      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {}, {
         headers: {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "69420",
@@ -135,16 +134,19 @@ export default function Predict() {
         {!isBrandPrediction && (
           <div id="main_predict">
             <div id="title-box-predict">
-              Previsão de preços por IA <FontAwesomeIcon size="2x" icon={faLightbulb} />
+              Previsão de preços com Inteligência Artificial <FontAwesomeIcon size="2x" icon={faLightbulb} />
             </div>
 
             <div id="switch_container">
-              <div id="switch_box" onClick={() => activePred()}>
-                <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-              </div>
-              <span>Modo playground</span>
-              <div id="icon-info" onClick={() => alert("Simulação Inteligente de Preços para Veículos Inexistentes no Mercado Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
-            </div>
+  <div id="switch_box" onClick={() => activePred()}>
+    <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
+  </div>
+  <span>Previsão Exploratória</span>
+  <Tooltip text="Preveja
+ o preço de veículos personalizados com base em <strong>características hipotéticas</strong>. Explore como diferentes configurações afetam o preço de um automóvel, considerando <strong>cenários alternativos</strong> e obtendo estimativas para essas variações.">
+    <div ></div>
+  </Tooltip>
+</div>
 
             <form id="form" onSubmit={handleSubmit}>
               <div className="col_options_form">
@@ -202,32 +204,22 @@ export default function Predict() {
             </form>
           </div>
         )}
-        {/* Formulário de Previsão por Marca (Sem Modelo e Ano) */}
-
-
 
         {isBrandPrediction && (
           <div id="main_predict">
             <div id="title-box-predict">
-              Previsão de preços por IA <FontAwesomeIcon size="2x" icon={faLightbulb} />
+              Previsão de preços com Inteligência Artificial<FontAwesomeIcon size="2x" icon={faLightbulb} />
             </div>
 
             <div id="switch_container">
-              <div id="switch_box" onClick={() => activePred()}>
-                <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-              </div>
-              <span>Voltar para modo Geral</span>
-              <div id="icon-info" onClick={() => alert("Essa funcionalidade permite ao time de análise de dados simular o preço de um veículo que ainda não possui anúncio no mercado. Através de inteligência artificial, é possível gerar estimativas precisas com base em veículos similares, ajudando na tomada de decisões estratégicas, como precificação de novos modelos ou a análise de oportunidades antes de uma possível entrada no mercado. Ela possibilita uma previsão assertiva, mesmo em cenários hipotéticos, fornecendo insights valiosos para ações proativas e fundamentadas.")}>i</div>
-            </div>
-
-
-
-
-
-
-
-
-
+      <div id="switch_box" onClick={() => activePred()}>
+        <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
+      </div>
+      <span>Previsão por Marca</span>
+      <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
+        <div></div>
+      </Tooltip>
+    </div>
 
             <form id="form" onSubmit={handleBrandSubmit} style={{
               display:'flex', flexDirection:'column'
@@ -237,11 +229,8 @@ export default function Predict() {
                 <div className="col_options_form">
                 {[
                   { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
-                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
-                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }
                 ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name}>
+                  <div className="option-box" key={name} style={{height:'100px'}}>
                     <div className="label-box">
                       <FontAwesomeIcon icon={icon} size="2x" />
                       <label>{label}:</label>
@@ -256,32 +245,20 @@ export default function Predict() {
                 ))}
               </div>
 
-              <div id="second_part_col_opt">
-                {[
-                  { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
-                  { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
-                  { label: "Cidade", icon: faCity, name: "city", type: "text" }
-                ].map(({ label, icon, name, type, min }) => (
-                  <div className="option-box" key={name}>
-                    <FontAwesomeIcon icon={icon} className="icon-font" size="2x" style={{ color: "#EF44A1" }} />
-                    <input required type={type} name={name} placeholder=" " value={formData[name] || ""} onChange={handleChange} min={min} />
-                    <label>{label}:</label>
-                  </div>
-                ))}
+
                 <div className="option-box">
                   <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
-              </div>
 
               
               </div>
-              <h3>Previsões por Modelo:</h3>
+      
               {brandPrediction && (
-                <div className="result-box" style={{width:'80%', height:'20%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
-          
-                  <ul>
+                <div className="result-box" style={{width:'80%', height:'40%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
+                  <h3>Previsões por Modelo:</h3>
+                  <ul className='ul-results'>
                     {brandPrediction.map((item, index) => (
                       <li key={index}>
                         <strong>{item.model}</strong>: R$ {item.predicted_value}
@@ -293,101 +270,6 @@ export default function Predict() {
             </form>
 
           </div>
-
-
-
-
-          //   <form id="brand-form" onSubmit={handleBrandSubmit}>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faCrown} size='2x' />
-          //         <label>Marca:</label>
-          //       </div>
-          //       <select name="brand" value={formData.brand} onChange={handleChange}>
-          //         <option value="">Selecione a marca</option>
-          //         {brandList.map((item, index) => (
-          //           <option key={index} value={item}>{item}</option>
-          //         ))}
-          //       </select>
-          //     </div>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faCar} size='2x' />
-          //         <label>Carroceria:</label>
-          //       </div>
-          //       <select name="bodywork" value={formData.bodywork} onChange={handleChange}>
-          //         <option value="">Selecione a carroceria</option>
-          //         {bodyworkList.map((item, index) => (
-          //           <option key={index} value={item}>{item}</option>
-          //         ))}
-          //       </select>
-          //     </div>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faGauge} size='2x' />
-          //         <label>Quilometragem:</label>
-          //       </div>
-          //       <input required type="number" name="mileage" value={formData.mileage} onChange={handleChange} min="0" />
-          //     </div>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faGear} size='2x' />
-          //         <label>Câmbio:</label>
-          //       </div>
-          //       <select name="gear" value={formData.gear} onChange={handleChange}>
-          //         <option value="">Selecione o câmbio</option>
-          //         {gearList.map((item, index) => (
-          //           <option key={index} value={item}>{item}</option>
-          //         ))}
-          //       </select>
-          //     </div>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faGasPump} size='2x' />
-          //         <label>Combustível:</label>
-          //       </div>
-          //       <select name="fuel" value={formData.fuel} onChange={handleChange}>
-          //         <option value="">Selecione o combustível</option>
-          //         {fuelList.map((item, index) => (
-          //           <option key={index} value={item}>{item}</option>
-          //         ))}
-          //       </select>
-          //     </div>
-
-
-
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faMap} size='2x' />
-          //         <label>Estado:</label>
-          //       </div>
-          //       <input required type="text" name="state" placeholder="Estado" value={formData.state} onChange={handleChange} />
-          //     </div>
-          //     <div className='option-box'>
-          //       <div className="label-box">
-          //         <FontAwesomeIcon icon={faCity} size='2x' />
-          //         <label>Cidade:</label>
-          //       </div>
-          //       <input required type="text" name="city" placeholder="Cidade" value={formData.city} onChange={handleChange} />
-          //     </div>
-          //     <div className='option-box'>
-          //       <button type="submit">
-          //         <h3>Prever</h3>
-          //       </button>
-          //     </div>
-          //     {brandPrediction && (
-          //   <div className="result-box">
-          //     <h3>Previsões por Modelo:</h3>
-          //     <ul>
-          //       {brandPrediction.map((item, index) => (
-          //         <li key={index}>
-          //           <strong>{item.model}</strong>: R$ {item.predicted_value}
-          //         </li>
-          //       ))}
-          //     </ul>
-          //   </div>
-          // )}
-          //   </form>
 
         )}
 
