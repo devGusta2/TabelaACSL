@@ -892,3 +892,70 @@ justify-content: space-around;
   margin-top: -30px; /* Ajuste a margem superior para mover a imagem para cima */
   margin-bottom: 20px; /* Adicione margem inferior para criar espaço entre a imagem e as divs */
 }
+
+
+
+
+
+
+
+
+
+
+/* aplicaçõe e publico alvo drive intel */
+#secttion-drive-intel-aplications{
+
+}
+.row-aplications-driveintel{
+  height: 500px;
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+
+}
+.img-box-aplications{
+  width: 45%;
+  height: 100%;
+}
+.img-aplications{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.text-aplications-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%;
+
+}
+
+.text-aplications-box h1{
+  color: #EF44A1;
+  font-size: clamp(20px,100vw,55px);
+}
+.text-aplications-box span{
+  font-size: clamp(20px,100vw,25px);
+}
+.aplications-btn{
+  height: 80px;
+  width: 350px;
+  background-color: #EF44A1;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: 0.5s;
+}
+
+.aplications-btn:hover{
+  background-color: #ff76c1;
+  transform: translateY(-10px);
+}
+

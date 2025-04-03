@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    color: #EF44A1;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style-type: none;
+  }
+  
+  .list li {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .list li:hover {
+    transform: scale(1.05);
+  }
+  
+  .list li i {
+    font-size: 2rem;
+    color: #3498db;
+    margin-right: 15px;
+  }
+  
+  .list li span {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .relevant-section,
+  .not-relevant-section {
+    margin-bottom: 40px;
+    display: flex;
+    gap: 3em;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+
+  .desc-publico-alvo-page{
+    font-size: 25px;
+    display: flex;
+    text-align: justify;
+  }
+  .desc-publico-alvo-page li::marker{
+    color: #EF44A1;
+  }
