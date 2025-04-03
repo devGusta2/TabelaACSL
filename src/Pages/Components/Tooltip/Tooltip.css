@@ -39,6 +39,7 @@
     max-height: 200px;
     overflow: visible;
     margin-left: 200%;
+    overflow: auto;
 }
 
 /* Exibe o tooltip ao passar o mouse no ícone */
@@ -49,6 +50,6 @@
 /* Responsivo: Se a posição do ícone estiver perto da borda direita, exibe o tooltip à esquerda */
 .tooltip-container:hover .tooltip {
     left: auto;
-    margin-left: 110%; /* Coloca o tooltip à esquerda do ícone */
+    margin-left: 30px; /* Coloca o tooltip à esquerda do ícone */
 
 }
