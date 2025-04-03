@@ -123,7 +123,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5%;
+    gap: 15%;
     padding: 0 10%;
     box-sizing: border-box;
 }
