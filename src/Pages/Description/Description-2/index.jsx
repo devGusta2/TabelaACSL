@@ -16,7 +16,11 @@ export default function Description1() {
                 }}to='../'><FontAwesomeIcon icon={faArrowLeft} size="3x"/><h2>Voltar</h2></Link>
       <h1 className="title" style={{color:'#EF44A1'}}>Definição do DriveIntel</h1>
       <span className="description">
-        O <strong>DriveIntel</strong> é uma ferramenta de inteligência de mercado para precificação automotiva, desenvolvida para apoiar negócios do setor na tomada de decisão estratégica de preços. Ele coleta e analisa dados históricos e atuais de anúncios de veículos por meio de web scraping (RPA), utiliza inteligência artificial para prever preços futuros e oferece insights baseados em dados para empresas que operam sob um modelo data-driven.
+        O <strong>DriveIntel</strong> é uma plataforma de inteligência de mercado para precificação automotiva, desenvolvida para apoiar empresas do setor na definição de estratégias de venda mais lucrativas no momento da saída dos veículos de suas frotas.
+
+Ao coletar e analisar dados históricos e atuais de anúncios de veículos por meio de web scraping (RPA), e aplicar inteligência artificial para prever preços futuros, o DriveIntel fornece insights que ajudam a maximizar o retorno financeiro das empresas no momento do repasse ao consumidor final.
+
+É uma solução pensada para negócios que atuam com volume e operam sob uma abordagem data-driven, onde decisões são guiadas por dados.
       </span>
 
       <div className="points-section">
@@ -48,23 +52,22 @@ export default function Description1() {
           </li>
         </ul>
         <div className="desc-publico-alvo-page">
-          O DriveIntel é uma ferramenta de inteligência de mercado para precificação automotiva, desenvolvida para apoiar negócios do setor na tomada de decisão estratégica de preços. Ele coleta e analisa dados históricos e atuais de anúncios de veículos por meio de web scraping (RPA), utiliza inteligência artificial para prever preços futuros e oferece insights baseados em dados para empresas que operam sob um modelo data-driven.
+          O DriveIntel é uma plataforma de inteligência de mercado para precificação automotiva, desenvolvida para apoiar empresas do setor na definição de estratégias de venda mais lucrativas no momento da saída dos veículos de suas frotas.
+
+Ao coletar e analisar dados históricos e atuais de anúncios de veículos por meio de web scraping (RPA), e aplicar inteligência artificial para prever preços futuros, o DriveIntel fornece insights que ajudam a maximizar o retorno financeiro das empresas no momento do repasse ao consumidor final.
+
+É uma solução pensada para negócios que atuam com volume e operam sob uma abordagem data-driven, onde decisões são guiadas por dados.
           Pontos-chave da definição:
           <div id="list-div">
             <ul>
               <li> Ferramenta de inteligência de mercado → Não apenas um sistema de precificação, mas uma plataforma que fornece insights estratégicos.</li>
               <li>Precificação automotiva → Foco no setor automotivo, diferenciando-se de outras soluções genéricas.</li>
+                <li> Foco no momento da venda → Ajuda empresas a maximizar o valor de revenda no repasse de veículos, identificando o melhor momento e preço de saída com base em inteligência de mercado.</li>
               <li>Tomada de decisão estratégica → Suporte para definir preços competitivos com base em dados.</li>
               <li>Coleta e análise de dados (web scraping/RPA) → Automação para monitorar preços em tempo real.</li>
               <li>Previsão de preços com IA → Diferencial competitivo ao antecipar tendências do mercado.</li>
               <li> Para empresas data-driven → Indicação clara de que é ideal para quem valoriza decisões baseadas em dados</li>
             </ul>
-
-
-
-
-
-
           </div>
         </div>
       </div>
