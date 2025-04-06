@@ -46,12 +46,12 @@ export default function Description1(){
               </li>
             </ul>
             <div className="desc-publico-alvo-page">
-            <li>Lojistas e concessionárias – Para definir preços competitivos e antecipar variações no mercado.</li>
-            <li>Gestores de frotas – Para calcular o melhor momento de compra e venda de veículos.</li>
-            <li>Empresas de aluguel de veículos – Para planejar renovação de frota com base em previsões de preço.</li>
-            <li>Investidores no mercado automotivo – Para identificar oportunidades de compra e revenda.</li>
-            <li>Instituições financeiras – Para precificação de garantias em financiamentos e seguros automotivos.</li>
-            <li>Leiloeiros – Para estimar valores justos de venda e prever tendências do mercado.</li>
+            <li>Lojistas e concessionárias – Para definir preços de revenda mais competitivos e antecipar variações de mercado, com base em dados reais de anúncios e previsão de tendências.</li>
+            <li>Gestores de frotas – Para entender o melhor momento de vender veículos da frota, maximizando o valor de revenda e planejando a troca de veículos com base em dados reais de mercado e previsões de preço.</li>
+            <li>Empresas de aluguel de veículos – Para planejar a renovação da frota com foco na venda dos veículos para o consumidor final, utilizando tendências de preço e previsões de mercado para saber quando repassar cada carro.</li>
+            <li>Investidores no mercado automotivo – Para identificar oportunidades de compra e revenda de veículos, usando dados de mercado, previsões e simulações de cenário.</li>
+            <li>Instituições financeiras –Para avaliar o valor de mercado atual dos veículos usados como garantia em financiamentos e seguros, com base em médias reais e atualizadas.</li>
+            <li>Leiloeiros – Para estimar valores justos de venda em leilões e prever o comportamento do mercado com base em dados reais de revenda e tendências.</li>
             </div>
           </div>
     
