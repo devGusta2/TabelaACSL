@@ -23,7 +23,7 @@ const Dashboard = () => {
     const [year, setYear] = useState(new Date().getFullYear());
     const [loadingCount, setLoadingCount] = useState(0);
     const [error, setError] = useState(null);
-    const [kpiData, setKpiData] = useState({ total_ads: 0, total_average_year_model: 0, total_average_price: 0 });
+    const [kpiData, setKpiData] = useState({ total_ads: 0, most_frequent_year_model: 0, total_average_price: 0 });
     const [geoData, setGeoData] = useState({ top_10_states: [] });
 
     const setLoading = (isLoading) => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
     useEffect(() => {
         fetchData(`/crawler/dashboard/general_kpi/machine/${year}/${month}/`, setKpiData, {
             total_ads: 0,
-            total_average_year_model: 0,
+            most_frequent_year_model: 0,
             total_average_price: 0,
             top_10_year_model_distribution: [], // Adicionando fallback para top_10_year_model_distribution
             top_10_price_distribution: [], // Adicionando fallback para top_10_price_distribution
@@ -148,7 +148,7 @@ const Dashboard = () => {
                             </div>
 
                             <p><strong>Total de anúncios:</strong> {kpiData?.total_ads ?? 0}</p>
-                            <p><strong>Ano modelo médio:</strong> {kpiData?.total_average_year_model ?? 0}</p>
+                            <p><strong>Ano modelo mais frequente:</strong> {kpiData?.most_frequent_year_model ?? 0}</p>
                             <p><strong>Preço médio:</strong> R$ {(kpiData?.total_average_price ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                         </div>
                     )}
@@ -165,9 +165,10 @@ const Dashboard = () => {
 
 
                         <h2 className="text-lg">Dispersão de Ano Modelo</h2>
-                        <Tooltip  text="
-                              Os seguintes dados mostram os anos-modelo mais ofertados, com o recorte dos <strong>10 anos-modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação de períodos em que o mercado está mais aquecido.">
-                            
+                        <Tooltip 
+                        
+                        text="Os seguintes dados mostram os anos-modelo mais ofertados, com o recorte dos <strong>10 anos-modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação de períodos em que o mercado está mais aquecido.">
+            
                         </Tooltip>
 
                     </div>
