@@ -86,7 +86,7 @@ body {
   list-style: disc;
   flex-direction: column;
   justify-content: space-around;
-  list
+
 
 }
 #list-div ul li::marker{
