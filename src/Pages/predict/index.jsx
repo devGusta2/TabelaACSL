@@ -5,140 +5,87 @@ import Menu from "../Components/Menu";
 import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRotateBack,
-  faCalculator,
-  faCalendar, faCar, faChartBar, faChartLine, faCity, faCrown, faCube, faGasPump,
-  faGauge, faGear, faHourglass, faLightbulb, faMap,
-  faSearch
+  faArrowRotateBack, faCalculator, faCalendar, faCar, faChartBar,
+  faChartLine, faCity, faCrown, faCube, faGasPump, faGauge, faGear,
+  faHourglass, faLightbulb, faMap, faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 export default function Predict() {
-  const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
-  const [fuelList, setFuelList] = useState([]);
-  const [gearList, setGearList] = useState([]);
-  const [prediction, setPrediction] = useState(null);
+  const [formData, setFormData] = useState({ brand: "" });
   const [brandPrediction, setBrandPrediction] = useState(null);
-  const [isBrandPrediction, setIsBrandPrediction] = useState(false);
-  const [active, setActive] = useState(false);
-
-  // Estado inicial do formulário garantindo valores controlados
-  const [formData, setFormData] = useState({
-    brand: "",
-    bodywork: "",
-    gear: "",
-    fuel: "",
-    model: "",
-    year_model: "",
-    mileage: "",
-    state: "",
-    city: ""
-  });
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const fetchData = async (param, setState) => {
-      const userToken = localStorage.getItem("token");
-      if (!userToken) return console.error("Erro: Token não encontrado!");
+    const fetchBrands = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return console.error("Token não encontrado!");
 
       try {
-        const response = await axios.get(`${host_django}/artificial_intelligence/list/${param}/?page=1&page_size=99`, {
+        const res = await axios.get(`${host_django}/artificial_intelligence/list-brands/`, {
           headers: {
             "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-            Authorization: `Bearer ${userToken}`
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420"
           }
         });
-
-        if (response.data?.content) {
-          const key = Object.keys(response.data.content).find(k => Array.isArray(response.data.content[k]));
-          if (key) setState(response.data.content[key] || []);
-        }
+        const data = res.data?.content?.brands || [];
+        setBrandList(data);
       } catch (error) {
-        console.error("Erro na requisição:", error.response?.data || error.message);
+        console.error("Erro ao buscar marcas:", error);
+        console.log("Detalhes do erro:", error.response?.data);
       }
     };
 
-    fetchData("bodywork", setBodyworkList);
-    fetchData("brand", setBrandList);
-    fetchData("fuel", setFuelList);
-    fetchData("gear", setGearList);
+    fetchBrands();
   }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isBrandPrediction) return;
-
-    const userToken = localStorage.getItem("token");
-    if (!userToken) return console.error("Erro: Token não encontrado!");
-
-    try {
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-          Authorization: `Bearer ${userToken}`
-        }
-      });
-
-      const predictedValue = response.data.content?.predict;
-      predictedValue !== undefined ? setPrediction(predictedValue) : console.error("Erro: A resposta da API não contém 'predict'.", response.data);
-    } catch (error) {
-      console.error("Erro na previsão:", error);
-    }
-  };
-
   const handleBrandSubmit = async (e) => {
     e.preventDefault();
 
-    const userToken = localStorage.getItem("token");
-    if (!userToken) return console.error("Erro: Token não encontrado!");
+    const token = localStorage.getItem("token");
+    if (!token) return console.error("Token não encontrado!");
 
     try {
-      const { brand } = formData;
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {}, {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-          Authorization: `Bearer ${userToken}`
+      const response = await axios.post(
+        `${host_django}/artificial_intelligence/predict/price/brand/${formData.brand}/`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420"
+          }
         }
-      });
+      );
 
       const predictions = response.data.content?.predictions || [];
-      predictions.length > 0 ? setBrandPrediction(predictions) : console.error("Erro: Sem previsões para modelos.", response.data);
+      setBrandPrediction(predictions);
+      setShowModal(true);
     } catch (error) {
-      console.error("Erro na previsão da marca:", error);
+      console.error("Erro na previsão por marca:", error);
     }
   };
-
-  const activePred = () => {
-    setActive(!active)
-    setIsBrandPrediction((prev) => !prev);
-
-  }
 
   return (
     <div className='predict'>
       <Menu />
       <div className='content-predict'>
+        {/* Bloco de introdução e descrição */}
         <div id="card-descricao-geral-func">
           <div id="title-e-desc-desc">
             <span id="title-projecao">Projeção de preços por Inteligência artificial</span>
             <br />
             <span>
-              Com base em dados reais de mercado, o sistema prevê
-              o preço estimado de veículos de uma determinada marca
-              para o próximo ano-modelo, simulando as especificações
-              de modelos mais frequentes dessa marca com suas características
-              típicas   Essa funcionalidade permite ao lojista explorar quanto
-              veículos semelhantes — mas com ano-modelo posterior — podem ser
-              avaliados no cenário atual, oferecendo uma visão antecipada
-              sobre os valores esperados na revenda do automóvel
+              Com base em dados reais de mercado, o sistema prevê o preço estimado de veículos de uma determinada marca
+              para o próximo ano-modelo, simulando as especificações de modelos mais frequentes dessa marca com suas características
+              típicas.
             </span>
           </div>
           <div id="box-icon-AI">
@@ -146,8 +93,7 @@ export default function Predict() {
           </div>
         </div>
 
-
-
+        {/* Formulário */}
         <div id="container-info-form-desc">
           <div id="row-lower-infos">
             <div id="col-info-form-projecao">
@@ -163,31 +109,18 @@ export default function Predict() {
                     <div className="ball-motivos"></div>
                   </div>
                   <div id="list-motivos-contetn">
-                    <div className="row-motivos">
-
-                      <span>Evitar prejuízos ao revender carros por menos do que eles realmente valerão</span>
-                    </div>
-                    <div className="row-motivos">
-
-                      <span>Planejar estoque de forma inteligente, priorizando modelos com maior valorização futura</span>
-                    </div>
-
-                    <div className="row-motivos">
-
-                      <span> Negociar com mais segurança, usando dados e projeções reais para justificar o preço.</span>
-                    </div>
-                    <div className="row-motivos">
-
-                      <span>Antecipar tendências de mercado e sair na frente da concorrência.</span>
-                    </div>
+                    <div className="row-motivos"><span>Evitar prejuízos ao revender carros por menos do que eles realmente valerão</span></div>
+                    <div className="row-motivos"><span>Planejar estoque de forma inteligente, priorizando modelos com maior valorização futura</span></div>
+                    <div className="row-motivos"><span>Negociar com mais segurança, usando dados reais para justificar o preço</span></div>
+                    <div className="row-motivos"><span>Antecipar tendências de mercado e sair na frente da concorrência</span></div>
                   </div>
                 </div>
               </div>
+
+              {/* Formulário */}
               <div id="card-lower-form">
                 <div className="col_options_form">
-                  {[
-                    { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  ].map(({ label, icon, name, list }) => (
+                  {[{ label: "Marca", icon: faCrown, name: "brand", list: brandList }].map(({ label, icon, name, list }) => (
                     <div className="option-box" key={name} style={{ height: '100px' }}>
                       <div className="label-box">
                         <FontAwesomeIcon icon={icon} size="2x" />
@@ -202,11 +135,11 @@ export default function Predict() {
                     </div>
                   ))}
                   <div className="option-box">
-                    <button type="submit">
+                    <button type="button" onClick={handleBrandSubmit}>
                       <FontAwesomeIcon icon={faHourglass} size="2x" />
                       <h3>Fazer projeção</h3>
                     </button>
-                    <button type="submit">
+                    <button type="button" onClick={() => setFormData({ brand: "" })}>
                       <FontAwesomeIcon icon={faArrowRotateBack} size="2x" />
                       <h3>Redefinir</h3>
                     </button>
@@ -214,74 +147,54 @@ export default function Predict() {
                 </div>
               </div>
             </div>
-            <div id="info-como-feito" style={{ boxShadow: '4px 4px 10px rgb(167, 167, 167)', borderRadius: '16px', padding: '25px' }}>
 
+            {/* Explicação da IA */}
+            <div id="info-como-feito" style={{ boxShadow: '4px 4px 10px rgb(167, 167, 167)', borderRadius: '16px', padding: '25px' }}>
               <div id="info-como-feito-title-box">
                 <span>Como a projeção é feita:</span>
               </div>
-              <div className="icon-title-desc-feito">
-                <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faSearch} size="3x" />
-                </div>
-                <div className="desc-title-como">
-                  <span>Coleta de dados:</span>
 
-                  <span>
-                    Os anúncios são coletados de
-                    forma automatizada, garantindo
-                    ampla representatividade dos
-                    dados de mercado.
-                  </span>
+              {[
+                { icon: faSearch, title: "Coleta de dados", desc: "Os anúncios são coletados de forma automatizada, garantindo ampla representatividade dos dados de mercado." },
+                { icon: faLightbulb, title: "Análise com IA", desc: "O modelo aprende padrões de precificação e gera recomendações automáticas com base no mercado." },
+                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Utiliza modelos estatísticos e ML para prever valores futuros com confiança." },
+                { icon: faChartLine, title: "Projeção de Tendência", desc: "Avalia comportamento do mercado para sugerir valores prováveis no futuro." }
+              ].map(({ icon, title, desc }, i) => (
+                <div key={i} className="icon-title-desc-feito">
+                  <div className="icon-como-box">
+                    <FontAwesomeIcon icon={icon} size="3x" />
+                  </div>
+                  <div className="desc-title-como">
+                    <span>{title}:</span>
+                    <span>{desc}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="icon-title-desc-feito">
-                <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faLightbulb} size="3x" />
-                </div>
-                <div className="desc-title-como">
-                  <span>Análise com IA:</span>
-
-                  <span>
-                    O modelo processa o histórico de anúncios para aprender padrões de precificação e gerar recomendações de valor de anúncio de forma automática, baseada nas dinâmicas reais do mercado.
-                  </span>
-                </div>
-              </div>
-              <div className="icon-title-desc-feito">
-                <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faCalculator} size="3x" />
-                </div>
-                <div className="desc-title-como">
-                  <span>Coleta de dados:</span>
-
-                  <span>
-                    Os anúncios são coletados de
-                    forma automatizada, garantindo
-                    ampla representatividade dos
-                    dados de mercado.
-                  </span>
-                </div>
-              </div>
-              <div className="icon-title-desc-feito">
-                <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faChartLine} size="3x" />
-                </div>
-                <div className="desc-title-como">
-                  <span>Coleta de dados:</span>
-                  <span>
-                    Os anúncios são coletados de
-                    forma automatizada, garantindo
-                    ampla representatividade dos
-                    dados de mercado.
-                  </span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Previsão por modelos da marca {formData.brand}</h2>
+            <ul>
+              {brandPrediction?.length > 0 ? (
+                brandPrediction.map((item, index) => (
+                  <li key={index}>
+                    <strong>{item.model}:</strong> R$ {item.price?.toLocaleString("pt-BR")}
+                  </li>
+                ))
+              ) : (
+                <p>Nenhum dado de previsão encontrado.</p>
+              )}
+            </ul>
+            <button onClick={() => setShowModal(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-
-
