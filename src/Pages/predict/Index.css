@@ -517,12 +517,13 @@
 
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+
 }
 .option-box button {
     height: 70%;
-    width: 50%;
+    width: 40%;
     background-color: #EF44A1;
     display: flex;
     align-items: center;
@@ -533,8 +534,11 @@
     border-radius: 10px;
     transition: 0.5s;
     cursor: pointer;
+    gap: 1em;
 }
-
+.option-box button:nth-child(2){
+    background-color: #FA8FB1;
+}
 #col-info-form-projecao{
  
     display: flex;

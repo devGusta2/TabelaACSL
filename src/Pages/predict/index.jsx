@@ -5,9 +5,10 @@ import Menu from "../Components/Menu";
 import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowRotateBack,
   faCalculator,
   faCalendar, faCar, faChartBar, faChartLine, faCity, faCrown, faCube, faGasPump,
-  faGauge, faGear, faLightbulb, faMap,
+  faGauge, faGear, faHourglass, faLightbulb, faMap,
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -183,7 +184,7 @@ export default function Predict() {
                 </div>
               </div>
               <div id="card-lower-form">
-              <div className="col_options_form">
+                <div className="col_options_form">
                   {[
                     { label: "Marca", icon: faCrown, name: "brand", list: brandList },
                   ].map(({ label, icon, name, list }) => (
@@ -200,15 +201,20 @@ export default function Predict() {
                       </select>
                     </div>
                   ))}
-                   <div className="option-box">
-                  <button type="submit">
-                    <h3>Prever</h3>
-                  </button>
-                </div>
+                  <div className="option-box">
+                    <button type="submit">
+                      <FontAwesomeIcon icon={faHourglass} size="2x" />
+                      <h3>Fazer projeção</h3>
+                    </button>
+                    <button type="submit">
+                      <FontAwesomeIcon icon={faArrowRotateBack} size="2x" />
+                      <h3>Redefinir</h3>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div id="info-como-feito" style={{boxShadow:'4px 4px 10px rgb(167, 167, 167)', borderRadius:'16px', padding:'25px'}}>
+            <div id="info-como-feito" style={{ boxShadow: '4px 4px 10px rgb(167, 167, 167)', borderRadius: '16px', padding: '25px' }}>
 
               <div id="info-como-feito-title-box">
                 <span>Como a projeção é feita:</span>
@@ -244,7 +250,6 @@ export default function Predict() {
                 <div className="icon-como-box">
                   <FontAwesomeIcon icon={faCalculator} size="3x" />
                 </div>
-                
                 <div className="desc-title-como">
                   <span>Coleta de dados:</span>
 
@@ -262,7 +267,6 @@ export default function Predict() {
                 </div>
                 <div className="desc-title-como">
                   <span>Coleta de dados:</span>
-
                   <span>
                     Os anúncios são coletados de
                     forma automatizada, garantindo
@@ -274,85 +278,6 @@ export default function Predict() {
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/* <div id="main_predict">
-            <div id="title-box-predict">
-              Previsão de preços com Inteligência Artificial<FontAwesomeIcon size="2x" icon={faLightbulb} />
-            </div>
-
-            <div id="switch_container">
-              <div id="switch_box" onClick={() => activePred()}>
-                <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-              </div>
-              <span>Previsão por Marca</span>
-              <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
-                <div></div>
-              </Tooltip>
-            </div>
-
-            <form id="form" onSubmit={handleBrandSubmit} style={{
-              display: 'flex', flexDirection: 'column'
-
-            }}>
-              <div id="opt-brand-pred">
-                <div className="col_options_form">
-                  {[
-                    { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  ].map(({ label, icon, name, list }) => (
-                    <div className="option-box" key={name} style={{ height: '100px' }}>
-                      <div className="label-box">
-                        <FontAwesomeIcon icon={icon} size="2x" />
-                        <label>{label}:</label>
-                      </div>
-                      <select name={name} value={formData[name] || ""} onChange={handleChange}>
-                        <option value="">Selecione {label.toLowerCase()}</option>
-                        {list.map((item, index) => (
-                          <option key={index} value={item}>{item}</option>
-                        ))}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-
-
-                <div className="option-box">
-                  <button type="submit">
-                    <h3>Prever</h3>
-                  </button>
-                </div>
-
-
-              </div>
-
-              {brandPrediction && (
-                <div className="result-box" style={{ width: '80%', height: '40%', flexDirection: 'column', padding: '20px', overflow: 'auto' }}>
-                  <h3>Previsões por Modelo:</h3>
-                  <ul className='ul-results'>
-                    {brandPrediction.map((item, index) => (
-                      <li key={index}>
-                        <strong>{item.model}</strong>: R$ {item.predicted_value}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </form>
-
-          </div> */}
       </div>
     </div>
   );
