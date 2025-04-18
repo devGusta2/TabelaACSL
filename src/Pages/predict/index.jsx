@@ -5,8 +5,10 @@ import Menu from "../Components/Menu";
 import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCalendar, faCar, faCity, faCrown, faCube, faGasPump,
-  faGauge, faGear, faLightbulb, faMap
+  faCalculator,
+  faCalendar, faCar, faChartBar, faChartLine, faCity, faCrown, faCube, faGasPump,
+  faGauge, faGear, faLightbulb, faMap,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
@@ -123,127 +125,212 @@ export default function Predict() {
     <div className='predict'>
       <Menu />
       <div className='content-predict'>
-        <div className='toggle-buttons'>
-
-          {/* <button onClick={handleGeneralSelect}>Previsão Geral</button>
-        
-          <button onClick={handleBrandSelect}>Previsão por Marca</button> */}
+        <div id="card-descricao-geral-func">
+          <div id="title-e-desc-desc">
+            <span id="title-projecao">Projeção de preços por Inteligência artificial</span>
+            <br />
+            <span>
+              Com base em dados reais de mercado, o sistema prevê
+              o preço estimado de veículos de uma determinada marca
+              para o próximo ano-modelo, simulando as especificações
+              de modelos mais frequentes dessa marca com suas características
+              típicas   Essa funcionalidade permite ao lojista explorar quanto
+              veículos semelhantes — mas com ano-modelo posterior — podem ser
+              avaliados no cenário atual, oferecendo uma visão antecipada
+              sobre os valores esperados na revenda do automóvel
+            </span>
+          </div>
+          <div id="box-icon-AI">
+            <FontAwesomeIcon size='8x' icon={faLightbulb}></FontAwesomeIcon>
+          </div>
         </div>
 
-        {/* Formulário de Previsão Normal (Com Modelo e Ano) */}
-        {!isBrandPrediction && (
-          <div id="main_predict">
-            <div id="title-box-predict">
-              Previsão de preços com Inteligência Artificial <FontAwesomeIcon size="2x" icon={faLightbulb} />
-            </div>
 
-            <div id="switch_container">
-  <div id="switch_box" onClick={() => activePred()}>
-    <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-  </div>
-  <span>Previsão Exploratória</span>
-  <Tooltip text="Preveja
- o preço de veículos personalizados com base em <strong>características hipotéticas</strong>. Explore como diferentes configurações afetam o preço de um automóvel, considerando <strong>cenários alternativos</strong> e obtendo estimativas para essas variações.">
-    <div ></div>
-  </Tooltip>
-</div>
 
-            <form id="form" onSubmit={handleSubmit}>
-              <div className="col_options_form">
-                {[
-                  { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
-                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
-                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }
-                ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name}>
-                    <div className="label-box">
-                      <FontAwesomeIcon icon={icon} size="2x" />
-                      <label>{label}:</label>
-                    </div>
-                    <select name={name} value={formData[name] || ""} onChange={handleChange}>
-                      <option value="">Selecione {label.toLowerCase()}</option>
-                      {list.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
-                      ))}
-                    </select>
+        <div id="container-info-form-desc">
+          <div id="row-lower-infos">
+            <div id="col-info-form-projecao">
+              <div id="card-motivos-box">
+                <div id="title-motivos-box">
+                  <span>Por que usar a Sugestão Inteligente de Preço?</span>
+                </div>
+                <div id="row-list-content-flex">
+                  <div id="balls-box-motivos">
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
                   </div>
-                ))}
+                  <div id="list-motivos-contetn">
+                    <div className="row-motivos">
 
-                <div className="result-box">
-                  {/* <FontAwesomeIcon icon={faCar} size="2x" style={{ color: '#EF44A1' }} /> */}
-                  {prediction && (
-                    <div className="result">
-                      <span>O valor estimado é:</span><span>{prediction}</span>
+                      <span>Evitar prejuízos ao revender carros por menos do que eles realmente valerão</span>
                     </div>
-                  )}
+                    <div className="row-motivos">
+
+                      <span>Planejar estoque de forma inteligente, priorizando modelos com maior valorização futura</span>
+                    </div>
+
+                    <div className="row-motivos">
+
+                      <span> Negociar com mais segurança, usando dados e projeções reais para justificar o preço.</span>
+                    </div>
+                    <div className="row-motivos">
+
+                      <span>Antecipar tendências de mercado e sair na frente da concorrência.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               {/* <div id="card-lower-form">
+            <div className="col_options_form">
+                  {[
+                    { label: "Marca", icon: faCrown, name: "brand", list: brandList },
+                  ].map(({ label, icon, name, list }) => (
+                    <div className="option-box" key={name} style={{ height: '100px' }}>
+                      <div className="label-box">
+                        <FontAwesomeIcon icon={icon} size="2x" />
+                        <label>{label}:</label>
+                      </div>
+                      <select name={name} value={formData[name] || ""} onChange={handleChange}>
+                        <option value="">Selecione {label.toLowerCase()}</option>
+                        {list.map((item, index) => (
+                          <option key={index} value={item}>{item}</option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
                 </div>
 
-              </div>
 
-              <div id="second_part_col_opt">
-                {[
-                  { label: "Modelo", icon: faCube, name: "model", type: "text" },
-                  { label: "Ano modelo", icon: faCalendar, name: "year_model", type: "number", min: 1950 },
-                  { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
-                  { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
-                  { label: "Cidade", icon: faCity, name: "city", type: "text" }
-                ].map(({ label, icon, name, type, min }) => (
-                  <div className="option-box" key={name}>
-                    <FontAwesomeIcon icon={icon} className="icon-font" size="2x" style={{ color: "#EF44A1" }} />
-                    <input required type={type} name={name} placeholder=" " value={formData[name] || ""} onChange={handleChange} min={min} />
-                    <label>{label}:</label>
-                  </div>
-                ))}
                 <div className="option-box">
                   <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
+            </div> */}
+            </div>
+            <div id="info-como-feito">
+            
+              <div id="info-como-feito-title-box">
+                <span>Como a projeção é feita:</span>
               </div>
-            </form>
-          </div>
-        )}
+              <div className="icon-title-desc-feito">
+                <div className="icon-como-box">
+                  <FontAwesomeIcon icon={faSearch} size="3x"/>
+                </div>
+                <div className="desc-title-como">
+                  <span>Coleta de dados:</span>
+        
+                    <span>
+                      Os anúncios são coletados de 
+                      forma automatizada, garantindo
+                      ampla representatividade dos
+                      dados de mercado.
+                    </span>
+                </div>
+              </div>
+              <div className="icon-title-desc-feito">
+                <div className="icon-como-box">
+                  <FontAwesomeIcon icon={faLightbulb} size="3x"/>
+                </div>
+                <div className="desc-title-como">
+                  <span>Análise com IA:</span>
+      
+                    <span>
+                    O modelo processa o histórico de anúncios para aprender padrões de precificação e gerar recomendações de valor de anúncio de forma automática, baseada nas dinâmicas reais do mercado.
+                    </span>
+                </div>
+              </div>
+              <div className="icon-title-desc-feito">
+                <div className="icon-como-box">
+                  <FontAwesomeIcon icon={faCalculator} size="3x"/>
+                </div>
+                <div className="desc-title-como">
+                  <span>Coleta de dados:</span>
+          
+                    <span>
+                      Os anúncios são coletados de 
+                      forma automatizada, garantindo
+                      ampla representatividade dos
+                      dados de mercado.
+                    </span>
+                </div>
+              </div>
+              <div className="icon-title-desc-feito">
+                <div className="icon-como-box">
+                  <FontAwesomeIcon icon={faChartLine} size="3x"/>
+                </div>
+                <div className="desc-title-como">
+                  <span>Coleta de dados:</span>
+   
+                    <span>
+                      Os anúncios são coletados de 
+                      forma automatizada, garantindo
+                      ampla representatividade dos
+                      dados de mercado.
+                    </span>
+                </div>
+              </div>
+            </div>
+            
 
-        {isBrandPrediction && (
-          <div id="main_predict">
+           
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div id="main_predict">
             <div id="title-box-predict">
               Previsão de preços com Inteligência Artificial<FontAwesomeIcon size="2x" icon={faLightbulb} />
             </div>
 
             <div id="switch_container">
-      <div id="switch_box" onClick={() => activePred()}>
-        <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-      </div>
-      <span>Previsão por Marca</span>
-      <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
-        <div></div>
-      </Tooltip>
-    </div>
+              <div id="switch_box" onClick={() => activePred()}>
+                <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
+              </div>
+              <span>Previsão por Marca</span>
+              <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
+                <div></div>
+              </Tooltip>
+            </div>
 
             <form id="form" onSubmit={handleBrandSubmit} style={{
-              display:'flex', flexDirection:'column'
-              
-              }}>
+              display: 'flex', flexDirection: 'column'
+
+            }}>
               <div id="opt-brand-pred">
                 <div className="col_options_form">
-                {[
-                  { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name} style={{height:'100px'}}>
-                    <div className="label-box">
-                      <FontAwesomeIcon icon={icon} size="2x" />
-                      <label>{label}:</label>
+                  {[
+                    { label: "Marca", icon: faCrown, name: "brand", list: brandList },
+                  ].map(({ label, icon, name, list }) => (
+                    <div className="option-box" key={name} style={{ height: '100px' }}>
+                      <div className="label-box">
+                        <FontAwesomeIcon icon={icon} size="2x" />
+                        <label>{label}:</label>
+                      </div>
+                      <select name={name} value={formData[name] || ""} onChange={handleChange}>
+                        <option value="">Selecione {label.toLowerCase()}</option>
+                        {list.map((item, index) => (
+                          <option key={index} value={item}>{item}</option>
+                        ))}
+                      </select>
                     </div>
-                    <select name={name} value={formData[name] || ""} onChange={handleChange}>
-                      <option value="">Selecione {label.toLowerCase()}</option>
-                      {list.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
 
                 <div className="option-box">
@@ -252,11 +339,11 @@ export default function Predict() {
                   </button>
                 </div>
 
-              
+
               </div>
-      
+
               {brandPrediction && (
-                <div className="result-box" style={{width:'80%', height:'40%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
+                <div className="result-box" style={{ width: '80%', height: '40%', flexDirection: 'column', padding: '20px', overflow: 'auto' }}>
                   <h3>Previsões por Modelo:</h3>
                   <ul className='ul-results'>
                     {brandPrediction.map((item, index) => (
@@ -269,10 +356,7 @@ export default function Predict() {
               )}
             </form>
 
-          </div>
-
-        )}
-
+          </div> */}
       </div>
     </div>
   );
