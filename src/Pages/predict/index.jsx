@@ -6,7 +6,7 @@ import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRotateBack, faCalculator, faCalendar, faCar, faChartBar,
-  faChartLine, faCity, faCrown, faCube, faGasPump, faGauge, faGear,
+  faChartLine, faCity, faCrown, faCube, faDiamond, faGasPump, faGauge, faGear,
   faHourglass, faLightbulb, faMap, faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -180,21 +180,57 @@ export default function Predict() {
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>Previsão por modelos da marca {formData.brand}</h2>
-            <ul>
-              {brandPrediction?.length > 0 ? (
-                brandPrediction.map((item, index) => (
-                  <li key={index}>
-                    <strong>{item.model}:</strong> R$ {item.price?.toLocaleString("pt-BR")}
-                  </li>
-                ))
-              ) : (
-                <p>Nenhum dado de previsão encontrado.</p>
-              )}
-            </ul>
+
+            <div id="container-response-predict">
+              <ul className='ul-results'>
+                {brandPrediction.length > 0 ? (
+                  brandPrediction.map((item, index) => (
+                    <li key={index}>
+                      <div className="row-response-items">
+                        <div className="col-response-item">
+                          <FontAwesomeIcon icon={faDiamond} size='2x' />
+                          <FontAwesomeIcon icon={faGauge} size='2x' />
+                          <FontAwesomeIcon icon={faMap} size='2x' />
+                          <FontAwesomeIcon icon={faCity} size='2x' />
+                          <FontAwesomeIcon icon={faCar} size='2x' />
+                          <FontAwesomeIcon icon={faGear} size='2x' />
+                          <FontAwesomeIcon icon={faGasPump} size='2x' />
+                          <strong>R$</strong>
+                        </div>
+                        <div className="col-response-item">
+                          <h3>Modelo:</h3>
+                          <h3>Quilometragem:</h3>
+                          <h3>UF:</h3>
+                          <h3>Cidade:</h3>
+                          <h3>Carroceria:</h3>
+                          <h3>Câmbio:</h3>
+                          <h3>Combustível:</h3>
+                          <h3>Preço:</h3>
+                        </div>
+                        <div className="col-response-item">
+                          <span>{item.model}</span>
+                          <span>{item.mileage}</span>
+                          <span>{item.state}</span>
+                          <span>{item.city}</span>
+                          <span>{item.bodywork}</span>
+                          <span>{item.gear}</span>
+                          <span>{item.fuel}</span>
+                          <span>{item.predicted_value?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <p>Nenhum dado de previsão encontrado.</p>
+                )}
+              </ul>
+            </div>
+
             <button onClick={() => setShowModal(false)}>Fechar</button>
           </div>
         </div>
       )}
+
     </div>
   );
 }
