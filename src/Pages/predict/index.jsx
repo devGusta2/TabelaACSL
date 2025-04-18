@@ -182,8 +182,8 @@ export default function Predict() {
                   </div>
                 </div>
               </div>
-               {/* <div id="card-lower-form">
-            <div className="col_options_form">
+              <div id="card-lower-form">
+              <div className="col_options_form">
                   {[
                     { label: "Marca", icon: faCrown, name: "brand", list: brandList },
                   ].map(({ label, icon, name, list }) => (
@@ -200,82 +200,78 @@ export default function Predict() {
                       </select>
                     </div>
                   ))}
-                </div>
-
-
-                <div className="option-box">
+                   <div className="option-box">
                   <button type="submit">
                     <h3>Prever</h3>
                   </button>
                 </div>
-            </div> */}
+                </div>
+              </div>
             </div>
-            <div id="info-como-feito">
-            
+            <div id="info-como-feito" style={{boxShadow:'4px 4px 10px rgb(167, 167, 167)', borderRadius:'16px', padding:'25px'}}>
+
               <div id="info-como-feito-title-box">
                 <span>Como a projeção é feita:</span>
               </div>
               <div className="icon-title-desc-feito">
                 <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faSearch} size="3x"/>
+                  <FontAwesomeIcon icon={faSearch} size="3x" />
                 </div>
                 <div className="desc-title-como">
                   <span>Coleta de dados:</span>
-        
-                    <span>
-                      Os anúncios são coletados de 
-                      forma automatizada, garantindo
-                      ampla representatividade dos
-                      dados de mercado.
-                    </span>
+
+                  <span>
+                    Os anúncios são coletados de
+                    forma automatizada, garantindo
+                    ampla representatividade dos
+                    dados de mercado.
+                  </span>
                 </div>
               </div>
               <div className="icon-title-desc-feito">
                 <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faLightbulb} size="3x"/>
+                  <FontAwesomeIcon icon={faLightbulb} size="3x" />
                 </div>
                 <div className="desc-title-como">
                   <span>Análise com IA:</span>
-      
-                    <span>
+
+                  <span>
                     O modelo processa o histórico de anúncios para aprender padrões de precificação e gerar recomendações de valor de anúncio de forma automática, baseada nas dinâmicas reais do mercado.
-                    </span>
+                  </span>
                 </div>
               </div>
               <div className="icon-title-desc-feito">
                 <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faCalculator} size="3x"/>
+                  <FontAwesomeIcon icon={faCalculator} size="3x" />
                 </div>
+                
                 <div className="desc-title-como">
                   <span>Coleta de dados:</span>
-          
-                    <span>
-                      Os anúncios são coletados de 
-                      forma automatizada, garantindo
-                      ampla representatividade dos
-                      dados de mercado.
-                    </span>
+
+                  <span>
+                    Os anúncios são coletados de
+                    forma automatizada, garantindo
+                    ampla representatividade dos
+                    dados de mercado.
+                  </span>
                 </div>
               </div>
               <div className="icon-title-desc-feito">
                 <div className="icon-como-box">
-                  <FontAwesomeIcon icon={faChartLine} size="3x"/>
+                  <FontAwesomeIcon icon={faChartLine} size="3x" />
                 </div>
                 <div className="desc-title-como">
                   <span>Coleta de dados:</span>
-   
-                    <span>
-                      Os anúncios são coletados de 
-                      forma automatizada, garantindo
-                      ampla representatividade dos
-                      dados de mercado.
-                    </span>
+
+                  <span>
+                    Os anúncios são coletados de
+                    forma automatizada, garantindo
+                    ampla representatividade dos
+                    dados de mercado.
+                  </span>
                 </div>
               </div>
             </div>
-            
-
-           
           </div>
         </div>
 
