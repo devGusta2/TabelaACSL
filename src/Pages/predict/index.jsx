@@ -185,7 +185,10 @@ export default function Predict() {
               <ul className='ul-results'>
                 {brandPrediction.length > 0 ? (
                   brandPrediction.map((item, index) => (
-                    <li key={index}>
+                    <li key={index} style={{
+                      height:'300px',
+                      width:'500px'
+                    }}>
                       <div className="row-response-items">
                         <div className="col-response-item">
                           <FontAwesomeIcon icon={faDiamond} size='2x' />
