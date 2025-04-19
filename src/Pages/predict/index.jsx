@@ -6,7 +6,7 @@ import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRotateBack, faCalculator, faCalendar, faCar, faChartBar,
-  faChartLine, faCity, faCoins, faCrown, faCube, faDiamond, faGasPump, faGauge, faGear,
+  faChartLine, faCity, faCoins, faCrown, faCube, faDiamond, faDollar, faGasPump, faGauge, faGear,
   faHourglass, faLightbulb, faMap, faSearch,
   faX
 } from "@fortawesome/free-solid-svg-icons";
@@ -47,7 +47,7 @@ import TOYOTA from '../../assets/Brands/TOYOTA.webp';
 import VOLKSWAGEN from '../../assets/Brands/VOLKSWAGEN.png';
 import VOLVO from '../../assets/Brands/VOLVO.jpg';
 import WILLYS from '../../assets/Brands/WILLYS.png';
-
+import LAND from '../../assets/Brands/LAND.jpg';
 const brandLogos = {
   BMW,
   CHERY,
@@ -73,7 +73,8 @@ const brandLogos = {
   VOLKSWAGEN,
   VOLVO,
   WILLYS,
-  AUDI
+  AUDI,
+  LAND
 };
 
 
@@ -336,6 +337,9 @@ export default function Predict() {
                 case 'WILLYS':
                   logo = WILLYS;
                   break;
+                case 'LAND':
+                  logo = LAND;
+                  break;
                 default:
                   logo = null;
               }
@@ -348,7 +352,7 @@ export default function Predict() {
                     alt={brand}
                     style={{ maxWidth: '200px', height: 'auto' }}
                   />
-                  <button id="btn-fechar-projecao-modal" onClick={() => setShowModal(false)}><FontAwesomeIcon size='2x'icon={faX}/>Fechar</button>
+                  <button id="btn-fechar-projecao-modal" onClick={() => setShowModal(false)}><FontAwesomeIcon size='2x' icon={faX} />Fechar</button>
                 </div>
               ) : null;
             })()}
@@ -371,7 +375,7 @@ export default function Predict() {
                           <FontAwesomeIcon icon={faCar} size="2x" />
                           <FontAwesomeIcon icon={faGear} size="2x" />
                           <FontAwesomeIcon icon={faGasPump} size="2x" />
-                          <FontAwesomeIcon icon={faCoins} size="2x" />
+                          <FontAwesomeIcon icon={faDollar} size="2x" />
                         </div>
                         <div className="col-response-item">
                           <h3>Ano:</h3>
@@ -383,7 +387,7 @@ export default function Predict() {
                           <h3>Câmbio:</h3>
                           <h3>Combustível:</h3>
                           <h3>Preço:</h3>
-                          
+
                         </div>
                         <div className="col-response-item">
                           <span>{item.year_model}</span>
@@ -395,11 +399,13 @@ export default function Predict() {
                           <span>{item.gear}</span>
                           <span>{item.fuel}</span>
                           <span>
-                            {item.predicted_value?.toLocaleString('pt-BR', {
-                              style: 'currency',
-                              currency: 'BRL',
-                            })}
+                            R$ {item.predicted_value?.toLocaleString('pt-BR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                              useGrouping: true,
+                            }) || '0,00'}
                           </span>
+
                         </div>
                       </div>
                     </li>
@@ -410,7 +416,7 @@ export default function Predict() {
               </ul>
             </div>
 
-            
+
           </div>
         </div>
       )}
