@@ -158,9 +158,8 @@ export default function Predict() {
             <span id="title-projecao">Sugestão Inteligente de Preço para Anúncio</span>
             <br />
             <span>
-              Com base em dados reais de mercado, o sistema prevê o preço estimado de veículos de uma determinada marca
-              para o próximo ano-modelo, simulando as especificações de modelos mais frequentes dessa marca com suas características
-              típicas.
+              Receba uma sugestão inteligente de preço para anunciar seus veículos com base em um benchmarking de mercado. A recomendação ajuda a posicionar melhor seus anúncios, evitando preços fora da realidade e aumentando as chances de negociação com mais agilidade e segurança.
+
             </span>
           </div>
           <div id="box-icon-AI">
