@@ -155,7 +155,7 @@ export default function Predict() {
         {/* Bloco de introdução e descrição */}
         <div id="card-descricao-geral-func">
           <div id="title-e-desc-desc">
-            <span id="title-projecao">Projeção de preços por Inteligência artificial</span>
+            <span id="title-projecao">Sugestão Inteligente de Preço para Anúncio</span>
             <br />
             <span>
               Com base em dados reais de mercado, o sistema prevê o preço estimado de veículos de uma determinada marca
@@ -174,7 +174,7 @@ export default function Predict() {
             <div id="col-info-form-projecao">
               <div id="card-motivos-box">
                 <div id="title-motivos-box">
-                  <span>Por que usar a Sugestão Inteligente de Preço?</span>
+                  <span>Por que usar?</span>
                 </div>
                 <div id="row-list-content-flex">
                   <div id="balls-box-motivos">
@@ -184,10 +184,10 @@ export default function Predict() {
                     <div className="ball-motivos"></div>
                   </div>
                   <div id="list-motivos-contetn">
-                    <div className="row-motivos"><span>Evitar prejuízos ao revender carros por menos do que eles realmente valerão</span></div>
-                    <div className="row-motivos"><span>Planejar estoque de forma inteligente, priorizando modelos com maior valorização futura</span></div>
-                    <div className="row-motivos"><span>Negociar com mais segurança, usando dados reais para justificar o preço</span></div>
-                    <div className="row-motivos"><span>Antecipar tendências de mercado e sair na frente da concorrência</span></div>
+                    <div className="row-motivos"><span>Evite prejuízos ao anunciar carros com valores abaixo do esperado;</span></div>
+                    <div className="row-motivos"><span>Ganhe agilidade e confiança ao definir preços baseados em dados reais;</span></div>
+                    <div className="row-motivos"><span>Use o benchmark para justificar o valor do anúncio na negociação;</span></div>
+                    <div className="row-motivos"><span>Acompanhe movimentos do mercado e se antecipe à concorrência.</span></div>
                   </div>
                 </div>
               </div>
@@ -226,14 +226,15 @@ export default function Predict() {
             {/* Explicação da IA */}
             <div id="info-como-feito" style={{ boxShadow: '4px 4px 10px rgb(167, 167, 167)', borderRadius: '16px', padding: '25px' }}>
               <div id="info-como-feito-title-box">
-                <span>Como a projeção é feita:</span>
+                <span>Como o processo é feito?</span>
               </div>
 
               {[
-                { icon: faSearch, title: "Coleta de dados", desc: "Os anúncios são coletados de forma automatizada, garantindo ampla representatividade dos dados de mercado." },
-                { icon: faLightbulb, title: "Análise com IA", desc: "O modelo aprende padrões de precificação e gera recomendações automáticas com base no mercado." },
-                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Utiliza modelos estatísticos e ML para prever valores futuros com confiança." },
-                { icon: faChartLine, title: "Projeção de Tendência", desc: "Avalia comportamento do mercado para sugerir valores prováveis no futuro." }
+                { icon: faSearch, title: "Coleta de dados", desc: "Milhares de anúncios de veículos são coletados de forma automatizada na internet, garantindo informações sempre atualizadas e representativas do mercado.\n" +
+                      "\n" },
+                { icon: faLightbulb, title: "Análise com IA", desc: "A partir de dados reais do mercado, o sistema aprende como veículos semelhantes são precificados e sugere valores com base nesses padrões." },
+                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Com base nos preços dos anúncios, a IA aplica modelos estatísticos para estimar valores justos e confiáveis de acordo com o comportamento real do mercado." },
+                { icon: faChartLine, title: "Geração da Recomendação", desc: "Com base nos dados analisados, o sistema entrega uma sugestão de preço para anúncio que reflete o valor praticado para veículos similares no mercado atual." }
               ].map(({ icon, title, desc }, i) => (
                 <div key={i} className="icon-title-desc-feito">
                   <div className="icon-como-box">
