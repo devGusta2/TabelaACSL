@@ -211,7 +211,7 @@ export default function Predict() {
                   <div className="option-box">
                     <button type="button" onClick={handleBrandSubmit}>
                       <FontAwesomeIcon icon={faHourglass} size="2x" />
-                      <h3>Fazer projeção</h3>
+                      <h3>Avaliar sugestões</h3>
                     </button>
                     <button type="button" onClick={() => setFormData({ brand: "" })}>
                       <FontAwesomeIcon icon={faArrowRotateBack} size="2x" />
@@ -358,7 +358,7 @@ export default function Predict() {
             })()}
 
             {/* Continuação do modal */}
-            <h2>Previsão por modelos da marca {formData.brand}</h2>
+            <h2>Sugestão de preço anúnciado para os modelos da marca {formData.brand}</h2>
 
             <div id="container-response-predict">
               <ul className="ul-results">
