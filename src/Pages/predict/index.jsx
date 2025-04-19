@@ -231,8 +231,8 @@ export default function Predict() {
               {[
                 { icon: faSearch, title: "Coleta de dados", desc: "Milhares de anúncios de veículos são coletados de forma automatizada na internet, garantindo informações sempre atualizadas e representativas do mercado.\n" +
                       "\n" },
-                { icon: faLightbulb, title: "Análise com IA", desc: "A partir de dados reais do mercado, o sistema aprende como veículos semelhantes são precificados e sugere valores com base nesses padrões." },
-                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Com base nos preços dos anúncios, a IA aplica modelos estatísticos para estimar valores justos e confiáveis de acordo com o comportamento real do mercado." },
+                { icon: faLightbulb, title: "Análise com IA", desc: "A partir de tais dados, o sistema aprende como veículos semelhantes são precificados e sugere valores com base nesses padrões." },
+                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Embasando-se nos preços dos anúncios, a IA aplica modelos estatísticos para estimar valores justos e confiáveis de acordo com o comportamento real do mercado." },
                 { icon: faChartLine, title: "Geração da Recomendação", desc: "Com base nos dados analisados, o sistema entrega uma sugestão de preço para anúncio que reflete o valor praticado para veículos similares no mercado atual." }
               ].map(({ icon, title, desc }, i) => (
                 <div key={i} className="icon-title-desc-feito">
