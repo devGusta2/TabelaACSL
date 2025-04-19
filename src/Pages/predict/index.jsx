@@ -6,9 +6,83 @@ import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRotateBack, faCalculator, faCalendar, faCar, faChartBar,
-  faChartLine, faCity, faCrown, faCube, faDiamond, faGasPump, faGauge, faGear,
-  faHourglass, faLightbulb, faMap, faSearch
+  faChartLine, faCity, faCoins, faCrown, faCube, faDiamond, faGasPump, faGauge, faGear,
+  faHourglass, faLightbulb, faMap, faSearch,
+  faX
 } from "@fortawesome/free-solid-svg-icons";
+
+
+
+
+
+
+
+
+
+
+
+// Topo do componente
+import BMW from '../../assets/Brands/BMW.png';
+import CHERY from '../../assets/Brands/CHERY.png';
+import CHEVROLET from '../../assets/Brands/CHEVROLET.webp';
+import CITROEN from '../../assets/Brands/CITROEN.jpg';
+import AUDI from '../../assets/Brands/AUDI.jpg';
+import FIAT from '../../assets/Brands/FIAT.jfif';
+import FORD from '../../assets/Brands/FORD.png';
+import HONDA from '../../assets/Brands/HONDA.webp';
+import HYUNDAI from '../../assets/Brands/HYUNDAI.jpg';
+import JAGUAR from '../../assets/Brands/JAGUAR.avif';
+import JEEP from '../../assets/Brands/JEEP.png';
+import KIA from '../../assets/Brands/KIA.png';
+import MERCEDES from '../../assets/Brands/MERCEDES.jpg';
+import MINI from '../../assets/Brands/MINI.png';
+import MITSUBISHI from '../../assets/Brands/MITSUBISH.png';
+import NISSAN from '../../assets/Brands/NISSAN.jpg';
+import PEUGEOT from '../../assets/Brands/PEGEOUT.png';
+import PORSCHE from '../../assets/Brands/PORSHE.jpg';
+import RAM from '../../assets/Brands/RAM.webp';
+import RENAULT from '../../assets/Brands/RENAULT.png';
+import SUZUKI from '../../assets/Brands/SUZUKI.png';
+import TOYOTA from '../../assets/Brands/TOYOTA.webp';
+import VOLKSWAGEN from '../../assets/Brands/VOLKSWAGEN.png';
+import VOLVO from '../../assets/Brands/VOLVO.jpg';
+import WILLYS from '../../assets/Brands/WILLYS.png';
+
+const brandLogos = {
+  BMW,
+  CHERY,
+  CHEVROLET,
+  CITROEN,
+  FIAT,
+  FORD,
+  HONDA,
+  HYUNDAI,
+  JAGUAR,
+  JEEP,
+  KIA,
+  'MERCEDES-BENZ': MERCEDES,
+  MINI,
+  MITSUBISHI,
+  NISSAN,
+  PEUGEOT,
+  PORSCHE,
+  RAM,
+  RENAULT,
+  SUZUKI,
+  TOYOTA,
+  VOLKSWAGEN,
+  VOLVO,
+  WILLYS,
+  AUDI
+};
+
+
+
+
+
+
+
+
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
@@ -179,28 +253,128 @@ export default function Predict() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
+
+            {/* Logo da marca com switch */}
+            {brandPrediction.length > 0 && (() => {
+
+              const brand = formData.brand
+              let logo;
+
+              switch (brand) {
+                case 'AUDI':
+                  logo = AUDI;
+                  break;
+                case 'FORD':
+                  logo = FORD;
+                  break;
+                case 'CHEVROLET':
+                  logo = CHEVROLET;
+                  break;
+                case 'FIAT':
+                  logo = FIAT;
+                  break;
+                case 'VOLKSWAGEN':
+                  logo = VOLKSWAGEN;
+                  break;
+                case 'HYUNDAI':
+                  logo = HYUNDAI;
+                  break;
+                case 'TOYOTA':
+                  logo = TOYOTA;
+                  break;
+                case 'HONDA':
+                  logo = HONDA;
+                  break;
+                case 'JEEP':
+                  logo = JEEP;
+                  break;
+                case 'NISSAN':
+                  logo = NISSAN;
+                  break;
+                case 'RENAULT':
+                  logo = RENAULT;
+                  break;
+                case 'KIA':
+                  logo = KIA;
+                  break;
+                case 'PEUGEOT':
+                  logo = PEUGEOT;
+                  break;
+                case 'CITROEN':
+                  logo = CITROEN;
+                  break;
+                case 'BMW':
+                  logo = BMW;
+                  break;
+                case 'MERCEDES-BENZ':
+                  logo = MERCEDES;
+                  break;
+                case 'MITSUBISHI':
+                  logo = MITSUBISHI;
+                  break;
+                case 'VOLVO':
+                  logo = VOLVO;
+                  break;
+                case 'CHERY':
+                  logo = CHERY;
+                  break;
+                case 'PORSCHE':
+                  logo = PORSCHE;
+                  break;
+                case 'MINI':
+                  logo = MINI;
+                  break;
+                case 'RAM':
+                  logo = RAM;
+                  break;
+                case 'JAGUAR':
+                  logo = JAGUAR;
+                  break;
+                case 'SUZUKI':
+                  logo = SUZUKI;
+                  break;
+                case 'WILLYS':
+                  logo = WILLYS;
+                  break;
+                default:
+                  logo = null;
+              }
+
+
+              return logo ? (
+                <div className="top-brand-logo" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                  <img
+                    src={logo}
+                    alt={brand}
+                    style={{ maxWidth: '200px', height: 'auto' }}
+                  />
+                  <button id="btn-fechar-projecao-modal" onClick={() => setShowModal(false)}><FontAwesomeIcon size='2x'icon={faX}/>Fechar</button>
+                </div>
+              ) : null;
+            })()}
+
+            {/* Continuação do modal */}
             <h2>Previsão por modelos da marca {formData.brand}</h2>
 
             <div id="container-response-predict">
-              <ul className='ul-results'>
+              <ul className="ul-results">
                 {brandPrediction.length > 0 ? (
                   brandPrediction.map((item, index) => (
-                    <li key={index} style={{
-                      height:'300px',
-                      width:'500px'
-                    }}>
+                    <li key={index} style={{ height: '400px', width: '500px' }}>
                       <div className="row-response-items">
                         <div className="col-response-item">
-                          <FontAwesomeIcon icon={faDiamond} size='2x' />
-                          <FontAwesomeIcon icon={faGauge} size='2x' />
-                          <FontAwesomeIcon icon={faMap} size='2x' />
-                          <FontAwesomeIcon icon={faCity} size='2x' />
-                          <FontAwesomeIcon icon={faCar} size='2x' />
-                          <FontAwesomeIcon icon={faGear} size='2x' />
-                          <FontAwesomeIcon icon={faGasPump} size='2x' />
-                          <strong>R$</strong>
+                          <FontAwesomeIcon icon={faCalendar} size="2x" />
+                          <FontAwesomeIcon icon={faDiamond} size="2x" />
+                          <FontAwesomeIcon icon={faGauge} size="2x" />
+                          <FontAwesomeIcon icon={faMap} size="2x" />
+                          <FontAwesomeIcon icon={faCity} size="2x" />
+                          <FontAwesomeIcon icon={faCar} size="2x" />
+                          <FontAwesomeIcon icon={faGear} size="2x" />
+                          <FontAwesomeIcon icon={faGasPump} size="2x" />
+                          <FontAwesomeIcon icon={faCoins} size="2x" />
                         </div>
                         <div className="col-response-item">
+                          <h3>Ano:</h3>
                           <h3>Modelo:</h3>
                           <h3>Quilometragem:</h3>
                           <h3>UF:</h3>
@@ -209,8 +383,10 @@ export default function Predict() {
                           <h3>Câmbio:</h3>
                           <h3>Combustível:</h3>
                           <h3>Preço:</h3>
+                          
                         </div>
                         <div className="col-response-item">
+                          <span>{item.year_model}</span>
                           <span>{item.model}</span>
                           <span>{item.mileage}</span>
                           <span>{item.state}</span>
@@ -218,7 +394,12 @@ export default function Predict() {
                           <span>{item.bodywork}</span>
                           <span>{item.gear}</span>
                           <span>{item.fuel}</span>
-                          <span>{item.predicted_value?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+                          <span>
+                            {item.predicted_value?.toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                            })}
+                          </span>
                         </div>
                       </div>
                     </li>
@@ -229,10 +410,11 @@ export default function Predict() {
               </ul>
             </div>
 
-            <button onClick={() => setShowModal(false)}>Fechar</button>
+            
           </div>
         </div>
       )}
+
 
     </div>
   );

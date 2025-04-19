@@ -611,7 +611,7 @@
     height: 80%;
     overflow-y: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
+    position: relative;
   }
   
   .modal-content h2 {
@@ -714,3 +714,16 @@
     
 }
 
+
+#btn-fechar-projecao-modal{
+/* 
+    margin-left: 87%;
+    margin-top:-45%; */
+    /* position: absolute; */
+    background-color: #EF44A1;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
