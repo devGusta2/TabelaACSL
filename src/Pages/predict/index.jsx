@@ -5,278 +5,423 @@ import Menu from "../Components/Menu";
 import Tooltip from '../Components/Tooltip/Tooltip';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCalendar, faCar, faCity, faCrown, faCube, faGasPump,
-  faGauge, faGear, faLightbulb, faMap
+  faArrowRotateBack, faCalculator, faCalendar, faCar, faChartBar,
+  faChartLine, faCity, faCoins, faCrown, faCube, faDiamond, faDollar, faGasPump, faGauge, faGear,
+  faHourglass, faLightbulb, faMap, faSearch,
+  faX
 } from "@fortawesome/free-solid-svg-icons";
+
+
+
+
+
+
+
+
+
+
+
+// Topo do componente
+import BMW from '../../assets/Brands/BMW.png';
+import CHERY from '../../assets/Brands/CHERY.png';
+import CHEVROLET from '../../assets/Brands/CHEVROLET.webp';
+import CITROEN from '../../assets/Brands/CITROEN.jpg';
+import AUDI from '../../assets/Brands/AUDI.jpg';
+import FIAT from '../../assets/Brands/FIAT.jfif';
+import FORD from '../../assets/Brands/FORD.png';
+import HONDA from '../../assets/Brands/HONDA.webp';
+import HYUNDAI from '../../assets/Brands/HYUNDAI.jpg';
+import JAGUAR from '../../assets/Brands/JAGUAR.avif';
+import JEEP from '../../assets/Brands/JEEP.png';
+import KIA from '../../assets/Brands/KIA.png';
+import MERCEDES from '../../assets/Brands/MERCEDES.jpg';
+import MINI from '../../assets/Brands/MINI.png';
+import MITSUBISHI from '../../assets/Brands/MITSUBISH.png';
+import NISSAN from '../../assets/Brands/NISSAN.jpg';
+import PEUGEOT from '../../assets/Brands/PEGEOUT.png';
+import PORSCHE from '../../assets/Brands/PORSHE.jpg';
+import RAM from '../../assets/Brands/RAM.webp';
+import RENAULT from '../../assets/Brands/RENAULT.png';
+import SUZUKI from '../../assets/Brands/SUZUKI.png';
+import TOYOTA from '../../assets/Brands/TOYOTA.webp';
+import VOLKSWAGEN from '../../assets/Brands/VOLKSWAGEN.png';
+import VOLVO from '../../assets/Brands/VOLVO.jpg';
+import WILLYS from '../../assets/Brands/WILLYS.png';
+import LAND from '../../assets/Brands/LAND.jpg';
+const brandLogos = {
+  BMW,
+  CHERY,
+  CHEVROLET,
+  CITROEN,
+  FIAT,
+  FORD,
+  HONDA,
+  HYUNDAI,
+  JAGUAR,
+  JEEP,
+  KIA,
+  'MERCEDES-BENZ': MERCEDES,
+  MINI,
+  MITSUBISHI,
+  NISSAN,
+  PEUGEOT,
+  PORSCHE,
+  RAM,
+  RENAULT,
+  SUZUKI,
+  TOYOTA,
+  VOLKSWAGEN,
+  VOLVO,
+  WILLYS,
+  AUDI,
+  LAND
+};
+
+
+
+
+
+
+
+
 
 const host_django = import.meta.env.VITE_API_URL_DJANGO;
 
 export default function Predict() {
-  const [bodyworkList, setBodyworkList] = useState([]);
   const [brandList, setBrandList] = useState([]);
-  const [fuelList, setFuelList] = useState([]);
-  const [gearList, setGearList] = useState([]);
-  const [prediction, setPrediction] = useState(null);
+  const [formData, setFormData] = useState({ brand: "" });
   const [brandPrediction, setBrandPrediction] = useState(null);
-  const [isBrandPrediction, setIsBrandPrediction] = useState(false);
-  const [active, setActive] = useState(false);
-
-  // Estado inicial do formulário garantindo valores controlados
-  const [formData, setFormData] = useState({
-    brand: "",
-    bodywork: "",
-    gear: "",
-    fuel: "",
-    model: "",
-    year_model: "",
-    mileage: "",
-    state: "",
-    city: ""
-  });
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const fetchData = async (param, setState) => {
-      const userToken = localStorage.getItem("token");
-      if (!userToken) return console.error("Erro: Token não encontrado!");
+    const fetchBrands = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return console.error("Token não encontrado!");
 
       try {
-        const response = await axios.get(`${host_django}/artificial_intelligence/list/${param}/?page=1&page_size=99`, {
+        const res = await axios.get(`${host_django}/artificial_intelligence/list-brands/`, {
           headers: {
             "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-            Authorization: `Bearer ${userToken}`
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420"
           }
         });
-
-        if (response.data?.content) {
-          const key = Object.keys(response.data.content).find(k => Array.isArray(response.data.content[k]));
-          if (key) setState(response.data.content[key] || []);
-        }
+        const data = res.data?.content?.brands || [];
+        setBrandList(data);
       } catch (error) {
-        console.error("Erro na requisição:", error.response?.data || error.message);
+        console.error("Erro ao buscar marcas:", error);
+        console.log("Detalhes do erro:", error.response?.data);
       }
     };
 
-    fetchData("bodywork", setBodyworkList);
-    fetchData("brand", setBrandList);
-    fetchData("fuel", setFuelList);
-    fetchData("gear", setGearList);
+    fetchBrands();
   }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isBrandPrediction) return;
-
-    const userToken = localStorage.getItem("token");
-    if (!userToken) return console.error("Erro: Token não encontrado!");
-
-    try {
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-          Authorization: `Bearer ${userToken}`
-        }
-      });
-
-      const predictedValue = response.data.content?.predict;
-      predictedValue !== undefined ? setPrediction(predictedValue) : console.error("Erro: A resposta da API não contém 'predict'.", response.data);
-    } catch (error) {
-      console.error("Erro na previsão:", error);
-    }
-  };
-
   const handleBrandSubmit = async (e) => {
     e.preventDefault();
 
-    const userToken = localStorage.getItem("token");
-    if (!userToken) return console.error("Erro: Token não encontrado!");
+    const token = localStorage.getItem("token");
+    if (!token) return console.error("Token não encontrado!");
 
     try {
-      const { brand } = formData;
-      const response = await axios.post(`${host_django}/artificial_intelligence/predict/price/brand/${brand}/`, {}, {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-          Authorization: `Bearer ${userToken}`
+      const response = await axios.post(
+        `${host_django}/artificial_intelligence/predict/price/brand/${formData.brand}/`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "69420"
+          }
         }
-      });
+      );
 
       const predictions = response.data.content?.predictions || [];
-      predictions.length > 0 ? setBrandPrediction(predictions) : console.error("Erro: Sem previsões para modelos.", response.data);
+      setBrandPrediction(predictions);
+      setShowModal(true);
     } catch (error) {
-      console.error("Erro na previsão da marca:", error);
+      console.error("Erro na previsão por marca:", error);
     }
   };
-
-  const activePred = () => {
-    setActive(!active)
-    setIsBrandPrediction((prev) => !prev);
-
-  }
 
   return (
     <div className='predict'>
       <Menu />
       <div className='content-predict'>
-        <div className='toggle-buttons'>
+        {/* Bloco de introdução e descrição */}
+        <div id="card-descricao-geral-func">
+          <div id="title-e-desc-desc">
+            <span id="title-projecao">Sugestão Inteligente de Preço para Anúncio</span>
+            <br />
+            <span>
+              Receba uma sugestão inteligente de preço para anunciar seus veículos com base em um benchmarking de mercado. A recomendação ajuda a posicionar melhor seus anúncios, evitando preços fora da realidade e aumentando as chances de negociação com mais agilidade e segurança.
 
-          {/* <button onClick={handleGeneralSelect}>Previsão Geral</button>
-        
-          <button onClick={handleBrandSelect}>Previsão por Marca</button> */}
+            </span>
+          </div>
+          <div id="box-icon-AI">
+            <FontAwesomeIcon size='8x' icon={faLightbulb}></FontAwesomeIcon>
+          </div>
         </div>
 
-        {/* Formulário de Previsão Normal (Com Modelo e Ano) */}
-        {!isBrandPrediction && (
-          <div id="main_predict">
-            <div id="title-box-predict">
-              Previsão de preços com Inteligência Artificial <FontAwesomeIcon size="2x" icon={faLightbulb} />
-            </div>
-
-            <div id="switch_container">
-  <div id="switch_box" onClick={() => activePred()}>
-    <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-  </div>
-  <span>Previsão Exploratória</span>
-  <Tooltip text="Preveja
- o preço de veículos personalizados com base em <strong>características hipotéticas</strong>. Explore como diferentes configurações afetam o preço de um automóvel, considerando <strong>cenários alternativos</strong> e obtendo estimativas para essas variações.">
-    <div ></div>
-  </Tooltip>
-</div>
-
-            <form id="form" onSubmit={handleSubmit}>
-              <div className="col_options_form">
-                {[
-                  { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                  { label: "Carroceria", icon: faCar, name: "bodywork", list: bodyworkList },
-                  { label: "Câmbio", icon: faGear, name: "gear", list: gearList },
-                  { label: "Combustível", icon: faGasPump, name: "fuel", list: fuelList }
-                ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name}>
-                    <div className="label-box">
-                      <FontAwesomeIcon icon={icon} size="2x" />
-                      <label>{label}:</label>
-                    </div>
-                    <select name={name} value={formData[name] || ""} onChange={handleChange}>
-                      <option value="">Selecione {label.toLowerCase()}</option>
-                      {list.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-
-                <div className="result-box">
-                  {/* <FontAwesomeIcon icon={faCar} size="2x" style={{ color: '#EF44A1' }} /> */}
-                  {prediction && (
-                    <div className="result">
-                      <span>O valor estimado é:</span><span>{prediction}</span>
-                    </div>
-                  )}
+        {/* Formulário */}
+        <div id="container-info-form-desc">
+          <div id="row-lower-infos">
+            <div id="col-info-form-projecao">
+              <div id="card-motivos-box">
+                <div id="title-motivos-box">
+                  <span>Por que usar?</span>
                 </div>
-
-              </div>
-
-              <div id="second_part_col_opt">
-                {[
-                  { label: "Modelo", icon: faCube, name: "model", type: "text" },
-                  { label: "Ano modelo", icon: faCalendar, name: "year_model", type: "number", min: 1950 },
-                  { label: "Quilometragem", icon: faGauge, name: "mileage", type: "number", min: 0 },
-                  { label: "Unidade federativa", icon: faMap, name: "state", type: "text" },
-                  { label: "Cidade", icon: faCity, name: "city", type: "text" }
-                ].map(({ label, icon, name, type, min }) => (
-                  <div className="option-box" key={name}>
-                    <FontAwesomeIcon icon={icon} className="icon-font" size="2x" style={{ color: "#EF44A1" }} />
-                    <input required type={type} name={name} placeholder=" " value={formData[name] || ""} onChange={handleChange} min={min} />
-                    <label>{label}:</label>
+                <div id="row-list-content-flex">
+                  <div id="balls-box-motivos">
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
+                    <div className="ball-motivos"></div>
                   </div>
-                ))}
-                <div className="option-box">
-                  <button type="submit">
-                    <h3>Prever</h3>
-                  </button>
+                  <div id="list-motivos-contetn">
+                    <div className="row-motivos"><span>Evite prejuízos ao anunciar carros com valores abaixo do esperado;</span></div>
+                    <div className="row-motivos"><span>Ganhe agilidade e confiança ao definir preços baseados em dados reais;</span></div>
+                    <div className="row-motivos"><span>Use o benchmark para justificar o valor do anúncio na negociação;</span></div>
+                    <div className="row-motivos"><span>Acompanhe movimentos do mercado e se antecipe à concorrência.</span></div>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
-        )}
 
-        {isBrandPrediction && (
-          <div id="main_predict">
-            <div id="title-box-predict">
-              Previsão de preços com Inteligência Artificial<FontAwesomeIcon size="2x" icon={faLightbulb} />
-            </div>
-
-            <div id="switch_container">
-      <div id="switch_box" onClick={() => activePred()}>
-        <div id="switch" style={{ marginLeft: active ? "60%" : "0%" }}></div>
-      </div>
-      <span>Previsão por Marca</span>
-      <Tooltip text="Preveja o preço estimado de todos os modelos de uma marca para o próximo ano, com base em <strong>dados concretos de mercado</strong>. Antecipe negociações e esteja um passo à frente na tomada de decisão.">
-        <div></div>
-      </Tooltip>
-    </div>
-
-            <form id="form" onSubmit={handleBrandSubmit} style={{
-              display:'flex', flexDirection:'column'
-              
-              }}>
-              <div id="opt-brand-pred">
+              {/* Formulário */}
+              <div id="card-lower-form">
                 <div className="col_options_form">
-                {[
-                  { label: "Marca", icon: faCrown, name: "brand", list: brandList },
-                ].map(({ label, icon, name, list }) => (
-                  <div className="option-box" key={name} style={{height:'100px'}}>
-                    <div className="label-box">
-                      <FontAwesomeIcon icon={icon} size="2x" />
-                      <label>{label}:</label>
+                  {[{ label: "Marca", icon: faCrown, name: "brand", list: brandList }].map(({ label, icon, name, list }) => (
+                    <div className="option-box" key={name} style={{ height: '100px' }}>
+                      <div className="label-box">
+                        <FontAwesomeIcon icon={icon} size="2x" />
+                        <label>{label}:</label>
+                      </div>
+                      <select name={name} value={formData[name] || ""} onChange={handleChange}>
+                        <option value="">Selecione {label.toLowerCase()}</option>
+                        {list.map((item, index) => (
+                          <option key={index} value={item}>{item}</option>
+                        ))}
+                      </select>
                     </div>
-                    <select name={name} value={formData[name] || ""} onChange={handleChange}>
-                      <option value="">Selecione {label.toLowerCase()}</option>
-                      {list.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
-                      ))}
-                    </select>
+                  ))}
+                  <div className="option-box">
+                    <button type="button" onClick={handleBrandSubmit}>
+                      <FontAwesomeIcon icon={faHourglass} size="2x" />
+                      <h3>Avaliar sugestões</h3>
+                    </button>
+                    <button type="button" onClick={() => setFormData({ brand: "" })}>
+                      <FontAwesomeIcon icon={faArrowRotateBack} size="2x" />
+                      <h3>Redefinir</h3>
+                    </button>
                   </div>
-                ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Explicação da IA */}
+            <div id="info-como-feito" style={{ boxShadow: '4px 4px 10px rgb(167, 167, 167)', borderRadius: '16px', padding: '25px' }}>
+              <div id="info-como-feito-title-box">
+                <span>Como o processo é feito?</span>
               </div>
 
-
-                <div className="option-box">
-                  <button type="submit">
-                    <h3>Prever</h3>
-                  </button>
+              {[
+                { icon: faSearch, title: "Coleta de dados", desc: "Milhares de anúncios de veículos são coletados de forma automatizada na internet, garantindo informações sempre atualizadas e representativas do mercado.\n" +
+                      "\n" },
+                { icon: faLightbulb, title: "Análise com IA", desc: "A partir de tais dados, o sistema aprende como veículos semelhantes são precificados e sugere valores com base nesses padrões." },
+                { icon: faCalculator, title: "Cálculo Inteligente", desc: "Embasando-se nos preços dos anúncios, a IA aplica modelos estatísticos para estimar valores justos e confiáveis de acordo com o comportamento real do mercado." },
+                { icon: faChartLine, title: "Geração da Recomendação", desc: "Com base nos dados analisados, o sistema entrega uma sugestão de preço para anúncio que reflete o valor praticado para veículos similares no mercado atual." }
+              ].map(({ icon, title, desc }, i) => (
+                <div key={i} className="icon-title-desc-feito">
+                  <div className="icon-como-box">
+                    <FontAwesomeIcon icon={icon} size="3x" />
+                  </div>
+                  <div className="desc-title-como">
+                    <span>{title}:</span>
+                    <span>{desc}</span>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
-              
-              </div>
-      
-              {brandPrediction && (
-                <div className="result-box" style={{width:'80%', height:'40%', flexDirection:'column', padding:'20px', overflow:'auto'}}>
-                  <h3>Previsões por Modelo:</h3>
-                  <ul className='ul-results'>
-                    {brandPrediction.map((item, index) => (
-                      <li key={index}>
-                        <strong>{item.model}</strong>: R$ {item.predicted_value}
-                      </li>
-                    ))}
-                  </ul>
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+
+            {/* Logo da marca com switch */}
+            {brandPrediction.length > 0 && (() => {
+
+              const brand = formData.brand
+              let logo;
+
+              switch (brand) {
+                case 'AUDI':
+                  logo = AUDI;
+                  break;
+                case 'FORD':
+                  logo = FORD;
+                  break;
+                case 'CHEVROLET':
+                  logo = CHEVROLET;
+                  break;
+                case 'FIAT':
+                  logo = FIAT;
+                  break;
+                case 'VOLKSWAGEN':
+                  logo = VOLKSWAGEN;
+                  break;
+                case 'HYUNDAI':
+                  logo = HYUNDAI;
+                  break;
+                case 'TOYOTA':
+                  logo = TOYOTA;
+                  break;
+                case 'HONDA':
+                  logo = HONDA;
+                  break;
+                case 'JEEP':
+                  logo = JEEP;
+                  break;
+                case 'NISSAN':
+                  logo = NISSAN;
+                  break;
+                case 'RENAULT':
+                  logo = RENAULT;
+                  break;
+                case 'KIA':
+                  logo = KIA;
+                  break;
+                case 'PEUGEOT':
+                  logo = PEUGEOT;
+                  break;
+                case 'CITROEN':
+                  logo = CITROEN;
+                  break;
+                case 'BMW':
+                  logo = BMW;
+                  break;
+                case 'MERCEDES-BENZ':
+                  logo = MERCEDES;
+                  break;
+                case 'MITSUBISHI':
+                  logo = MITSUBISHI;
+                  break;
+                case 'VOLVO':
+                  logo = VOLVO;
+                  break;
+                case 'CHERY':
+                  logo = CHERY;
+                  break;
+                case 'PORSCHE':
+                  logo = PORSCHE;
+                  break;
+                case 'MINI':
+                  logo = MINI;
+                  break;
+                case 'RAM':
+                  logo = RAM;
+                  break;
+                case 'JAGUAR':
+                  logo = JAGUAR;
+                  break;
+                case 'SUZUKI':
+                  logo = SUZUKI;
+                  break;
+                case 'WILLYS':
+                  logo = WILLYS;
+                  break;
+                case 'LAND':
+                  logo = LAND;
+                  break;
+                default:
+                  logo = null;
+              }
+
+
+              return logo ? (
+                <div className="top-brand-logo" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                  <img
+                    src={logo}
+                    alt={brand}
+                    style={{ maxWidth: '200px', height: 'auto' }}
+                  />
+                  <button id="btn-fechar-projecao-modal" onClick={() => setShowModal(false)}><FontAwesomeIcon size='2x' icon={faX} />Fechar</button>
                 </div>
-              )}
-            </form>
+              ) : null;
+            })()}
+
+            {/* Continuação do modal */}
+            <h2>Sugestão de preço anúnciado para os modelos da marca {formData.brand}</h2>
+
+            <div id="container-response-predict">
+              <ul className="ul-results">
+                {brandPrediction.length > 0 ? (
+                  brandPrediction.map((item, index) => (
+                    <li key={index} style={{ height: '400px', width: '500px' }}>
+                      <div className="row-response-items">
+                        <div className="col-response-item">
+                          <FontAwesomeIcon icon={faCalendar} size="2x" />
+                          <FontAwesomeIcon icon={faDiamond} size="2x" />
+                          <FontAwesomeIcon icon={faGauge} size="2x" />
+                          <FontAwesomeIcon icon={faMap} size="2x" />
+                          <FontAwesomeIcon icon={faCity} size="2x" />
+                          <FontAwesomeIcon icon={faCar} size="2x" />
+                          <FontAwesomeIcon icon={faGear} size="2x" />
+                          <FontAwesomeIcon icon={faGasPump} size="2x" />
+                          <FontAwesomeIcon icon={faDollar} size="2x" />
+                        </div>
+                        <div className="col-response-item">
+                          <h3>Ano:</h3>
+                          <h3>Modelo:</h3>
+                          <h3>Quilometragem:</h3>
+                          <h3>UF:</h3>
+                          <h3>Cidade:</h3>
+                          <h3>Carroceria:</h3>
+                          <h3>Câmbio:</h3>
+                          <h3>Combustível:</h3>
+                          <h3>Preço:</h3>
+
+                        </div>
+                        <div className="col-response-item">
+                          <span>{item.year_model}</span>
+                          <span>{item.model}</span>
+                          <span>{item.mileage}</span>
+                          <span>{item.state}</span>
+                          <span>{item.city}</span>
+                          <span>{item.bodywork}</span>
+                          <span>{item.gear}</span>
+                          <span>{item.fuel}</span>
+                          <span>
+                            R$ {item.predicted_value?.toLocaleString('pt-BR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                              useGrouping: true,
+                            }) || '0,00'}
+                          </span>
+
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <p>Nenhum dado de previsão encontrado.</p>
+                )}
+              </ul>
+            </div>
+
 
           </div>
+        </div>
+      )}
 
-        )}
 
-      </div>
     </div>
   );
 }
-
-
-

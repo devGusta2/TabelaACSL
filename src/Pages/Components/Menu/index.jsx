@@ -3,7 +3,7 @@ import './index.css';
 import logo from '../../../../src/assets/logo4.png';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChartLine, faDatabase, faCalendar, faHome, faChartBar, faFileAlt} from '@fortawesome/free-solid-svg-icons';
+import {faChartLine, faDatabase, faDollarSign, faHome, faChartBar, faFileAlt} from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
     const [permission, setPermission] = useState({
@@ -69,8 +69,8 @@ export default function Menu() {
                     {permission.canPricePredict === "True" && (
                         <li>
                             <Link to="../Pages/predict">
-                                <FontAwesomeIcon icon={faCalendar} size="2x" />
-                                <h3>Predição de Preços</h3>
+                                <FontAwesomeIcon icon={faDollarSign} size="2x" />
+                                <h3>Sugestões de Preços</h3>
                             </Link>
                         </li>
                     )}

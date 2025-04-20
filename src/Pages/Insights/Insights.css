@@ -56,7 +56,7 @@
     max-width: 800px; /* Define uma largura máxima para não ficar muito espalhado */
     margin: 0 auto; /* Centraliza a lista */
     padding: 0;
-    list-style-type: none;
+
     display: block; /* Garante que a lista não seja flexível */
 }
 

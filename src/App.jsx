@@ -12,7 +12,7 @@ import {
     faCalendarDays,
     faCar,
     faChartLine,
-    faCalendar, faChartBar, faFileAlt
+     faChartBar, faFileAlt, faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
@@ -333,13 +333,12 @@ const calcular = async () => {
               </div>
               <div className="card-about">
                 <div className='icon-title'>
-                  <h3>Predição de Preços</h3>
-                  <FontAwesomeIcon icon={faCalendar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
+                  <h3>Sugestões de Preços</h3>
+                  <FontAwesomeIcon icon={faDollarSign} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
-                  Nossa inteligência artificial aprende com o histórico do mercado para prever o valor real de cada
-                    veículo com alta precisão. Evite pagar mais do que deveria ou vender abaixo do preço justo com um
-                    modelo treinado nos dados mais recentes.
+                  Nossa inteligência artificial analisa dados reais de mercado para sugerir um valor competitivo de
+                    anúncio. Evite prejuízos ao comprar ou vender com base em precificação confiável e atualizada.
                 </span>
               </div>
               <div className="card-about">

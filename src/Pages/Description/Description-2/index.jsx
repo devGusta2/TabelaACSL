@@ -44,7 +44,7 @@ Ao coletar e analisar dados históricos e atuais de anúncios de veículos por m
           </li>
           <li style={{ backgroundColor: '#FFCFE9' }}>
             <i className="fas fa-brain"></i>
-            <span>Previsão de preços com IA</span>
+            <span>Sugestões de preços com IA</span>
           </li>
           <li style={{ backgroundColor: '#FFCFE9' }}>
             <i className="fas fa-chart-pie"></i>
@@ -65,7 +65,7 @@ Ao coletar e analisar dados históricos e atuais de anúncios de veículos por m
                 <li> Foco no momento da venda → Ajuda empresas a maximizar o valor de revenda no repasse de veículos, identificando o melhor momento e preço de saída com base em inteligência de mercado.</li>
               <li>Tomada de decisão estratégica → Suporte para definir preços competitivos com base em dados.</li>
               <li>Coleta e análise de dados (web scraping/RPA) → Automação para monitorar preços em tempo real.</li>
-              <li>Previsão de preços com IA → Diferencial competitivo ao antecipar tendências do mercado.</li>
+              <li>Sugestões de preços com IA → Diferencial competitivo ao definir o valor do anúncio de seus veículos.</li>
               <li> Para empresas data-driven → Indicação clara de que é ideal para quem valoriza decisões baseadas em dados</li>
             </ul>
           </div>
