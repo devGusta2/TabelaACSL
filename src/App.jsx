@@ -195,12 +195,12 @@ const calcular = async () => {
         {/* Início */}
         <section id="inicio">
           <header>
-            <nav>
+            <nav >
               <div className='logo_box'>
                 <img src={logo} alt="" />
               </div>
 
-              <ul>
+              <ul style={{listStyle:'none'}}>
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
