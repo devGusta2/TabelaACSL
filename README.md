@@ -14,7 +14,7 @@
 # React + Vite
 
 ## Variáveis de ambiente
-  VITE_API_URL_DJANGO: Endpoint do micro serviço de RPA
+  VITE_API_URL_DJANGO: Endpoint do projeto Django principal
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

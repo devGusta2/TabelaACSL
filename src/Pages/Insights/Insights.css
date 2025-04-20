@@ -11,28 +11,51 @@
 /* Mantém os seletores de mês e ano no topo */
 #data_box {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
+    width: 100%;
     margin-top: 10px; /* Ajuste para colar abaixo do título */
+    
+    align-items: center;
+    gap: 3em;
 }
+.label_icon_box{
+    display: flex;
+    gap: 1em;
+    align-items: center;
 
+}
 /* Alinha os campos de mês e ano verticalmente */
 .inpt_label_field {
     display: flex;
     flex-direction: column;
+    gap: 1em;
+    width: 20%;
+
 }
 
 .inpt_label_field input {
-    width: 100px;
+
     padding: 5px;
     font-size: 14px;
+    border: 2px solid #ec4899;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 /* Estiliza o título */
 #title_box span {
     font-size: 1.5rem;
     color: #ec4899;
+ 
+}
+#title_box  {
+    display: flex;
+    gap: 3em;
+
+    align-items: center;
+    
 }
 
 /* Estiliza a área de insights */
