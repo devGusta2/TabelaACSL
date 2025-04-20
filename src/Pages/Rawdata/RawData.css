@@ -13,17 +13,25 @@
 
 .form_pagination {
     display: flex;
-    gap: 1em;
+    gap: 2em;
     margin-bottom: 20px;
     align-items: center;
     justify-content: center;
 }
+.form_pagination label{
+    display: flex;
+    gap: 2em;
+
+    align-items: center;
+    justify-content: space-around;
+}
 
 .input_pagination {
     padding: 5px;
-    border: 2px solid var(--btn-color);
+    border: 2px solid #e60073;
     border-radius: 5px;
     outline: none;
+    height: 35px;
 }
 
 .btn_pagination {
@@ -33,6 +41,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100px;
+    height: 60px;
 }
 
 .btn_pagination:hover {
@@ -49,6 +59,8 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    width: 100px;
+    height: 60px;
 }
 
 .btn_download:hover {
@@ -214,10 +226,6 @@ body{
     color: #e60073;
     font-size: 25px;
 }
-.card{
-
-
-}
 .card h1{
     color: var(--btn-color);
 }
@@ -306,11 +314,12 @@ td input{
 
 .modal-box{
     height: 100%;
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
 }
 
 .btn_filtro{
