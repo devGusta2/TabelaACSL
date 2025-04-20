@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './Tooltip.css';
 
-const Tooltip = ({ text, children }) => {
+const TooltipAjuda = ({ text, children }) => {
     const tooltipRef = useRef(null);
     const containerRef = useRef(null);
     const [position, setPosition] = useState('right');
@@ -36,4 +36,4 @@ const Tooltip = ({ text, children }) => {
     );
 };
 
-export default Tooltip;
+export default TooltipAjuda;
