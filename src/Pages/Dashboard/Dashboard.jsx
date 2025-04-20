@@ -226,7 +226,7 @@ const Dashboard = () => {
                                      <YAxis yAxisId="left" orientation="left" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft' }} />
                                      <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
                                      <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                     <Bar yAxisId="left" dataKey="total_ads" fill="#E690D2" name="Quant. Anúncios" />
+                                     <Bar yAxisId="left" dataKey="total_ads" fill="#EC95C3" name="Quant. Anúncios" />
                                      <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
                                  </ComposedChart>
                              </ResponsiveContainer>
