@@ -190,7 +190,33 @@ const Dashboard = () => {
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Preço" label={{ value: 'Preço', position: 'insideBottom', offset: -5 }} />
                                     <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                    <Tooltip
+  cursor={{ strokeDasharray: '3 3' }}
+  content={({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={{
+          backgroundColor: 'black',
+          padding: '12px 16px',
+          borderRadius: '8px',
+          border: '1px solid #ddd',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          color: '#ffcfe9',
+        }}>
+          <p style={{ marginBottom: 8, fontWeight: '600' }}>{label}</p>
+          {payload.map((entry, index) => (
+            <p key={index} style={{ margin: 0, color: entry.color }}>
+              {entry.name}: {entry.value.toLocaleString('pt-BR')}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  }}
+/>
+
                                     <Scatter name="Preço" data={priceScatterData} fill="#ec4899" />
                                 </ScatterChart>
                             </ResponsiveContainer>
@@ -200,7 +226,33 @@ const Dashboard = () => {
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="x" name="Ano Modelo" label={{ value: 'Ano Modelo', position: 'insideBottom', offset: -5 }} />
                                     <YAxis dataKey="y" name="Quantidade de Anúncios" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft', dy: 80 }} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                    <Tooltip
+  cursor={{ strokeDasharray: '3 3' }}
+  content={({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={{
+          backgroundColor: 'black',
+          padding: '12px 16px',
+          borderRadius: '8px',
+          border: '1px solid #ddd',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          color: '#ffcfe9',
+        }}>
+          <p style={{ marginBottom: 8, fontWeight: '600' }}>{label}</p>
+          {payload.map((entry, index) => (
+            <p key={index} style={{ margin: 0, color: entry.color }}>
+              {entry.name}: {entry.value.toLocaleString('pt-BR')}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  }}
+/>
+
                                     <Scatter name="Ano Modelo" data={scatterData} fill="#ec4899" />
                                 </ScatterChart>
                             </ResponsiveContainer>
@@ -225,7 +277,33 @@ const Dashboard = () => {
                                      <XAxis dataKey="name" label={{ value: 'Estado', position: 'insideBottom', offset: -5 }} />
                                      <YAxis yAxisId="left" orientation="left" label={{ value: 'Quant. Anúncios', angle: -90, position: 'insideLeft' }} />
                                      <YAxis yAxisId="right" orientation="right" label={{ value: 'Preço Médio', angle: -90, position: 'insideRight' }} />
-                                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                     <Tooltip
+  cursor={{ strokeDasharray: '3 3' }}
+  content={({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={{
+          backgroundColor: 'black',
+          padding: '12px 12px',
+          borderRadius: '8px',
+          border: '1px solid #ddd',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+          color: '#333',
+        }}>
+          <p style={{ marginBottom: 8, fontWeight: '600' }}>{label}</p>
+          {payload.map((entry, index) => (
+            <p key={index} style={{ margin: 0, color: entry.color }}>
+              {entry.name}: {entry.value.toLocaleString('pt-BR')}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  }}
+/>
+
                                      <Bar yAxisId="left" dataKey="total_ads" fill="#ffcfe9" name="Quant. Anúncios" />
                                      <Scatter yAxisId="right" dataKey="average_price" fill="#ec4899" name="Preço Médio" />
                                  </ComposedChart>
