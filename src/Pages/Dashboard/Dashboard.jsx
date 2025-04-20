@@ -148,12 +148,13 @@ const Dashboard = () => {
             <div id="title_chart_box">
               <h2 className="text-lg">Dispersão de Preços</h2>
               <TooltipAjuda text="
-                Dados baseados nos <strong>10 preços mais frequentes</strong> do mercado, revelando clusters e tendências.">
+                              Tais dados demonstram a distribuição dos preços mais ofertados, a análise se embasa no recorte dos <strong>10 preços mais frequentes</strong> do mercado para as determinadas datas de referência, evidenciando as faixas mais comuns de preço, revelando assim tendências predominantes e os clusters de mercado na área de precificação.">
                 <div></div>
               </TooltipAjuda>
 
               <h2 className="text-lg">Dispersão de Ano Modelo</h2>
-              <TooltipAjuda text="Análise dos <strong>10 anos-modelo mais ofertados</strong>, útil para entender padrões de oferta.">
+              <TooltipAjuda
+                   text="Os seguintes dados mostram os anos-modelo mais ofertados, com o recorte dos <strong>10 anos-modelo mais frequentes</strong>. A análise revela as faixas de anos com maior presença no setor automotivo, facilitando a identificação de períodos em que o mercado está mais aquecido.">
                 <div></div>
               </TooltipAjuda>
             </div>
@@ -183,7 +184,7 @@ const Dashboard = () => {
             <div id="title_chart_box">
               <h2 className="text-lg mt-6">Correlação de Preço Médio e Quantidade de Anúncios por Estado</h2>
               <TooltipAjuda text="
-                Considera os <strong>10 estados com mais anúncios</strong>, revelando relação entre preços e volume.">
+                A análise considera os <strong>10 estados com maior número de anúncios</strong>, permitindo entender a relação entre a oferta de veículos e os preços médios em regiões com maior representatividade no mercado.">
                 <div></div>
               </TooltipAjuda>
             </div>
