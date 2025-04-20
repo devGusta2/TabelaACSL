@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 import carDefinition from '../src/assets/carDefinition.png'
 import handShakeImg from '../src/assets/handshake.jpg'
 import {
-    faCrown,
-    faCalendarDays,
-    faCar,
-    faChartLine,
-     faChartBar, faFileAlt, faDollarSign
+  faCrown,
+  faCalendarDays,
+  faCar,
+  faChartLine,
+  faChartBar, faFileAlt, faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
@@ -70,98 +70,98 @@ function App() {
 
   const fetchMarcas = async () => {
     try {
-        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
-            params: {
-                page: 1,
-                page_size: 99
-            },
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-            }
-        });
-        setMarcas(response.data.content.data);
+      const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+        params: {
+          page: 1,
+          page_size: 99
+        },
+        headers: {
+          'User-Agent': 'insomnia/10.1.1',
+          'ngrok-skip-browser-warning': '69420',
+        }
+      });
+      setMarcas(response.data.content.data);
     } catch (error) {
-        console.error('Erro ao buscar marcas:', error);
+      console.error('Erro ao buscar marcas:', error);
     }
-};
+  };
 
-const fetchModelo = async () => {
+  const fetchModelo = async () => {
     try {
-        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
-            params: {
-                brand: marcaSelecionada,
-                page: 1,
-                page_size: 99
-            },
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-            }
-        });
+      const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+        params: {
+          brand: marcaSelecionada,
+          page: 1,
+          page_size: 99
+        },
+        headers: {
+          'User-Agent': 'insomnia/10.1.1',
+          'ngrok-skip-browser-warning': '69420',
+        }
+      });
 
-        setModelo(response.data.content.data);
+      setModelo(response.data.content.data);
     } catch (error) {
-        console.error('Erro ao buscar modelos:', error);
+      console.error('Erro ao buscar modelos:', error);
     }
-};
+  };
 
-const fetchAnos = async () => {
+  const fetchAnos = async () => {
     try {
-        const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
-            params: {
-                brand: marcaSelecionada,
-                model: modeloSelecionado,
-                page: 1,
-                page_size: 99
-            },
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-            }
-        });
+      const response = await axios.get(`${host_django}/crawler/brand/model/list/machine/`, {
+        params: {
+          brand: marcaSelecionada,
+          model: modeloSelecionado,
+          page: 1,
+          page_size: 99
+        },
+        headers: {
+          'User-Agent': 'insomnia/10.1.1',
+          'ngrok-skip-browser-warning': '69420',
+        }
+      });
 
-        setAno(response.data.content.data);
+      setAno(response.data.content.data);
     } catch (error) {
-        console.error('Erro ao buscar anos:', error);
+      console.error('Erro ao buscar anos:', error);
     }
-};
+  };
 
 
 
 
-const calcular = async () => {
+  const calcular = async () => {
     try {
-        const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
-            params: {
-                year_model: anoSelecionado,
-                is_active: true,
-                page: 1,
-                page_size: 10
-            },
-            headers: {
-                'User-Agent': 'insomnia/10.1.1',
-                'ngrok-skip-browser-warning': '69420',
-            }
-        });
+      const response = await axios.get(`${host_django}/crawler/average_prices/machine/${cod_modelo}/`, {
+        params: {
+          year_model: anoSelecionado,
+          is_active: true,
+          page: 1,
+          page_size: 10
+        },
+        headers: {
+          'User-Agent': 'insomnia/10.1.1',
+          'ngrok-skip-browser-warning': '69420',
+        }
+      });
 
-        // Pegando o primeiro item dentro de "content.monthly_averages"
-        const data = response.data.content.monthly_averages[0];
+      // Pegando o primeiro item dentro de "content.monthly_averages"
+      const data = response.data.content.monthly_averages[0];
 
-        setInfo({
-            reference_year: data.reference_year,
-            reference_month: data.reference_month,
-            code_model: data.code_model,
-            year_model: data.year_model,
-            brand: marcaSelecionada,
-            model: modeloSelecionado,
-            average_price: data.average_price
-        });
+      setInfo({
+        reference_year: data.reference_year,
+        reference_month: data.reference_month,
+        code_model: data.code_model,
+        year_model: data.year_model,
+        brand: marcaSelecionada,
+        model: modeloSelecionado,
+        average_price: data.average_price
+      });
 
     } catch (error) {
-        console.error('Erro ao fazer a requisição:', error);
+      console.error('Erro ao fazer a requisição:', error);
     }
-};
+  };
 
 
 
@@ -183,7 +183,7 @@ const calcular = async () => {
     }
   }, [modeloSelecionado]);
 
- // Estado para armazenar os registros
+  // Estado para armazenar os registros
   // Substitua pelo seu ID da tarefa
 
 
@@ -200,7 +200,7 @@ const calcular = async () => {
                 <img src={logo} alt="" />
               </div>
 
-              <ul style={{listStyle:'none'}}>
+              <ul style={{ listStyle: 'none' }}>
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
@@ -283,7 +283,7 @@ const calcular = async () => {
             <div className="desc_col_consult">
               <h1>Consulta de carros</h1>
               <p>Obtenha a média de mercado de veículos com base em dados atualizados. Selecione a marca, o
-              modelo e o ano do veículo para acessar informações precisas sobre os preços praticados, auxiliando na sua análise e tomada de decisão.</p>
+                modelo e o ano do veículo para acessar informações precisas sobre os preços praticados, auxiliando na sua análise e tomada de decisão.</p>
             </div>
             <div className="table_box">
               <div className='celula'><h3>Ano de referência:</h3></div>
@@ -311,56 +311,60 @@ const calcular = async () => {
                 <span>Sobre o produto</span>
                 <span>
                   O DriveIntel é uma plataforma especializada em análise de dados do mercado automotivo.
-                    Nosso foco é transformar informações em inteligência acionável, auxiliando equipes na tomada de
-                    decisões estratégicas com mais precisão e confiança. Com insights aprofundados, relatórios detalhados
-                    e visualizações claras, ajudamos a antecipar tendências, otimizar precificação e fortalecer estratégias
-                    de mercado.
+                  Nosso foco é transformar informações em inteligência acionável, auxiliando equipes na tomada de
+                  decisões estratégicas com mais precisão e confiança. Com insights aprofundados, relatórios detalhados
+                  e visualizações claras, ajudamos a antecipar tendências, otimizar precificação e fortalecer estratégias
+                  de mercado.
                 </span>
               </div>
-        <img src={logo} alt="" className="logo-about"/>
+              <img src={logo} alt="" className="logo-about" />
             </div>
             <div id="about-cards-box">
               <div className="card-about">
                 <div className='icon-title'>
+
+                  <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3vw, 50px)' }} />
                   <h3>Informação Inteligente</h3>
-                  <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Tenha acesso a dados estratégicos sobre o mercado automotivo. Nossa plataforma analisa milhares de
-                    anúncios para fornecer insights precisos sobre a valorização e depreciação de veículos, ajudando sua
-                    empresa a tomar decisões mais assertivas.
+                  anúncios para fornecer insights precisos sobre a valorização e depreciação de veículos, ajudando sua
+                  empresa a tomar decisões mais assertivas.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
+
+                  <FontAwesomeIcon icon={faDollarSign} style={{ fontSize: 'clamp(16px, 3vw, 50px)' }} />
                   <h3>Sugestões de Preços</h3>
-                  <FontAwesomeIcon icon={faDollarSign} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Nossa inteligência artificial analisa dados reais de mercado para sugerir um valor competitivo de
-                    anúncio. Evite prejuízos ao comprar ou vender com base em precificação confiável e atualizada.
+                  anúncio. Evite prejuízos ao comprar ou vender com base em precificação confiável e atualizada.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
+
+                  <FontAwesomeIcon icon={faChartBar} style={{ fontSize: 'clamp(16px, 3vw, 50px)' }} />
                   <h3>Visualização de Dados</h3>
-                  <FontAwesomeIcon icon={faChartBar} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Acompanhe o comportamento do mercado por meio de gráficos claros e objetivos. Nossa plataforma
-                    transforma grandes volumes de dados em visualizações simples, permitindo uma análise rápida das
-                    tendências de preços e variações do mercado automotivo.
+                  transforma grandes volumes de dados em visualizações simples, permitindo uma análise rápida das
+                  tendências de preços e variações do mercado automotivo.
                 </span>
               </div>
               <div className="card-about">
                 <div className='icon-title'>
+
+                  <FontAwesomeIcon icon={faFileAlt} style={{ fontSize: 'clamp(16px, 3vw, 50px)' }} />
                   <h3>Geração de Relatórios</h3>
-                  <FontAwesomeIcon icon={faFileAlt} style={{ fontSize: 'clamp(16px, 3vw, 32px)' }} />
                 </div>
                 <span>
                   Receba relatórios completos e detalhados sobre o mercado de veículos. Nossa plataforma processa
-                    grandes volumes de dados para entregar informações precisas, facilitando sua análise e otimizando
-                    suas estratégias de precificação.
+                  grandes volumes de dados para entregar informações precisas, facilitando sua análise e otimizando
+                  suas estratégias de precificação.
                 </span>
               </div>
             </div>
@@ -369,38 +373,38 @@ const calcular = async () => {
         <section id='secttion-drive-intel-aplications'>
           <div className="row-aplications-driveintel">
             <div className="img-box-aplications">
-              <img src={handShakeImg} alt="" className='img-aplications'/>
+              <img src={handShakeImg} alt="" className='img-aplications' />
             </div>
             <div className="text-aplications-box">
               <h1>Para quem o DriveIntel é relevante ?</h1>
               <span>
-                O DriveIntel ajuda lojistas, 
-                concessionárias, gestores de frotas, 
-                empresas de aluguel, investidores, 
-                instituições financeiras e leiloeiros 
-                a tomar decisões estratégicas, como 
-                definir preços, prever variações de 
+                O DriveIntel ajuda lojistas,
+                concessionárias, gestores de frotas,
+                empresas de aluguel, investidores,
+                instituições financeiras e leiloeiros
+                a tomar decisões estratégicas, como
+                definir preços, prever variações de
                 mercado, calcular ...
               </span>
-              <Link   className='aplications-btn' to='/pages/Description/Description-1'><h2>Ler mais</h2></Link>
-             
+              <Link className='aplications-btn' to='/pages/Description/Description-1'><h2>Ler mais</h2></Link>
+
             </div>
           </div>
           <div className="row-aplications-driveintel">
             <div className="img-box-aplications">
-              <img src={carDefinition} alt="" className='img-aplications'/>
+              <img src={carDefinition} alt="" className='img-aplications' />
             </div>
             <div className="text-aplications-box">
               <h1>Definição do DriveIntel</h1>
               <span>
-              O DriveIntel é uma ferramenta de inteligência de 
-              mercado para precificação automotiva, desenvolvida 
-              para apoiar negócios do setor na tomada de decisão 
-              estratégica de preços. Ele coleta e analisa dados 
-              históricos e atuais de anúncios de veículos por 
-              meio de web scraping (RPA) ...
+                O DriveIntel é uma ferramenta de inteligência de
+                mercado para precificação automotiva, desenvolvida
+                para apoiar negócios do setor na tomada de decisão
+                estratégica de preços. Ele coleta e analisa dados
+                históricos e atuais de anúncios de veículos por
+                meio de web scraping (RPA) ...
               </span>
-              <Link   className='aplications-btn' to='/pages/Description/Description-2'><h2>Ler mais</h2></Link>
+              <Link className='aplications-btn' to='/pages/Description/Description-2'><h2>Ler mais</h2></Link>
             </div>
           </div>
         </section>
