@@ -739,6 +739,7 @@ select{
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 3em;
 }
 #about-img-box{
  
@@ -782,7 +783,8 @@ select{
 }
 #about-cards-box{
   width: 100%;
-  height: 35%;  
+  height: 50%;
+ 
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -791,8 +793,9 @@ select{
 
 .card-about{
   height: 100%;
-  width: 18%;
-  background-color: #EF44A1;
+  width: 22%;
+  background-color: #ef44a1;
+  box-shadow: 4px 4px 10px rgb(146, 146, 146);
   border-radius: 16px;
   padding: 20px;
   color: white;
@@ -808,15 +811,19 @@ select{
   font-size: clamp(23px, 1.2vw, 33px);
 }
 .icon-title{
-  height: 20%;
+  height: 30%;
   width: 100%;
-
+  gap: 1em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  color: white;
 }
+.card-about span{
+  height: 70%;
 
+}
 
 
 

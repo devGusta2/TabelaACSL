@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import './RawData.css';
 import Menu from '../Components/Menu';
@@ -301,9 +301,7 @@ const RawData = () => {
                     <div className="modal-box">
                         <FilterModal onClose={() => setShowFilterModal(false)} onApply={applyFilters} />
                     </div>
-                    <div className="card-btn-box">
-                        <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x' icon={faDownload} />Download</button>
-                    </div>
+                  
                 </div>
                 <form onSubmit={handleSubmit} className="form_pagination" >
                         <label>
@@ -315,7 +313,10 @@ const RawData = () => {
                             <input min='1' type="number" value={pageSize} onChange={handlePageSizeChange}
                                 className="input_pagination" />
                         </label>
-                        <button type="submit" className="btn_pagination">Visualizar</button>
+                        <button type="submit" className="btn_pagination">
+                        <FontAwesomeIcon size='2x' icon={faSearch} />
+                            <h4>Visualizar</h4></button>
+                        <button onClick={downloadExcel} className="btn_download"><FontAwesomeIcon size='2x' icon={faDownload} /><h4>Download</h4></button>
                     </form>
                 <div className="info" style={{   overflow: 'auto'}}>
                     

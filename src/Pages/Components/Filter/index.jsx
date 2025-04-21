@@ -30,7 +30,7 @@ const FilterModal = ({ onClose, onApply }) => {
     return (
         <div className="modal">
             <div className="modal_content">
-                <h2>Filtrar datas</h2>
+                {/* <h2>Filtrar datas</h2> */}
                 {localFilters.map((filter, index) => (
                     <div key={index} className="filter_item">
                         <div className='icon-inpt'>
@@ -63,8 +63,8 @@ const FilterModal = ({ onClose, onApply }) => {
                     </div>
                 ))}
                 <div className='btn-filter-box'>
-                    <button onClick={addFilter}><FontAwesomeIcon icon={faPlus} size='2x' />Adicionar Filtro</button>
-                    <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' />Aplicar Filtros</button>
+                    <button onClick={addFilter}><FontAwesomeIcon icon={faPlus} size='2x'/><h4>Adicionar Filtro</h4></button>
+                    <button onClick={() => onApply(localFilters)}><FontAwesomeIcon icon={faCheck} size='2x' /><h4>Aplicar Filtros</h4></button>
                 </div>
             </div>
         </div>

@@ -60,7 +60,7 @@ const Insights = () => {
                 <div id="data_box">
                     <div className="inpt_label_field">
                         <div className="label_icon_box">
-                            <FontAwesomeIcon className="icon-pink" size='3x' icon={faCalendar} />
+                            <FontAwesomeIcon className="icon-pink" size='2x' icon={faCalendar} />
                             <label>Mês</label>
                         </div>
                         <input
@@ -75,7 +75,7 @@ const Insights = () => {
                     </div>
                     <div className="inpt_label_field">
                         <div className="label_icon_box">
-                            <FontAwesomeIcon className="icon-pink" size='3x' icon={faCalendar} />
+                            <FontAwesomeIcon className="icon-pink" size='2x' icon={faCalendar} />
                             <label>Ano</label>
                         </div>
                         <input
