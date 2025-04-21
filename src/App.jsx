@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import carDefinition from '../src/assets/carDefinition.png'
 import handShakeImg from '../src/assets/handshake.jpg'
 import {
+  faRocket,
   faCrown,
   faCalendarDays,
   faCar,
@@ -230,6 +231,31 @@ function App() {
           </div>
         </section>
         {/* Secção de consulta*/}
+        <section id="video-section">
+          <div id="video-section-col">
+            <div id="video-title">
+              <span>Os melhores recursos para impulsionar sua empresa</span>
+            </div>
+            <div id="desc-video">
+              <span>
+                Os melhores recursos para impulsionar sua empresa no mercado automotivo.
+                Nossa plataforma de precificação de veículos combina tecnologia de ponta, inteligência artificial e análise de mercado em tempo real para oferecer estimativas precisas, confiáveis e atualizadas. Automatize processos, reduza erros humanos e ganhe tempo com uma ferramenta feita para simplificar sua rotina e maximizar seus resultados.
+                Ideal para revendedoras, lojistas e empreendedores do setor automotivo que buscam tomar decisões mais estratégicas, vender com mais segurança e aumentar a competitividade no mercado.
+              </span>
+            </div>
+            <div id="btn-video-box">
+              <div id="btn-video">
+              <FontAwesomeIcon icon={faRocket} size='3x' />
+                <h3>Impulsionar vendas</h3>
+              </div>
+            </div>
+          </div>
+          <div id="video-box">
+            <div id="video-test">
+              
+            </div>
+          </div>
+        </section>
         <section id="consulta">
           <div className="col_consulta">
             <div className="form_box">
