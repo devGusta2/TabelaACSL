@@ -203,6 +203,7 @@ function App() {
 
               <ul style={{ listStyle: 'none' }}>
                 <li><a href="#inicio">Início</a></li>
+                <li><a href="#video-section">Introdução</a></li>
                 <li><a href="#consulta">Consultar</a></li>
                 <li><a href="#Produto">Sobre o Produto</a></li>
                 <li><a href="#secttion-drive-intel-aplications">Púbico Alvo e Aplicações</a></li>
@@ -246,7 +247,7 @@ function App() {
             <div id="btn-video-box">
               <div id="btn-video">
               <FontAwesomeIcon icon={faRocket} size='3x' />
-                <h3>Impulsionar vendas</h3>
+                <h3><Link to='/pages/cadastro' style={{textDecoration:'none',color:'white'}}>Impulsionar vendas</Link></h3>
               </div>
             </div>
           </div>
