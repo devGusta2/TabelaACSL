@@ -4,7 +4,7 @@ import car from '../src/assets/revuelto-porquinho-da-india.png';
 import logo from '../src/assets/logo-pink-alt.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-
+import video  from './assets/video.mp4'
 import carDefinition from '../src/assets/carDefinition.png'
 import handShakeImg from '../src/assets/handshake.jpg'
 import {
@@ -252,9 +252,9 @@ function App() {
             </div>
           </div>
           <div id="video-box">
-            <div id="video-test">
+              <video src={video} id="video-test" controls>
               
-            </div>
+              </video>
           </div>
         </section>
         <section id="consulta">
